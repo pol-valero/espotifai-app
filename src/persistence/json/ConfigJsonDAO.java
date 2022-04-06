@@ -17,7 +17,7 @@ public class ConfigJsonDAO implements ConfigDAO {
     private String usuario;
     private String contraseña;
 
-
+    //otro con la libreria de google
     /*
     public void readFile(){
 

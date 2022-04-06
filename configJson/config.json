@@ -1,0 +1,7 @@
+{
+  "Port": "5432",
+  "IP": "localhost",
+  "NomBase": "Spotify_database",
+  "Usuari": "Admin",
+  "contrasenya": "admin"
+}
