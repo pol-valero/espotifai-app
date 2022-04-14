@@ -16,7 +16,7 @@ public class LogoutViewController implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        switch (e.getActionCommand()){
+        switch (e.getActionCommand()){ //todo revisar
             case logoutView.BTN_LOGOUT:
                 controller.showLoginCard();
                 break;
