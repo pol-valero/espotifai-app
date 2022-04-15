@@ -1,25 +1,26 @@
 package presentation.controllers;
 
-import business.BusinessFacadelmpl;
-import presentation.Controller;
+import presentation.UIController;
 import presentation.views.LoginView;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginViewController implements ActionListener {
     private LoginView loginView;
-    private Controller controller;
+    private UIController controller;
 
-    public LoginViewController(Controller controller, LoginView loginView){
+    public LoginViewController(UIController controller, JFrame topContainer, CardLayout cardManager){
         this.controller = controller;
-        this.loginView=loginView;
+        loginView = new LoginView();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()){
             case LoginView.BTN_LOGIN: //todo
-                if(controller.checkLoginInfo(loginView.getInfo())){
+                /*if(controller.checkLoginInfo(loginView.getInfo())){
                     controller.showHomescreenCard(controller.getPlaylist());
                 }
                 else{
@@ -32,7 +33,7 @@ public class LoginViewController implements ActionListener {
                 break;
             case LoginView.BTN_SINGUP: //todo
                 controller.showSignUpCard();
-                break;
+                break;*/
         }
 
     }

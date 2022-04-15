@@ -1,6 +1,6 @@
 package presentation.controllers;
 
-import presentation.Controller;
+import presentation.UIController;
 import presentation.views.SignupView;
 
 import java.awt.event.ActionEvent;
@@ -9,9 +9,9 @@ import java.awt.event.ActionListener;
 public class SignupViewController implements ActionListener {
 
     private final SignupView signupView;
-    private final Controller controller;
+    private final UIController controller;
 
-    public SignupViewController(Controller controller, SignupView signupView){
+    public SignupViewController(UIController controller, SignupView signupView){
         this.signupView = signupView;
         this.controller = controller;
     }
@@ -19,15 +19,15 @@ public class SignupViewController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()){
             case SignupView.BTN_SIGNUP: //todo revisar el com trobem i avisem del errors.
-                int[] errors = controller.checkSingupInfo(signupView.getinfo());
+                 /*int[] errors = controller.checkSingupInfo(signupView.getinfo());
 
-                if(lookForErrors(errors)){
+                 if(lookForErrors(errors)){
                     controller.showHomescreenCard(controller.getPlaylist());
                 }
                 else{
                     signupView.showSignupErrorMessages(errors);
                 }
-                break;
+                break;*/
         }
     }
 
