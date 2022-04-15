@@ -1,7 +1,6 @@
 package presentation.controllers;
 
-import business.BusinessFacadelmpl;
-import presentation.Controller;
+import presentation.UIController;
 import presentation.views.LoginView;
 
 import java.awt.event.ActionEvent;
@@ -9,9 +8,9 @@ import java.awt.event.ActionListener;
 
 public class LoginViewController implements ActionListener {
     private LoginView loginView;
-    private Controller controller;
+    private UIController controller;
 
-    public LoginViewController(Controller controller, LoginView loginView){
+    public LoginViewController(UIController controller, LoginView loginView){
         this.controller = controller;
         this.loginView=loginView;
     }

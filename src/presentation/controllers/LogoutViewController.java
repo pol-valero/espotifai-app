@@ -1,16 +1,16 @@
 package presentation.controllers;
 
-import presentation.Controller;
+import presentation.UIController;
 import presentation.views.LogoutView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LogoutViewController implements ActionListener {
-    private Controller controller;
+    private UIController controller;
     private LogoutView logoutView;
 
-    LogoutViewController(Controller controller, LogoutView logoutView){
+    LogoutViewController(UIController controller, LogoutView logoutView){
         this.controller = controller;
         this.logoutView = logoutView;
     }

@@ -1,6 +1,6 @@
 package presentation.controllers;
 
-import presentation.Controller;
+import presentation.UIController;
 import presentation.views.SignupView;
 
 import java.awt.event.ActionEvent;
@@ -9,9 +9,9 @@ import java.awt.event.ActionListener;
 public class SignupViewController implements ActionListener {
 
     private final SignupView signupView;
-    private final Controller controller;
+    private final UIController controller;
 
-    public SignupViewController(Controller controller, SignupView signupView){
+    public SignupViewController(UIController controller, SignupView signupView){
         this.signupView = signupView;
         this.controller = controller;
     }

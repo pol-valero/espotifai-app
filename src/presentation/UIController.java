@@ -3,5 +3,14 @@ package presentation;
 /**
  * Clase que gestiona el funcionamiento del programa
  */
-public class Controller {
+public class UIController {
+
+    public void run () {
+
+
+    }
+
+
+
+
 }
