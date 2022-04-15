@@ -20,7 +20,7 @@ public class LoginViewController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()){
             case LoginView.BTN_LOGIN: //todo
-                if(controller.checkLoginInfo(loginView.getInfo())){
+                /*if(controller.checkLoginInfo(loginView.getInfo())){
                     controller.showHomescreenCard(controller.getPlaylist());
                 }
                 else{
@@ -33,7 +33,7 @@ public class LoginViewController implements ActionListener {
                 break;
             case LoginView.BTN_SINGUP: //todo
                 controller.showSignUpCard();
-                break;
+                break;*/
         }
 
     }

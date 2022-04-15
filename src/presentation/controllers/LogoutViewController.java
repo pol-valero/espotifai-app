@@ -17,13 +17,13 @@ public class LogoutViewController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()){ //todo revisar
-            case logoutView.BTN_LOGOUT:
+            /*case logoutView.BTN_LOGOUT:
                 controller.showLoginCard();
                 break;
             case logoutView.BTN_DELETEACCOUNT:
                 controller.deleteCurrentAccount();
                 controller.showLoginCard();
-                break;
+                break;*/
         }
     }
 }

@@ -19,15 +19,15 @@ public class SignupViewController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()){
             case SignupView.BTN_SIGNUP: //todo revisar el com trobem i avisem del errors.
-                int[] errors = controller.checkSingupInfo(signupView.getinfo());
+                 /*int[] errors = controller.checkSingupInfo(signupView.getinfo());
 
-                if(lookForErrors(errors)){
+                 if(lookForErrors(errors)){
                     controller.showHomescreenCard(controller.getPlaylist());
                 }
                 else{
                     signupView.showSignupErrorMessages(errors);
                 }
-                break;
+                break;*/
         }
     }
 
