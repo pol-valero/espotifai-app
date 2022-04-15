@@ -3,6 +3,8 @@ package presentation.controllers;
 import presentation.UIController;
 import presentation.views.LoginView;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,9 +12,9 @@ public class LoginViewController implements ActionListener {
     private LoginView loginView;
     private UIController controller;
 
-    public LoginViewController(UIController controller, LoginView loginView){
+    public LoginViewController(UIController controller, JFrame topContainer, CardLayout cardManager){
         this.controller = controller;
-        this.loginView=loginView;
+        loginView = new LoginView();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
