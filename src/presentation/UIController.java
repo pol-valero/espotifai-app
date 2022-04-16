@@ -18,7 +18,7 @@ public class UIController {
         CardLayout cardManager = new CardLayout();
 
         loginViewController = new LoginViewController(this, topContainer, cardManager);
-        //fer el mateix amb tots els controllers
+        //fer el mateix amb tots els altres controllers
     }
 
 
