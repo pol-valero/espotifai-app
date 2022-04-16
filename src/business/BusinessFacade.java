@@ -10,7 +10,7 @@ public interface BusinessFacade {
      * @param generalString String a comprobar
      * @return boolean, false si esta vacia, true si contiene caracteres
      */
-    boolean checkEmptyString(String generalString);
+    boolean checkNonEmptyString(String generalString);
 
     /**
      * Metodo para comprobar que los campos del correo electronico son correctos

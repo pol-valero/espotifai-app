@@ -1,5 +1,6 @@
 package presentation;
 
+import business.BusinessFacade;
 import presentation.controllers.LoginViewController;
 import presentation.views.LoginView;
 
@@ -12,6 +13,7 @@ import java.awt.*;
 public class UIController {
 
     private LoginViewController loginViewController;
+    private BusinessFacade facade;
 
     public void run () {
         JFrame topContainer = new JFrame();
