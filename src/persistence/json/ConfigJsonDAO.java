@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 //import org.json.simple.JSONArray;
 
 
-public class ConfigJsonDAO implements ConfigDAO {
+public class ConfigJsonDAO /*implements ConfigDAO*/ {
 
     private static final String filename = "configJson/config.json";
     //private final Gson gson;
@@ -38,4 +38,3 @@ public class ConfigJsonDAO implements ConfigDAO {
         }
         */
     }
-}
