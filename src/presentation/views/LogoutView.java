@@ -2,10 +2,14 @@ package presentation.views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class LogoutView extends JFrame {
     public static final String BTN_LOGOUT = "BTN_LOGOUT";
     public static final String BTN_DELETEACCOUNT = "BTN_DELETEACCOUNT" ;
+
+    private JButton btnLogout;
+    private JButton btnDeleteAccount;
     
     public LogoutView () {
         configureView();
@@ -20,6 +24,7 @@ public class LogoutView extends JFrame {
     }
 
     private void configureView() {
+        //Colors, fonts and sizes
         Color negre = new Color(48,48,48);
         Color vermell = new Color (232,74,77);
         Font titols = new Font("Dialog", Font.PLAIN, 36);
@@ -30,7 +35,7 @@ public class LogoutView extends JFrame {
         p.setBackground(negre);
 
         GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets(30,30,30,30);
+        c.insets = new Insets(30,30,30,30); //Space between components
 
         //Title
         JLabel title = new JLabel();
@@ -40,24 +45,26 @@ public class LogoutView extends JFrame {
 
 
         //Log out btn
-        JButton btnLogout = new JButton();
+        btnLogout = new JButton();
         btnLogout.setBackground(vermell);
         btnLogout.setForeground(Color.white);
         btnLogout.setText("Log out");
         btnLogout.setFont(text);
         btnLogout.setPreferredSize(button_shape);
         btnLogout.setFocusable(false);
+        btnLogout.setActionCommand(BTN_LOGOUT);
 
 
 
         //Delete account btn
-        JButton btnDeleteAccount = new JButton();
+        btnDeleteAccount = new JButton();
         btnDeleteAccount.setBackground(vermell);
         btnDeleteAccount.setForeground(Color.white);
         btnDeleteAccount.setText("Delete account");
         btnDeleteAccount.setFont(text);
         btnDeleteAccount.setPreferredSize(button_shape);
         btnDeleteAccount.setFocusable(false);
+        btnDeleteAccount.setActionCommand(BTN_DELETEACCOUNT);
 
         //Position and addition
         c.gridx = 0;
@@ -74,6 +81,14 @@ public class LogoutView extends JFrame {
 
         getContentPane().add(p);
 
+    }
+    public void start(){
+        setVisible(true);
+    }
+
+    public void registerController (ActionListener logoutViewController){ //Todo crida aquesta funció on toqui
+        btnLogout.addActionListener(logoutViewController);
+        btnDeleteAccount.addActionListener(logoutViewController);
     }
 
 
