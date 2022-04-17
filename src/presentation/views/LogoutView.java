@@ -25,7 +25,7 @@ public class LogoutView extends JFrame {
 
     private void configureView() {
         //Colors, fonts and sizes
-        Color negre = new Color(48,48,48);
+        Color negre = new Color(48, 48, 48);
         Color vermell = new Color (232,74,77);
         Font titols = new Font("Dialog", Font.PLAIN, 36);
         Font text = new Font("Dialog", Font.PLAIN, 24);
