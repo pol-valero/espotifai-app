@@ -2,10 +2,17 @@ package presentation.views;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class SignupView extends JFrame{
     public static final String BTN_SIGNUP = "BTN_SIGNUP";
     private JButton btnSignup;
+    private JTextField name_text = new JTextField("enter the user name", 20);
+    private JTextField mail_text = new JTextField("enter the E-mail", 20);
+    private JTextField password_text = new JTextField("enter the Password", 20);
+    private JTextField password_2_text = new JTextField("enter the Password again", 20);
+
+
 
     public SignupView (boolean error_name, boolean error_mail, boolean error_password , boolean error_password_2) {
         configureView( error_name,  error_mail,  error_password , error_password_2);
@@ -42,7 +49,7 @@ public class SignupView extends JFrame{
 
         // User name Jtextfield
 
-        JTextField name_text = new JTextField("enter the user name", 20);
+
         name_text.setFont(text);
 
         if(error_name){
@@ -134,9 +141,23 @@ public class SignupView extends JFrame{
 
 
     public String[] getinfo() { //todo mètode per recollir les strings del JlabelText
+
         String[] info = new String[4];
+        String name_info = name_text.getText();
+        String mail_info = mail_text.getText();
+        String password_info = password_text.getText();
+        String password_2_info = password_2_text.getText();
 
+        if (Objects.equals(password_info, password_2_info)){
 
-        return info;
+            info[0] = name_info;
+            info[1] = mail_info;
+            info[2] = password_info;
+            info[3] = password_2_info;
+
+            return info;
+        }
+
+        return null;
     }
 }
