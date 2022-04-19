@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 public class SignupView extends JFrame{
+
     public static final String BTN_SIGNUP = "BTN_SIGNUP";
     private JButton btnSignup;
     private JTextField name_text = new JTextField("enter the user name", 20);
@@ -13,7 +14,11 @@ public class SignupView extends JFrame{
     private JTextField password_2_text = new JTextField("enter the Password again", 20);
 
 
+/**
+    Singup view ha de rebre si hi ha un error en algun parametre a
+    l'hora de fer el display perque en funció d'aixo mostrara un misstage de error o no
 
+ */
     public SignupView (boolean error_name, boolean error_mail, boolean error_password , boolean error_password_2) {
         configureView( error_name,  error_mail,  error_password , error_password_2);
         configureWindows();
@@ -38,7 +43,7 @@ public class SignupView extends JFrame{
 
         //Image
 
-        JLabel imatge = new JLabel(new ImageIcon("example png.png"));
+        JLabel imatge = new JLabel(new ImageIcon("icona.png"));
 
         //User name
 
@@ -103,19 +108,20 @@ public class SignupView extends JFrame{
         JTextField password_2_text = new JTextField("enter the Password again", 20);
         password_2_text.setFont(text);
 
-        if(error_password){
+        if(error_password_2){
 
             password_2_text.setToolTipText(vermell + "Wrong Password " + text);
         }
 
         //Sign up button
-        btnSignup = new JButton();
+
         btnSignup.setBackground(vermell);
         btnSignup.setForeground(Color.white);
         btnSignup.setText("Log out");
         btnSignup.setFont(text);
         btnSignup.setPreferredSize(button_shape);
         btnSignup.setFocusable(false);
+        btnSignup.setActionCommand(BTN_SIGNUP);
 
      //   btnSignup.setActionCommand(BTN_LOGOUT);
 
@@ -131,7 +137,7 @@ public class SignupView extends JFrame{
         p.add(password_2_text);
         p.add(btnSignup);
 
-
+        getContentPane().add(p);
 
 
     }
@@ -139,7 +145,11 @@ public class SignupView extends JFrame{
         setVisible(true);
     }
 
+    /**
 
+       return null si les strings del password no son iguals
+
+    */
     public String[] getinfo() { //todo mètode per recollir les strings del JlabelText
 
         String[] info = new String[4];
@@ -159,5 +169,9 @@ public class SignupView extends JFrame{
         }
 
         return null;
+    }
+    public void registerController (ActionListener SignupViewController){ //Todo crida aquesta funció on toqui
+        btnSignup.addActionListener(SignupViewController);
+
     }
 }
