@@ -14,18 +14,18 @@ public class LogoutViewController implements ActionListener {
 
     public LogoutViewController(UIController controller, JFrame topContainer, CardLayout cardManager){
         this.controller = controller;
-        logoutView = new LogoutView();
+        logoutView = new LogoutView(topContainer,cardManager);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        switch (e.getActionCommand()){ //todo revisar
-            /*case LogoutView.BTN_LOGOUT:
+        switch (e.getActionCommand()){
+            case LogoutView.BTN_LOGOUT:
                 controller.showLoginCard();
                 break;
             case LogoutView.BTN_DELETEACCOUNT:
-                controller.deleteCurrentAccount();
+                controller.deleteAccountRequest();
                 controller.showLoginCard();
-                break;*/
+                break;
         }
     }
 }

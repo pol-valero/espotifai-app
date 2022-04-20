@@ -19,9 +19,12 @@ public class LoginViewController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()){
-            case LoginView.BTN_LOGIN: //todo
-                /*if(controller.checkLoginInfo(loginView.getInfo())){
-                    controller.showHomescreenCard(controller.getPlaylist());
+            case LoginView.BTN_LOGIN:
+                if(controller.findUserNameMatch(loginView.getUsername()) && controller.findEmailMatch(loginView.getEmail()) &&
+                controller.checkPasswordFormat(loginView.getPassword()) && controller.checkEmailFormat(loginView.getEmail()) &&
+                controller.checkEqualPassword(loginView.getBothPasswords())){
+
+                    controller.showHomescreenCard(controller.getPlaylistNames());
                 }
                 else{
                     loginView.showLoginErrorMessage();
@@ -33,7 +36,7 @@ public class LoginViewController implements ActionListener {
                 break;
             case LoginView.BTN_SINGUP: //todo
                 controller.showSignUpCard();
-                break;*/
+                break;
         }
 
     }
