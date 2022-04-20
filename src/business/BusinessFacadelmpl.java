@@ -11,13 +11,35 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
 
     @Override
-    public boolean checkEmptyString(String generalString) {
+    public boolean checkNonEmptyString(String generalString) {
         return !generalString.equals("");
     }
 
     @Override
-    public boolean checkEmail(String email) {
-        return false;
+    public boolean checkEmail(String email){ //todo falta comprobar que solo hayan numeros, letras y puntos
+                                            // (contando que ya se comprueba que solo haya un@), poner metodo
+                                            //que lo compruebe ya que sera para cada parte del String
+        try {
+            if (email.length() <= 254 && checkNonEmptyString(email) && email.charAt(email.length() - 1) == '.') {
+                String[]  userUrl = email.split("@");
+
+                if (checkNonEmptyString(userUrl[0]) && userUrl.length == 2) {
+                    String[] url = userUrl[1].split("\\.");
+
+                    if (url.length > 1) {
+                        for (int i = 1; i < url.length; i++) {
+                            if(url[i].length() < 2){
+                                return ERROR;
+                            }
+                        }
+                        return OK;
+                    }
+                }
+            }
+            return ERROR;
+        } catch (ArrayIndexOutOfBoundsException e){
+            return ERROR;
+        }
     }
 
     @Override
