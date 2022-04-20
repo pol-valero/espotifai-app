@@ -21,7 +21,7 @@ public class UIController {
         CardLayout cardManager = new CardLayout();
 
         loginViewController = new LoginViewController(this, topContainer, cardManager);
-        logoutViewController = new LogoutViewController(this, topContainer, cardManager); //així?
+        logoutViewController = new LogoutViewController(this, topContainer, cardManager);
         //fer el mateix amb tots els altres controllers
     }
 

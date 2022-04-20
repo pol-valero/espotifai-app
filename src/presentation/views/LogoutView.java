@@ -4,26 +4,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class LogoutView extends JFrame {
+public class LogoutView {
     public static final String BTN_LOGOUT = "BTN_LOGOUT";
     public static final String BTN_DELETEACCOUNT = "BTN_DELETEACCOUNT" ;
 
     private JButton btnLogout;
     private JButton btnDeleteAccount;
     
-    public LogoutView () {
-        configureView();
-        configureWindows();
-    }
+    public LogoutView (JFrame topContainer, CardLayout cardManager) {
+        // Windows configuration
+        topContainer.setTitle("Account Manager");
+        topContainer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        topContainer.setSize(1512,928);
+        topContainer.setLocationRelativeTo(null);
 
-    private void configureWindows() {
-        setTitle("Account Manager");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1512,928);
-        setLocationRelativeTo(null);
-    }
-
-    private void configureView() {
+        //View configuration
         //Colors, fonts and sizes
         Color negre = new Color(48, 48, 48);
         Color vermell = new Color (232,74,77);
@@ -79,11 +74,12 @@ public class LogoutView extends JFrame {
         c.gridy = 3;
         p.add(btnDeleteAccount,c);
 
-        getContentPane().add(p);
-
+        topContainer.getContentPane().add(p);
     }
-    public void start(){
-        setVisible(true);
+
+
+    public void start(JFrame topContainer){
+        topContainer.setVisible(true);
     }
 
     public void registerController (ActionListener logoutViewController){ //Todo crida aquesta funció on toqui

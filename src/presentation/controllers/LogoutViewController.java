@@ -14,7 +14,7 @@ public class LogoutViewController implements ActionListener {
 
     public LogoutViewController(UIController controller, JFrame topContainer, CardLayout cardManager){
         this.controller = controller;
-        logoutView = new LogoutView();
+        logoutView = new LogoutView(topContainer,cardManager);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
