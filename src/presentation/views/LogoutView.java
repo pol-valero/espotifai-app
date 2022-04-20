@@ -13,7 +13,7 @@ public class LogoutView {
     
     public LogoutView (JFrame topContainer, CardLayout cardManager) {
         // Windows configuration
-        topContainer.setTitle("Account Manager");
+        topContainer.setTitle("Log out");
         topContainer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         topContainer.setSize(1512,928);
         topContainer.setLocationRelativeTo(null);
@@ -22,8 +22,8 @@ public class LogoutView {
         //Colors, fonts and sizes
         Color negre = new Color(48, 48, 48);
         Color vermell = new Color (232,74,77);
-        Font titols = new Font("Dialog", Font.PLAIN, 36);
-        Font text = new Font("Dialog", Font.PLAIN, 24);
+        Font titols = new Font("Eras Medium ITC", Font.PLAIN, 36);
+        Font text = new Font("Segoe UI Light", Font.PLAIN, 24);
         Dimension button_shape = new Dimension(371,56);
 
         JPanel p = new JPanel(new GridBagLayout());
