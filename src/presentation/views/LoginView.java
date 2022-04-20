@@ -8,11 +8,23 @@ public class LoginView {
     public void showLoginErrorMessage() { //todo: Mètode per fer visible el missatge d'error del login
     }
 
-    public String[] getInfo() { //todo: mètode per recollir les strings del jLabeltext
-        String[] info = new String[2];
 
+    public String getUsername() {//todo
+        return "str";
+    }
 
+    public String getEmail() {//todo
+        return "str";
+    }
 
-        return info;
+    public String getPassword() {//todo
+        return "str";
+    }
+
+    public String[] getBothPasswords() {//todo
+
+        String[] passwords = new String[2];
+
+        return passwords;
     }
 }

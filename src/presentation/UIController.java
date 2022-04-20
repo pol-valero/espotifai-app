@@ -7,6 +7,7 @@ import presentation.views.LogoutView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedList;
 
 /**
  * Clase que gestiona el funcionamiento del programa
@@ -26,6 +27,48 @@ public class UIController {
     }
 
 
+    public void showLoginCard() {
+    }
+
+    public boolean findUserNameMatch(String username){//todo
+
+        return true;
+    }
+
+    public boolean findEmailMatch(String email){ //todo
+
+        return true;
+    }
+
+    public boolean checkPasswordFormat(String password){ //todo
+
+        return true;
+    }
+
+    public boolean checkEmailFormat (String email){
+        return true;
+    }
+
+    public boolean checkEqualPassword (String[] passwords){
+        return true;
+    }
 
 
+    public void deleteAccountRequest() {
+    }
+
+    public LinkedList getPlaylistNames() {
+        LinkedList playlistNames = new LinkedList();
+        
+        return playlistNames;
+    }
+
+    public void showHomescreenCard(LinkedList playlistNames) {
+    }
+
+    public void showForgotPasswordCard() {
+    }
+
+    public void showSignUpCard() {
+    }
 }
