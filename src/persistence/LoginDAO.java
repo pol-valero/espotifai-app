@@ -10,7 +10,7 @@ public interface LoginDAO {
      * Metodo para obtener todos los usuarios almacenados en la base de datos
      * @return List de user con la informacion de los usuarios
      */
-    public List<User> getAllUsers():
+    public List<User> getAllUsers();
 
     /***
      * Metodo para registrar a un usuario
