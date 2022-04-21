@@ -14,7 +14,7 @@ public class SQLConnector {
 
     public static SQLConnector getInstance(){ //si la base no esta instanciada la instanciamos
         if (instance == null ){
-            instance = new SQLConnector("potify-lasalle", "3S8&jfd1", "31.193.128.38", 3306, "spotifybbdd");
+            instance = new SQLConnector("potify-lasalle", "3S8&jfd1", "www.spotify-lasalle.com", 3306, "spotifybbdd");
             instance.connect();
         }
         return instance;
