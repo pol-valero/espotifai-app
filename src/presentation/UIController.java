@@ -71,4 +71,9 @@ public class UIController {
 
     public void showSignUpCard() {
     }
+
+    public boolean loginRequest(String[] infoLogin) { //todo
+
+        return true;
+    }
 }

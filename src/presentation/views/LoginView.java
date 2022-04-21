@@ -6,25 +6,16 @@ public class LoginView {
     public static final String BTN_SINGUP = "BTN_SIGNUP";
 
     public void showLoginErrorMessage() { //todo: Mètode per fer visible el missatge d'error del login
+
     }
 
 
-    public String getUsername() {//todo
-        return "str";
+    public String[] getInfoLogin() {//todo
+        String[] info = new String[2];
+
+        return info;
     }
 
-    public String getEmail() {//todo
-        return "str";
-    }
 
-    public String getPassword() {//todo
-        return "str";
-    }
 
-    public String[] getBothPasswords() {//todo
-
-        String[] passwords = new String[2];
-
-        return passwords;
-    }
 }
