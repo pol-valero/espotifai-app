@@ -145,33 +145,29 @@ public class SignupView extends JFrame{
         setVisible(true);
     }
 
-    /**
 
-       return null si les strings del password no son iguals
-
-    */
-    public String[] getinfo() { //todo mètode per recollir les strings del JlabelText
-
-        String[] info = new String[4];
-        String name_info = name_text.getText();
-        String mail_info = mail_text.getText();
-        String password_info = password_text.getText();
-        String password_2_info = password_2_text.getText();
-
-        if (Objects.equals(password_info, password_2_info)){
-
-            info[0] = name_info;
-            info[1] = mail_info;
-            info[2] = password_info;
-            info[3] = password_2_info;
-
-            return info;
-        }
-
-        return null;
-    }
     public void registerController (ActionListener SignupViewController){ //Todo crida aquesta funció on toqui
         btnSignup.addActionListener(SignupViewController);
 
+    }
+
+    public String getUsername() {
+        return name_text.getText();
+    }
+
+    public String getEmail() {
+        return mail_text.getText();
+    }
+
+    public String getPassword() {
+        return password_text.getText();
+    }
+
+    public String[] getBothPasswords() {
+        String[] passwords = new String[2];
+
+        passwords[0] = password_text.getText();
+        passwords[1] = password_2_text.getText();
+        return passwords;
     }
 }
