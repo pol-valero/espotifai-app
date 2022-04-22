@@ -1,6 +1,76 @@
 package presentation.views;
 
-public class ForgotPasswordView {
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionListener;
 
-    //caca
+public class ForgotPasswordView {
+    public static final String BTN_SEND = "BTN_SEND";
+
+    private JButton btn_send;
+
+    public ForgotPasswordView(JFrame topContainer, CardLayout cardManager){
+
+        //Windows configuration
+        topContainer.setTitle("Forgot Password");
+        topContainer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        topContainer.setSize(1512,928);
+        topContainer.setLocationRelativeTo(null);
+
+        //View configuration
+        Color negre = new Color(48,48,48);
+        Color vermell = new Color (232,74,77);
+        Font titols = new Font("Eras Medium ITC", Font.PLAIN, 36);
+        Font text = new Font("Segoe UI Light", Font.PLAIN, 20);
+
+
+
+        JPanel panel = new JPanel();
+        panel.setBackground(negre);
+        panel.setLayout(null);
+
+        JLabel title = new JLabel("Forgot password");
+        title.setBounds(200,210,300,50);
+        title.setFont(titols);
+        title.setForeground(Color.white);
+        panel.add(title);
+
+        JLabel subtitle = new JLabel("<html>Enter the email address assoaciated with your account. <br>" +
+                "We will then send you the instructions.</html>");
+        subtitle.setBounds(200,270,600,50);
+        subtitle.setFont(text);
+        subtitle.setForeground(Color.white);
+        panel.add(subtitle);
+
+        JLabel textboxTitle = new JLabel("Email");
+        textboxTitle.setBounds(200,380,70,30);
+        textboxTitle.setFont(text);
+        textboxTitle.setForeground(Color.white);
+        panel.add(textboxTitle);
+
+        JTextField jTextField = new JTextField();
+        jTextField.setBounds(200,430,490,45);
+        panel.add(jTextField);
+
+        btn_send.setText("Send");
+        btn_send.setBounds(571,614,371,56);
+        btn_send.setForeground(Color.white);
+        btn_send.setFont(text);
+        btn_send.setBackground(vermell);
+        btn_send.setFocusable(false);
+        btn_send.setActionCommand(BTN_SEND);
+        panel.add(btn_send);
+
+
+        topContainer.getContentPane().add(panel);
+
+    }
+    public void start(JFrame topContainer){
+        topContainer.setVisible(true);
+    }
+
+    public void registerController (ActionListener ForgotPasswordViewController){ //Todo crida aquesta funció on toqui
+        btn_send.addActionListener(ForgotPasswordViewController);
+    }
+
 }

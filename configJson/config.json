@@ -1,7 +1,7 @@
 {
-  "Port": "5432",
-  "IP": "localhost",
-  "NomBase": "Spotify_database",
-  "Usuari": "Admin",
-  "contrasenya": "admin"
+  "Port": "3306",
+  "IP": "www.spotify-lasalle.com",
+  "NomBase": "spotifybbdd",
+  "Usuari": "spotifybbdd",
+  "contrasenya": "3$4bSq1m"
 }

@@ -18,26 +18,38 @@ public class SignupViewController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()){
-            case SignupView.BTN_SIGNUP: //todo revisar el com trobem i avisem del errors.
-                 /*int[] errors = controller.checkSingupInfo(signupView.getinfo());
-
-                 if(lookForErrors(errors)){
-                    controller.showHomescreenCard(controller.getPlaylist());
-                }
-                else{
-                    signupView.showSignupErrorMessages(errors);
-                }
-                break;*/
+            case SignupView.BTN_SIGNUP:
+                checkAllSignupFields();
+                break;
         }
     }
 
-    public boolean lookForErrors(int[] errors) { //todo podem utilitzar aquest mètode aquí?
-        boolean flag = false;
-        for (int error : errors) {
-            if (error == 1) {
-                flag = true;
-            }
+    private void checkAllSignupFields() {//todo revisar el com trobem i avisem del errors.
+        boolean errorFlag = false;
+        //todo: posar les crides a la vista per mostrar els errors
+        if(controller.findUserNameMatch(signupView.getUsername())){
+            errorFlag=true;
         }
-        return flag;
+
+        if (controller.findEmailMatch(signupView.getEmail())){
+            errorFlag=true;
+        }
+
+        if(controller.checkEmailFormat(signupView.getEmail())){
+            errorFlag=true;
+        }
+
+        if(controller.checkPasswordFormat(signupView.getPassword())){
+            errorFlag=true;
+        }
+
+        if(controller.checkEqualPassword(signupView.getBothPasswords())){
+            errorFlag=true;
+        }
+
+        if(!errorFlag){
+            controller.showHomescreenCard(controller.getPlaylistNames());
+        }
     }
+
 }
