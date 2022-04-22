@@ -31,59 +31,69 @@ public class SQLConnector {
      */
     public void connect() {
         try {
-            connection = DriverManager.getConnection(url, username, password); //conecta a la base de datos usando la url
-        } catch(SQLException e) {
-            System.err.println("Couldn't connect to --> " + url + " (" + e.getMessage() + ")");
+            connection = DriverManager.getConnection(url, username, password);
+        } catch(SQLException exception) {
+            System.err.println("Couldn't connect to  " + url);
         }
     }
 
+    /**
+     * Metodo para insertar nueva informacion a la base de datos
+     * @param query String con el comando para el SQL
+     */
     public void insertQuery(String query){
         try {
             Statement s = connection.createStatement();
             s.executeUpdate(query);
-        } catch (SQLException e) {
-            System.err.println(query);
-            System.err.println("Problem when inserting --> " + e.getSQLState() + " (" + e.getMessage() + ")");
+        } catch (SQLException exception) {
+            System.err.println("ERROR in = " + query);
         }
     }
 
-
+    /**
+     *  Metodo para actiualizar informacion ya existente de la  base de datos
+     * @param query String con el comando para el SQL
+     */
     public void updateQuery(String query){
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate(query);
-        } catch (SQLException e) {
-            System.err.println(query);
-            System.err.println("Problem when updating --> " + e.getSQLState() + " (" + e.getMessage() + ")");
+        } catch (SQLException exception) {
+            System.err.println("ERROR in = " + query);
         }
     }
 
-
+    /**
+     * Metodo para eliminar informacion de la base de datos
+     * @param query String con el comando para el SQL
+     */
     public void deleteQuery(String query){
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate(query);
-        } catch (SQLException e) {
-            System.err.println(query);
-            System.err.println("Problem when deleting --> " + e.getSQLState() + " (" + e.getMessage() + ")");
+        } catch (SQLException exception) {
+            System.err.println("ERROR in = " + query);
         }
 
     }
 
-
+    /**
+     *
+     * @param query String con el comando para el SQL
+     * @return
+     */
     public ResultSet selectQuery(String query){
-        ResultSet rs = null;
+        ResultSet resultSet = null;
         try {
-            Statement s = connection.createStatement();
-            rs = s.executeQuery(query);
-        } catch (SQLException e) {
-            System.err.println(query);
-            System.err.println("Problem when selecting data --> " + e.getSQLState() + " (" + e.getMessage() + ")");
+            Statement statement = connection.createStatement();
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException exception) {
+            System.err.println("ERROR in = " + query);
         }
-        return rs;
+        return resultSet;
     }
 
-
+/*
     public void disconnect(){
         try {
             connection.close();
@@ -91,5 +101,7 @@ public class SQLConnector {
             System.err.println("Problem when closing the connection --> " + e.getSQLState() + " (" + e.getMessage() + ")");
         }
     }
+
+ */
 
 }
