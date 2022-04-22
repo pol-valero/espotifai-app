@@ -9,12 +9,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginViewController implements ActionListener {
-    private LoginView loginView;
-    private UIController controller;
+    private final LoginView loginView;
+    private final UIController controller;
 
     public LoginViewController(UIController controller, JFrame topContainer, CardLayout cardManager){
         this.controller = controller;
-        loginView = new LoginView();
+        loginView = new LoginView(topContainer, cardManager);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -36,5 +36,9 @@ public class LoginViewController implements ActionListener {
                 break;*/
         }
 
+    }
+
+    public void showLoginCard () {
+        loginView.showCard();
     }
 }
