@@ -49,7 +49,7 @@ public class UIController {
         return true;
     }
 
-    public boolean checkEqualPassword (String[] passwords){
+    public boolean checkEqualPassword (String password, String rewritedPassword){
         return true;
     }
 
@@ -72,7 +72,7 @@ public class UIController {
     public void showSignUpCard() {
     }
 
-    public boolean loginRequest(String[] infoLogin) { //todo
+    public boolean loginRequest(String login, String password) { //todo
 
         return true;
     }

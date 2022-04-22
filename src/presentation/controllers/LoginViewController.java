@@ -20,7 +20,7 @@ public class LoginViewController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()){
             case LoginView.BTN_LOGIN:
-                if(controller.loginRequest(loginView.getInfoLogin())){
+                if(controller.loginRequest(loginView.getLoginField(), loginView.getPasswordField())){
                     controller.showHomescreenCard(controller.getPlaylistNames());
                 }
                 else{

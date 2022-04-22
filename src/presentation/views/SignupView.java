@@ -163,11 +163,7 @@ public class SignupView extends JFrame{
         return password_text.getText();
     }
 
-    public String[] getBothPasswords() {
-        String[] passwords = new String[2];
-
-        passwords[0] = password_text.getText();
-        passwords[1] = password_2_text.getText();
-        return passwords;
+    public String getRewritedPassword () {
+        return password_2_text.getText();
     }
 }

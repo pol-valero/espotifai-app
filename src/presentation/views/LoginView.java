@@ -70,6 +70,15 @@ public class LoginView {
     public void showLoginErrorMessage() {
     }
 
+    public String getLoginField() {
+
+        return null;
+    }
+
+    public String getPasswordField() {
+        return null;
+    }
+
     public void showCard () {
         //cardmanager.show()
     }

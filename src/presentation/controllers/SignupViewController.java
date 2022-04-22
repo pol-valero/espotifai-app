@@ -39,11 +39,9 @@ public class SignupViewController implements ActionListener {
             errorFlag=true;
         }
 
-        if(controller.checkPasswordFormat(signupView.getPassword())){
+        if(controller.checkEqualPassword(signupView.getPassword(), signupView.getRewritedPassword())){
             errorFlag=true;
-        }
-
-        if(controller.checkEqualPassword(signupView.getBothPasswords())){
+        } else if(controller.checkPasswordFormat(signupView.getPassword())){
             errorFlag=true;
         }
 
