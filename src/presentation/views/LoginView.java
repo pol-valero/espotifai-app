@@ -4,6 +4,7 @@ import presentation.Components.ImagePanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -45,6 +46,10 @@ public class LoginView {
         JPanel jpLogin = new JPanel();
         jpLogin.setLayout(new BoxLayout(jpLogin, BoxLayout.Y_AXIS));
 
+        JPanel imagePanel = new ImagePanel("images/logo.png");
+        //imagePanel.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
+        imagePanel.setPreferredSize(new Dimension(50,50));
+
         JLabel jlAppName = new JLabel("Espotify");
         jlAppName.setAlignmentX(Component.CENTER_ALIGNMENT);
         jlAppName.setFont(new Font("Futura", Font.BOLD, 40));
@@ -57,7 +62,7 @@ public class LoginView {
 
         jpLogin.add(Box.createRigidArea(new Dimension(0, 100)));
 
-        //jpLogin.add(imagePanel);
+        jpLogin.add(imagePanel);
 
         jpLogin.add(jlAppName);
         jpLogin.add(Box.createRigidArea(new Dimension(0, 50)));
