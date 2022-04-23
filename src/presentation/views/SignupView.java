@@ -50,7 +50,7 @@ public class SignupView extends JFrame{
 
         //Image
 
-        ImageIcon Image_default = new ImageIcon("C:\\Users\\joaqu\\OneDrive\\Documents\\Universitat Salle Eng\\otic 2 any\\Programació Orientada a Objectes\\Honker-Simple_-_quim\\Honker-Simple\\Honker-Simple\\src\\icona.png");
+        ImageIcon Image_default = new ImageIcon("images/logo.png");
         Image imageIcon = Image_default.getImage();
         Image Image = getScaledImage(imageIcon, 200, 200);
         ImageIcon icon = new ImageIcon(Image);
