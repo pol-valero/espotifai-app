@@ -75,11 +75,7 @@ public class LogoutView {
         p.add(btnDeleteAccount,c);
 
         topContainer.getContentPane().add(p);
-    }
 
-
-    public void start(JFrame topContainer){
-        topContainer.setVisible(true);
     }
 
     public void registerController (ActionListener logoutViewController){ //Todo crida aquesta funció on toqui

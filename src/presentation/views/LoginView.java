@@ -30,7 +30,7 @@ public class LoginView {
     private void oneTimeConfiguration () {
         //The following three lines only need to be added to this class as it is the first class whose object is created. All the other view classes must not have these three lines.
         topContainer.setTitle("Spotifai");
-        topContainer.getContentPane().setLayout(cardManager);
+        //topContainer.getContentPane().setLayout(cardManager);
         topContainer.setVisible(true);
     }
 
@@ -64,7 +64,11 @@ public class LoginView {
         jpLogin.add(jbutton2);
         jpLogin.add(jbutton3);
 
-        topContainer.add(jpLogin, "login");
+        //topContainer.add(jpLogin, "login");
+
+        topContainer.getContentPane().add(jpLogin);
+        topContainer.getContentPane().remove(jpLogin);
+
     }
 
     public void showLoginErrorMessage() {
