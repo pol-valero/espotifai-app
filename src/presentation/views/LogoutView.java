@@ -22,8 +22,8 @@ public class LogoutView {
         //Colors, fonts and sizes
         Color negre = new Color(48, 48, 48);
         Color vermell = new Color (232,74,77);
-        Font titols = new Font("Eras Medium ITC", Font.PLAIN, 36);
-        Font text = new Font("Segoe UI Light", Font.PLAIN, 24);
+        Font titols = new Font("Futura", Font.PLAIN, 36);
+        Font text = new Font("Futura", Font.PLAIN, 24);
         Dimension button_shape = new Dimension(371,56);
 
         JPanel p = new JPanel(new GridBagLayout());
@@ -47,6 +47,8 @@ public class LogoutView {
         btnLogout.setFont(text);
         btnLogout.setPreferredSize(button_shape);
         btnLogout.setFocusable(false);
+        btnLogout.setOpaque(true);
+        btnLogout.setBorderPainted(false);
         btnLogout.setActionCommand(BTN_LOGOUT);
 
 
@@ -59,6 +61,8 @@ public class LogoutView {
         btnDeleteAccount.setFont(text);
         btnDeleteAccount.setPreferredSize(button_shape);
         btnDeleteAccount.setFocusable(false);
+        btnDeleteAccount.setOpaque(true);
+        btnDeleteAccount.setBorderPainted(false);
         btnDeleteAccount.setActionCommand(BTN_DELETEACCOUNT);
 
         //Position and addition
@@ -74,7 +78,10 @@ public class LogoutView {
         c.gridy = 3;
         p.add(btnDeleteAccount,c);
 
-        topContainer.getContentPane().add(p);
+        //topContainer.getContentPane().add(p);
+        //topContainer.pack();
+        //topContainer.getContentPane().remove(p);
+
 
     }
 
