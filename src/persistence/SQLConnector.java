@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class SQLConnector {
 
-    private static SQLConnector instance = null; //empazamos sin instanciar la base
+    private static SQLConnector instance = null;
 
     private final String username;
     private final String password;
@@ -80,7 +80,7 @@ public class SQLConnector {
     /**
      *
      * @param query String con el comando para el SQL
-     * @return
+     * @return resulSet objeto de tipo ResultSet con ls informcion de la base de datos //todo preguntar por el puntero ya que en java no existen
      */
     public ResultSet selectQuery(String query){
         ResultSet resultSet = null;
