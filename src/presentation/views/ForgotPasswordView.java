@@ -20,8 +20,8 @@ public class ForgotPasswordView {
         //View configuration
         Color negre = new Color(48,48,48);
         Color vermell = new Color (232,74,77);
-        Font titols = new Font("Eras Medium ITC", Font.PLAIN, 36);
-        Font text = new Font("Segoe UI Light", Font.PLAIN, 20);
+        Font titols = new Font("Trebuchet MS", Font.PLAIN, 36);
+        Font text = new Font("Gulim", Font.PLAIN, 24);
 
 
 
@@ -58,11 +58,14 @@ public class ForgotPasswordView {
         btn_send.setFont(text);
         btn_send.setBackground(vermell);
         btn_send.setFocusable(false);
+        btn_send.setOpaque(false);
+        btn_send.setBorderPainted(false);
         btn_send.setActionCommand(BTN_SEND);
         panel.add(btn_send);
 
-
-        topContainer.getContentPane().add(panel);
+        //topContainer.getContentPane().add(panel);
+        //topContainer.pack();
+        //topContainer.getContentPane().remove(panel);
 
     }
     public void start(JFrame topContainer){
