@@ -37,16 +37,22 @@ public class SignupView extends JFrame{
         //Colors, fonts and sizes
         Color negre = new Color(48, 48, 48);
         Color vermell = new Color (232,74,77);
-        Font titols = new Font("Dialog", Font.PLAIN, 30);
-        Font text = new Font("Dialog", Font.PLAIN, 10);
+        Font titols = new Font("Dialog", Font.PLAIN, 40);
+        Font text = new Font("Dialog", Font.PLAIN, 20);
+        Font button = new Font("Dialog", Font.PLAIN, 30);
+        Font information = new Font("Dialog", Font.PLAIN, 12);
         // Dimension button_shape = new Dimension(371,56);
-        Dimension button_shape = new Dimension(250,50);
+        Dimension button_shape = new Dimension(505,40);
 
         JPanel p = new JPanel(new GridBagLayout());
         p.setBackground(negre);
 
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(10,30,10,30); //Space between components
+
+        JPanel info_panel = new JPanel();
+        info_panel.setLayout(new BoxLayout(info_panel, BoxLayout.PAGE_AXIS));
+
 
         //Image
 
@@ -58,87 +64,116 @@ public class SignupView extends JFrame{
         imatge_final.setIcon(icon);
 
 
-        //User name
+        //User name and name text
+
 
         JLabel name_Label = new JLabel();
         name_Label.setText("User name");
         name_Label.setForeground(Color.white);
         name_Label.setFont(titols);
-
-        JPanel name = new JPanel();
-        name.setLayout( new BorderLayout());
-        name.setSize(500, 300);
-        name.setOpaque(false);
-        name.add(name_Label, BorderLayout.SOUTH);
-        // User name Jtextfield
+        info_panel.add(name_Label);
 
         name_text.setFont(text);
+        info_panel.add(name_text);
 
-        if(error_name){
+        if(error_name) {
 
-            name_text.setToolTipText(vermell + "Wrong User name " + text);
+            JLabel Error_Label = new JLabel();
+            Error_Label.setText("The username is incorrect");
+            Error_Label.setForeground(vermell);
+            Error_Label.setFont(text);
+            info_panel.add(Error_Label);
+
         }
 
-        // E-mail
+        info_panel.setOpaque(false);
 
+        //mail and mail text
+
+
+        info_panel.setOpaque(false);
         JLabel mail = new JLabel();
         mail.setText("E-mail");
         mail.setForeground(Color.white);
         mail.setFont(titols);
+        info_panel.add(mail);
 
-        // mail Jtextfield
 
-        JTextField mail_text = new JTextField("enter the E-mail", 20);
         mail_text.setFont(text);
+        info_panel.add(mail_text);
 
         if(error_mail){
 
-            mail_text.setToolTipText(vermell + "Wrong E-mail " + text);
-            mail.setText("malament ");
+            JLabel Error_Label = new JLabel();
+            Error_Label.setText("The mail is incorrect");
+            Error_Label.setForeground(vermell);
+            Error_Label.setFont(text);
+            info_panel.add(Error_Label);
         }
 
-        // Password
+
+
+        // Password and JTextField
 
         JLabel password = new JLabel();
         password.setText("Password");
         password.setForeground(Color.white);
         password.setFont(titols);
+        info_panel.add(password);
 
-        // password Jtextfield
 
-        JTextField password_text = new JTextField("enter the Password", 20);
         password_text.setFont(text);
+        info_panel.add(password_text);
 
         if(error_password){
 
-            password_text.setToolTipText(vermell + "Wrong Password " + text);
-            password_text.setText("malament ");
+            JLabel Error_Label = new JLabel();
+            Error_Label.setText("The password is incorrect");
+            Error_Label.setForeground(vermell);
+            Error_Label.setFont(text);
+            info_panel.add(Error_Label);
         }
 
-        // Rewrite Password
+
+        // Rewrite Password and JTextField
+
 
         JLabel password_2 = new JLabel();
         password_2.setText("Rewrite Password");
         password_2.setForeground(Color.white);
         password_2.setFont(titols);
+        info_panel.add(password_2);
 
-        // password_2 Jtextfield
 
-        JTextField password_2_text = new JTextField("enter the Password again", 20);
         password_2_text.setFont(text);
+        info_panel.add(password_2_text);
 
         if(error_password_2){
 
-            password_2_text.setToolTipText(vermell + "Wrong Password " + text);
-            password_2_text.setText("malament ");
+            JLabel Error_Label = new JLabel();
+            Error_Label.setText("The password is incorrect");
+            Error_Label.setForeground(vermell);
+            Error_Label.setFont(text);
+            info_panel.add(Error_Label);
         }
+
+        JLabel message = new JLabel();
+        message.setText("The password must contain at least 8 characters with ");
+        message.setForeground(Color.white);
+        message.setFont(information);
+        info_panel.add( message);
+        JLabel message_2 = new JLabel();
+        message_2.setText("1 lower case letter, 1 upper case letter and 1 number");
+        message_2.setForeground(Color.white);
+        message_2.setFont(information);
+        info_panel.add( message_2);
 
         //Sign up button
 
         btnSignup.setBackground(vermell);
         btnSignup.setForeground(Color.white);
         btnSignup.setText("Sing Up");
-        btnSignup.setFont(titols);
+        btnSignup.setFont(button);
         btnSignup.setPreferredSize(button_shape);
         btnSignup.setFocusable(false);
         btnSignup.setActionCommand(BTN_SIGNUP);
@@ -151,74 +186,23 @@ public class SignupView extends JFrame{
         c.gridy = 0;
         p.add(imatge_final,c);
 
+        //Position and addition
         c.gridx = 0;
         c.gridy = 1;
-        p.add(name,c);
+        p.add(info_panel,c);
 
+
+        //Position and addition
         c.gridx = 0;
         c.gridy = 2;
-        p.add(name_text,c);
-        //Position and addition
-        c.gridx = 0;
-        c.gridy = 3;
-        p.add(mail,c);
-
-        c.gridx = 0;
-        c.gridy = 4;
-        p.add(mail_text,c);
-
-        c.gridx = 0;
-        c.gridy = 5;
-        p.add(password,c);
-
-        //Position and addition
-        c.gridx = 0;
-        c.gridy = 6;
-        p.add(password_text,c);
-
-        c.gridx = 0;
-        c.gridy = 7;
-        p.add(password_2,c);
-
-        c.gridx = 0;
-        c.gridy = 8;
-        p.add(password_2_text,c);
-        //Position and addition
-        c.gridx = 0;
-        c.gridy = 9;
         p.add(btnSignup,c);
 
         getContentPane().add(p);
-
 
     }
     public void start(){
         setVisible(true);
     }
-
-
-    /*
-    public String[] getinfo() { //todo mètode per recollir les strings del JlabelText
-
-        String[] info = new String[4];
-        String name_info = name_text.getText();
-        String mail_info = mail_text.getText();
-        String password_info = password_text.getText();
-        String password_2_info = password_2_text.getText();
-
-        if (Objects.equals(password_info, password_2_info)){
-
-            info[0] = name_info;
-            info[1] = mail_info;
-            info[2] = password_info;
-            info[3] = password_2_info;
-
-            return info;
-        }
-
-        return null;
-    }
-    */
 
     Image getScaledImage(Image Img, int wt, int ht) {
         BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
