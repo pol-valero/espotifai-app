@@ -2,6 +2,7 @@ package presentation;
 
 import presentation.controllers.LoginViewController;
 import presentation.controllers.LogoutViewController;
+import presentation.controllers.SignupViewController;
 import presentation.views.LoginView;
 import presentation.views.LogoutView;
 
@@ -16,6 +17,7 @@ public class UIController {
 
     private LoginViewController loginViewController;
     private LogoutViewController logoutViewController;
+    private SignupViewController signupViewController;
 
     public void run () {
         JFrame topContainer = new JFrame();
@@ -23,6 +25,8 @@ public class UIController {
 
         loginViewController = new LoginViewController(this, topContainer, cardManager);
         logoutViewController = new LogoutViewController(this, topContainer, cardManager);
+        signupViewController = new SignupViewController(this, topContainer, cardManager);
+
         //fer el mateix amb tots els altres controllers
     }
 
