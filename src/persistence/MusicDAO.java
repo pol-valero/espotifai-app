@@ -7,12 +7,28 @@ import java.util.List;
 
 public interface MusicDAO {
 
+    /**
+     * Metodo para obtener las estadisticas de genero de la base de datos
+     * @return List de tipo Genre con la informacion
+     */
     public List<Genre> loadStadistic();
 
+    /**
+     *
+     * @param song
+     */
     public void createSong(Song song);
 
+    /**
+     * Metodo para eliminar una cancion de la base de datos
+     * @param songName
+     */
     public void deleteSong(String songName);
 
+    /**
+     * Metodo para subir estadisticas a la base de datos
+     * @param stadistic List con la informacion de las estadisticas
+     */
     public void createStadistic(List<Genre> stadistic);
 
 }
