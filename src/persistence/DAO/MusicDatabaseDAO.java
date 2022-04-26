@@ -15,14 +15,15 @@ public class MusicDatabaseDAO implements MusicDAO {
     @Override
     public List<Genre> loadStadistic() {
         List<Genre> genres = new LinkedList<>();
-        String query = "SELECT genero ,cantidad FROM genero;";
+        String query = "SELECT id, genero ,cantidad FROM genero;";
         ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
         try {
             while (resultSet.next()) {
+                int idgenre = resultSet.getInt("id");
                 String genre = resultSet.getString("genero");
                 int amount = resultSet.getInt("cantidad");
 
-                genres.add(new Genre(genre,amount));
+                genres.add(new Genre(idgenre, genre,amount));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -50,16 +51,26 @@ public class MusicDatabaseDAO implements MusicDAO {
                 + songName + ";";
         SQLConnector.getInstance().deleteQuery(query);
 
-        //todo falta eliminar un valor del genero en la base de genero
         List<Genre> genreList = loadStadistic();
-
-
-
+        for (Genre genre: genreList) {
+            if (genre.getId() == idGenre ){
+                genre.setAmount(genre.getAmount() - 1);
+            }
+        }
+        createStadistic(genreList);
     }
 
     @Override
     public void createStadistic(List<Genre> stadistic) {
-
+        String query = "TRUNCATE genero";
+        SQLConnector.getInstance().updateQuery(query); //todo probar si va bien
+        for (Genre genre : stadistic) {
+            query = "INSERT INTO genero(id, genero, cantidad) VALUES ('" +
+                    genre.getId() + "', '" +
+                    genre.getGenre() + "', '" +
+                    genre.getAmount() + "');";
+            SQLConnector.getInstance().insertQuery(query);
+        }
     }
 
     /**
