@@ -2,7 +2,6 @@ package presentation.views;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 import java.awt.image.BufferedImage;
 
 
@@ -84,15 +83,11 @@ public class SignupView {
         name_text.setFont(text);
         info_panel.add(name_text);
 
-        if(error_name) {
-
-
             error_Label_name.setText("The username is incorrect");
             error_Label_name.setForeground(vermell);
             error_Label_name.setFont(text);
             info_panel.add(error_Label_name);
 
-        }
 
         info_panel.setOpaque(false);
 
@@ -110,14 +105,12 @@ public class SignupView {
         mail_text.setFont(text);
         info_panel.add(mail_text);
 
-        if(error_mail){
-
 
             error_Label_mail.setText("The mail is incorrect");
             error_Label_mail.setForeground(vermell);
             error_Label_mail.setFont(text);
             info_panel.add(error_Label_mail);
-        }
+
 
 
 
@@ -133,13 +126,12 @@ public class SignupView {
         password_text.setFont(text);
         info_panel.add(password_text);
 
-        if(error_password){
 
             error_Label_password.setText("The password is incorrect");
             error_Label_password.setForeground(vermell);
             error_Label_password.setFont(text);
             info_panel.add(error_Label_password);
-        }
+
 
 
         // Rewrite Password and JTextField
@@ -155,15 +147,12 @@ public class SignupView {
         password_2_text.setFont(text);
         info_panel.add(password_2_text);
 
-        if(error_password_2){
-
-
             error_Label_password_2.setText("The password is incorrect");
             error_Label_password_2.setForeground(vermell);
             error_Label_password_2.setFont(text);
 
             info_panel.add(error_Label_password_2);
-        }
+
 
         JLabel message = new JLabel();
         message.setText("The password must contain at least 8 characters with ");
@@ -226,8 +215,13 @@ public class SignupView {
 
     }
    /**
-*/
-  public void showUserNameError(boolean error){ error_Label_name.setVisible(error);}
+    * Aquesta funcio permet canviar si es visible o no , per tant s'ha de utilitzar
+    * tant per si s'ha de fer visible com invisible.
+    */
+    public void userNameErrorVisibility (boolean error){ error_Label_name.setVisible(error);}
+    public void mailErrorVisibility (boolean error){ error_Label_mail.setVisible(error);}
+    public void passwordVisibility (boolean error){ error_Label_password.setVisible(error);}
+    public void password_2_Visibility (boolean error){ error_Label_password_2.setVisible(error);}
 
 
 
