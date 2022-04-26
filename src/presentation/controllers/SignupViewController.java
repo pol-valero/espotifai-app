@@ -1,8 +1,11 @@
 package presentation.controllers;
 
 import presentation.UIController;
+import presentation.views.LoginView;
 import presentation.views.SignupView;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,9 +14,9 @@ public class SignupViewController implements ActionListener {
     private final SignupView signupView;
     private final UIController controller;
 
-    public SignupViewController(UIController controller, SignupView signupView){
-        this.signupView = signupView;
+    public SignupViewController(UIController controller, JFrame topContainer, CardLayout cardManager){
         this.controller = controller;
+        signupView = new SignupView(topContainer, cardManager);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -48,6 +51,18 @@ public class SignupViewController implements ActionListener {
         if(!errorFlag){
             controller.showHomescreenCard(controller.getPlaylistNames());
         }
+    }
+    public void userNameErrorVisibility (boolean error) {
+        signupView.userNameErrorVisibility(error);
+    }
+    public void mailErrorVisibility (boolean error) {
+        signupView.mailErrorVisibility(error);
+    }
+    public void passwordVisibility (boolean error) {
+        signupView.passwordVisibility(error);
+    }
+    public void password_2_Visibility (boolean error) {
+        signupView.password_2_Visibility(error);
     }
 
 }

@@ -2,11 +2,13 @@ package presentation.views;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 import java.awt.image.BufferedImage;
 
 
-public class SignupView extends JFrame{
+public class SignupView {
+
+    private final JFrame topContainer;
+    private final CardLayout cardManager;
 
     public static final String BTN_SIGNUP = "BTN_SIGNUP";
     private JButton btnSignup = new JButton("Sing Up");
@@ -14,26 +16,31 @@ public class SignupView extends JFrame{
     private JTextField mail_text = new JTextField("enter the E-mail", 20);
     private JTextField password_text = new JTextField("enter the Password", 20);
     private JTextField password_2_text = new JTextField("enter the Password again", 20);
+    private JLabel error_Label_name = new JLabel();
+    private JLabel error_Label_mail = new JLabel();
+    private JLabel error_Label_password = new JLabel();
+    private JLabel error_Label_password_2 = new JLabel();
 
 
-
-    /**
-     Singup view ha de rebre si hi ha un error en algun parametre a
-     l'hora de fer el display perque en funció d'aixo mostrara un misstage de error o no
-
-     */
-    public SignupView (boolean error_name, boolean error_mail, boolean error_password , boolean error_password_2) {
-        configureView( error_name,  error_mail,  error_password , error_password_2);
+    public SignupView (JFrame topContainer, CardLayout cardManager) {
+        this.topContainer = topContainer;
+        this.cardManager = cardManager;
         configureWindows();
+        configureView();
+        topContainer.pack();
     }
 
     private void configureWindows() {
-        setTitle("Account Manager");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1512,928);
-        setLocationRelativeTo(null);
+
+        topContainer.setPreferredSize(new Dimension(1512,928));
+        topContainer. setLocationRelativeTo(null);
+
+        error_Label_name.setVisible(false);
+        error_Label_mail.setVisible(false);
+        error_Label_password.setVisible(false);
+        error_Label_password_2.setVisible(false);
     }
-    private void configureView( boolean error_name, boolean error_mail, boolean error_password , boolean error_password_2) {
+    private void configureView() {
         //Colors, fonts and sizes
         Color negre = new Color(48, 48, 48);
         Color vermell = new Color (232,74,77);
@@ -76,15 +83,11 @@ public class SignupView extends JFrame{
         name_text.setFont(text);
         info_panel.add(name_text);
 
-        if(error_name) {
+            error_Label_name.setText("The username is incorrect");
+            error_Label_name.setForeground(vermell);
+            error_Label_name.setFont(text);
+            info_panel.add(error_Label_name);
 
-            JLabel Error_Label = new JLabel();
-            Error_Label.setText("The username is incorrect");
-            Error_Label.setForeground(vermell);
-            Error_Label.setFont(text);
-            info_panel.add(Error_Label);
-
-        }
 
         info_panel.setOpaque(false);
 
@@ -102,14 +105,12 @@ public class SignupView extends JFrame{
         mail_text.setFont(text);
         info_panel.add(mail_text);
 
-        if(error_mail){
 
-            JLabel Error_Label = new JLabel();
-            Error_Label.setText("The mail is incorrect");
-            Error_Label.setForeground(vermell);
-            Error_Label.setFont(text);
-            info_panel.add(Error_Label);
-        }
+            error_Label_mail.setText("The mail is incorrect");
+            error_Label_mail.setForeground(vermell);
+            error_Label_mail.setFont(text);
+            info_panel.add(error_Label_mail);
+
 
 
 
@@ -125,14 +126,12 @@ public class SignupView extends JFrame{
         password_text.setFont(text);
         info_panel.add(password_text);
 
-        if(error_password){
 
-            JLabel Error_Label = new JLabel();
-            Error_Label.setText("The password is incorrect");
-            Error_Label.setForeground(vermell);
-            Error_Label.setFont(text);
-            info_panel.add(Error_Label);
-        }
+            error_Label_password.setText("The password is incorrect");
+            error_Label_password.setForeground(vermell);
+            error_Label_password.setFont(text);
+            info_panel.add(error_Label_password);
+
 
 
         // Rewrite Password and JTextField
@@ -148,14 +147,12 @@ public class SignupView extends JFrame{
         password_2_text.setFont(text);
         info_panel.add(password_2_text);
 
-        if(error_password_2){
+            error_Label_password_2.setText("The password is incorrect");
+            error_Label_password_2.setForeground(vermell);
+            error_Label_password_2.setFont(text);
 
-            JLabel Error_Label = new JLabel();
-            Error_Label.setText("The password is incorrect");
-            Error_Label.setForeground(vermell);
-            Error_Label.setFont(text);
-            info_panel.add(Error_Label);
-        }
+            info_panel.add(error_Label_password_2);
+
 
         JLabel message = new JLabel();
         message.setText("The password must contain at least 8 characters with ");
@@ -197,12 +194,10 @@ public class SignupView extends JFrame{
         c.gridy = 2;
         p.add(btnSignup,c);
 
-        getContentPane().add(p);
+        topContainer.getContentPane().add(p);
 
     }
-    public void start(){
-        setVisible(true);
-    }
+
 
     Image getScaledImage(Image Img, int wt, int ht) {
         BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
@@ -219,7 +214,14 @@ public class SignupView extends JFrame{
         btnSignup.addActionListener(SignupViewController);
 
     }
-
+   /**
+    * Aquesta funcio permet canviar si es visible o no , per tant s'ha de utilitzar
+    * tant per si s'ha de fer visible com invisible.
+    */
+    public void userNameErrorVisibility (boolean error){ error_Label_name.setVisible(error);}
+    public void mailErrorVisibility (boolean error){ error_Label_mail.setVisible(error);}
+    public void passwordVisibility (boolean error){ error_Label_password.setVisible(error);}
+    public void password_2_Visibility (boolean error){ error_Label_password_2.setVisible(error);}
 
 
 
