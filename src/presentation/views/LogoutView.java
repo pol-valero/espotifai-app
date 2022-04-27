@@ -5,20 +5,32 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class LogoutView {
+    private final JFrame topContainer;
+    private final CardLayout cardManager;
+
     public static final String BTN_LOGOUT = "BTN_LOGOUT";
     public static final String BTN_DELETEACCOUNT = "BTN_DELETEACCOUNT" ;
 
-    private JButton btnLogout;
-    private JButton btnDeleteAccount;
+    private JButton btnLogout = new JButton("Log out");
+    private JButton btnDeleteAccount = new JButton("Delete Account");
     
     public LogoutView (JFrame topContainer, CardLayout cardManager) {
-        // Windows configuration
-        topContainer.setTitle("Log out");
-        topContainer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.topContainer = topContainer;
+        this.cardManager = cardManager;
+        configureWindows();
+        configureView();
+        /*topContainer.getContentPane().add(p);
+        topContainer.pack();
+        topContainer.getContentPane().remove(p);*/
+
+    }
+
+    private void configureWindows() {
         topContainer.setSize(1512,928);
         topContainer.setLocationRelativeTo(null);
+    }
 
-        //View configuration
+    private void configureView() {
         //Colors, fonts and sizes
         Color negre = new Color(48, 48, 48);
         Color vermell = new Color (232,74,77);
@@ -43,7 +55,6 @@ public class LogoutView {
         btnLogout = new JButton();
         btnLogout.setBackground(vermell);
         btnLogout.setForeground(Color.white);
-        btnLogout.setText("Log out");
         btnLogout.setFont(text);
         btnLogout.setPreferredSize(button_shape);
         btnLogout.setFocusable(false);
@@ -54,10 +65,8 @@ public class LogoutView {
 
 
         //Delete account btn
-        btnDeleteAccount = new JButton();
         btnDeleteAccount.setBackground(vermell);
         btnDeleteAccount.setForeground(Color.white);
-        btnDeleteAccount.setText("Delete account");
         btnDeleteAccount.setFont(text);
         btnDeleteAccount.setPreferredSize(button_shape);
         btnDeleteAccount.setFocusable(false);
@@ -77,20 +86,10 @@ public class LogoutView {
         c.gridx = 0;
         c.gridy = 3;
         p.add(btnDeleteAccount,c);
-
-        //topContainer.getContentPane().add(p);
-        //topContainer.pack();
-        //topContainer.getContentPane().remove(p);
-
-
     }
-
     public void registerController (ActionListener logoutViewController){ //Todo crida aquesta funció on toqui
         btnLogout.addActionListener(logoutViewController);
         btnDeleteAccount.addActionListener(logoutViewController);
     }
-
-
-
 
 }

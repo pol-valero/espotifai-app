@@ -58,7 +58,7 @@ public class ForgotPasswordView {
         btn_send.setFont(text);
         btn_send.setBackground(vermell);
         btn_send.setFocusable(false);
-        btn_send.setOpaque(false);
+        btn_send.setOpaque(true);
         btn_send.setBorderPainted(false);
         btn_send.setActionCommand(BTN_SEND);
         panel.add(btn_send);
