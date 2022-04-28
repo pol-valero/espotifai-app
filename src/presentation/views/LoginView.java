@@ -25,21 +25,19 @@ public class LoginView {
         this.cardManager = cardManager;
         oneTimeConfiguration();
         configureLoginScreen();
-        configureWindow();
+        topContainer.pack();
     }
 
     private void oneTimeConfiguration () {
         //The following three lines only need to be added to this class as it is the first class whose object is created. All the other view classes must not have these three lines.
         topContainer.setTitle("Spotifai");
-        topContainer.getContentPane().setLayout(cardManager);
+        //topContainer.getContentPane().setLayout(cardManager);
         topContainer.setVisible(true);
-    }
-
-    private void configureWindow () {
         topContainer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        topContainer.pack();
         topContainer.setLocationRelativeTo(null);
-        topContainer.setSize(1600, 900);
+        //topContainer.setSize(1600, 900);
+        topContainer.setPreferredSize(new Dimension(1600,900));
+        topContainer.setResizable(false);
     }
 
     private void configureLoginScreen() {
@@ -52,10 +50,14 @@ public class LoginView {
 
         JLabel jlAppName = new JLabel("Espotify");
         jlAppName.setAlignmentX(Component.CENTER_ALIGNMENT);
-        jlAppName.setFont(new Font("Futura", Font.BOLD, 40));
+        jlAppName.setFont(new Font("Futura", Font.BOLD, 60));
 
         JButton jbutton2 = new JButton("prova2");
-        jbutton2.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JPanel panelaux = new JPanel();
+        panelaux.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //jbutton2.setAlignmentX(Component.CENTER_ALIGNMENT);
+        jbutton2.setPreferredSize(new Dimension(40,40));
+        panelaux.add(jbutton2);
 
         JButton jbutton3 = new JButton("prova3");
         jbutton3.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -66,10 +68,15 @@ public class LoginView {
 
         jpLogin.add(jlAppName);
         jpLogin.add(Box.createRigidArea(new Dimension(0, 50)));
-        jpLogin.add(jbutton2);
+        jpLogin.add(panelaux);
         jpLogin.add(jbutton3);
 
-        topContainer.add(jpLogin, "login");
+        //topContainer.add(jpLogin, "login");
+
+        topContainer.getContentPane().add(jpLogin);
+        //topContainer.getContentPane().remove(jpLogin);
+
+
     }
 
     public void showLoginErrorMessage() {
