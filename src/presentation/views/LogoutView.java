@@ -17,16 +17,10 @@ public class LogoutView {
     public LogoutView (JFrame topContainer, CardLayout cardManager) {
         this.topContainer = topContainer;
         this.cardManager = cardManager;
-        configureWindows();
         configureView();
         topContainer.pack();
-
     }
 
-    private void configureWindows() {
-        topContainer.setSize(1512,928);
-        topContainer.setLocationRelativeTo(null);
-    }
 
     private void configureView() {
         //Colors, fonts and sizes
@@ -50,7 +44,6 @@ public class LogoutView {
 
 
         //Log out btn
-        btnLogout = new JButton();
         btnLogout.setBackground(vermell);
         btnLogout.setForeground(Color.white);
         btnLogout.setFont(text);

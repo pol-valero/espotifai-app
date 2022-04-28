@@ -24,6 +24,7 @@ public class SignupViewController implements ActionListener {
             case SignupView.BTN_SIGNUP:
                 checkAllSignupFields();
                 break;
+
         }
     }
 

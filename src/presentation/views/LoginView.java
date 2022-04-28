@@ -36,7 +36,7 @@ public class LoginView {
         topContainer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         topContainer.setLocationRelativeTo(null);
         topContainer.setPreferredSize(new Dimension(1600,900));
-        topContainer.setResizable(false);
+        //topContainer.setResizable(false);
     }
 
     private void configureLoginScreen() {
@@ -70,11 +70,8 @@ public class LoginView {
         jpLogin.add(panelaux);
         jpLogin.add(jbutton3);
 
-        //topContainer.add(jpLogin, "login");
 
         topContainer.getContentPane().add(jpLogin, "loginCard");
-        //topContainer.getContentPane().remove(jpLogin);
-
 
     }
 
@@ -93,4 +90,5 @@ public class LoginView {
     public void showCard () {
         cardManager.show(topContainer.getContentPane(),"loginCard");
     }
+
 }

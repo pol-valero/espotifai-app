@@ -27,7 +27,7 @@ public class UIController {
         signupViewController = new SignupViewController(this, topContainer, cardManager);
         logoutViewController = new LogoutViewController(this, topContainer, cardManager);
 
-        showSignUpCard();
+        showLogoutCard();
         //fer el mateix amb tots els altres controllers
     }
 
