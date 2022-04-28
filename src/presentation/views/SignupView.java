@@ -35,10 +35,10 @@ public class SignupView {
         topContainer.setPreferredSize(new Dimension(1512,928));
         topContainer. setLocationRelativeTo(null);
 
-        error_Label_name.setVisible(false);
-        error_Label_mail.setVisible(false);
-        error_Label_password.setVisible(false);
-        error_Label_password_2.setVisible(false);
+        error_Label_name.setVisible(true);
+        error_Label_mail.setVisible(true);
+        error_Label_password.setVisible(true);
+        error_Label_password_2.setVisible(true);
     }
     private void configureView() {
         //Colors, fonts and sizes
@@ -194,7 +194,7 @@ public class SignupView {
         c.gridy = 2;
         p.add(btnSignup,c);
 
-        topContainer.getContentPane().add(p);
+        topContainer.getContentPane().add(p, "signupCard");
 
     }
 
@@ -239,5 +239,9 @@ public class SignupView {
 
     public String getRewritedPassword () {
         return password_2_text.getText();
+    }
+
+    public void showCard () {
+        cardManager.show(topContainer.getContentPane(),"signupCard");
     }
 }

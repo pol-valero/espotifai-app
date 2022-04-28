@@ -24,14 +24,24 @@ public class UIController {
         CardLayout cardManager = new CardLayout();
 
         loginViewController = new LoginViewController(this, topContainer, cardManager);
-        logoutViewController = new LogoutViewController(this, topContainer, cardManager);
         signupViewController = new SignupViewController(this, topContainer, cardManager);
+        logoutViewController = new LogoutViewController(this, topContainer, cardManager);
 
+        showSignUpCard();
         //fer el mateix amb tots els altres controllers
     }
 
 
     public void showLoginCard() {
+        loginViewController.showLoginCard();
+    }
+
+    public void showSignUpCard() {
+        signupViewController.showSignupCard();
+    }
+
+    public void showLogoutCard () {
+        logoutViewController.showLogoutCard();
     }
 
     public boolean findUserNameMatch(String username){//todo
@@ -73,8 +83,7 @@ public class UIController {
     public void showForgotPasswordCard() {
     }
 
-    public void showSignUpCard() {
-    }
+
 
     public boolean loginRequest(String login, String password) { //todo
 

@@ -28,4 +28,8 @@ public class LogoutViewController implements ActionListener {
                 break;
         }
     }
+
+    public void showLogoutCard () {
+        logoutView.showCard();
+    }
 }

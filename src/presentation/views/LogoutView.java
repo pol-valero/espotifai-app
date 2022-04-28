@@ -19,9 +19,7 @@ public class LogoutView {
         this.cardManager = cardManager;
         configureWindows();
         configureView();
-        /*topContainer.getContentPane().add(p);
         topContainer.pack();
-        topContainer.getContentPane().remove(p);*/
 
     }
 
@@ -86,10 +84,16 @@ public class LogoutView {
         c.gridx = 0;
         c.gridy = 3;
         p.add(btnDeleteAccount,c);
+
+        topContainer.getContentPane().add(p, "logoutCard");
     }
     public void registerController (ActionListener logoutViewController){ //Todo crida aquesta funció on toqui
         btnLogout.addActionListener(logoutViewController);
         btnDeleteAccount.addActionListener(logoutViewController);
+    }
+
+    public void showCard () {
+        cardManager.show(topContainer.getContentPane(),"logoutCard");
     }
 
 }

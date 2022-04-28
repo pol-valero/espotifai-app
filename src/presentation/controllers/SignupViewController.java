@@ -65,4 +65,8 @@ public class SignupViewController implements ActionListener {
         signupView.password_2_Visibility(error);
     }
 
+    public void showSignupCard () {
+        signupView.showCard();
+    }
+
 }

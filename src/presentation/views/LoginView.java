@@ -31,11 +31,10 @@ public class LoginView {
     private void oneTimeConfiguration () {
         //The following three lines only need to be added to this class as it is the first class whose object is created. All the other view classes must not have these three lines.
         topContainer.setTitle("Spotifai");
-        //topContainer.getContentPane().setLayout(cardManager);
+        topContainer.getContentPane().setLayout(cardManager);
         topContainer.setVisible(true);
         topContainer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         topContainer.setLocationRelativeTo(null);
-        //topContainer.setSize(1600, 900);
         topContainer.setPreferredSize(new Dimension(1600,900));
         topContainer.setResizable(false);
     }
@@ -73,7 +72,7 @@ public class LoginView {
 
         //topContainer.add(jpLogin, "login");
 
-        topContainer.getContentPane().add(jpLogin);
+        topContainer.getContentPane().add(jpLogin, "loginCard");
         //topContainer.getContentPane().remove(jpLogin);
 
 
@@ -92,6 +91,6 @@ public class LoginView {
     }
 
     public void showCard () {
-        //cardmanager.show()
+        cardManager.show(topContainer.getContentPane(),"loginCard");
     }
 }
