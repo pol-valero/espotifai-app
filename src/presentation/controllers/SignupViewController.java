@@ -50,7 +50,7 @@ public class SignupViewController implements ActionListener {
         }
 
         if(!errorFlag){
-            controller.showHomescreenCard(controller.getPlaylistNames());
+            controller.showHomescreenCard();
         }
     }
     public void userNameErrorVisibility (boolean error) {

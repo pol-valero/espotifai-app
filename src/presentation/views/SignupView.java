@@ -142,7 +142,6 @@ public class SignupView {
 
             info_panel.add(error_Label_password_2);
 
-
         JLabel message = new JLabel();
         message.setText("The password must contain at least 8 characters with ");
         message.setForeground(Color.white);
