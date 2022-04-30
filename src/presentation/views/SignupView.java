@@ -2,6 +2,7 @@ package presentation.views;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 
 
@@ -20,6 +21,8 @@ public class SignupView {
     private JLabel error_Label_mail = new JLabel();
     private JLabel error_Label_password = new JLabel();
     private JLabel error_Label_password_2 = new JLabel();
+    private JLabel go_Back_Image = new JLabel();
+
 
 
     public SignupView (JFrame topContainer, CardLayout cardManager) {
@@ -40,6 +43,13 @@ public class SignupView {
         // Dimension button_shape = new Dimension(371,56);
         Dimension button_shape = new Dimension(505,40);
 
+
+        // Panel no bounds
+        JPanel panel = new JPanel();
+        panel.setBackground(negre);
+        panel.setLayout(null);
+
+
         JPanel p = new JPanel(new GridBagLayout());
         p.setBackground(negre);
 
@@ -52,13 +62,23 @@ public class SignupView {
 
         //Image
 
-        ImageIcon Image_default = new ImageIcon("images/logo.png");
+        ImageIcon Image_default = new ImageIcon("images/icona.png");
         Image imageIcon = Image_default.getImage();
         Image Image = getScaledImage(imageIcon, 200, 200);
         ImageIcon icon = new ImageIcon(Image);
         JLabel imatge_final = new JLabel();
         imatge_final.setIcon(icon);
 
+        // Set go back Image
+
+        ImageIcon boto = new ImageIcon("images/boto.png");
+        Image imageIcon_2 = boto.getImage();
+        Image Image_2 = getScaledImage(imageIcon_2, 50, 50);
+        ImageIcon new_Boto = new ImageIcon(Image_2);
+
+        go_Back_Image.setIcon(new_Boto);
+        go_Back_Image.setBounds(30,30,50,50);
+        go_Back_Image.addMouseListener(new MouseAdapter() {});
 
         //User name and name text
 
@@ -72,10 +92,10 @@ public class SignupView {
         name_text.setFont(text);
         info_panel.add(name_text);
 
-            error_Label_name.setText("The username is incorrect");
-            error_Label_name.setForeground(vermell);
-            error_Label_name.setFont(text);
-            info_panel.add(error_Label_name);
+        error_Label_name.setText("The username is incorrect");
+        error_Label_name.setForeground(vermell);
+        error_Label_name.setFont(text);
+        info_panel.add(error_Label_name);
 
 
         info_panel.setOpaque(false);
@@ -95,10 +115,10 @@ public class SignupView {
         info_panel.add(mail_text);
 
 
-            error_Label_mail.setText("The mail is incorrect");
-            error_Label_mail.setForeground(vermell);
-            error_Label_mail.setFont(text);
-            info_panel.add(error_Label_mail);
+        error_Label_mail.setText("The mail is incorrect");
+        error_Label_mail.setForeground(vermell);
+        error_Label_mail.setFont(text);
+        info_panel.add(error_Label_mail);
 
 
 
@@ -116,10 +136,10 @@ public class SignupView {
         info_panel.add(password_text);
 
 
-            error_Label_password.setText("The password is incorrect");
-            error_Label_password.setForeground(vermell);
-            error_Label_password.setFont(text);
-            info_panel.add(error_Label_password);
+        error_Label_password.setText("The password is incorrect");
+        error_Label_password.setForeground(vermell);
+        error_Label_password.setFont(text);
+        info_panel.add(error_Label_password);
 
 
 
@@ -136,17 +156,19 @@ public class SignupView {
         password_2_text.setFont(text);
         info_panel.add(password_2_text);
 
-            error_Label_password_2.setText("The password is incorrect");
-            error_Label_password_2.setForeground(vermell);
-            error_Label_password_2.setFont(text);
+        error_Label_password_2.setText("The password is incorrect");
+        error_Label_password_2.setForeground(vermell);
+        error_Label_password_2.setFont(text);
 
-            info_panel.add(error_Label_password_2);
+        info_panel.add(error_Label_password_2);
+
 
         JLabel message = new JLabel();
         message.setText("The password must contain at least 8 characters with ");
         message.setForeground(Color.white);
         message.setFont(information);
         info_panel.add( message);
+
         JLabel message_2 = new JLabel();
         message_2.setText("1 lower case letter, 1 upper case letter and 1 number");
         message_2.setForeground(Color.white);
@@ -182,13 +204,12 @@ public class SignupView {
         c.gridy = 2;
         p.add(btnSignup,c);
 
-        error_Label_name.setVisible(true);
-        error_Label_mail.setVisible(true);
-        error_Label_password.setVisible(true);
-        error_Label_password_2.setVisible(true);
+        p.setBounds(450,0,600,800);
 
-        topContainer.getContentPane().add(p, "signupCard");
+        panel.add(go_Back_Image);
+        panel.add(p);
 
+        topContainer.getContentPane().add(panel);
     }
 
 
@@ -215,7 +236,6 @@ public class SignupView {
     public void mailErrorVisibility (boolean error){ error_Label_mail.setVisible(error);}
     public void passwordVisibility (boolean error){ error_Label_password.setVisible(error);}
     public void password_2_Visibility (boolean error){ error_Label_password_2.setVisible(error);}
-
 
 
     public String getUsername() {

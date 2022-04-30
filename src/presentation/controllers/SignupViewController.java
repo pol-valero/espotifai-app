@@ -1,15 +1,16 @@
 package presentation.controllers;
 
 import presentation.UIController;
-import presentation.views.LoginView;
+
 import presentation.views.SignupView;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
-public class SignupViewController implements ActionListener {
+public class SignupViewController implements ActionListener, MouseListener {
 
     private final SignupView signupView;
     private final UIController controller;
