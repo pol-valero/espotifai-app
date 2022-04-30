@@ -21,7 +21,7 @@ public class LoginViewController implements ActionListener {
         switch(e.getActionCommand()){
             case LoginView.BTN_LOGIN:
                 if(controller.loginRequest(loginView.getLoginField(), loginView.getPasswordField())){
-                    controller.showHomescreenCard(controller.getPlaylistNames());
+                    controller.showHomescreenCard();
                 }
                 else{
                     loginView.showLoginErrorMessage();

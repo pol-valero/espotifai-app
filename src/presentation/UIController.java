@@ -1,5 +1,6 @@
 package presentation;
 
+import presentation.controllers.HomescreenViewController;
 import presentation.controllers.LoginViewController;
 import presentation.controllers.LogoutViewController;
 import presentation.controllers.SignupViewController;
@@ -18,20 +19,45 @@ public class UIController {
     private LoginViewController loginViewController;
     private LogoutViewController logoutViewController;
     private SignupViewController signupViewController;
+    private HomescreenViewController homescreenViewController;
 
     public void run () {
         JFrame topContainer = new JFrame();
         CardLayout cardManager = new CardLayout();
 
         loginViewController = new LoginViewController(this, topContainer, cardManager);
-        logoutViewController = new LogoutViewController(this, topContainer, cardManager);
         signupViewController = new SignupViewController(this, topContainer, cardManager);
+        logoutViewController = new LogoutViewController(this, topContainer, cardManager);
+        homescreenViewController = new HomescreenViewController(this,topContainer,cardManager,loadUsersPlaylists(),loadPublicPlaylists());
 
+
+        showLogoutCard();
         //fer el mateix amb tots els altres controllers
+    }
+
+    public LinkedList<String> loadPublicPlaylists() {
+        LinkedList<String> publicPlaylists = new LinkedList<String>();
+
+        return publicPlaylists;
+    }
+
+    public LinkedList<String> loadUsersPlaylists() {
+        LinkedList<String> usersPlaylists = new LinkedList<String>();
+
+        return usersPlaylists;
     }
 
 
     public void showLoginCard() {
+        loginViewController.showLoginCard();
+    }
+
+    public void showSignUpCard() {
+        signupViewController.showSignupCard();
+    }
+
+    public void showLogoutCard () {
+        logoutViewController.showLogoutCard();
     }
 
     public boolean findUserNameMatch(String username){//todo
@@ -61,20 +87,15 @@ public class UIController {
     public void deleteAccountRequest() {
     }
 
-    public LinkedList getPlaylistNames() {
-        LinkedList playlistNames = new LinkedList();
-        
-        return playlistNames;
-    }
 
-    public void showHomescreenCard(LinkedList playlistNames) {
+    public void showHomescreenCard() {
+        homescreenViewController.showHomescreenCard(loadUsersPlaylists(),loadPublicPlaylists());
     }
 
     public void showForgotPasswordCard() {
     }
 
-    public void showSignUpCard() {
-    }
+
 
     public boolean loginRequest(String login, String password) { //todo
 

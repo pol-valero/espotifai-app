@@ -25,21 +25,10 @@ public class SignupView {
     public SignupView (JFrame topContainer, CardLayout cardManager) {
         this.topContainer = topContainer;
         this.cardManager = cardManager;
-        configureWindows();
         configureView();
         topContainer.pack();
     }
 
-    private void configureWindows() {
-
-        topContainer.setPreferredSize(new Dimension(1512,928));
-        topContainer. setLocationRelativeTo(null);
-
-        error_Label_name.setVisible(false);
-        error_Label_mail.setVisible(false);
-        error_Label_password.setVisible(false);
-        error_Label_password_2.setVisible(false);
-    }
     private void configureView() {
         //Colors, fonts and sizes
         Color negre = new Color(48, 48, 48);
@@ -153,7 +142,6 @@ public class SignupView {
 
             info_panel.add(error_Label_password_2);
 
-
         JLabel message = new JLabel();
         message.setText("The password must contain at least 8 characters with ");
         message.setForeground(Color.white);
@@ -194,7 +182,12 @@ public class SignupView {
         c.gridy = 2;
         p.add(btnSignup,c);
 
-        topContainer.getContentPane().add(p);
+        error_Label_name.setVisible(true);
+        error_Label_mail.setVisible(true);
+        error_Label_password.setVisible(true);
+        error_Label_password_2.setVisible(true);
+
+        topContainer.getContentPane().add(p, "signupCard");
 
     }
 
@@ -239,5 +232,9 @@ public class SignupView {
 
     public String getRewritedPassword () {
         return password_2_text.getText();
+    }
+
+    public void showCard () {
+        cardManager.show(topContainer.getContentPane(),"signupCard");
     }
 }

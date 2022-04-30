@@ -24,6 +24,7 @@ public class SignupViewController implements ActionListener {
             case SignupView.BTN_SIGNUP:
                 checkAllSignupFields();
                 break;
+
         }
     }
 
@@ -49,7 +50,7 @@ public class SignupViewController implements ActionListener {
         }
 
         if(!errorFlag){
-            controller.showHomescreenCard(controller.getPlaylistNames());
+            controller.showHomescreenCard();
         }
     }
     public void userNameErrorVisibility (boolean error) {
@@ -63,6 +64,10 @@ public class SignupViewController implements ActionListener {
     }
     public void password_2_Visibility (boolean error) {
         signupView.password_2_Visibility(error);
+    }
+
+    public void showSignupCard () {
+        signupView.showCard();
     }
 
 }

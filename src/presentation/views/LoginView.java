@@ -4,6 +4,7 @@ import presentation.Components.ImagePanel;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -30,18 +31,21 @@ public class LoginView {
     private void oneTimeConfiguration () {
         //The following three lines only need to be added to this class as it is the first class whose object is created. All the other view classes must not have these three lines.
         topContainer.setTitle("Spotifai");
-        //topContainer.getContentPane().setLayout(cardManager);
+        topContainer.getContentPane().setLayout(cardManager);
         topContainer.setVisible(true);
         topContainer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         topContainer.setLocationRelativeTo(null);
-        //topContainer.setSize(1600, 900);
         topContainer.setPreferredSize(new Dimension(1600,900));
-        topContainer.setResizable(false);
+        //topContainer.setResizable(false);
     }
 
     private void configureLoginScreen() {
         JPanel jpLogin = new JPanel();
         jpLogin.setLayout(new BoxLayout(jpLogin, BoxLayout.Y_AXIS));
+
+        JPanel imagePanel = new ImagePanel("images/logo.png");
+        //imagePanel.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
+        imagePanel.setPreferredSize(new Dimension(50,50));
 
         JLabel jlAppName = new JLabel("Espotify");
         jlAppName.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -59,18 +63,15 @@ public class LoginView {
 
         jpLogin.add(Box.createRigidArea(new Dimension(0, 100)));
 
-        //jpLogin.add(imagePanel);
+        jpLogin.add(imagePanel);
 
         jpLogin.add(jlAppName);
         jpLogin.add(Box.createRigidArea(new Dimension(0, 50)));
         jpLogin.add(panelaux);
         jpLogin.add(jbutton3);
 
-        //topContainer.add(jpLogin, "login");
 
-        topContainer.getContentPane().add(jpLogin);
-        //topContainer.getContentPane().remove(jpLogin);
-
+        topContainer.getContentPane().add(jpLogin, "loginCard");
 
     }
 
@@ -87,6 +88,7 @@ public class LoginView {
     }
 
     public void showCard () {
-        //cardmanager.show()
+        cardManager.show(topContainer.getContentPane(),"loginCard");
     }
+
 }
