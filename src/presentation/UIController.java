@@ -28,7 +28,7 @@ public class UIController {
         loginViewController = new LoginViewController(this, topContainer, cardManager);
         signupViewController = new SignupViewController(this, topContainer, cardManager);
         logoutViewController = new LogoutViewController(this, topContainer, cardManager);
-        homescreenViewController = new HomescreenViewController(this,topContainer,cardManager,loadUsersPlaylists(),loadPublicPlaylists());
+        homescreenViewController = new HomescreenViewController(this,topContainer,cardManager);
 
 
         showHomescreenCard();

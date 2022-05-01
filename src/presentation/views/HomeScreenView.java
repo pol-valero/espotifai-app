@@ -10,15 +10,17 @@ public class HomeScreenView {
     private final JFrame topContainer;
     private final CardLayout cardManager;
 
-    public HomeScreenView (JFrame topContainer, CardLayout cardManager,
-                           LinkedList<String> usersPlaylists, LinkedList<String> publicPlaylists){
+    public HomeScreenView (JFrame topContainer, CardLayout cardManager){
         this.topContainer = topContainer;
         this.cardManager = cardManager;
-        configureView(usersPlaylists,publicPlaylists);
+        configureView();
         topContainer.pack();
     }
 
-    private void configureView(LinkedList<String> usersPlaylists, LinkedList<String> publicPlaylists) {
+    private void configureView() {
+        LinkedList<String> usersPlaylists = new LinkedList();
+        LinkedList<String> publicPlaylists = new LinkedList();
+
         generateName(usersPlaylists,publicPlaylists);
         
         //Creation of main panels
@@ -144,6 +146,7 @@ public class HomeScreenView {
     } //Mètode auxiliar. S'haurà d'esborrar més endavant
 
     public void showCard(LinkedList<String> usersPlaylists, LinkedList<String> publicPlaylists) {
+        //Afegir playlist a la vista ?¿
         cardManager.show(topContainer.getContentPane(),"homescreenCard");
     }
 }
