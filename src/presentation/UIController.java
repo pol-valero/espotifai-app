@@ -31,7 +31,7 @@ public class UIController {
         homescreenViewController = new HomescreenViewController(this,topContainer,cardManager,loadUsersPlaylists(),loadPublicPlaylists());
 
 
-        showLogoutCard();
+        showHomescreenCard();
         //fer el mateix amb tots els altres controllers
     }
 
