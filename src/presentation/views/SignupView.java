@@ -183,6 +183,8 @@ public class SignupView {
         btnSignup.setFont(button);
         btnSignup.setPreferredSize(button_shape);
         btnSignup.setFocusable(false);
+        btnSignup.setOpaque(true);
+        btnSignup.setBorderPainted(false);
         btnSignup.setActionCommand(BTN_SIGNUP);
 
         //   btnSignup.setActionCommand(BTN_LOGOUT);
