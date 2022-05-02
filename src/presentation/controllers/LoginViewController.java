@@ -27,10 +27,6 @@ public class LoginViewController implements ActionListener {
                     loginView.showLoginErrorMessage();
                 }
                 break;
-            case LoginView.BTN_FORGOTPASSWORD: //todo
-                //Com que es una funcionalitat "opcional" de moment no ho farem
-                //controller.showForgotPasswordCard();
-                break;
             case LoginView.BTN_SIGNUP: //todo
                 controller.showSignUpCard();
                 break;

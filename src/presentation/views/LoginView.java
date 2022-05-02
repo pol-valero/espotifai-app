@@ -1,15 +1,8 @@
 package presentation.views;
 
-import presentation.Components.ImagePanel;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class LoginView {
 
@@ -17,14 +10,13 @@ public class LoginView {
     private final CardLayout cardManager;
 
     public static final String BTN_LOGIN = "BTN_LOGING";
-    public static final String BTN_FORGOTPASSWORD = "BTN_FORGOTPASSWORD";
     public static final String BTN_SIGNUP = "BTN_SIGNUP";
 
 
-    private JButton btnSignup = new JButton();
-    private JTextField name_text = new JTextField();
-    private JTextField mail_text = new JTextField();
-    private JLabel error_Label_mail = new JLabel();
+    private JButton btnLogin = new JButton();
+    private JTextField usernameField = new JTextField();
+    private JTextField passwordField = new JTextField();
+    private JLabel loginError = new JLabel();
     private JLabel signUpLabel = new JLabel();
 
     public LoginView (JFrame topContainer, CardLayout cardManager) {
@@ -51,7 +43,7 @@ public class LoginView {
         Color negre = new Color(48, 48, 48);
         Color vermell = new Color (232,74,77);
         Font titols = new Font("Trebuchet MS", Font.PLAIN, 36);
-        Font text = new Font("Gulim", Font.PLAIN, 24);
+        Font text = new Font("Gulim", Font.PLAIN, 20);
         Font button = new Font("Gulim", Font.PLAIN, 30);
         Dimension button_shape = new Dimension(505,40);
 
@@ -82,59 +74,52 @@ public class LoginView {
         imatge_final.setIcon(icon);
 
 
-        //User name and name text
-
-
+        //User name
         JLabel name_Label = new JLabel();
         name_Label.setText("Username or email address");
         name_Label.setForeground(Color.white);
         name_Label.setFont(titols);
         info_panel.add(name_Label);
 
-        name_text.setFont(text);
-        info_panel.add(name_text);
+        usernameField.setFont(text);
+        info_panel.add(usernameField);
         info_panel.setOpaque(false);
 
         //blank space
         info_panel.add(Box.createRigidArea(new Dimension(0,20)));
 
-
-        //mail and mail text
+        //password
         info_panel.setOpaque(false);
         JLabel mail = new JLabel();
-        mail.setText("E-mail");
+        mail.setText("Password");
         mail.setForeground(Color.white);
         mail.setFont(titols);
         info_panel.add(mail);
 
 
-        mail_text.setFont(text);
-        info_panel.add(mail_text);
+        passwordField.setFont(text);
+        info_panel.add(passwordField);
 
 
-        error_Label_mail.setText("The mail is incorrect");
-        error_Label_mail.setForeground(vermell);
-        error_Label_mail.setFont(text);
-        info_panel.add(error_Label_mail);
+        loginError.setText("Username or password are incorrect");
+        loginError.setForeground(vermell);
+        loginError.setFont(text);
+        info_panel.add(loginError);
 
         //blank space
         info_panel.add(Box.createRigidArea(new Dimension(0,20)));
 
-        //Sign up button
+        //login button
 
-        btnSignup.setBackground(vermell);
-        btnSignup.setForeground(Color.white);
-        btnSignup.setText("Log in");
-        btnSignup.setFont(button);
-        btnSignup.setPreferredSize(button_shape);
-        btnSignup.setFocusable(false);
-        btnSignup.setOpaque(true);
-        btnSignup.setBorderPainted(false);
-        btnSignup.setActionCommand(BTN_SIGNUP);
-
-
-        //   btnSignup.setActionCommand(BTN_LOGOUT);
-
+        btnLogin.setBackground(vermell);
+        btnLogin.setForeground(Color.white);
+        btnLogin.setText("Log in");
+        btnLogin.setFont(button);
+        btnLogin.setPreferredSize(button_shape);
+        btnLogin.setFocusable(false);
+        btnLogin.setOpaque(true);
+        btnLogin.setBorderPainted(false);
+        btnLogin.setActionCommand(BTN_LOGIN);
 
         //Position and addition
         c.gridx = 0;
@@ -150,7 +135,7 @@ public class LoginView {
         //Position and addition
         c.gridx = 0;
         c.gridy = 2;
-        p.add(btnSignup,c);
+        p.add(btnLogin,c);
 
 
 

@@ -12,11 +12,11 @@ public class SignupView {
     private final CardLayout cardManager;
 
     public static final String BTN_SIGNUP = "BTN_SIGNUP";
-    private JButton btnSignup = new JButton("Sing Up");
-    private JTextField name_text = new JTextField("enter the user name", 20);
-    private JTextField mail_text = new JTextField("enter the E-mail", 20);
-    private JTextField password_text = new JTextField("enter the Password", 20);
-    private JTextField password_2_text = new JTextField("enter the Password again", 20);
+    private JButton btnSignup = new JButton();
+    private JTextField name_text = new JTextField();
+    private JTextField mail_text = new JTextField();
+    private JTextField password_text = new JTextField();
+    private JTextField password_2_text = new JTextField();
     private JLabel error_Label_name = new JLabel();
     private JLabel error_Label_mail = new JLabel();
     private JLabel error_Label_password = new JLabel();
@@ -36,10 +36,10 @@ public class SignupView {
         //Colors, fonts and sizes
         Color negre = new Color(48, 48, 48);
         Color vermell = new Color (232,74,77);
-        Font titols = new Font("Dialog", Font.PLAIN, 40);
-        Font text = new Font("Dialog", Font.PLAIN, 20);
-        Font button = new Font("Dialog", Font.PLAIN, 30);
-        Font information = new Font("Dialog", Font.PLAIN, 12);
+        Font titols = new Font("Trebuchet MS", Font.PLAIN, 36);
+        Font text = new Font("Gulim", Font.PLAIN, 20);
+        Font button = new Font("Gulim", Font.PLAIN, 30);
+        Font information = new Font("Gulim", Font.PLAIN, 14);
         // Dimension button_shape = new Dimension(371,56);
         Dimension button_shape = new Dimension(505,40);
 
@@ -179,7 +179,7 @@ public class SignupView {
 
         btnSignup.setBackground(vermell);
         btnSignup.setForeground(Color.white);
-        btnSignup.setText("Sing Up");
+        btnSignup.setText("Sign up");
         btnSignup.setFont(button);
         btnSignup.setPreferredSize(button_shape);
         btnSignup.setFocusable(false);
@@ -200,10 +200,9 @@ public class SignupView {
         c.gridy = 1;
         p.add(info_panel,c);
 
-
         //Position and addition
         c.gridx = 0;
-        c.gridy = 2;
+        c.gridy = 3;
         p.add(btnSignup,c);
 
         p.setBounds(450,0,600,800);
