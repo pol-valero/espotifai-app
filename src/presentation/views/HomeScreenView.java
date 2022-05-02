@@ -10,6 +10,9 @@ public class HomeScreenView {
     private final JFrame topContainer;
     private final CardLayout cardManager;
 
+    JPanel panel;
+    JPanel centralPanel;
+
     public HomeScreenView (JFrame topContainer, CardLayout cardManager){
         this.topContainer = topContainer;
         this.cardManager = cardManager;
@@ -20,20 +23,21 @@ public class HomeScreenView {
     private void configureView() {
 
         //Creation of main panels
-        JPanel panel = new JPanel();
+        panel = new JPanel();
         panel.setLayout(new BorderLayout());
         JPanel westernPanel = westernPanelConfiguration();
-        JPanel centralPanel = centralPanelConfiguration();
+        centralPanel = centralPanelConfiguration(new LinkedList<>(), new LinkedList<>());
         JPanel northernPanel = northernPanelConfiguration();
 
         panel.add(northernPanel,BorderLayout.NORTH);
         panel.add(westernPanel,BorderLayout.WEST);
         panel.add(centralPanel,BorderLayout.CENTER);
+        panel.remove(centralPanel);
 
         topContainer.getContentPane().add(panel, "homescreenCard");
     }
 
-    private JPanel centralPanelConfiguration() {
+    private JPanel centralPanelConfiguration(LinkedList<String> usersPlaylists, LinkedList<String> publicPlaylists) {
 
         Color negre = new Color(48, 48, 48);
         Color vermell = new Color (232,74,77);
@@ -72,7 +76,7 @@ public class HomeScreenView {
         //Panel ScrollPane Your Playlists
         JPanel urPlaylistScrollP = new JPanel();
         urPlaylistScrollP.setBackground(negre);
-        urPlaylistScrollP.add(createScrollPane(new LinkedList<String>())); //Todo
+        urPlaylistScrollP.add(createScrollPane(usersPlaylists)); //Todo
 
 
         //Panel Explore
@@ -88,7 +92,7 @@ public class HomeScreenView {
         //Panel ScrollPane Explore
         JPanel exploreScrollP = new JPanel();
         exploreScrollP.setBackground(negre);
-        exploreScrollP.add(createScrollPane(new LinkedList<String>())); //todo
+        exploreScrollP.add(createScrollPane(publicPlaylists)); //todo
 
 
         centralPanel.add(urPlaylistP);
@@ -227,12 +231,15 @@ public class HomeScreenView {
         scrollPane.setBackground(new Color(48,48,48));
 
         return scrollPane;
-
     }
 
 
     public void showCard(LinkedList<String> usersPlaylists, LinkedList<String> publicPlaylists) {
         //Afegir playlist a la vista ?¿
+        panel.remove(centralPanel);
+        centralPanel = centralPanelConfiguration(usersPlaylists, publicPlaylists);
+        panel.add(centralPanel,BorderLayout.CENTER);
+        topContainer.revalidate();
         cardManager.show(topContainer.getContentPane(),"homescreenCard");
     }
 }

@@ -31,7 +31,7 @@ public class UIController {
         homescreenViewController = new HomescreenViewController(this,topContainer,cardManager);
 
 
-        showLoginCard();
+        showHomescreenCard();
         //fer el mateix amb tots els altres controllers
     }
 
@@ -89,7 +89,16 @@ public class UIController {
 
 
     public void showHomescreenCard() {
-        homescreenViewController.showHomescreenCard(loadUsersPlaylists(),loadPublicPlaylists());
+        LinkedList<String> prova = new LinkedList<>();
+        prova.add("Adria");
+        prova.add("se't");
+        prova.add("dona");
+        prova.add("molt");
+        prova.add("be");
+        prova.add("fer");
+        prova.add("vistes");
+        prova.add(":-)");
+        homescreenViewController.showHomescreenCard(prova,loadPublicPlaylists());
     }
 
     public boolean loginRequest(String login, String password) { //todo
