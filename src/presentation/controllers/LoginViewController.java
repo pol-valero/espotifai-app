@@ -28,10 +28,10 @@ public class LoginViewController implements ActionListener {
                 }
                 break;
             case LoginView.BTN_FORGOTPASSWORD: //todo
-                controller.showForgotPasswordCard();
-
+                //Com que es una funcionalitat "opcional" de moment no ho farem
+                //controller.showForgotPasswordCard();
                 break;
-            case LoginView.BTN_SINGUP: //todo
+            case LoginView.BTN_SIGNUP: //todo
                 controller.showSignUpCard();
                 break;
         }

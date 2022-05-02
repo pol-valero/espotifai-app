@@ -17,9 +17,6 @@ public class ForgotPasswordView {
         this.cardManager = cardManager;
         configureWindows();
         configureView();
-        //topContainer.getContentPane().add(panel);
-        //topContainer.pack();
-        //topContainer.getContentPane().remove(panel);
     }
 
     private void configureWindows(){
@@ -76,10 +73,16 @@ public class ForgotPasswordView {
         btn_send.setBorderPainted(false);
         btn_send.setActionCommand(BTN_SEND);
         panel.add(btn_send);
+
+        topContainer.getContentPane().add(panel, "forgotPasswordView");
     }
 
     public void registerController (ActionListener ForgotPasswordViewController){ //Todo crida aquesta funció on toqui
         btn_send.addActionListener(ForgotPasswordViewController);
+    }
+
+    public void showCard () {
+        cardManager.show(topContainer, "forgotPasswordView");
     }
 
 
