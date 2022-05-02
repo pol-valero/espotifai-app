@@ -209,7 +209,7 @@ public class SignupView {
         panel.add(go_Back_Image);
         panel.add(p);
 
-        topContainer.getContentPane().add(panel);
+        topContainer.getContentPane().add(panel, "signupCard");
     }
 
 

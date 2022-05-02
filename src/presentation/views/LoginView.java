@@ -36,7 +36,7 @@ public class LoginView {
         topContainer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         topContainer.setLocationRelativeTo(null);
         topContainer.setPreferredSize(new Dimension(1600,900));
-        //topContainer.setResizable(false);
+        topContainer.setResizable(false);
     }
 
     private void configureLoginScreen() {
