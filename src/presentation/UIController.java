@@ -89,16 +89,20 @@ public class UIController {
 
 
     public void showHomescreenCard() {
-        LinkedList<String> prova = new LinkedList<>();
-        prova.add("Adria");
-        prova.add("se't");
-        prova.add("dona");
-        prova.add("molt");
-        prova.add("be");
-        prova.add("fer");
-        prova.add("vistes");
-        prova.add(":-)");
-        homescreenViewController.showHomescreenCard(prova,loadPublicPlaylists());
+        LinkedList<String> prova1 = new LinkedList<>();
+        prova1.add("Adria");
+        prova1.add("se't");
+        prova1.add("dona");
+        prova1.add("molt");
+        prova1.add("be");
+        prova1.add("fer");
+        prova1.add("vistes");
+        prova1.add(":-)");
+
+        LinkedList<String> prova2 = new LinkedList<>();
+        prova2.add("Quim");
+        prova2.add("dolent");
+        homescreenViewController.showHomescreenCard(prova1,prova2);
     }
 
     public boolean loginRequest(String login, String password) { //todo

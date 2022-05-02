@@ -74,6 +74,7 @@ public class HomeScreenView {
         urPlaylistP.add(newPlaylistBtn);
 
         //Panel ScrollPane Your Playlists
+        usersPlaylists.addFirst("MySongs");
         JPanel urPlaylistScrollP = new JPanel();
         urPlaylistScrollP.setBackground(negre);
         urPlaylistScrollP.add(createScrollPane(usersPlaylists)); //Todo
@@ -90,6 +91,7 @@ public class HomeScreenView {
         exploreP.setBackground(negre);
 
         //Panel ScrollPane Explore
+        publicPlaylists.addFirst("AllSongs");
         JPanel exploreScrollP = new JPanel();
         exploreScrollP.setBackground(negre);
         exploreScrollP.add(createScrollPane(publicPlaylists)); //todo
@@ -192,14 +194,11 @@ public class HomeScreenView {
     }
 
     private Component createScrollPane(LinkedList<String> playListNames){
-        LinkedList<JButton> buttonLinkedList = new LinkedList<>();
-        int nPlaylist = playListNames.size();
 
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(800,400));
 
-
-        for(int i=0; i < nPlaylist; i++){
+        for(int i=0; i < playListNames.size(); i++){
 
             //Panel which contains button and label
             JPanel miniPanel = new JPanel();
@@ -210,14 +209,13 @@ public class HomeScreenView {
             JLabel playlistTitle = new JLabel(playListNames.get(i));
             playlistTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-
             //Button config
-            buttonLinkedList.add(new JButton(playListNames.get(i)));
-            buttonLinkedList.get(i).setPreferredSize(new Dimension(150,60));
-            buttonLinkedList.get(i).setAlignmentX(Component.CENTER_ALIGNMENT);
+            JButton jbPlaylist = new JButton(playListNames.get(i));
+            jbPlaylist.setPreferredSize(new Dimension(150,60));
+            jbPlaylist.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             //Adding components to panel
-            miniPanel.add(buttonLinkedList.get(i));
+            miniPanel.add(jbPlaylist);
             miniPanel.add(Box.createRigidArea(new Dimension(0,5)));
             miniPanel.add(playlistTitle);
             miniPanel.setBackground(Color.red);
