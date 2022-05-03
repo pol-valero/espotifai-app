@@ -44,6 +44,15 @@ public class UIController {
         return usersPlaylists;
     }
 
+    public void showHomescreenCard() {
+        LinkedList<String> prova1 = new LinkedList<>();
+        prova1.add("test1");
+        prova1.add("test2");
+
+        LinkedList<String> prova2 = new LinkedList<>();
+        prova2.add("test3");
+        homescreenViewController.showHomescreenCard(prova1,prova2);
+    }
 
     public void showLoginCard() {
         loginViewController.showLoginCard();
@@ -80,30 +89,13 @@ public class UIController {
         return false;
     }
 
+    public boolean loginRequest(String login, String password) { //todo
+
+        return false;
+    }
 
     public void deleteAccountRequest() {
     }
 
 
-    public void showHomescreenCard() {
-        LinkedList<String> prova1 = new LinkedList<>();
-        prova1.add("Adria");
-        prova1.add("se't");
-        prova1.add("dona");
-        prova1.add("molt");
-        prova1.add("be");
-        prova1.add("fer");
-        prova1.add("vistes");
-        prova1.add(":-)");
-
-        LinkedList<String> prova2 = new LinkedList<>();
-        prova2.add("Quim");
-        prova2.add("dolent");
-        homescreenViewController.showHomescreenCard(prova1,prova2);
-    }
-
-    public boolean loginRequest(String login, String password) { //todo
-
-        return false;
-    }
 }
