@@ -16,7 +16,7 @@ public class LoginView {
 
 
     private JButton btnLogin = new JButton();
-    private JTextField usernameField = new JTextField();
+    private JTextField loginField = new JTextField();
     private JTextField passwordField = new JTextField();
     private JLabel loginError = new JLabel();
     private JLabel signUpLabel = new JLabel();
@@ -88,8 +88,8 @@ public class LoginView {
         name_Label.setFont(titols);
         info_panel.add(name_Label);
 
-        usernameField.setFont(text);
-        info_panel.add(usernameField);
+        loginField.setFont(text);
+        info_panel.add(loginField);
         info_panel.setOpaque(false);
 
         //blank space
@@ -189,11 +189,12 @@ public class LoginView {
 
     public String getLoginField() {
 
-        return null;
+        return loginField.getText();
     }
 
     public String getPasswordField() {
-        return null;
+
+        return passwordField.getText();
     }
 
     public void showCard () {

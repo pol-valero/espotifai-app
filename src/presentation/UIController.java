@@ -1,5 +1,6 @@
 package presentation;
 
+import business.entities.User;
 import presentation.controllers.HomescreenViewController;
 import presentation.controllers.LoginViewController;
 import presentation.controllers.LogoutViewController;
@@ -93,6 +94,12 @@ public class UIController {
 
         return false;
     }
+
+    public void signUpRequest (User user) {
+
+    }
+
+
 
     public void deleteAccountRequest() {
     }

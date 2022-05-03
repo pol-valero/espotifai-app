@@ -1,5 +1,6 @@
 package presentation.controllers;
 
+import business.entities.User;
 import presentation.UIController;
 
 import presentation.views.SignupView;
@@ -70,6 +71,8 @@ public class SignupViewController implements ActionListener, MouseListener {
         }
 
         if(!errorFlag) {
+            User user = new User(signupView.getUsername(), signupView.getEmail(), signupView.getPassword());
+            controller.signUpRequest(user);
             controller.showHomescreenCard();
         }
 

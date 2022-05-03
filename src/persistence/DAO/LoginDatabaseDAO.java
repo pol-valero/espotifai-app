@@ -13,7 +13,7 @@ public class LoginDatabaseDAO implements LoginDAO {
 
     @Override
     public List<User> getAllUsers() {
-        List<User> user = new LinkedList<>();
+        List<User> users = new LinkedList<>();
         String query = "SELECT id, nombre, correo, password;";
         ResultSet information = SQLConnector.getInstance().selectQuery(query);
 
@@ -24,13 +24,16 @@ public class LoginDatabaseDAO implements LoginDAO {
                 String email = information.getString("correo");
                 String password = information.getString("password");
 
-                user.add(new User(id, name, email, password));
+                User user = new User(name, email, password);
+                user.setId(id);
+                users.add(user);
+
             }
         } catch (SQLException exception){
             System.err.println("Problem when " + exception.getErrorCode());
         }
 
-        return user;
+        return users;
     }
 
     @Override
