@@ -62,7 +62,7 @@ public class UIController {
 
     public boolean findUserNameMatch(String username){//todo
 
-        return true;
+        return false;
     }
 
     public boolean findEmailMatch(String email){ //todo

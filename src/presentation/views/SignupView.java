@@ -1,4 +1,6 @@
 package presentation.views;
+import presentation.controllers.SignupViewController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -220,8 +222,9 @@ public class SignupView {
         return resizedImg;
     }
 
-    public void registerController (ActionListener SignupViewController){ //Todo crida aquesta funció on toqui
-        jbSignup.addActionListener(SignupViewController);
+    public void registerController (SignupViewController signupViewController){ //Todo crida aquesta funció on toqui
+        jbSignup.addActionListener(signupViewController);
+        goBackImage.addMouseListener(signupViewController);
     }
 
    /**
