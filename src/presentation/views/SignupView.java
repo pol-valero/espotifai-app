@@ -211,7 +211,7 @@ public class SignupView {
     }
 
 
-    Image getScaledImage(Image Img, int wt, int ht) {
+    private Image getScaledImage(Image Img, int wt, int ht) {
         BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImg.createGraphics();
 

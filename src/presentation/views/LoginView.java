@@ -1,5 +1,7 @@
 package presentation.views;
 
+import presentation.controllers.LoginViewController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -25,6 +27,11 @@ public class LoginView {
         oneTimeConfiguration();
         configureView();
         topContainer.pack();
+    }
+
+    public void registerController (LoginViewController loginViewController){ //Todo crida aquesta funció on toqui
+        btnLogin.addActionListener(loginViewController);
+        signUpLabel.addMouseListener(loginViewController);
     }
 
     private void oneTimeConfiguration () {
@@ -104,6 +111,7 @@ public class LoginView {
         loginError.setText("Username or password are incorrect");
         loginError.setForeground(vermell);
         loginError.setFont(text);
+        loginError.setVisible(false);
         info_panel.add(loginError);
 
         //blank space
@@ -163,7 +171,7 @@ public class LoginView {
     }
 
 
-    Image getScaledImage(Image Img, int wt, int ht) {
+    private Image getScaledImage(Image Img, int wt, int ht) {
         BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImg.createGraphics();
 
@@ -174,7 +182,9 @@ public class LoginView {
         return resizedImg;
     }
 
-    public void showLoginErrorMessage() {
+    public void loginErrorVisibility(boolean error) {
+        loginError.setVisible(error);
+        topContainer.revalidate();
     }
 
     public String getLoginField() {
@@ -187,7 +197,10 @@ public class LoginView {
     }
 
     public void showCard () {
+        loginErrorVisibility(false);
         cardManager.show(topContainer.getContentPane(),"loginCard");
     }
+
+
 
 }

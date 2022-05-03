@@ -29,9 +29,6 @@ public class UIController {
         signupViewController = new SignupViewController(this, topContainer, cardManager);
         logoutViewController = new LogoutViewController(this, topContainer, cardManager);
         homescreenViewController = new HomescreenViewController(this,topContainer,cardManager);
-
-
-        showSignUpCard();
         //fer el mateix amb tots els altres controllers
     }
 
@@ -107,6 +104,6 @@ public class UIController {
 
     public boolean loginRequest(String login, String password) { //todo
 
-        return true;
+        return false;
     }
 }
