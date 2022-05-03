@@ -20,8 +20,8 @@ public class SignupView {
     private JLabel error_Label_name = new JLabel();
     private JLabel error_Label_mail = new JLabel();
     private JLabel error_Label_password = new JLabel();
-    private JLabel error_Label_password_2 = new JLabel();
     private JLabel go_Back_Image = new JLabel();
+    private JLabel jlPasswordFormat = new JLabel();
 
 
 
@@ -136,7 +136,7 @@ public class SignupView {
         info_panel.add(password_text);
 
 
-        error_Label_password.setText("The password is incorrect");
+        error_Label_password.setText("The passwords do not match");
         error_Label_password.setForeground(vermell);
         error_Label_password.setFont(text);
         info_panel.add(error_Label_password);
@@ -156,24 +156,13 @@ public class SignupView {
         password_2_text.setFont(text);
         info_panel.add(password_2_text);
 
-        error_Label_password_2.setText("The password is incorrect");
-        error_Label_password_2.setForeground(vermell);
-        error_Label_password_2.setFont(text);
-
-        info_panel.add(error_Label_password_2);
 
 
-        JLabel message = new JLabel();
-        message.setText("The password must contain at least 8 characters with ");
-        message.setForeground(Color.white);
-        message.setFont(information);
-        info_panel.add( message);
 
-        JLabel message_2 = new JLabel();
-        message_2.setText("1 lower case letter, 1 upper case letter and 1 number");
-        message_2.setForeground(Color.white);
-        message_2.setFont(information);
-        info_panel.add( message_2);
+        jlPasswordFormat.setText("<html>The password must be at least 8 characters, have<br>uppercase and lowercase letters and a number</html>" );
+        jlPasswordFormat.setForeground(Color.white);
+        jlPasswordFormat.setFont(information);
+        info_panel.add( jlPasswordFormat);
 
         //Sign up button
 
@@ -243,13 +232,13 @@ public class SignupView {
         topContainer.revalidate();
     }
 
-    public void passwordVisibility (boolean error){
+    public void notEqualPasswordsError(boolean error){
         error_Label_password.setVisible(error);
         topContainer.revalidate();
     }
 
-    public void password_2_Visibility (boolean error){
-        error_Label_password_2.setVisible(error);
+    public void passwordFormatError(boolean error){
+        jlPasswordFormat.setVisible(error);
         topContainer.revalidate();
     }
 
@@ -279,7 +268,7 @@ public class SignupView {
         error_Label_name.setVisible(false);
         error_Label_mail.setVisible(false);
         error_Label_password.setVisible(false);
-        error_Label_password_2.setVisible(false);
+        jlPasswordFormat.setVisible(false);
         topContainer.revalidate();
     }
 }
