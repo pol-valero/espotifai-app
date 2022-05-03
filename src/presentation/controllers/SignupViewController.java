@@ -33,27 +33,38 @@ public class SignupViewController implements ActionListener  {
         boolean errorFlag = false;
 
         if(controller.findUserNameMatch(signupView.getUsername())){
-            signupView.userNameErrorVisibility(true);
+            signupView.existingUsernameErrorVisibility(true);
             errorFlag=true;
         } else {
-            signupView.userNameErrorVisibility(false);
+            signupView.existingUsernameErrorVisibility(false);
         }
 
-        if (controller.findEmailMatch(signupView.getEmail())){
-            signupView.mailErrorVisibility(true);
+        if (controller.checkEmailFormat(signupView.getEmail())){
+            signupView.mailFormatErrorVisibility(true);
             errorFlag=true;
-        } else if (controller.checkEmailFormat(signupView.getEmail())){
-            errorFlag=true;
+        } else {
+            signupView.mailFormatErrorVisibility(false);
+            if (controller.findEmailMatch(signupView.getEmail())){
+                signupView.existingMailErrorVisibility(true);
+                errorFlag=true;
+            } else {
+                signupView.existingMailErrorVisibility(false);
+            }
         }
 
 
 
-        if(controller.checkEqualPassword(signupView.getPassword(), signupView.getRewritedPassword())){
-            signupView.notEqualPasswordsError(true);
+        if(controller.checkEqualPassword(signupView.getPassword(), signupView.getRepeatedPassword())){
+            signupView.notEqualPasswordsErrorVisibility(true);
             errorFlag=true;
-        } else if(controller.checkPasswordFormat(signupView.getPassword())){
-            signupView.passwordFormatError(true);
-            errorFlag=true;
+        } else {
+            signupView.notEqualPasswordsErrorVisibility(false);
+            if(controller.checkPasswordFormat(signupView.getPassword())){
+                signupView.passwordFormatErrorVisibility(true);
+                errorFlag=true;
+            } else {
+                signupView.passwordFormatErrorVisibility(false);
+            }
         }
 
         if(!errorFlag) {

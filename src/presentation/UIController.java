@@ -67,20 +67,20 @@ public class UIController {
 
     public boolean findEmailMatch(String email){ //todo
 
-        return true;
+        return false;
     }
 
     public boolean checkPasswordFormat(String password){ //todo
 
-        return true;
+        return false;
     }
 
     public boolean checkEmailFormat (String email){
-        return true;
+        return false;
     }
 
     public boolean checkEqualPassword (String password, String rewritedPassword){
-        return true;
+        return false;
     }
 
 

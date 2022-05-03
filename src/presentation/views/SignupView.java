@@ -12,16 +12,17 @@ public class SignupView {
     private final CardLayout cardManager;
 
     public static final String BTN_SIGNUP = "BTN_SIGNUP";
-    private JButton btnSignup = new JButton();
-    private JTextField name_text = new JTextField();
-    private JTextField mail_text = new JTextField();
-    private JTextField password_text = new JTextField();
-    private JTextField password_2_text = new JTextField();
-    private JLabel error_Label_name = new JLabel();
-    private JLabel error_Label_mail = new JLabel();
-    private JLabel error_Label_password = new JLabel();
-    private JLabel go_Back_Image = new JLabel();
-    private JLabel jlPasswordFormat = new JLabel();
+    private JButton jbSignup = new JButton();
+    private JTextField usernameField = new JTextField(20);
+    private JTextField emailField = new JTextField(20);
+    private JTextField passwordField = new JTextField(20);
+    private JTextField repeatedPasswordField = new JTextField(20);
+    private JLabel jlExistingUsername = new JLabel();
+    private JLabel jlExistingMailError = new JLabel();
+    private JLabel jlMailFormatError = new JLabel();
+    private JLabel jlNotEqualPasswordsError = new JLabel();
+    private JLabel goBackImage = new JLabel();
+    private JLabel jlPasswordFormatError = new JLabel();
 
 
 
@@ -76,9 +77,9 @@ public class SignupView {
         Image Image_2 = getScaledImage(imageIcon_2, 50, 50);
         ImageIcon new_Boto = new ImageIcon(Image_2);
 
-        go_Back_Image.setIcon(new_Boto);
-        go_Back_Image.setBounds(30,30,50,50);
-        go_Back_Image.addMouseListener(new MouseAdapter() {});
+        goBackImage.setIcon(new_Boto);
+        goBackImage.setBounds(30,30,50,50);
+        goBackImage.addMouseListener(new MouseAdapter() {});
 
         //User name and name text
 
@@ -89,13 +90,13 @@ public class SignupView {
         name_Label.setFont(titols);
         info_panel.add(name_Label);
 
-        name_text.setFont(text);
-        info_panel.add(name_text);
+        usernameField.setFont(text);
+        info_panel.add(usernameField);
 
-        error_Label_name.setText("The username is incorrect");
-        error_Label_name.setForeground(vermell);
-        error_Label_name.setFont(text);
-        info_panel.add(error_Label_name);
+        jlExistingUsername.setText("The username is incorrect");
+        jlExistingUsername.setForeground(vermell);
+        jlExistingUsername.setFont(text);
+        info_panel.add(jlExistingUsername);
 
 
         info_panel.setOpaque(false);
@@ -111,14 +112,19 @@ public class SignupView {
         info_panel.add(mail);
 
 
-        mail_text.setFont(text);
-        info_panel.add(mail_text);
+        emailField.setFont(text);
+        info_panel.add(emailField);
 
 
-        error_Label_mail.setText("The mail is incorrect");
-        error_Label_mail.setForeground(vermell);
-        error_Label_mail.setFont(text);
-        info_panel.add(error_Label_mail);
+        jlExistingMailError.setText("This mail is already in use");
+        jlExistingMailError.setForeground(vermell);
+        jlExistingMailError.setFont(text);
+        info_panel.add(jlExistingMailError);
+
+        jlMailFormatError.setText("This is not a valid mail");
+        jlMailFormatError.setForeground(vermell);
+        jlMailFormatError.setFont(text);
+        info_panel.add(jlMailFormatError);
 
 
 
@@ -132,14 +138,14 @@ public class SignupView {
         info_panel.add(password);
 
 
-        password_text.setFont(text);
-        info_panel.add(password_text);
+        passwordField.setFont(text);
+        info_panel.add(passwordField);
 
 
-        error_Label_password.setText("The passwords do not match");
-        error_Label_password.setForeground(vermell);
-        error_Label_password.setFont(text);
-        info_panel.add(error_Label_password);
+        jlNotEqualPasswordsError.setText("The passwords do not match");
+        jlNotEqualPasswordsError.setForeground(vermell);
+        jlNotEqualPasswordsError.setFont(text);
+        info_panel.add(jlNotEqualPasswordsError);
 
 
 
@@ -147,34 +153,34 @@ public class SignupView {
 
 
         JLabel password_2 = new JLabel();
-        password_2.setText("Rewrite Password");
+        password_2.setText("Repeat password");
         password_2.setForeground(Color.white);
         password_2.setFont(titols);
         info_panel.add(password_2);
 
 
-        password_2_text.setFont(text);
-        info_panel.add(password_2_text);
+        repeatedPasswordField.setFont(text);
+        info_panel.add(repeatedPasswordField);
 
 
 
 
-        jlPasswordFormat.setText("<html>The password must be at least 8 characters, have<br>uppercase and lowercase letters and a number</html>" );
-        jlPasswordFormat.setForeground(Color.white);
-        jlPasswordFormat.setFont(information);
-        info_panel.add( jlPasswordFormat);
+        jlPasswordFormatError.setText("<html>The password must be at least 8 characters, have<br>uppercase and lowercase letters and a number</html>" );
+        jlPasswordFormatError.setForeground(vermell);
+        jlPasswordFormatError.setFont(information);
+        info_panel.add(jlPasswordFormatError);
 
         //Sign up button
 
-        btnSignup.setBackground(vermell);
-        btnSignup.setForeground(Color.white);
-        btnSignup.setText("Sign up");
-        btnSignup.setFont(button);
-        btnSignup.setPreferredSize(button_shape);
-        btnSignup.setFocusable(false);
-        btnSignup.setOpaque(true);
-        btnSignup.setBorderPainted(false);
-        btnSignup.setActionCommand(BTN_SIGNUP);
+        jbSignup.setBackground(vermell);
+        jbSignup.setForeground(Color.white);
+        jbSignup.setText("Sign up");
+        jbSignup.setFont(button);
+        jbSignup.setPreferredSize(button_shape);
+        jbSignup.setFocusable(false);
+        jbSignup.setOpaque(true);
+        jbSignup.setBorderPainted(false);
+        jbSignup.setActionCommand(BTN_SIGNUP);
 
         //   btnSignup.setActionCommand(BTN_LOGOUT);
 
@@ -192,11 +198,11 @@ public class SignupView {
         //Position and addition
         c.gridx = 0;
         c.gridy = 3;
-        p.add(btnSignup,c);
+        p.add(jbSignup,c);
 
         p.setBounds(450,0,600,800);
 
-        panel.add(go_Back_Image);
+        panel.add(goBackImage);
         panel.add(p);
 
         topContainer.getContentPane().add(panel, "signupCard");
@@ -215,48 +221,52 @@ public class SignupView {
     }
 
     public void registerController (ActionListener SignupViewController){ //Todo crida aquesta funció on toqui
-        btnSignup.addActionListener(SignupViewController);
+        jbSignup.addActionListener(SignupViewController);
     }
 
    /**
     * Aquesta funcio permet canviar si es visible o no , per tant s'ha de utilitzar
     * tant per si s'ha de fer visible com invisible.
     */
-    public void userNameErrorVisibility (boolean error){
-        error_Label_name.setVisible(error);
+    public void existingUsernameErrorVisibility(boolean error){
+        jlExistingUsername.setVisible(error);
         topContainer.revalidate();
     }
 
-    public void mailErrorVisibility (boolean error){
-        error_Label_mail.setVisible(error);
+    public void existingMailErrorVisibility(boolean error){
+        jlExistingMailError.setVisible(error);
         topContainer.revalidate();
     }
 
-    public void notEqualPasswordsError(boolean error){
-        error_Label_password.setVisible(error);
+    public void mailFormatErrorVisibility (boolean error) {
+        jlMailFormatError.setVisible(error);
         topContainer.revalidate();
     }
 
-    public void passwordFormatError(boolean error){
-        jlPasswordFormat.setVisible(error);
+    public void notEqualPasswordsErrorVisibility(boolean error){
+        jlNotEqualPasswordsError.setVisible(error);
         topContainer.revalidate();
     }
 
+    public void passwordFormatErrorVisibility(boolean error){
+        jlPasswordFormatError.setVisible(error);
+        topContainer.revalidate();
+    }
 
     public String getUsername() {
-        return name_text.getText();
+        return usernameField.getText();
     }
 
     public String getEmail() {
-        return mail_text.getText();
+        return emailField.getText();
     }
 
     public String getPassword() {
-        return password_text.getText();
+        return passwordField.getText();
     }
 
-    public String getRewritedPassword () {
-        return password_2_text.getText();
+    public String getRepeatedPassword() {
+        return repeatedPasswordField.getText();
     }
 
     public void showCard () {
@@ -265,10 +275,11 @@ public class SignupView {
     }
 
     private void setErrorsInvisible() {
-        error_Label_name.setVisible(false);
-        error_Label_mail.setVisible(false);
-        error_Label_password.setVisible(false);
-        jlPasswordFormat.setVisible(false);
+        jlExistingUsername.setVisible(false);
+        jlExistingMailError.setVisible(false);
+        jlNotEqualPasswordsError.setVisible(false);
+        jlPasswordFormatError.setVisible(false);
+        jlMailFormatError.setVisible(false);
         topContainer.revalidate();
     }
 }
