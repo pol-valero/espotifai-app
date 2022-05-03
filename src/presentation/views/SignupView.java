@@ -227,16 +227,31 @@ public class SignupView {
 
     public void registerController (ActionListener SignupViewController){ //Todo crida aquesta funció on toqui
         btnSignup.addActionListener(SignupViewController);
-
     }
+
    /**
     * Aquesta funcio permet canviar si es visible o no , per tant s'ha de utilitzar
     * tant per si s'ha de fer visible com invisible.
     */
-    public void userNameErrorVisibility (boolean error){ error_Label_name.setVisible(error);}
-    public void mailErrorVisibility (boolean error){ error_Label_mail.setVisible(error);}
-    public void passwordVisibility (boolean error){ error_Label_password.setVisible(error);}
-    public void password_2_Visibility (boolean error){ error_Label_password_2.setVisible(error);}
+    public void userNameErrorVisibility (boolean error){
+        error_Label_name.setVisible(error);
+        topContainer.revalidate();
+    }
+
+    public void mailErrorVisibility (boolean error){
+        error_Label_mail.setVisible(error);
+        topContainer.revalidate();
+    }
+
+    public void passwordVisibility (boolean error){
+        error_Label_password.setVisible(error);
+        topContainer.revalidate();
+    }
+
+    public void password_2_Visibility (boolean error){
+        error_Label_password_2.setVisible(error);
+        topContainer.revalidate();
+    }
 
 
     public String getUsername() {
@@ -256,6 +271,15 @@ public class SignupView {
     }
 
     public void showCard () {
+        setErrorsInvisible();
         cardManager.show(topContainer.getContentPane(),"signupCard");
+    }
+
+    private void setErrorsInvisible() {
+        error_Label_name.setVisible(false);
+        error_Label_mail.setVisible(false);
+        error_Label_password.setVisible(false);
+        error_Label_password_2.setVisible(false);
+        topContainer.revalidate();
     }
 }

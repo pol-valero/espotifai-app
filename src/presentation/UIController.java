@@ -31,7 +31,7 @@ public class UIController {
         homescreenViewController = new HomescreenViewController(this,topContainer,cardManager);
 
 
-        showHomescreenCard();
+        showSignUpCard();
         //fer el mateix amb tots els altres controllers
     }
 
@@ -62,7 +62,7 @@ public class UIController {
 
     public boolean findUserNameMatch(String username){//todo
 
-        return true;
+        return false;
     }
 
     public boolean findEmailMatch(String email){ //todo
