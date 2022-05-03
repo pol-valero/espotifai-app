@@ -1,5 +1,7 @@
 package presentation;
 
+import business.BusinessFacade;
+import business.BusinessFacadelmpl;
 import business.entities.User;
 import presentation.controllers.HomescreenViewController;
 import presentation.controllers.LoginViewController;
@@ -21,6 +23,7 @@ public class UIController {
     private LogoutViewController logoutViewController;
     private SignupViewController signupViewController;
     private HomescreenViewController homescreenViewController;
+    private BusinessFacade businessFacadel;
 
     public void run () {
         JFrame topContainer = new JFrame();
@@ -79,15 +82,17 @@ public class UIController {
 
     public boolean checkPasswordFormat(String password){ //todo
 
-        return false;
+        return businessFacadel.checkPassword(password);
     }
 
     public boolean checkEmailFormat (String email){
-        return false;
+
+        return businessFacadel.checkEmail(email);
     }
 
     public boolean checkEqualPassword (String password, String rewritedPassword){
-        return false;
+
+        return businessFacadel.sameString(password, rewritedPassword);
     }
 
     public boolean loginRequest(String login, String password) { //todo

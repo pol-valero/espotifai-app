@@ -1,10 +1,13 @@
 package business;
 
+import business.entities.User;
 
 /**
  * Clase para gestionar la informacion entre el controller y las clases de Business
  */
 public class BusinessFacadelmpl implements BusinessFacade{
+
+    private LoginManager loginManager;
 
     private final static boolean OK = true;
     private final static boolean ERROR = false;
@@ -107,6 +110,30 @@ public class BusinessFacadelmpl implements BusinessFacade{
             }
         }
         return ERROR;
+    }
+
+    public boolean loginRequest(String login, String password){
+        return loginManager.loginRequest(login, password);
+    }
+
+    public boolean findUsernameMach(String name){
+        return loginManager.findUsernameMach(name);
+    }
+
+    public boolean findEmailMach(String email){
+        return loginManager.findEmailMach(email);
+    }
+
+    public void singUpRequest(User user){
+        loginManager.singUpRequest(user);
+    }
+
+    public void logoutRequest(){
+        loginManager.logoutRequest();
+    }
+
+    public void deleteAccountRequest(){
+        loginManager.deleteAccountRequest();
     }
 
 }
