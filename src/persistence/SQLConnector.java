@@ -10,20 +10,21 @@ public class SQLConnector {
     private final String password;
     private final String url;
     private Connection connection;
-
+    private ConfigDAO configDAO;
 
     public static SQLConnector getInstance(){ //si la base no esta instanciada la instanciamos
         if (instance == null ){
-            instance = new SQLConnector("spotify-lasalle", "3S8&jfd1", "www.spotify-lasalle.com", 3306, "spotifybbdd");
+            instance = new SQLConnector();
             instance.connect();
         }
         return instance;
     }
 
-    private SQLConnector(String username, String password, String ip, int port, String database){
-        this.username = username;
-        this.password = password;
-        this.url = "jdbc:mysql://" + ip + ":" + port + "/" + database;
+    private SQLConnector(){
+        this.username = configDAO.getUsuariobbdd();
+        this.password = configDAO.getPassword();
+        this.url = configDAO.getUrl();
+
     }
 
     /**

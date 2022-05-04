@@ -5,6 +5,7 @@ import business.entities.Song;
 import persistence.MusicListDAO;
 import persistence.SQLConnector;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -208,4 +209,44 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         return genre;
     }
 
+    public void canciones_Playlist (int playlist) {
+
+        PreparedStatement ps = null;
+        //String query = "select * from v_canciones where id_playlist = ?";
+        String query = "select * from v_canciones";
+        ResultSet rs = SQLConnector.getInstance().selectQuery(query);
+
+        try {
+
+            // recorremos el arrya y printamos, aunque lo que tendría que hacer es devolver el array
+
+            while (rs.next()) {
+                System.out.println(rs.getInt("id_cancion") + " " + rs.getString("titulo") + rs.getString("cantante"));
+            }
+
+        } catch (
+                SQLException e) {
+            System.err.println(e);
+        }
+    }
+
+    public void playlistUser (int user_id) {
+
+
+        PreparedStatement ps = null;
+        String query = "Select id, nombre from listas_reproduccion  where id_usuario = ?";
+        ResultSet rs = SQLConnector.getInstance().selectQuery(query);
+
+        try {
+            // recorremos el arrya y printamos, aunque lo que tendría que hacer es devolver el array
+            int a = 0;
+            while (rs.next()) {
+                a++;
+                System.out.println(a + " " + rs.getString("nombre") + "--id: " + rs.getInt("id"));
+            }
+
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
+    }
 }

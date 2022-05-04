@@ -29,4 +29,8 @@ public interface MusicListDAO {
      * @param playlist Objeto Playlist con la informcion de la playlist
      */
     public void deletePlaylist(Playlist playlist);
+
+    public void canciones_Playlist (int playlist);
+
+    public void playlistUser (int user_id);
 }

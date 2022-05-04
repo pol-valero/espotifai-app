@@ -2,6 +2,13 @@ package business;
 
 import business.entities.User;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 /**
  * Clase para gestionar la informacion entre el controller y las clases de Business
  */
@@ -140,4 +147,21 @@ public class BusinessFacadelmpl implements BusinessFacade{
         return loginManager.getCurrentUSer();
     }
 
+    public String pwdHash(String pwd) {
+        MessageDigest digest = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        digest.reset();
+        try {
+            digest.update(pwd.getBytes("utf8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        pwd = String.format("%064x", new BigInteger(1, digest.digest()));
+
+        return pwd;
+    }
 }

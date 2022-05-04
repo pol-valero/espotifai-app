@@ -4,6 +4,7 @@ import business.entities.User;
 import persistence.LoginDAO;
 import persistence.SQLConnector;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -51,5 +52,32 @@ public class LoginDatabaseDAO implements LoginDAO {
     public void deleteAccountRequest(String userName) {
         String query = "DELETE FROM usuario WHERE nombre = " + userName + ";";
         SQLConnector.getInstance().deleteQuery(query);
+    }
+
+    @Override
+    public User getUser(String name, String pwd) {
+
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        String query = "Select * from usuario where nombre = ? and password = ?";
+        rs = SQLConnector.getInstance().selectQuery(query);
+
+        try {
+            // si devuelve 1 resultado es qeu hay coincidencia
+            while (rs.next()) {
+                int id = Integer.parseInt(rs.getString("id"));
+                String username = rs.getString("nombre");
+                String correo = rs.getString("correo");
+                String pwd1 = rs.getString("password");
+                if (username.equals(name)) {
+                    return new User(id, username, correo, pwd1);
+                }
+            }
+            return null;
+
+        }catch (SQLException e) {
+            System.err.println(e);
+        }
+        return null;
     }
 }

@@ -20,6 +20,13 @@ public class User {
 
     }
 
+    public User(int id, String username, String correo, String pwd1) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
     public long getId() {
         return id;
     }

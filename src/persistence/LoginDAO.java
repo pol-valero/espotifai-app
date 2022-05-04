@@ -23,4 +23,6 @@ public interface LoginDAO {
      * @param userName String con el nombre del usuario a elimianar
      */
     public void deleteAccountRequest(String userName);
+
+    User getUser(String name, String pwd);
 }

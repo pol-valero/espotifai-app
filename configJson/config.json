@@ -2,6 +2,6 @@
   "Port": "3306",
   "IP": "www.spotify-lasalle.com",
   "NomBase": "spotifybbdd",
-  "Usuari": "spotifybbdd",
-  "contrasenya": "3$4bSq1m"
+  "userbbdd": "spotifybbdd",
+  "password": "3$4bSq1m"
 }
