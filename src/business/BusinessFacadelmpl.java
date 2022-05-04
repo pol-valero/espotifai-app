@@ -136,4 +136,8 @@ public class BusinessFacadelmpl implements BusinessFacade{
         loginManager.deleteAccountRequest();
     }
 
+    public User getCurrentUser(){
+        return loginManager.getCurrentUSer();
+    }
+
 }
