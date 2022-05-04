@@ -4,8 +4,6 @@ import business.BusinessFacade;
 import business.BusinessFacadelmpl;
 import business.entities.User;
 import presentation.controllers.*;
-import presentation.views.LoginView;
-import presentation.views.LogoutView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +18,7 @@ public class UIController {
     private LogoutViewController logoutViewController;
     private SignupViewController signupViewController;
     private HomescreenViewController homescreenViewController;
-    private BusinessFacade businessFacadel;
+    private BusinessFacade businessFacade = new BusinessFacadelmpl();
     private VerificationCodeViewController verificationCodeViewController;
 
     public void run () {
@@ -88,22 +86,22 @@ public class UIController {
 
     public boolean checkPasswordFormat(String password){ //todo
 
-        return businessFacadel.checkPassword(password);
+        return businessFacade.checkPassword(password);
     }
 
     public boolean checkEmailFormat (String email){
 
-        return businessFacadel.checkEmail(email);
+        return businessFacade.checkEmail(email);
     }
 
     public boolean checkEqualPassword (String password, String rewritedPassword){
 
-        return businessFacadel.sameString(password, rewritedPassword);
+        return businessFacade.sameString(password, rewritedPassword);
     }
 
     public boolean loginRequest(String login, String password) { //todo
 
-        return businessFacadel.loginRequest(login, password);
+        return businessFacade.loginRequest(login, password);
     }
 
     public void signUpRequest (User user) {
