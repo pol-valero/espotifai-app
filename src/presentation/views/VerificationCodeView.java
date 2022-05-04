@@ -1,13 +1,12 @@
 package presentation.views;
 
+import presentation.controllers.VerificationCodeViewController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.font.TextAttribute;
 import java.util.Map;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class VerificationCodeView {
 
@@ -17,7 +16,7 @@ public class VerificationCodeView {
     public static final String BTN_CHECK = "BTN_CHECK";
     public static final String LBL_EMAIL = "LBL_EMAIL";
     private JLabel error_Label = new JLabel();
-    private JButton btn_send = new JButton();
+    private JButton btn_check = new JButton();
     private JLabel rewrite_email = new JLabel("Rewrite email adress");
 
     public VerificationCodeView(JFrame topContainer, CardLayout cardManager){
@@ -74,16 +73,16 @@ public class VerificationCodeView {
         jTextField.setBounds(200,430,490,45);
 
 
-        btn_send.setText("Check");
-        btn_send.setBounds(571,614,371,56);
-        btn_send.setForeground(Color.white);
-        btn_send.setFont(text);
-        btn_send.setBackground(vermell);
-        btn_send.setFocusable(false);
+        btn_check.setText("Check");
+        btn_check.setBounds(571,614,371,56);
+        btn_check.setForeground(Color.white);
+        btn_check.setFont(text);
+        btn_check.setBackground(vermell);
+        btn_check.setFocusable(false);
         // btn_send.setOpaque(false);
-        btn_send.setBorderPainted(false);
-        btn_send.setActionCommand(BTN_CHECK);
-        panel.add(btn_send);
+        btn_check.setBorderPainted(false);
+        btn_check.setActionCommand(BTN_CHECK);
+        panel.add(btn_check);
 
         error_Label.setText("Verification code only includes numbers");
         error_Label.setForeground(vermell);
@@ -103,7 +102,7 @@ public class VerificationCodeView {
 
         panel.add( rewrite_email);
 
-        topContainer.getContentPane().add(panel);
+        topContainer.getContentPane().add(panel, "verificationCodeViewCard");
     }
     /*
     @Override
@@ -118,9 +117,15 @@ public class VerificationCodeView {
      */
     public void ErrorVisibility (boolean error){ error_Label.setVisible(error);}
 
-    public void registerController (ActionListener ForgotPasswordViewController, MouseListener rewriteEmailViewController){ //Todo crida aquesta funció on toqui
-        btn_send.addActionListener(ForgotPasswordViewController);
-        rewrite_email.addMouseListener(rewriteEmailViewController);
+    public void showCard () {
+
+        cardManager.show(topContainer.getContentPane(),"verificationCodeViewCard");
+    }
+
+
+    public void registerController (VerificationCodeViewController verificationCodeViewController ){
+        btn_check.addActionListener(verificationCodeViewController);
+        rewrite_email.addMouseListener(verificationCodeViewController);
 
     }
 

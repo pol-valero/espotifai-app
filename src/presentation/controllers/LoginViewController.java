@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class LoginViewController implements ActionListener, MouseListener {
+
     private final LoginView loginView;
     private final UIController controller;
 

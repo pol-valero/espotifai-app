@@ -3,10 +3,7 @@ package presentation;
 import business.BusinessFacade;
 import business.BusinessFacadelmpl;
 import business.entities.User;
-import presentation.controllers.HomescreenViewController;
-import presentation.controllers.LoginViewController;
-import presentation.controllers.LogoutViewController;
-import presentation.controllers.SignupViewController;
+import presentation.controllers.*;
 import presentation.views.LoginView;
 import presentation.views.LogoutView;
 
@@ -24,6 +21,7 @@ public class UIController {
     private SignupViewController signupViewController;
     private HomescreenViewController homescreenViewController;
     private BusinessFacade businessFacadel;
+    private VerificationCodeViewController verificationCodeViewController;
 
     public void run () {
         JFrame topContainer = new JFrame();
@@ -33,7 +31,11 @@ public class UIController {
         signupViewController = new SignupViewController(this, topContainer, cardManager);
         logoutViewController = new LogoutViewController(this, topContainer, cardManager);
         homescreenViewController = new HomescreenViewController(this,topContainer,cardManager);
+        verificationCodeViewController = new VerificationCodeViewController(this,topContainer,cardManager);
         //fer el mateix amb tots els altres controllers
+
+        showVerificationCodeViewCard();
+
     }
 
     public LinkedList<String> loadPublicPlaylists() {
@@ -64,6 +66,10 @@ public class UIController {
 
     public void showSignUpCard() {
         signupViewController.showSignupCard();
+    }
+    public void showVerificationCodeViewCard() {
+
+        verificationCodeViewController.showVerificationCodeViewCard();
     }
 
     public void showLogoutCard () {
