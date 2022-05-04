@@ -3,7 +3,6 @@ import presentation.controllers.SignupViewController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 
@@ -24,6 +23,7 @@ public class SignupView {
     private JLabel jlMailFormatError = new JLabel();
     private JLabel jlNotEqualPasswordsError = new JLabel();
     private JLabel goBackImage = new JLabel();
+    private JLabel jlPasswordFormat = new JLabel();
     private JLabel jlPasswordFormatError = new JLabel();
 
 
@@ -164,13 +164,16 @@ public class SignupView {
         repeatedPasswordField.setFont(text);
         info_panel.add(repeatedPasswordField);
 
-
-
-
-        jlPasswordFormatError.setText("<html>The password must be at least 8 characters, have<br>uppercase and lowercase letters and a number</html>" );
+        jlPasswordFormatError.setText("Password does not meet requirements");
         jlPasswordFormatError.setForeground(vermell);
-        jlPasswordFormatError.setFont(information);
+        jlPasswordFormatError.setFont(text);
         info_panel.add(jlPasswordFormatError);
+
+
+        jlPasswordFormat.setText("<html>The password must be at least 8 characters, have<br>uppercase and lowercase letters and a number</html>" );
+        jlPasswordFormat.setForeground(Color.white);
+        jlPasswordFormat.setFont(information);
+        info_panel.add(jlPasswordFormat);
 
         //Sign up button
 
