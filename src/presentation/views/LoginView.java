@@ -38,11 +38,13 @@ public class LoginView {
         //The following three lines only need to be added to this class as it is the first class whose object is created. All the other view classes must not have these three lines.
         topContainer.setTitle("Spotifai");
         topContainer.getContentPane().setLayout(cardManager);
-        topContainer.setVisible(true);
         topContainer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        topContainer.setLocationRelativeTo(null);
         topContainer.setPreferredSize(new Dimension(1600,900));
         topContainer.setResizable(false);
+        topContainer.pack();
+        topContainer.setVisible(true);
+        topContainer.setLocationRelativeTo(null);
+
     }
 
     private void configureView() {
