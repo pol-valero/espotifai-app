@@ -15,14 +15,9 @@ public class ForgotPasswordView {
     public ForgotPasswordView(JFrame topContainer, CardLayout cardManager){
         this.topContainer = topContainer;
         this.cardManager = cardManager;
-        configureWindows();
         configureView();
     }
 
-    private void configureWindows(){
-        topContainer.setSize(1512,928);
-        topContainer.setLocationRelativeTo(null);
-    }
     private void configureView() {
         //Fonts and colours
         Color negre = new Color(48,48,48);

@@ -22,16 +22,10 @@ public class VerificationCodeView {
     public VerificationCodeView(JFrame topContainer, CardLayout cardManager){
         this.topContainer = topContainer;
         this.cardManager = cardManager;
-        configureWindows();
         configureView();
 
     }
 
-    private void configureWindows(){
-        topContainer.setSize(1512,928);
-        topContainer.setLocationRelativeTo(null);
-        error_Label.setVisible(false);
-    }
     private void configureView() {
         Color negre = new Color(48, 48, 48);
         Color vermell = new Color (232,74,77);
@@ -88,6 +82,7 @@ public class VerificationCodeView {
         error_Label.setForeground(vermell);
         error_Label.setFont(mini_Text);
         error_Label.setBounds(200,430,371,156);
+        error_Label.setVisible(false);
         panel.add(error_Label);
 
 
