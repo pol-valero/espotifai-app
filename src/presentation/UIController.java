@@ -3,10 +3,9 @@ package presentation;
 import business.BusinessFacade;
 import business.BusinessFacadelmpl;
 import business.entities.User;
-import presentation.controllers.HomescreenViewController;
-import presentation.controllers.LoginViewController;
-import presentation.controllers.LogoutViewController;
-import presentation.controllers.SignupViewController;
+import presentation.controllers.*;
+import presentation.views.LoginView;
+import presentation.views.LogoutView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +20,8 @@ public class UIController {
     private LogoutViewController logoutViewController;
     private SignupViewController signupViewController;
     private HomescreenViewController homescreenViewController;
-    private BusinessFacade businessFacade = new BusinessFacadelmpl();
+    private BusinessFacade businessFacadel;
+    private VerificationCodeViewController verificationCodeViewController;
 
     public void run () {
         JFrame topContainer = new JFrame();
@@ -31,7 +31,11 @@ public class UIController {
         signupViewController = new SignupViewController(this, topContainer, cardManager);
         logoutViewController = new LogoutViewController(this, topContainer, cardManager);
         homescreenViewController = new HomescreenViewController(this,topContainer,cardManager);
+        verificationCodeViewController = new VerificationCodeViewController(this,topContainer,cardManager);
         //fer el mateix amb tots els altres controllers
+
+        showVerificationCodeViewCard();
+
     }
 
     public LinkedList<String> loadPublicPlaylists() {
@@ -63,6 +67,10 @@ public class UIController {
     public void showSignUpCard() {
         signupViewController.showSignupCard();
     }
+    public void showVerificationCodeViewCard() {
+
+        verificationCodeViewController.showVerificationCodeViewCard();
+    }
 
     public void showLogoutCard () {
         logoutViewController.showLogoutCard();
@@ -75,27 +83,27 @@ public class UIController {
 
     public boolean findEmailMatch(String email){ //todo
 
-        return true;
+        return false;
     }
 
     public boolean checkPasswordFormat(String password){ //todo
 
-        return businessFacade.checkPassword(password);
+        return businessFacadel.checkPassword(password);
     }
 
     public boolean checkEmailFormat (String email){
 
-        return businessFacade.checkEmail(email);
+        return businessFacadel.checkEmail(email);
     }
 
     public boolean checkEqualPassword (String password, String rewritedPassword){
 
-        return businessFacade.sameString(password, rewritedPassword);
+        return businessFacadel.sameString(password, rewritedPassword);
     }
 
     public boolean loginRequest(String login, String password) { //todo
 
-        return businessFacade.loginRequest(login, password);
+        return businessFacadel.loginRequest(login, password);
     }
 
     public void signUpRequest (User user) {
