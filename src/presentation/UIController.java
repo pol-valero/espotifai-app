@@ -103,7 +103,7 @@ public class UIController {
 
     public boolean loginRequest(String login, String password) { //todo
 
-        return false;
+        return businessFacadel.loginRequest(login, password);
     }
 
     public void signUpRequest (User user) {
