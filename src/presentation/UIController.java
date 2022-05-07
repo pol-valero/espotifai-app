@@ -32,6 +32,8 @@ public class UIController {
         verificationCodeViewController = new VerificationCodeViewController(this,topContainer,cardManager);
         //fer el mateix amb tots els altres controllers
 
+        showHomescreenCard();
+
     }
 
     public LinkedList<String> loadPublicPlaylists() {

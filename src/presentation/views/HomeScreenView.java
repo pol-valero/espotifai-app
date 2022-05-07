@@ -3,6 +3,7 @@ package presentation.views;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -114,7 +115,7 @@ public class HomeScreenView {
         BoxLayout northernLayout = new BoxLayout(northernPanel,BoxLayout.X_AXIS);
         northernPanel.setLayout(northernLayout);
         northernPanel.setBackground(negre);
-        northernPanel.setBorder(new EmptyBorder(new Insets(100, 300, 0, 50)));
+        northernPanel.setBorder(new EmptyBorder(new Insets(100, 250, 0, 50)));
 
         JLabel homeLabel = new JLabel("Home");
         homeLabel.setFont(titols);
@@ -130,67 +131,100 @@ public class HomeScreenView {
         Color vermell = new Color (232,74,77);
         Font titols = new Font("Trebuchet MS", Font.PLAIN, 36);
         Font text = new Font("Gulim", Font.PLAIN, 24);
-        
+
         JPanel westernPanel = new JPanel();
         BoxLayout westernLayout = new BoxLayout(westernPanel,BoxLayout.Y_AXIS);
         westernPanel.setLayout(westernLayout);
+        westernPanel.setBackground(Color.white);
+        westernPanel.setBorder(new EmptyBorder(new Insets(50, 30, 40, 30)));
+        westernPanel.setMinimumSize(new Dimension(200,900));
         westernPanel.setBackground(negre);
-        westernPanel.setBorder(new EmptyBorder(new Insets(50, 20, 40, 50)));
 
         //Search Panel
         JPanel searchPanel = new JPanel();
         BoxLayout searchLayout = new BoxLayout(searchPanel,BoxLayout.X_AXIS);
         searchPanel.setLayout(searchLayout);
         searchPanel.setBackground(negre);
+        searchPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JTextField searchBar = new JTextField();
-        searchBar.setMaximumSize(new Dimension(220,30));
+        searchBar.setMaximumSize(new Dimension(300,30));
 
-        JButton searchBtn = new JButton("Search");
-        searchBtn.setFont(text);
-        searchBtn.setForeground(Color.white);
+        ImageIcon magLens = new ImageIcon("images/LUPA AI.png");
+        Image magLensIcon = magLens.getImage();
+        Image magLensIconScaled = getScaledImage(magLensIcon, 20, 20);
+        ImageIcon magnifyingLens = new ImageIcon(magLensIconScaled);
+
+        JButton searchBtn = new JButton();
+        searchBtn.setIcon(magnifyingLens);
         searchBtn.setBackground(vermell);
         searchBtn.setFocusable(false);
         searchBtn.setOpaque(true);
         searchBtn.setBorderPainted(false);
+        searchBtn.setMaximumSize(new Dimension(30,30));
 
         searchPanel.add(searchBar);
-        searchPanel.add(Box.createRigidArea(new Dimension(30,0))); //Create space between both buttons
+        searchPanel.add(Box.createRigidArea(new Dimension(20,0))); //Create space between both buttons
         searchPanel.add(searchBtn);
 
-        //Buttons Panel
         JPanel buttonsPanel = new JPanel();
-        BoxLayout buttonLayout = new BoxLayout(buttonsPanel,BoxLayout.Y_AXIS);
-        buttonsPanel.setLayout(buttonLayout);
+        buttonsPanel.setLayout(new GridBagLayout());
         buttonsPanel.setBackground(negre);
 
-        JButton stadisticBtn = new JButton("Stadistics");
-        stadisticBtn.setFont(text);
-        stadisticBtn.setForeground(Color.white);
-        stadisticBtn.setBackground(vermell);
-        stadisticBtn.setFocusable(false);
-        stadisticBtn.setOpaque(true);
-        stadisticBtn.setBorderPainted(false);
+        GridBagConstraints constraints = new GridBagConstraints();
 
-        JButton accManagBtn = new JButton("Account Manager");
-        accManagBtn.setFont(text);
-        accManagBtn.setForeground(Color.white);
-        accManagBtn.setBackground(vermell);
-        accManagBtn.setFocusable(false);
-        accManagBtn.setOpaque(true);
-        accManagBtn.setBorderPainted(false);
+        JButton stadisticsBtn = createButton("Stadistics");
+        JButton accManBtn = createButton("Account Manager");
 
-        buttonsPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        buttonsPanel.add(stadisticBtn);
-        buttonsPanel.add(Box.createRigidArea(new Dimension(0,450))); //Create space between both buttons
-        buttonsPanel.add(accManagBtn);
+        constraints.gridx=0;
+        constraints.gridy=0;
+        buttonsPanel.add(stadisticsBtn,constraints);
+
+        constraints.gridx=0;
+        constraints.gridy=1;
+        buttonsPanel.add(Box.createRigidArea(new Dimension(0,400)),constraints);
+
+        constraints.gridx=0;
+        constraints.gridy=2;
+        buttonsPanel.add(accManBtn,constraints);
+
 
         westernPanel.add(searchPanel);
         westernPanel.add(Box.createRigidArea(new Dimension(0,40)));
         westernPanel.add(buttonsPanel);
 
+
         return westernPanel;
 
+    }
+
+    private JButton createButton(String name) {
+        Color vermell = new Color (232,74,77);
+        Dimension button_shape = new Dimension(200,40);
+        Font text = new Font("Gulim", Font.PLAIN, 19);
+
+        JButton btn = new JButton(name);
+
+        btn.setPreferredSize(button_shape);
+        btn.setBackground(vermell);
+        btn.setForeground(Color.white);
+        btn.setFocusable(false);
+        btn.setOpaque(true);
+        btn.setBorderPainted(false);
+        btn.setFont(text);
+
+        return btn;
+    }
+
+    private Image getScaledImage(Image img, int wt, int ht) {
+        BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = resizedImg.createGraphics();
+
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.drawImage(img, 0, 0, wt, ht, null);
+        g2.dispose();
+
+        return resizedImg;
     }
 
     private Component createScrollPane(LinkedList<String> playListNames){
