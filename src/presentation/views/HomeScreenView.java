@@ -10,6 +10,8 @@ import java.util.Random;
 public class HomeScreenView {
     private final JFrame topContainer;
     private final CardLayout cardManager;
+    private final Color negre = new Color(48,48,48);
+    private final Color vermell = new Color (232,74,77);
 
     JPanel panel;
     JPanel centralPanel;
@@ -40,8 +42,6 @@ public class HomeScreenView {
 
     private JPanel centralPanelConfiguration(LinkedList<String> usersPlaylists, LinkedList<String> publicPlaylists) {
 
-        Color negre = new Color(48, 48, 48);
-        Color vermell = new Color (232,74,77);
         Font titols = new Font("Trebuchet MS", Font.PLAIN, 36);
         Font text = new Font("Gulim", Font.PLAIN, 24);
 
@@ -49,7 +49,7 @@ public class HomeScreenView {
         BoxLayout centralLayout = new BoxLayout(centralPanel,BoxLayout.Y_AXIS);
         centralPanel.setLayout(centralLayout);
         centralPanel.setBackground(negre);
-        centralPanel.setBorder(new EmptyBorder(new Insets(50,50,40,80)));
+        centralPanel.setBorder(new EmptyBorder(new Insets(25,50,40,80)));
 
 
         //Panel "Your Playlist" + New Playlist Button
@@ -57,6 +57,7 @@ public class HomeScreenView {
         BoxLayout urPlaylistLayout = new BoxLayout(urPlaylistP,BoxLayout.X_AXIS);
         urPlaylistP.setLayout(urPlaylistLayout);
         urPlaylistP.setBackground(negre);
+
 
         JLabel urPlaylistLab = new JLabel("Your Playlist");
         urPlaylistLab.setFont(titols);
@@ -71,7 +72,7 @@ public class HomeScreenView {
         newPlaylistBtn.setBorderPainted(false);
 
         urPlaylistP.add(urPlaylistLab);
-        urPlaylistP.add(Box.createRigidArea(new Dimension(500,0)));
+        urPlaylistP.add(Box.createRigidArea(new Dimension(680,0)));
         urPlaylistP.add(newPlaylistBtn);
 
         //Panel ScrollPane Your Playlists
@@ -97,7 +98,6 @@ public class HomeScreenView {
         exploreScrollP.setBackground(negre);
         exploreScrollP.add(createScrollPane(publicPlaylists)); //todo
 
-
         centralPanel.add(urPlaylistP);
         centralPanel.add(urPlaylistScrollP);
         centralPanel.add(exploreP);
@@ -108,14 +108,13 @@ public class HomeScreenView {
 
     private JPanel northernPanelConfiguration() {
         //Fonts, colours and sizes
-        Color negre = new Color(48,48,48);
         Font titols = new Font("Trebuchet MS", Font.PLAIN, 65);
 
         JPanel northernPanel = new JPanel();
         BoxLayout northernLayout = new BoxLayout(northernPanel,BoxLayout.X_AXIS);
         northernPanel.setLayout(northernLayout);
         northernPanel.setBackground(negre);
-        northernPanel.setBorder(new EmptyBorder(new Insets(100, 250, 0, 50)));
+        northernPanel.setBorder(new EmptyBorder(new Insets(50, 250, 0, 50)));
 
         JLabel homeLabel = new JLabel("Home");
         homeLabel.setFont(titols);
@@ -127,8 +126,6 @@ public class HomeScreenView {
 
     private JPanel westernPanelConfiguration() {
         //Fonts, colours and sizes
-        Color negre = new Color(48, 48, 48);
-        Color vermell = new Color (232,74,77);
         Font titols = new Font("Trebuchet MS", Font.PLAIN, 36);
         Font text = new Font("Gulim", Font.PLAIN, 24);
 
@@ -199,7 +196,7 @@ public class HomeScreenView {
     }
 
     private JButton createButton(String name) {
-        Color vermell = new Color (232,74,77);
+
         Dimension button_shape = new Dimension(200,40);
         Font text = new Font("Gulim", Font.PLAIN, 19);
 
@@ -231,8 +228,12 @@ public class HomeScreenView {
 
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(800,400));
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT,20,5));
+        panel.setBackground(negre);
 
         for(int i=0; i < playListNames.size(); i++){
+
+            String playListName = playListNames.get(i);
 
             //Panel which contains button and label
             JPanel miniPanel = new JPanel();
@@ -240,34 +241,42 @@ public class HomeScreenView {
             miniPanel.setLayout(miniPanelLayout);
 
             //Label with the playlist name
-            JLabel playlistTitle = new JLabel(playListNames.get(i));
+            JLabel playlistTitle = new JLabel(playListName);
             playlistTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+
+            ImageIcon defaultCover = new ImageIcon("images/albumCoverDefault.png");
+            Image defaultCoverIcon = defaultCover.getImage();
+            Image defaultCoverIconScaled = getScaledImage(defaultCoverIcon, 100, 100);
+            ImageIcon albumCoverDefault = new ImageIcon(defaultCoverIconScaled);
+
             //Button config
-            JButton jbPlaylist = new JButton(playListNames.get(i));
-            jbPlaylist.setPreferredSize(new Dimension(150,60));
+            JButton jbPlaylist = new JButton();
+            jbPlaylist.setPreferredSize(new Dimension(100,100));
             jbPlaylist.setAlignmentX(Component.CENTER_ALIGNMENT);
+            jbPlaylist.setIcon(albumCoverDefault);
 
             //Adding components to panel
             miniPanel.add(jbPlaylist);
             miniPanel.add(Box.createRigidArea(new Dimension(0,5)));
             miniPanel.add(playlistTitle);
-            miniPanel.setBackground(Color.red);
+            miniPanel.setBackground(Color.white);
 
             panel.add(miniPanel);
             //buttons.get(i).setActionCommand(); todo
         }
 
         JScrollPane scrollPane = new JScrollPane(panel,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setPreferredSize(new Dimension(800,300));
-        scrollPane.setBackground(new Color(48,48,48));
+        //scrollPane.setPreferredSize(new Dimension(1060,280));
+        scrollPane.setBackground(negre);
 
         return scrollPane;
+
     }
 
 
     public void showCard(LinkedList<String> usersPlaylists, LinkedList<String> publicPlaylists) {
-        //Afegir playlist a la vista ?¿
+
         panel.remove(centralPanel);
         centralPanel = centralPanelConfiguration(usersPlaylists, publicPlaylists);
         panel.add(centralPanel,BorderLayout.CENTER);
