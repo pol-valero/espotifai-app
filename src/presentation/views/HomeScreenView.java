@@ -38,6 +38,7 @@ public class HomeScreenView {
         panel.remove(centralPanel);
 
         topContainer.getContentPane().add(panel, "homescreenCard");
+
     }
 
     private JPanel centralPanelConfiguration(LinkedList<String> usersPlaylists, LinkedList<String> publicPlaylists) {

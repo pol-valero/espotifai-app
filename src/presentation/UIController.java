@@ -20,6 +20,7 @@ public class UIController {
     private HomescreenViewController homescreenViewController;
     private BusinessFacade businessFacade = new BusinessFacadelmpl();
     private VerificationCodeViewController verificationCodeViewController;
+    private MusicListController musicListController;
 
     public void run () {
         JFrame topContainer = new JFrame();
@@ -30,6 +31,7 @@ public class UIController {
         logoutViewController = new LogoutViewController(this, topContainer, cardManager);
         homescreenViewController = new HomescreenViewController(this,topContainer,cardManager);
         verificationCodeViewController = new VerificationCodeViewController(this,topContainer,cardManager);
+
         //fer el mateix amb tots els altres controllers
 
         showHomescreenCard();
