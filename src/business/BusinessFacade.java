@@ -7,12 +7,6 @@ import business.entities.User;
  */
 public interface BusinessFacade {
 
-    /***
-     * Metodo para saber si una String esta vacia
-     * @param generalString String a comprobar
-     * @return boolean, false si esta vacia, true si contiene caracteres
-     */
-    boolean checkNonEmptyString(String generalString);
 
     /**
      * Metodo para comprobar que los campos del correo electronico son correctos
@@ -41,35 +35,35 @@ public interface BusinessFacade {
      * @param password contraseña del usuario
      * @return boolean true si se a podido iniciar sesion, false si no a sido posible iniciar sesion
      */
-    public boolean loginRequest(String login, String password);
+     boolean loginRequest(String login, String password);
 
     /**
      * Metodo para buscar el nombre de un usuario en la base de datos
      * @param name String con el nombre del usuario a buscar
      * @return boolean true si el usuario se a encontrado, false si no a sido encontrado
      */
-    public boolean findUsernameMach(String name);
+     boolean findUsernameMach(String name);
 
     /**
      * Metodo para buscar el email de un usuario en la base de datos
      * @param email String con el email del usuario a buscar
      * @return boolean true si el email del usuario se a encontrado, false si no a sido encontrado
      */
-    public boolean findEmailMach(String email);
+     boolean findEmailMach(String email);
 
     /**
      * Metodo para registrar a un usuario
      * @param user Obsejeto de la clase User con la informacion del usuario
      */
-    public void singUpRequest(User user);
+     void singUpRequest(User user);
 
     /**
      * Metodo para cerrar sesion
      */
-    public void logoutRequest();
+     void logoutRequest();
 
     /**
-     * Metofo para eliminar la cuenta del usuario actual
+     * Metodo para eliminar la cuenta del usuario actual
      */
-    public void deleteAccountRequest();
+     void deleteAccountRequest();
 }

@@ -15,18 +15,17 @@ public class LoginDatabaseDAO implements LoginDAO {
     @Override
     public List<User> getAllUsers() {
         List<User> users = new LinkedList<>();
-        String query = "SELECT id, nombre, correo, password;";
+        String query = "SELECT id, nombre, correo, password FROM usuario;";
         ResultSet information = SQLConnector.getInstance().selectQuery(query);
 
         try {
             while (information.next()) {
-                long id =  information.getLong("id");
+                int id =  information.getInt("id");
                 String name = information.getString("nombre");
                 String email = information.getString("correo");
                 String password = information.getString("password");
 
-                User user = new User(name, email, password);
-                user.setId(id);
+                User user = new User(id, name, email, password);
                 users.add(user);
 
             }
@@ -39,11 +38,11 @@ public class LoginDatabaseDAO implements LoginDAO {
 
     @Override
     public void singUpRequest(User user) {
-        String query = "INSERT INTO usuario (Id_user, Name, Password, email) VALUES ('" +
-                user.getId() + "," +
-                user.getName() + "," +
-                user.getPassword() + "," +
-                user.getEmail() + "');";
+        String query = "INSERT INTO usuario (id, nombre, correo, password) VALUES ('"
+                + user.getId() + "', '" +
+                user.getName() + "', '" +
+                user.getEmail() + "', '" +
+                user.getPassword() + "');";
 
         SQLConnector.getInstance().insertQuery(query);
     }
@@ -58,7 +57,6 @@ public class LoginDatabaseDAO implements LoginDAO {
     public User getUser(String name, String pwd) {
 
         ResultSet rs = null;
-        PreparedStatement ps = null;
         String query = "Select * from usuario where nombre = ? and password = ?";
         rs = SQLConnector.getInstance().selectQuery(query);
 

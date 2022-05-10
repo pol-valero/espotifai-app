@@ -14,42 +14,11 @@ import java.security.NoSuchAlgorithmException;
  */
 public class BusinessFacadelmpl implements BusinessFacade{
 
-    private LoginManager loginManager;
-
-    private final static boolean OK = true;
-    private final static boolean ERROR = false;
-
+    private LoginManager loginManager = new LoginManager();
 
     @Override
-    public boolean checkNonEmptyString(String generalString) {
-        return !generalString.equals("");
-    }
-
-    @Override
-    public boolean checkEmail(String email){ //todo falta comprobar que solo hayan numeros, letras y puntos
-                                            // (contando que ya se comprueba que solo haya un@), poner metodo
-                                            //que lo compruebe ya que sera para cada parte del String
-        try {
-            if (email.length() <= 254 && checkNonEmptyString(email) && email.charAt(email.length() - 1) == '.') {
-                String[]  userUrl = email.split("@");
-
-                if (checkNonEmptyString(userUrl[0]) && userUrl.length == 2) {
-                    String[] url = userUrl[1].split("\\.");
-
-                    if (url.length > 1) {
-                        for (int i = 1; i < url.length; i++) {
-                            if(url[i].length() < 2){
-                                return ERROR;
-                            }
-                        }
-                        return OK;
-                    }
-                }
-            }
-            return ERROR;
-        } catch (ArrayIndexOutOfBoundsException e){
-            return ERROR;
-        }
+    public boolean checkEmail(String email){
+         return loginManager.checkEmail(email);
     }
 
     @Override
@@ -59,64 +28,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     @Override
     public boolean checkPassword(String password) {
-
-        if (password.length() >= 8) {
-            char[] letter = password.toCharArray();
-
-            if (checkCapitalLetter(letter) && checkLowercaseLetter(letter) && containsNumber(letter)) {
-                return OK;
-            }
-        }
-        return ERROR;
-    }
-
-    /**
-     * Metodo que comprueba que haya al menos una mayuscula en la contraseña
-     * @param password array de char, donde en cada posicion del array esta un caracter de la contraseña
-     * @return boolean OK (true) si hay una mayuscula, ERROR (false) si no hya ninguna mayuscula
-     */
-    private boolean checkCapitalLetter(char[] password){
-
-        for (int i = 0; i < password.length ; i++) {
-            char aux = Character.toUpperCase(password[i]);
-
-            if (Character.compare(aux, password[i]) == 0 && !Character.isDigit(password[i])) {
-                return OK;
-            }
-        }
-        return ERROR;
-    }
-
-    /**
-     * Metodo que comprueba que haya al menos una minuscula en la contraseña
-     * @param password array de char, donde en cada posicion del array esta un caracter de la contraseña
-     * @return boolean OK (true) si hay una minuscula, ERROR (false) si no hya ninguna minuscula
-     */
-    private boolean checkLowercaseLetter(char[] password){
-
-        for (int i = 0; i < password.length ; i++) {
-            char aux = Character.toLowerCase(password[i]);
-
-            if (Character.compare(aux, password[i]) == 0 && !Character.isDigit(password[i])) {
-                return OK;
-            }
-        }
-        return ERROR;
-    }
-
-    /**
-     * Metodo que comprueba que al menos haya un numero en la contraseña
-     * @param password array de char con los characteres de la contraseña
-     * @return boolean OK (true) si contiene al menos un numero, ERROR (false) si no contiene al menos uno
-     */
-    private boolean containsNumber(char[] password){
-
-        for (int i = 0; i < password.length ; i++) {
-            if (Character.isDigit(password[i])) {
-                return OK;
-            }
-        }
-        return ERROR;
+        return loginManager.checkPassword(password);
     }
 
     public boolean loginRequest(String login, String password){
@@ -147,21 +59,4 @@ public class BusinessFacadelmpl implements BusinessFacade{
         return loginManager.getCurrentUSer();
     }
 
-    public String pwdHash(String pwd) {
-        MessageDigest digest = null;
-        try {
-            digest = MessageDigest.getInstance("SHA-256");
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        digest.reset();
-        try {
-            digest.update(pwd.getBytes("utf8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        pwd = String.format("%064x", new BigInteger(1, digest.digest()));
-
-        return pwd;
-    }
 }

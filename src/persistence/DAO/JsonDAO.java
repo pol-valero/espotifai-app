@@ -16,29 +16,35 @@ public class JsonDAO implements ConfigDAO {
     private String url ;
 
     public String getUsuariobbdd() {
+
+
         return usuariobbdd;
     }
 
     public String getPassword() {
+
         return password;
     }
 
     public String getUrl() {
+
         return url;
     }
 
+    public JsonDAO(){
+        readJson();
+    }
     public void readJson() {
+
         JSONParser parser = new JSONParser();
 
         try {
             Object obj = parser.parse(new FileReader("configJson/config.json"));
             JSONObject configjson = (JSONObject) obj;
-            //System.out.println(configjson);
 
             this.usuariobbdd = (String) configjson.get("userbbdd");
             this.password = (String) configjson.get("password");
             this.url = "jdbc:mysql://" + configjson.get("IP") + ":" + configjson.get("Port") + "/" + configjson.get("NomBase");
-            System.out.println(this.url);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -46,6 +52,5 @@ public class JsonDAO implements ConfigDAO {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-
     }
 }

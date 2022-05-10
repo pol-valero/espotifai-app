@@ -1,11 +1,16 @@
 package business.entities;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 /**
  * Clase encargada de gestionar la informacion de los objetos usuarios
  */
 public class User {
 
-    private long id;
+    private int id;
     private String name;
     private String email;
     private String password;
@@ -13,14 +18,11 @@ public class User {
     public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
-        this.password = password;
+        this.password = pwdHash(password);
     }
 
-    public User() {
 
-    }
-
-    public User(int id, String username, String correo, String pwd1) {
+    public User(int id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -31,7 +33,7 @@ public class User {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -47,5 +49,23 @@ public class User {
         return password;
     }
     //nuevo borrarnbsfekeji
+
+    private String pwdHash(String password) {
+        MessageDigest digest = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        digest.reset();
+        try {
+            digest.update(password.getBytes("utf8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        password = String.format("%064x", new BigInteger(1, digest.digest()));
+
+        return password;
+    }
 }
 

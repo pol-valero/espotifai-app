@@ -33,8 +33,9 @@ public class UIController {
         verificationCodeViewController = new VerificationCodeViewController(this,topContainer,cardManager);
         musicListController = new MusicListController(this, topContainer, cardManager);
         //fer el mateix amb tots els altres controllers
-
-        showMusicListCard();
+        showLoginCard();
+        //showSignUpCard();
+        //showHomescreenCard();
 
     }
 
@@ -126,17 +127,17 @@ public class UIController {
 
     public boolean findUserNameMatch(String username){//todo
 
-        return false;
+        return businessFacade.findUsernameMach(username);
     }
 
     public boolean findEmailMatch(String email){ //todo
 
-        return false;
+        return businessFacade.findEmailMach(email);
     }
 
     public boolean checkPasswordFormat(String password){ //todo
 
-        return businessFacade.checkPassword(password);
+        return !businessFacade.checkPassword(password);
     }
 
     public boolean checkEmailFormat (String email){
@@ -146,7 +147,7 @@ public class UIController {
 
     public boolean checkEqualPassword (String password, String rewritedPassword){
 
-        return businessFacade.sameString(password, rewritedPassword);
+        return !businessFacade.sameString(password, rewritedPassword);
     }
 
     public boolean loginRequest(String login, String password) { //todo
@@ -155,7 +156,7 @@ public class UIController {
     }
 
     public void signUpRequest (User user) {
-
+        businessFacade.singUpRequest(user);
     }
 
 
