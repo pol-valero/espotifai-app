@@ -1,5 +1,7 @@
 package persistence;
 
+import persistence.DAO.JsonDAO;
+
 import java.sql.*;
 
 public class SQLConnector {
@@ -10,7 +12,7 @@ public class SQLConnector {
     private final String password;
     private final String url;
     private Connection connection;
-    private ConfigDAO configDAO;
+    private ConfigDAO configDAO =  new JsonDAO();
 
     public static SQLConnector getInstance(){ //si la base no esta instanciada la instanciamos
         if (instance == null ){
@@ -47,7 +49,7 @@ public class SQLConnector {
             Statement s = connection.createStatement();
             s.executeUpdate(query);
         } catch (SQLException exception) {
-            System.err.println("ERROR in = " + query);
+            System.err.println("ERROR in = " + query + " (" + exception.getMessage() + ")");
         }
     }
 
