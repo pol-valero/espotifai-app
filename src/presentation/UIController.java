@@ -31,11 +31,15 @@ public class UIController {
         logoutViewController = new LogoutViewController(this, topContainer, cardManager);
         homescreenViewController = new HomescreenViewController(this,topContainer,cardManager);
         verificationCodeViewController = new VerificationCodeViewController(this,topContainer,cardManager);
-
+        musicListController = new MusicListController(this, topContainer, cardManager);
         //fer el mateix amb tots els altres controllers
 
-        showHomescreenCard();
+        showMusicListCard();
 
+    }
+
+    private void showMusicListCard() {
+        musicListController.showMusicListCard();
     }
 
     public LinkedList<String> loadPublicPlaylists() {

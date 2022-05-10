@@ -10,6 +10,7 @@ import java.util.Random;
 public class HomeScreenView {
     private final JFrame topContainer;
     private final CardLayout cardManager;
+
     private final Color negre = new Color(48,48,48);
     private final Color vermell = new Color (232,74,77);
 
@@ -64,13 +65,7 @@ public class HomeScreenView {
         urPlaylistLab.setFont(titols);
         urPlaylistLab.setForeground(Color.white);
 
-        JButton newPlaylistBtn = new JButton("New Playlist");
-        newPlaylistBtn.setFont(text);
-        newPlaylistBtn.setForeground(Color.white);
-        newPlaylistBtn.setBackground(vermell);
-        newPlaylistBtn.setFocusable(false);
-        newPlaylistBtn.setOpaque(true);
-        newPlaylistBtn.setBorderPainted(false);
+        JButton newPlaylistBtn = createButton("New Playlist");
 
         urPlaylistP.add(urPlaylistLab);
         urPlaylistP.add(Box.createRigidArea(new Dimension(680,0)));
@@ -268,7 +263,7 @@ public class HomeScreenView {
         }
 
         JScrollPane scrollPane = new JScrollPane(panel,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        //scrollPane.setPreferredSize(new Dimension(1060,280));
+        scrollPane.setPreferredSize(new Dimension(1060,280));
         scrollPane.setBackground(negre);
 
         return scrollPane;

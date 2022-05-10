@@ -4,6 +4,7 @@ import business.entities.Song;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
@@ -11,6 +12,7 @@ import java.util.LinkedList;
 public class MusicListView {
     private final JFrame topContainer;
     private final CardLayout cardManager;
+
     private final Color negre = new Color(48,48,48);
     private final Color vermell = new Color (232,74,77);
 
@@ -23,11 +25,12 @@ public class MusicListView {
 
     private void configureView() {
         //Creation of main panels
+        LinkedList<Song> songLinkedList = generateSong();
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
         JPanel westernPanel = westernPanelConfiguration();
-        JPanel centralPanel = centralPanelConfiguration(new LinkedList<>());
-        JPanel northernPanel = northernPanelConfiguration();
+        JPanel centralPanel = centralPanelConfiguration(songLinkedList); //todo ha de rebre la linkedlist de songs
+        JPanel northernPanel = northernPanelConfiguration(); //todo ha de rebre el nom de la playlist
         JPanel easternPanel = easternPanelConfiguration();
 
         panel.add(northernPanel,BorderLayout.NORTH);
@@ -38,6 +41,15 @@ public class MusicListView {
 
         topContainer.getContentPane().add(panel, "musicListCard");//todo ??
 
+    }
+
+    private LinkedList<Song> generateSong() {
+        LinkedList<Song> linkedList = new LinkedList<>();
+        for(int i=0; i < 200; i++){
+            linkedList.add(new Song("songName",i,"album","albumName","singerName","You",i*2));
+        }
+
+        return linkedList;
     }
 
     private JPanel easternPanelConfiguration() {
@@ -91,7 +103,7 @@ public class MusicListView {
         northernPanel.setBackground(negre);
         northernPanel.setBorder(new EmptyBorder(new Insets(50, 250, 0, 50)));
 
-        JLabel homeLabel = new JLabel("Home");
+        JLabel homeLabel = new JLabel("Chill Out");
         homeLabel.setFont(titols);
         homeLabel.setForeground(Color.white);
 
@@ -100,8 +112,41 @@ public class MusicListView {
     }
 
     private JPanel centralPanelConfiguration(LinkedList<Song> songList) {
+        Font titols = new Font("Trebuchet MS", Font.PLAIN, 20);
+
+        //Central panel configuration
         JPanel centraPanel = new JPanel();
-        
+        centraPanel.setBackground(negre);
+
+        //Model creation and config
+        String[] columnNames = {"","Name", "Author", "Album", "Genre", "Owner"};
+        DefaultTableModel model = new DefaultTableModel(null, columnNames);
+
+        //Table creation and config
+        JTable table = new JTable(model);
+        table.setBackground(negre);
+        table.setFont(titols);
+        table.setForeground(Color.white);
+        table.setFont(titols);
+        table.setGridColor(negre);
+        table.setRowHeight(30);
+
+        //Scrollpane creation and config
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setViewportView(table);
+        scrollPane.setPreferredSize(new Dimension(1000, 670));
+        scrollPane.setBackground(negre);
+
+        for(int i=0; i < songList.size(); i++){
+            Object[] aux = {new JButton("Button"),songList.get(i).getName(),songList.get(i).getSinger(),
+                    songList.get(i).getAlbum(),songList.get(i).getGenre(),songList.get(i).getOwne()};
+
+            model.addRow(aux);
+        }
+
+
+        centraPanel.add(scrollPane);
+
         return centraPanel;
     }
 
@@ -201,5 +246,9 @@ public class MusicListView {
         btn.setFont(text);
 
         return btn;
+    }
+
+    public void showCard() {
+        cardManager.show(topContainer.getContentPane(),"musicListCard");
     }
 }
