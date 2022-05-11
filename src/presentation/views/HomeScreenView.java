@@ -5,7 +5,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
-import java.util.Random;
 
 public class HomeScreenView {
     private final JFrame topContainer;
@@ -223,8 +222,8 @@ public class HomeScreenView {
     private Component createScrollPane(LinkedList<String> playListNames){
 
         JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(800,400));
-        panel.setLayout(new FlowLayout(FlowLayout.LEFT,20,5));
+        panel.setPreferredSize(new Dimension(800,getIdealHeight(playListNames.size()))); // calcular la height
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT,40,5));
         panel.setBackground(negre);
 
         for(int i=0; i < playListNames.size(); i++){
@@ -238,17 +237,18 @@ public class HomeScreenView {
 
             //Label with the playlist name
             JLabel playlistTitle = new JLabel(playListName);
+            playlistTitle.setForeground(Color.white);
             playlistTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
             ImageIcon defaultCover = new ImageIcon("images/albumCoverDefault.png");
             Image defaultCoverIcon = defaultCover.getImage();
-            Image defaultCoverIconScaled = getScaledImage(defaultCoverIcon, 100, 100);
+            Image defaultCoverIconScaled = getScaledImage(defaultCoverIcon, 160, 160);
             ImageIcon albumCoverDefault = new ImageIcon(defaultCoverIconScaled);
 
             //Button config
             JButton jbPlaylist = new JButton();
-            jbPlaylist.setPreferredSize(new Dimension(100,100));
+            jbPlaylist.setPreferredSize(new Dimension(160,160));
             jbPlaylist.setAlignmentX(Component.CENTER_ALIGNMENT);
             jbPlaylist.setIcon(albumCoverDefault);
 
@@ -256,18 +256,24 @@ public class HomeScreenView {
             miniPanel.add(jbPlaylist);
             miniPanel.add(Box.createRigidArea(new Dimension(0,5)));
             miniPanel.add(playlistTitle);
-            miniPanel.setBackground(Color.white);
+            miniPanel.setBackground(negre);
 
             panel.add(miniPanel);
             //buttons.get(i).setActionCommand(); todo
         }
 
         JScrollPane scrollPane = new JScrollPane(panel,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        //scrollPane.setViewportView(panel);
         scrollPane.setPreferredSize(new Dimension(1060,280));
         scrollPane.setBackground(negre);
 
         return scrollPane;
 
+    }
+
+    private int getIdealHeight(int size) {
+        double factor = 40.47;
+        return (int) (size*factor);
     }
 
 
