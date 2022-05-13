@@ -110,6 +110,7 @@ public class LoginManager {
      */
     public void deleteAccountRequest(){
         loginDAO.deleteAccountRequest(currentUser.getName());
+        logoutRequest();
     }
 
     /**

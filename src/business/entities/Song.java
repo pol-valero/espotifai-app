@@ -6,16 +6,18 @@ package business.entities;
 public class Song {
 
     private String name;
-    private long idSong;
+    private int idSong;
     private String genre;
+    private int idGenre;
     private String album;
     private String singer;
     private String filePath;
     private String owne;
-    private long idOwne;
+    private int idOwne; //user
+    private String path;
 
-    public Song(String name, long idSong, String genre,
-                String album, String singer, String owne, long idUser) {
+    public Song(String name, int idSong, String genre,
+                String album, String singer, String owne, int idUser) {
 
     this.name = name;
     this.idSong = idSong;
@@ -30,7 +32,7 @@ public class Song {
         return name;
     }
 
-    public long getIdSong() {
+    public int getIdSong() {
         return idSong;
     }
 

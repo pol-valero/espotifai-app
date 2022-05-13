@@ -66,4 +66,6 @@ public interface BusinessFacade {
      * Metodo para eliminar la cuenta del usuario actual
      */
      void deleteAccountRequest();
+
+    User getCurrentUser();
 }
