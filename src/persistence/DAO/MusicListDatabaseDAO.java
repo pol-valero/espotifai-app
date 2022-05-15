@@ -88,11 +88,11 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
         try {
             while (resultSet.next()) {
-                long idSong = resultSet.getLong("id");
+                int idSong = resultSet.getInt("id");
                 String name = resultSet.getString("titulo");
-                long idGenre = resultSet.getLong("id_genero");
-                long idAlbum = resultSet.getLong("id_album");
-                long idUser = resultSet.getLong("id_usuario");
+                int idGenre = resultSet.getInt("id_genero");
+                int idAlbum = resultSet.getInt("id_album");
+                int idUser = resultSet.getInt("id_usuario");
 
                 String singer = singerName(idAlbum);
                 String album = albumName(idAlbum);

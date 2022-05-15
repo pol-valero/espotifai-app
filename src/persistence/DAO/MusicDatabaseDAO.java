@@ -33,9 +33,16 @@ public class MusicDatabaseDAO implements MusicDAO {
     }
 
     @Override
-    public void createSong(Song song) {
+    public void createSong(Song song) { //la columna cancion hace referencia al path
+      /*  String query = "INSERT INTO usuario (id, titulo, id_genero, id_album, id_usuario," +
+                "tiempo_segundos, cancion) VALUES ('"
+                + song.getIdSong() + "', '" +
+                song.getName() + "', '" +
+                song.getGenre() + "', '" +
+                user.getPassword() + "');";
 
-
+        SQLConnector.getInstance().insertQuery(query);
+       */
     }
 
     @Override
