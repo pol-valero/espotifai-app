@@ -33,7 +33,7 @@ public class UIController {
         verificationCodeViewController = new VerificationCodeViewController(this,topContainer,cardManager);
         musicListController = new MusicListController(this, topContainer, cardManager);
         //fer el mateix amb tots els altres controllers
-        showLoginCard();
+        //showMusicListCard();
         //showSignUpCard();
         //showHomescreenCard();
 

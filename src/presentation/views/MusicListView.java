@@ -1,6 +1,7 @@
 package presentation.views;
 
 import business.entities.Song;
+import presentation.controllers.MusicListController;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,9 +10,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
+
+
 public class MusicListView {
     private final JFrame topContainer;
     private final CardLayout cardManager;
+
+    private JTable table;
 
     private final Color negre = new Color(48,48,48);
     private final Color vermell = new Color (232,74,77);
@@ -123,7 +128,7 @@ public class MusicListView {
         DefaultTableModel model = new DefaultTableModel(null, columnNames);
 
         //Table creation and config
-        JTable table = new JTable(model);
+        table = new JTable(model);
         table.setBackground(negre);
         table.setFont(titols);
         table.setForeground(Color.white);
@@ -246,6 +251,14 @@ public class MusicListView {
         btn.setFont(text);
 
         return btn;
+    }
+
+    public void registerController(MusicListController musicListController) {
+        table.getSelectionModel().addListSelectionListener(musicListController);
+    }
+
+    public int getRow() {
+        return table.getSelectedRow();
     }
 
     public void showCard() {
