@@ -5,17 +5,22 @@ import presentation.views.HomeScreenView;
 import presentation.views.MusicListView;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MusicListController implements ActionListener {
+public class MusicListController implements ActionListener, ListSelectionListener {
     private final MusicListView musicListView;
     private final UIController controller;
 
     public MusicListController (UIController controller, JFrame topContainer, CardLayout cardManager){
         this.controller = controller;
         musicListView = new MusicListView(topContainer, cardManager);
+        musicListView.registerController(this);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -24,6 +29,13 @@ public class MusicListController implements ActionListener {
 
     public void showMusicListCard(){//todo ha de rebre paràmetres
         musicListView.showCard();
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        if(!e.getValueIsAdjusting()) {
+            System.out.println("Row: " + musicListView.getRow());
+        }
     }
 
 }

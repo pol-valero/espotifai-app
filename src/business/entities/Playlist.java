@@ -10,12 +10,13 @@ public class Playlist {
     private String name;
     private long id_user;
     private String owner;
-    private List<Song> songList;
+    //private List<Song> songList;
 
-    public Playlist(long id, String name, long id_user){
+    public Playlist(long id, String name, long id_user, String owner){
         this.id = id;
         this.name = name;
         this.id_user = id_user;
+        this.owner = owner;
     }
 
     public long getId() {
@@ -30,7 +31,7 @@ public class Playlist {
         return owner;
     }
 
-    public List<Song> getSongList() {
-        return songList;
-    }
+    //public List<Song> getSongList() {
+    //    return songList;
+    //}
 }

@@ -33,6 +33,12 @@ public class LoginManager {
      * @return boolean true si se a podido iniciar sesion, false si no a sido posible iniciar sesion
      */
     public boolean loginRequest(String login, String password){
+        String passwordSHA = pwdHash(password);
+
+        if (loginDAO.checkLogin(login, passwordSHA) > 0 ) return OK;
+        else return ERROR;
+
+        /*
         List<User> users = loginDAO.getAllUsers();
         String passwordSHA = pwdHash(password);
         if(itsEmail(login)){
@@ -59,7 +65,10 @@ public class LoginManager {
             }
         }
         return ERROR;
+        */
     }
+
+
 
     /**
      * Metodo para buscar el nombre de un usuario en la base de datos
@@ -98,11 +107,23 @@ public class LoginManager {
      * @param user Obsejeto de la clase User con la informacion del usuario
      */
     public void singUpRequest(User user){
-        List<User> users = loginDAO.getAllUsers();
+
+        // miro si existe primero el usuario
+        if (loginDAO.checkUser(user.getName())) {
+            // si existe o existe un error al verificar si existe el usuario obtendremos True
+            // NO podemos dar de alta. Falta cambiar la función a boolean
+        } else {
+            //si NO EXISTE EL USUARIO, lo damos de alta
+            loginDAO.singUpRequest(user);
+        }
+
+
+        /*List<User> users = loginDAO.getAllUsers();
         int id = users.size() + 1;
         user.setId(id);
         setCurrentUser(user);
         loginDAO.singUpRequest(user);
+         */
     }
 
     /**

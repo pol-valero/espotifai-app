@@ -4,6 +4,7 @@ import business.entities.User;
 import persistence.LoginDAO;
 import persistence.SQLConnector;
 
+import javax.xml.transform.OutputKeys;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,41 @@ import java.util.List;
 public class LoginDatabaseDAO implements LoginDAO {
 
     @Override
+    public int checkLogin(String login, String pwdhash) {
+        String query = "SELECT * FROM usuario where nombre = '" + login + "' and pwd = '" + pwdhash+"'";
+
+        try {
+            ResultSet information = SQLConnector.getInstance().selectQuery(query);
+
+            if (information.next()) {
+                int id = information.getInt("id");
+                return id;
+            } else {
+                return 0;
+            }
+        } catch (SQLException exception) {
+            System.err.println("Problem when " + exception.getErrorCode());
+            return 0;
+        }
+    }
+
+    public boolean checkUser(String username) {
+        String query = "SELECT * FROM usuario where nombre = '" + username + "'";
+
+        try {
+            ResultSet information = SQLConnector.getInstance().selectQuery(query);
+
+            if (information.next()) return true;
+            else return false;
+
+        } catch (SQLException exception) {
+            System.err.println("Problem when " + exception.getErrorCode());
+            //devolvemos como si true para que no inserte
+            return true;
+        }
+    }
+
+        @Override
     public List<User> getAllUsers() {
         List<User> users = new LinkedList<>();
         String query = "SELECT id, nombre, correo, pwd FROM usuario;";
@@ -38,6 +74,15 @@ public class LoginDatabaseDAO implements LoginDAO {
 
     @Override
     public void singUpRequest(User user) {
+        // creamos el usuario en la bbdd, el id es un clave unica con auto-incremento por eso no lo pasoamo
+        String query = "INSERT INTO usuario (nombre, correo, pwd) VALUES ('"
+                + user.getName() + "', '" +
+                user.getEmail() + "', '" +
+                user.getPassword() + "');";
+
+        SQLConnector.getInstance().insertQuery(query);
+
+        /*
         String query = "INSERT INTO usuario (id, nombre, correo, pwd) VALUES ('"
                 + user.getId() + "', '" +
                 user.getName() + "', '" +
@@ -45,6 +90,7 @@ public class LoginDatabaseDAO implements LoginDAO {
                 user.getPassword() + "');";
 
         SQLConnector.getInstance().insertQuery(query);
+         */
     }
 
     @Override

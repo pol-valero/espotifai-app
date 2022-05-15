@@ -33,10 +33,9 @@ public class UIController {
         verificationCodeViewController = new VerificationCodeViewController(this,topContainer,cardManager);
         musicListController = new MusicListController(this, topContainer, cardManager);
         //fer el mateix amb tots els altres controllers
-        //showLoginCard();
-        //showSignUpCard();
-        showHomescreenCard();
         //showMusicListCard();
+        //showSignUpCard();
+        //showHomescreenCard();
 
     }
 
@@ -72,27 +71,6 @@ public class UIController {
         prova1.add("test2");
         prova1.add("test1");
         prova1.add("test2");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
         prova1.add("test1");
         prova1.add("test2");
         prova1.add("test1");
@@ -101,16 +79,6 @@ public class UIController {
         prova1.add("final");
 
         LinkedList<String> prova2 = new LinkedList<>();
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
         prova2.add("test3");
         prova2.add("test3");
         prova2.add("test3");
