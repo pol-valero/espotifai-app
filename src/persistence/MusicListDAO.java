@@ -5,11 +5,15 @@ import business.entities.Song;
 
 import java.util.List;
 
-public interface MusicListDAO {
+public interface MusicListDAO  {
 
      List<Song> loadAllMusic();
 
      List<Playlist> loadAllPlaylist();
+
+     List<Song> loadMusicUser(int id_user);
+
+    List<Song> loadMusicPlaylist(Playlist playlist);
 
     /**
      * Metodo para crear una nueva playlist
@@ -21,16 +25,16 @@ public interface MusicListDAO {
      * Metodo para eliminar una cancion de una playlist ya existente
      * @param playlist Objeto Playlist con la informcion de la playlist
      */
-     void updatePlaylist(Playlist playlist);
+     //void updatePlaylist(Playlist playlist);
 
 
     /**
      * Metodo para eliminar una playlist de la base de datos
      * @param playlist Objeto Playlist con la informcion de la playlist
      */
-     void deletePlaylist(Playlist playlist);
+     boolean deletePlaylist(Playlist playlist);
 
      void canciones_Playlist (int playlist);
 
-     void playlistUser (int user_id);
+    List<Playlist> playlistUser (int user_id);
 }

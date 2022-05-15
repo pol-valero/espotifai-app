@@ -5,27 +5,37 @@ package business.entities;
  */
 public class Song {
 
-    private String name;
     private int idSong;
-    private String genre;
+    private String name;
     private int idGenre;
+    private String genre;
+    private int idAlbum;
     private String album;
+    private int idSinger;
     private String singer;
-    private String filePath;
-    private String owne;
     private int idOwne; //user
-    private String path;
+    private String owne;
+    private String filePath;
 
-    public Song(String name, int idSong, String genre,
-                String album, String singer, String owne, int idUser) {
 
-    this.name = name;
+
+    public Song(int idSong, String name, int idGenre, String genre, int idAlbum,
+                String album, int idSinger, String singer, int idOwne, String owne, String filePath) {
+
     this.idSong = idSong;
+    this.name = name;
+    this.idGenre = idGenre;
     this.genre = genre;
+    this.idAlbum = idAlbum;
     this.album = album;
+    this.idSinger = idSinger;
     this.singer = singer;
+    this.idOwne = idOwne;
     this.owne = owne;
-    this.idOwne = idUser;
+
+    }
+
+    public Song(String songName, int i, String album, String albumName, String singerName, String you, int idSinger) {
     }
 
     public String getName() {

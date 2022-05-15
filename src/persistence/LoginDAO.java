@@ -6,6 +6,10 @@ import java.util.List;
 
 public interface LoginDAO {
 
+    public int checkLogin(String login, String pwdhash);
+
+    public boolean checkUser(String username);
+
     /***
      * Metodo para obtener todos los usuarios almacenados en la base de datos
      * @return List de user con la informacion de los usuarios

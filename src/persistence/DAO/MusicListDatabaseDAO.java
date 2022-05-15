@@ -13,11 +13,33 @@ import java.util.List;
 
 public class MusicListDatabaseDAO implements MusicListDAO {
 
-
+    // NO sabemos donde se usa
+    // ******
     @Override
     public List<Playlist> loadAllPlaylist() {
         List<Playlist> playlist = new LinkedList<>();
-        String query = "SELECT id, name, id_usuario FROM listas_reproduccion;";
+        // recupero todas las listas por orden de alta (id)
+        String query = "select * from v_playlist";
+
+        try {
+            ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
+
+            while (resultSet.next()) {
+                long id = resultSet.getLong("id_playlist");
+                String name = resultSet.getString("playlist_name");
+                long id_user = resultSet.getLong("id_usuario");
+                String owner = resultSet.getString("owner");
+
+                playlist.add(new Playlist(id, name, id_user,owner));
+            }
+        } catch (SQLException exception){
+            exception.getErrorCode();
+        }
+        return playlist;
+
+    /*
+        List<Playlist> playlist = new LinkedList<>();
+        String query = "SELECT id, name, id_usuario FROM listas_reproduccion";
         ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
 
         try {
@@ -32,12 +54,39 @@ public class MusicListDatabaseDAO implements MusicListDAO {
             exception.getErrorCode();
         }
         return playlist;
+
+     */
+    }
+
+    @Override
+    public List<Playlist> playlistUser (int user_id) {
+        List<Playlist> playlist = new LinkedList<>();
+        String query = "Select * from v_playlista where id_usuario = '"+user_id+"' order by playlist_name asc";
+
+        try {
+            ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
+
+            while (resultSet.next()) {
+                long id = resultSet.getLong("id_playlist");
+                String name = resultSet.getString("playlist_name");
+                long id_user = resultSet.getLong("id_usuario");
+                String owner = resultSet.getString("owner");
+
+                playlist.add(new Playlist(id, name, id_user,owner));
+            }
+        } catch (SQLException exception){
+            exception.getErrorCode();
+        }
+        return playlist;
     }
 
     @Override
     public void createPlaylist(Playlist playlist, long id_user) {
-        String query = "INSERT INTO listas_reproduccion(id, nombre, id_usuario) VALUES ('" +
-                playlist.getId() + "," +
+        // no hay control de si ya existe el "playlist", permitir mismo nombre con distinto usuario ? o no
+
+        String query = "INSERT INTO listas_reproduccion(nombre, id_usuario) VALUES ('" +
+                //playlist.getId() + "," +
+                //el getId no es necesario porque lo crea la propia bbdd, en realidad vendría con 0
                 playlist.getName() + "," +
                 id_user + "');";
 
@@ -45,15 +94,132 @@ public class MusicListDatabaseDAO implements MusicListDAO {
     }
 
     @Override
-    public void deletePlaylist(Playlist playlist) {
+    public boolean deletePlaylist(Playlist playlist) {
+        String query1 = "DELETE FROM listas_reproduccion WHERE id = " + playlist.getId();
+        String query2 = "DELETE FROM lista_cancion WHERE id_lista = " + playlist.getId();
+
+        SQLConnector.getInstance().deleteQuery(query1);
+        SQLConnector.getInstance().deleteQuery(query2);
+
+        return true;
+
+        /*
         String query = "DELETE FROM listas_reproduccion WHERE nombre = '" + playlist.getName() + "';";
         SQLConnector.getInstance().deleteQuery(query);
 
         query = "DELETE FROM lista_cancion WHERE id_lista = '" + playlist.getId() + "';";
         SQLConnector.getInstance().deleteQuery(query);
+
+         */
     }
 
+
+    // HOME / PLAYLIST
+    // es la lista de todas las canciones que tiene en el playlist el usuario
+    // ****
+
     @Override
+    public List<Song> loadMusicUser(int id_user) {
+        List<Song> song = new LinkedList<>();
+        String query = "select distinct name, listas_reproduccion.id_usuario as idOwnerLista, v_songs.* from lista_cancion\n" +
+                "            inner join v_songs on lista_cancion.id_cancion = v_songs.idSong\n" +
+                "            inner join listas_reproduccion on lista_cancion.id_lista = listas_reproduccion.id\n" +
+                " where listas_reproduccion.id_usuario = "+ id_user +
+                " order by name asc";
+
+        try {
+            ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
+
+            while (resultSet.next()) {
+                int idSong = resultSet.getInt("idSong");
+                String name = resultSet.getString("name");
+                int idGenere = resultSet.getInt("id_genere");
+                String genere = resultSet.getString("genere");
+                int idAlbum = resultSet.getInt("id_album");
+                String album = resultSet.getString("album");
+                int idSinger = resultSet.getInt("idSinger");
+                String singer = resultSet.getString("singer");
+                int idOwner = resultSet.getInt("idOwner");
+                String owner = resultSet.getString("Owner");
+                String filePath = resultSet.getString("filepath");
+
+                song.add(new Song(idSong, name, idGenere, genere, idAlbum, album, idSinger, singer, idOwner, owner, filePath));
+            }
+        } catch (SQLException exception){
+            exception.getErrorCode();
+        }
+        return song;
+    }
+
+    // HOME / EXPLORER
+    // lista de caciones de una playlist
+    // ****
+    @Override
+    public List<Song> loadMusicPlaylist(Playlist playlist) {
+        List<Song> song = new LinkedList<>();
+        String query = "select name, listas_reproduccion.id_usuario as idOwnerLista, v_songs.* from lista_cancion\n" +
+                "            inner join v_songs on lista_cancion.id_cancion = v_songs.idSong\n" +
+                "            inner join listas_reproduccion on lista_cancion.id_lista = listas_reproduccion.id\n" +
+                " where lista_cancion.id_lista = "+ playlist.getId();
+
+        try {
+            ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
+
+            while (resultSet.next()) {
+                int idSong = resultSet.getInt("idSong");
+                String name = resultSet.getString("name");
+                int idGenere = resultSet.getInt("id_genere");
+                String genere = resultSet.getString("genere");
+                int idAlbum = resultSet.getInt("id_album");
+                String album = resultSet.getString("album");
+                int idSinger = resultSet.getInt("idSinger");
+                String singer = resultSet.getString("singer");
+                int idOwner = resultSet.getInt("idOwner");
+                String owner = resultSet.getString("Owner");
+                String filePath = resultSet.getString("filepath");
+
+                song.add(new Song(idSong, name, idGenere, genere, idAlbum, album, idSinger, singer, idOwner, owner, filePath));
+            }
+        } catch (SQLException exception){
+            exception.getErrorCode();
+        }
+        return song;
+    }
+
+    // todavía no existe la pantalla donde se usa
+    // ****
+    @Override
+    public List<Song> loadAllMusic() {
+        List<Song> song = new LinkedList<>();
+        String query = "SELECT distinct name from v_song";
+
+        try {
+            ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
+
+            while (resultSet.next()) {
+                int idSong = resultSet.getInt("idSong");
+                String name = resultSet.getString("name");
+                int idGenere = resultSet.getInt("id_genere");
+                String genere = resultSet.getString("genere");
+                int idAlbum = resultSet.getInt("id_album");
+                String album = resultSet.getString("album");
+                int idSinger = resultSet.getInt("idSinger");
+                String singer = resultSet.getString("singer");
+                int idOwner = resultSet.getInt("idOwner");
+                String owner = resultSet.getString("Owner");
+                String filePath = resultSet.getString("filepath");
+
+                song.add(new Song(idSong, name, idGenere, genere, idAlbum, album, idSinger, singer, idOwner, owner, filePath));
+            }
+        } catch (SQLException exception){
+            exception.getErrorCode();
+        }
+        return song;
+    }
+
+
+
+   /* @Override
     public void updatePlaylist(Playlist playlist) {
      //todo hacer aqui de borrar todas con la id de playlist y ponerlas de nuevo
         String query = "DELETE FROM listas_reproduccion WHERE id_lista = '" + playlist.getId() + "';";
@@ -63,13 +229,13 @@ public class MusicListDatabaseDAO implements MusicListDAO {
             updatePlaylistAddSong(playlist, i);
         }
     }
-
+*/
     /**
      * Metodo para añadir una cancion de una playlist ya existente
-     * @param playlist Objeto Playlist con la informcion de la playlist
-     * @param position posicion de la nueva cancion en el orden de reproduccion
+     //* @param playlist Objeto Playlist con la informcion de la playlist
+     //* @param position posicion de la nueva cancion en el orden de reproduccion
      */
-    private void updatePlaylistAddSong(Playlist playlist, int position) {
+    /*private void updatePlaylistAddSong(Playlist playlist, int position) {
 
         String query = "INSERT INTO lista_cancion(id_lista, id_cancion, orden) VALUES ('" +
                 playlist.getId() + "," +
@@ -78,34 +244,9 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
         SQLConnector.getInstance().insertQuery(query);
     }
+*/
 
-    @Override
-    public List<Song> loadAllMusic() {
-        List<Song> song = new LinkedList<>();
-        String query = "SELECT id, titulo, id_genero, " +
-                "id_album, id_usuario FROM lista_cancion;";
-        ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
 
-        try {
-            while (resultSet.next()) {
-                int idSong = resultSet.getInt("id");
-                String name = resultSet.getString("titulo");
-                int idGenre = resultSet.getInt("id_genero");
-                int idAlbum = resultSet.getInt("id_album");
-                int idUser = resultSet.getInt("id_usuario");
-
-                String singer = singerName(idAlbum);
-                String album = albumName(idAlbum);
-                String owne = owneName(idUser);
-                String genre = genre(idGenre);
-                song.add(new Song(name, idSong, genre,
-                        album, singer, owne, idUser));
-            }
-        } catch (SQLException exception){
-            exception.getErrorCode();
-        }
-        return song;
-    }
 
     /**
      * Metodo para obtener el nombre del cantante a traves de la identificador de la cancion
@@ -211,7 +352,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
     public void canciones_Playlist (int playlist) {
 
-        PreparedStatement ps = null;
+        //PreparedStatement ps = null;
         //String query = "select * from v_canciones where id_playlist = ?";
         String query = "select * from v_canciones";
         ResultSet rs = SQLConnector.getInstance().selectQuery(query);
@@ -230,23 +371,5 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         }
     }
 
-    public void playlistUser (int user_id) {
 
-
-        PreparedStatement ps = null;
-        String query = "Select id, nombre from listas_reproduccion  where id_usuario = ?";
-        ResultSet rs = SQLConnector.getInstance().selectQuery(query);
-
-        try {
-            // recorremos el arrya y printamos, aunque lo que tendría que hacer es devolver el array
-            int a = 0;
-            while (rs.next()) {
-                a++;
-                System.out.println(a + " " + rs.getString("nombre") + "--id: " + rs.getInt("id"));
-            }
-
-        } catch (SQLException e) {
-            System.err.println(e);
-        }
-    }
 }
