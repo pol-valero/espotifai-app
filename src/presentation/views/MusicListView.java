@@ -315,7 +315,7 @@ public class MusicListView {
     }
 
     public String getSongName(int row){
-        return (String)data[row][0];
+        return (String)data[row][1];
     }
 
     public void showCard(Playlist playlist) {
