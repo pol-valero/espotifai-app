@@ -142,6 +142,7 @@ public class MusicListView {
         table.setFont(titols);
         table.setGridColor(negre);
         table.setRowHeight(30);
+        table.setDefaultEditor(Object.class, null);
 
         //Scrollpane creation and config
         JScrollPane scrollPane = new JScrollPane();
