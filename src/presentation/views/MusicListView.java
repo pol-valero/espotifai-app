@@ -164,6 +164,7 @@ public class MusicListView {
         table.setGridColor(negre);
         table.setRowHeight(50);
         table.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
+        table.getColumnModel().getColumn(0).setPreferredWidth(10);
 
         //Scrollpane creation and config
         JScrollPane scrollPane = new JScrollPane();
@@ -248,12 +249,12 @@ public class MusicListView {
     }
 
     private Object[][] songConversor(LinkedList<Song> songList) { //todo descomentar quan calgui
-        //Object[][] data = new Object[songList.size()][5];
+        //Object[][] data = new Object[songList.size()][6];
         Object[][] data = new Object[201][6];
 
         ImageIcon songCover = new ImageIcon("images/musicCoverMusicList.png");
         Image songCoverImage = songCover.getImage();
-        Image songCoverScaled = getScaledImage(songCoverImage,30,30);
+        Image songCoverScaled = getScaledImage(songCoverImage,40,40);
         ImageIcon songCoverDone = new ImageIcon(songCoverScaled);
 
         for(int i=0; i < 200; i++){
