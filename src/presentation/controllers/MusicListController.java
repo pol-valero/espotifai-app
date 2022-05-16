@@ -25,10 +25,43 @@ public class MusicListController implements ActionListener, ListSelectionListene
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        switch (e.getActionCommand()){
+            case MusicListView.BTN_SEARCH:
 
+                break;
+
+            case MusicListView.BTN_STADISTICS:
+
+                break;
+
+            case MusicListView.BTN_ACCOUNTMANAGER:
+
+                break;
+
+            case MusicListView.BTN_ADDSONG:
+
+                break;
+
+            case MusicListView.BTN_DELETE:
+
+                break;
+
+            case MusicListView.BTN_RENAMEPLAYLIST:
+
+                break;
+
+            case MusicListView.BTN_REMOVESONG:
+
+                break;
+
+            case MusicListView.BTN_ADDNEWSONG:
+
+                break;
+
+        }
     }
 
-    public void showMusicListCard(Playlist playlist){//todo ha de rebre paràmetres
+    public void showMusicListCard(Playlist playlist){
         musicListView.showCard(playlist);
     }
 

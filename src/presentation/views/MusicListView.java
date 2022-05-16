@@ -10,13 +10,21 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
-import java.util.List;
 
 
 
 public class MusicListView {
     private final JFrame topContainer;
     private final CardLayout cardManager;
+
+    public static final String BTN_ACCOUNTMANAGER = "BTN_ACCOUNTMANAGER";
+    public static final String BTN_STADISTICS = "BTN_STADISTICS";
+    public static final String BTN_SEARCH = "BTN_SEARCH";
+    public static final String BTN_ADDSONG = "BTN_ADDSONG";
+    public static final String BTN_REMOVESONG = "BTN_REMOVESONG";
+    public static final String BTN_RENAMEPLAYLIST = "BTN_RENAMEPLAYLIST";
+    public static final String BTN_DELETE = "BTN_DELETE";
+    public static final String BTN_ADDNEWSONG = "BTN_ADDNEWSONG";
 
     private JTable table;
     private Object[][] data;
@@ -41,8 +49,8 @@ public class MusicListView {
         panel = new JPanel();
         panel.setLayout(new BorderLayout());
         JPanel westernPanel = westernPanelConfiguration();
-        centralPanel = centralPanelConfiguration(new LinkedList<>()); //todo ha de rebre la linkedlist de songs
-        northernPanel = northernPanelConfiguration(new String()); //todo ha de rebre el nom de la playlist
+        centralPanel = centralPanelConfiguration(new LinkedList<>());
+        northernPanel = northernPanelConfiguration(new String());
         JPanel easternPanel = easternPanelConfiguration();
 
 
@@ -70,10 +78,19 @@ public class MusicListView {
         c.insets = new Insets(5,5,5,5); //Space between components
 
         JButton addSong = createButton("Add song");
+        addSong.setActionCommand(BTN_ADDSONG);
+
         JButton removeSong = createButton("Remove song");
+        removeSong.setActionCommand(BTN_REMOVESONG);
+
         JButton renamePlaylist = createButton("Rename Playlist");
+        renamePlaylist.setActionCommand(BTN_RENAMEPLAYLIST);
+
         JButton deletePlaylist = createButton("Delete Playlist");
-        JButton addPersonalSong = createButton("Add personal song");
+        deletePlaylist.setActionCommand(BTN_DELETE);
+
+        JButton addNewSong = createButton("Add new song");
+        addNewSong.setActionCommand(BTN_ADDNEWSONG);
 
         c.gridx = 0;
         c.gridy = 0;
@@ -93,7 +110,7 @@ public class MusicListView {
 
         c.gridx = 0;
         c.gridy = 4;
-        easternPanel.add(addPersonalSong,c);
+        easternPanel.add(addNewSong,c);
 
         return easternPanel;
     }
@@ -131,17 +148,23 @@ public class MusicListView {
         data = songConversor(songList);
 
         //Model creation and config
-        String[] columnNames = {"Name", "Author", "Album", "Genre", "Owner"};
+        String[] columnNames = {"","Name", "Author", "Album", "Genre", "Owner"};
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
 
         //Table creation and config
-        table = new JTable(model);
+        table = new JTable(model){
+            public Class getColumnClass(int column) { //Specifing that for first column, class is Icon
+                return (column == 0) ? Icon.class : Object.class;
+            }
+        };
         table.setBackground(negre);
         table.setFont(titols);
         table.setForeground(Color.white);
         table.setFont(titols);
         table.setGridColor(negre);
-        table.setRowHeight(30);
+        table.setRowHeight(50);
+        table.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
+        table.getColumnModel().getColumn(0).setPreferredWidth(10);
         table.setDefaultEditor(Object.class, null);
 
         //Scrollpane creation and config
@@ -150,40 +173,12 @@ public class MusicListView {
         scrollPane.setPreferredSize(new Dimension(1000, 670));
         scrollPane.setBackground(negre);
 
-
-
         centralPanel.add(scrollPane);
 
         return centralPanel;
     }
 
-    private Object[][] songConversor(LinkedList<Song> songList) {
-        //Object[][] data = new Object[songList.size()][5];
-        Object[][] data = new Object[201][5];
-
-        for(int i=0; i < 200; i++){
-            data[i][0] = "songName"+i;
-            data[i][1] = "Singer"+i;
-            data[i][2] = "Album"+i;
-            data[i][3] = "Genre"+i;
-            data[i][4] = "Owner"+i;
-        }
-
-        /*for(int i=0; i < songList.size(); i++){
-            data[i][0] = songList.get(i).getName();
-            data[i][1] = songList.get(i).getSinger();
-            data[i][2] = songList.get(i).getAlbum();
-            data[i][3] = songList.get(i).getGenre();
-            data[i][4] = songList.get(i).getOwne();
-        }*/
-
-        return data;
-    }
-
     private JPanel westernPanelConfiguration() {
-        //Fonts, colours and sizes
-        Font titols = new Font("Trebuchet MS", Font.PLAIN, 36);
-        Font text = new Font("Gulim", Font.PLAIN, 24);
 
         JPanel westernPanel = new JPanel();
         BoxLayout westernLayout = new BoxLayout(westernPanel,BoxLayout.Y_AXIS);
@@ -205,7 +200,7 @@ public class MusicListView {
 
         ImageIcon magLens = new ImageIcon("images/LUPA AI.png");
         Image magLensIcon = magLens.getImage();
-        Image magLensIconScaled = getScaledImage(magLensIcon, 20, 20);
+        Image magLensIconScaled = getScaledImage(magLensIcon,20,20);
         ImageIcon magnifyingLens = new ImageIcon(magLensIconScaled);
 
         JButton searchBtn = new JButton();
@@ -215,6 +210,7 @@ public class MusicListView {
         searchBtn.setOpaque(true);
         searchBtn.setBorderPainted(false);
         searchBtn.setMaximumSize(new Dimension(30,30));
+        searchBtn.setActionCommand(BTN_SEARCH);
 
         searchPanel.add(searchBar);
         searchPanel.add(Box.createRigidArea(new Dimension(20,0))); //Create space between both buttons
@@ -227,7 +223,10 @@ public class MusicListView {
         GridBagConstraints constraints = new GridBagConstraints();
 
         JButton stadisticsBtn = createButton("Stadistics");
+        stadisticsBtn.setActionCommand(BTN_STADISTICS);
+
         JButton accManBtn = createButton("Account Manager");
+        accManBtn.setActionCommand(BTN_ACCOUNTMANAGER);
 
         constraints.gridx=0;
         constraints.gridy=0;
@@ -250,12 +249,41 @@ public class MusicListView {
         return westernPanel;
     }
 
-    private Image getScaledImage(Image img, int wt, int ht) {
+    private Object[][] songConversor(LinkedList<Song> songList) { //todo descomentar quan calgui
+        //Object[][] data = new Object[songList.size()][6];
+        Object[][] data = new Object[201][6];
+
+        ImageIcon songCover = new ImageIcon("images/musicCoverMusicList.png");
+        Image songCoverImage = songCover.getImage();
+        Image songCoverScaled = getScaledImage(songCoverImage,40,40);
+        ImageIcon songCoverDone = new ImageIcon(songCoverScaled);
+
+        for(int i=0; i < 200; i++){
+            data[i][0] = songCoverDone;
+            data[i][1] = "songName"+i;
+            data[i][2] = "Singer"+i;
+            data[i][3] = "Album"+i;
+            data[i][4] = "Genre"+i;
+            data[i][5] = "Owner"+i;
+        }
+
+        /*for(int i=0; i < songList.size(); i++){
+            data[i][0] = songList.get(i).getName();
+            data[i][1] = songList.get(i).getSinger();
+            data[i][2] = songList.get(i).getAlbum();
+            data[i][3] = songList.get(i).getGenre();
+            data[i][4] = songList.get(i).getOwne();
+        }*/
+
+        return data;
+    }
+
+    private Image getScaledImage(Image Img, int wt, int ht) {
         BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImg.createGraphics();
 
         g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2.drawImage(img, 0, 0, wt, ht, null);
+        g2.drawImage(Img, 0, 0, wt, ht, null);
         g2.dispose();
 
         return resizedImg;
@@ -287,7 +315,7 @@ public class MusicListView {
     }
 
     public String getSongName(int row){
-        return (String)data[row][0];
+        return (String)data[row][1];
     }
 
     public void showCard(Playlist playlist) {
