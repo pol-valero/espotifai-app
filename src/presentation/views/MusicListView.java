@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
+import java.util.List;
 
 
 
@@ -165,6 +166,7 @@ public class MusicListView {
         table.setRowHeight(50);
         table.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
         table.getColumnModel().getColumn(0).setPreferredWidth(10);
+        table.setDefaultEditor(Object.class, null);
 
         //Scrollpane creation and config
         JScrollPane scrollPane = new JScrollPane();
