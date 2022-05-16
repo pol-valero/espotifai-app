@@ -7,6 +7,7 @@ import presentation.controllers.MusicListController;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
@@ -142,6 +143,7 @@ public class MusicListView {
         table.setFont(titols);
         table.setGridColor(negre);
         table.setRowHeight(30);
+        table.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
 
         //Scrollpane creation and config
         JScrollPane scrollPane = new JScrollPane();
@@ -154,29 +156,6 @@ public class MusicListView {
         centralPanel.add(scrollPane);
 
         return centralPanel;
-    }
-
-    private Object[][] songConversor(LinkedList<Song> songList) {
-        //Object[][] data = new Object[songList.size()][5];
-        Object[][] data = new Object[201][5];
-
-        for(int i=0; i < 200; i++){
-            data[i][0] = "songName"+i;
-            data[i][1] = "Singer"+i;
-            data[i][2] = "Album"+i;
-            data[i][3] = "Genre"+i;
-            data[i][4] = "Owner"+i;
-        }
-
-        /*for(int i=0; i < songList.size(); i++){
-            data[i][0] = songList.get(i).getName();
-            data[i][1] = songList.get(i).getSinger();
-            data[i][2] = songList.get(i).getAlbum();
-            data[i][3] = songList.get(i).getGenre();
-            data[i][4] = songList.get(i).getOwne();
-        }*/
-
-        return data;
     }
 
     private JPanel westernPanelConfiguration() {
@@ -249,6 +228,29 @@ public class MusicListView {
         return westernPanel;
     }
 
+    private Object[][] songConversor(LinkedList<Song> songList) {
+        //Object[][] data = new Object[songList.size()][5];
+        Object[][] data = new Object[201][5];
+
+        for(int i=0; i < 200; i++){
+            data[i][0] = "songName"+i;
+            data[i][1] = "Singer"+i;
+            data[i][2] = "Album"+i;
+            data[i][3] = "Genre"+i;
+            data[i][4] = "Owner"+i;
+        }
+
+        /*for(int i=0; i < songList.size(); i++){
+            data[i][0] = songList.get(i).getName();
+            data[i][1] = songList.get(i).getSinger();
+            data[i][2] = songList.get(i).getAlbum();
+            data[i][3] = songList.get(i).getGenre();
+            data[i][4] = songList.get(i).getOwne();
+        }*/
+
+        return data;
+    }
+
     private Image getScaledImage(Image img, int wt, int ht) {
         BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImg.createGraphics();
@@ -308,3 +310,4 @@ public class MusicListView {
     }
 
 }
+
