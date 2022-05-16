@@ -45,7 +45,7 @@ public class UIController {
         //showLoginCard();
         //showSignUpCard();
         //showHomescreenCard();
-        //showMusicListCard();
+        showMusicListCard();
     }
 
     private void showMusicListCard() {

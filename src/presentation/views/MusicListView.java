@@ -10,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
-import java.util.List;
 
 
 
@@ -338,4 +337,3 @@ public class MusicListView {
     }
 
 }
-
