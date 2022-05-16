@@ -1,5 +1,6 @@
 package business.entities;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**

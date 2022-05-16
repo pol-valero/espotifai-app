@@ -35,7 +35,10 @@ public class Song {
 
     }
 
-    public Song(String songName, int i, String album, String albumName, String singerName, String you, int idSinger) {
+    //public Song(String songName, int i, String album, String albumName, String singerName, String you, int idSinger) {}
+
+    public Song(String songName, String singer, String album, String genre, String owner){
+
     }
 
     public String getName() {

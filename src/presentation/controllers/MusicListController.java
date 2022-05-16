@@ -1,5 +1,6 @@
 package presentation.controllers;
 
+import business.entities.Playlist;
 import presentation.UIController;
 import presentation.views.HomeScreenView;
 import presentation.views.MusicListView;
@@ -27,14 +28,16 @@ public class MusicListController implements ActionListener, ListSelectionListene
 
     }
 
-    public void showMusicListCard(){//todo ha de rebre paràmetres
-        musicListView.showCard();
+    public void showMusicListCard(Playlist playlist){//todo ha de rebre paràmetres
+        musicListView.showCard(playlist);
     }
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if(!e.getValueIsAdjusting()) {
-            System.out.println("Row: " + musicListView.getRow());
+
+            String songName = musicListView.getSongName(musicListView.getRow());
+            System.out.println("Row: " + musicListView.getRow()+ " Song name: "+songName);
         }
     }
 

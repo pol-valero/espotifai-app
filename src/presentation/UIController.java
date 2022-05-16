@@ -2,6 +2,7 @@ package presentation;
 
 import business.BusinessFacade;
 import business.BusinessFacadelmpl;
+import business.entities.Playlist;
 import business.entities.User;
 import presentation.controllers.*;
 
@@ -36,11 +37,16 @@ public class UIController {
         //showMusicListCard();
         //showSignUpCard();
         //showHomescreenCard();
+        //showLoginCard();
+        //showSignUpCard();
+        //showHomescreenCard();
+        showMusicListCard();
 
     }
 
     private void showMusicListCard() {
-        musicListController.showMusicListCard();
+        //todo cal fer un mètode per obtenir una string (songname)
+        musicListController.showMusicListCard(new Playlist(122,"Chill out testing",2323,"You"));
     }
 
     public LinkedList<String> loadPublicPlaylists() {
