@@ -39,25 +39,24 @@ public class SignupView {
         //Colors, fonts and sizes
         Color negre = new Color(48, 48, 48);
         Color vermell = new Color (232,74,77);
-        Font titols = new Font("Trebuchet MS", Font.PLAIN, 36);
-        Font text = new Font("Gulim", Font.PLAIN, 20);
-        Font button = new Font("Gulim", Font.PLAIN, 30);
+        Font titols = new Font("Trebuchet MS", Font.PLAIN, 28);
+        Font text = new Font("Gulim", Font.PLAIN, 14);
         Font information = new Font("Gulim", Font.PLAIN, 14);
         // Dimension button_shape = new Dimension(371,56);
-        Dimension button_shape = new Dimension(505,40);
+        Dimension button_shape = new Dimension(430,40);
 
 
         // Panel no bounds
-        JPanel panel = new JPanel();
+        JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(negre);
-        panel.setLayout(null);
-
 
         JPanel p = new JPanel(new GridBagLayout());
         p.setBackground(negre);
 
         GridBagConstraints c = new GridBagConstraints();
+        GridBagConstraints d = new GridBagConstraints();
         c.insets = new Insets(10,30,10,30); //Space between components
+        d.insets = new Insets(0,30,0,30); //Space between components
 
         JPanel info_panel = new JPanel();
         info_panel.setLayout(new BoxLayout(info_panel, BoxLayout.PAGE_AXIS));
@@ -72,7 +71,7 @@ public class SignupView {
         JLabel imatge_final = new JLabel();
         imatge_final.setIcon(icon);
 
-        // Set go back Image
+        // Set go back Image and Imatge filler
 
         ImageIcon boto = new ImageIcon("images/boto.png");
         Image imageIcon_2 = boto.getImage();
@@ -80,8 +79,28 @@ public class SignupView {
         ImageIcon new_Boto = new ImageIcon(Image_2);
 
         goBackImage.setIcon(new_Boto);
-        goBackImage.setBounds(30,30,50,50);
         goBackImage.addMouseListener(new MouseAdapter() {});
+
+        JPanel BorderAdjustment = new JPanel(new BorderLayout());
+
+        JPanel FillNORTH = new JPanel();
+        FillNORTH.setBackground(negre);
+        FillNORTH.setSize(50, 20);
+
+        JPanel FillWEST = new JPanel();
+        FillWEST.setBackground(negre);
+        FillWEST.setSize(20, 50);
+
+        BorderAdjustment.add(goBackImage, BorderLayout.CENTER);
+        BorderAdjustment.add(FillNORTH, BorderLayout.NORTH);
+        BorderAdjustment.add(FillWEST, BorderLayout.WEST);
+
+        JPanel fill = new JPanel(new BorderLayout());
+
+        JPanel FillPanel = new JPanel();
+        FillPanel.setBackground(negre);
+        fill.add(FillPanel, BorderLayout.CENTER);
+        fill.add(BorderAdjustment, BorderLayout.WEST);
 
         //User name and name text
 
@@ -127,9 +146,6 @@ public class SignupView {
         jlMailFormatError.setForeground(vermell);
         jlMailFormatError.setFont(text);
         info_panel.add(jlMailFormatError);
-
-
-
 
         // Password and JTextField
 
@@ -180,7 +196,7 @@ public class SignupView {
         jbSignup.setBackground(vermell);
         jbSignup.setForeground(Color.white);
         jbSignup.setText("Sign up");
-        jbSignup.setFont(button);
+        jbSignup.setFont(titols);
         jbSignup.setPreferredSize(button_shape);
         jbSignup.setFocusable(false);
         jbSignup.setOpaque(true);
@@ -193,7 +209,7 @@ public class SignupView {
         //Position and addition
         c.gridx = 0;
         c.gridy = 0;
-        p.add(imatge_final,c);
+        p.add(imatge_final,d);
 
         //Position and addition
         c.gridx = 0;
@@ -205,10 +221,9 @@ public class SignupView {
         c.gridy = 3;
         p.add(jbSignup,c);
 
-        p.setBounds(450,0,600,800);
+        panel.add(fill, BorderLayout.NORTH);
+        panel.add(p, BorderLayout.CENTER);
 
-        panel.add(goBackImage);
-        panel.add(p);
 
         topContainer.getContentPane().add(panel, "signupCard");
     }

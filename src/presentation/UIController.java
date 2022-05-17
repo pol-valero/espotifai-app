@@ -27,6 +27,7 @@ public class UIController {
     private BusinessFacade businessFacade = new BusinessFacadelmpl();
     private VerificationCodeViewController verificationCodeViewController;
     private MusicListController musicListController;
+    private AddSongViewController addSongViewController;
 
     public void run () {
         JFrame topContainer = new JFrame();
@@ -38,6 +39,8 @@ public class UIController {
         homescreenViewController = new HomescreenViewController(this,topContainer,cardManager);
         verificationCodeViewController = new VerificationCodeViewController(this,topContainer,cardManager);
         musicListController = new MusicListController(this, topContainer, cardManager);
+        addSongViewController = new AddSongViewController(this, topContainer, cardManager);
+
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
         //showSignUpCard();
