@@ -26,8 +26,10 @@ public class MusicListView {
     public static final String BTN_RENAMEPLAYLIST = "BTN_RENAMEPLAYLIST";
     public static final String BTN_DELETE = "BTN_DELETE";
     public static final String BTN_ADDNEWSONG = "BTN_ADDNEWSONG";
+    public static final String BTN_UP = "BTN_UP";
+    public static final String BTN_DOWN = "BTN_DOWN";
 
-    private JTable table;
+    public JTable table;
     private Object[][] data;
 
     private final Color negre = new Color(48,48,48);
@@ -43,6 +45,8 @@ public class MusicListView {
         configureView();
         topContainer.pack();
     }
+
+
 
     private void configureView() {
         //Creation of main panels
@@ -93,6 +97,12 @@ public class MusicListView {
         JButton addNewSong = createButton("Add new song");
         addNewSong.setActionCommand(BTN_ADDNEWSONG);
 
+        JButton upBtn = createButton("Up");
+        upBtn.setActionCommand(BTN_UP);
+
+        JButton downBtn = createButton("Down");
+        downBtn.setActionCommand(BTN_DOWN);
+
         c.gridx = 0;
         c.gridy = 0;
         easternPanel.add(addSong,c);
@@ -112,6 +122,14 @@ public class MusicListView {
         c.gridx = 0;
         c.gridy = 4;
         easternPanel.add(addNewSong,c);
+
+        c.gridx = 0;
+        c.gridy = 5;
+        easternPanel.add(upBtn,c);
+
+        c.gridx = 0;
+        c.gridy = 6;
+        easternPanel.add(downBtn,c);
 
         return easternPanel;
     }
@@ -306,7 +324,7 @@ public class MusicListView {
 
         JButton btn = new JButton(name);
 
-        btn.setPreferredSize(button_shape);
+        btn.setMinimumSize(button_shape);
         btn.setBackground(vermell);
         btn.setForeground(Color.white);
         btn.setFocusable(false);
@@ -347,4 +365,7 @@ public class MusicListView {
         cardManager.show(topContainer.getContentPane(),"musicListCard");
     }
 
+    public int getSongListSize() {
+        return table.getRowCount()-1; //todo revisar
+    }
 }

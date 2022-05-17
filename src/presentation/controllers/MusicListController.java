@@ -10,6 +10,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +26,7 @@ public class MusicListController implements ActionListener, ListSelectionListene
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+
         switch (e.getActionCommand()){
             case MusicListView.BTN_SEARCH:
 
@@ -58,7 +60,38 @@ public class MusicListController implements ActionListener, ListSelectionListene
 
                 break;
 
+            case MusicListView.BTN_UP:
+               if(musicListView.table.getSelectedRow() > 0){
+                   moveUp();
+               }
+                break;
+
+            case MusicListView.BTN_DOWN:
+                if(musicListView.table.getSelectedRow() < getSongListSize()){
+                    moveDown();
+                }
+                break;
         }
+    }
+
+    private void moveDown() {
+        int index = musicListView.table.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) musicListView.table.getModel();
+
+        model.moveRow(index, index,index+1);
+        musicListView.table.setRowSelectionInterval(index+1,index+1);
+    }
+
+    private void moveUp() {
+        int index = musicListView.table.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) musicListView.table.getModel();
+
+        model.moveRow(index, index,index-1);
+        musicListView.table.setRowSelectionInterval(index-1,index-1);
+    }
+
+    private int getSongListSize() {
+        return musicListView.getSongListSize();
     }
 
     public void showMusicListCard(Playlist playlist){
