@@ -147,9 +147,6 @@ public class SignupView {
         jlMailFormatError.setFont(text);
         info_panel.add(jlMailFormatError);
 
-
-
-
         // Password and JTextField
 
         JLabel password = new JLabel();
