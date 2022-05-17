@@ -1,4 +1,4 @@
-package presentation.views;
+package presentation.Components;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;

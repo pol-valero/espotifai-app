@@ -3,6 +3,7 @@ package presentation.views;
 import business.entities.Playlist;
 import business.entities.Song;
 import presentation.controllers.MusicListController;
+import presentation.Components.SimpleHeaderRenderer;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -148,13 +149,21 @@ public class MusicListView {
         data = songConversor(songList);
 
         //Model creation and config
-        String[] columnNames = {"","Name", "Author", "Album", "Genre", "Owner"};
+        String[] columnNames = {"","Name", "Author", "Album", "Genre", "Owner",""};
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
 
         //Table creation and config
         table = new JTable(model){
-            public Class getColumnClass(int column) { //Specifing that for first column, class is Icon
-                return (column == 0) ? Icon.class : Object.class;
+            public Class getColumnClass(int column) {//Specifiing class for column 0 and 6
+                switch(column){
+                    case 0 -> {
+                        return Icon.class;
+                    }
+                    case 6 -> {
+                        return Boolean.class;
+                    }
+                    default -> {return String.class;}
+                }
             }
         };
         table.setBackground(negre);
@@ -165,6 +174,7 @@ public class MusicListView {
         table.setRowHeight(50);
         table.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
         table.getColumnModel().getColumn(0).setPreferredWidth(10);
+        table.getColumnModel().getColumn(6).setPreferredWidth(10);
         table.setDefaultEditor(Object.class, null);
 
         //Scrollpane creation and config
@@ -251,7 +261,7 @@ public class MusicListView {
 
     private Object[][] songConversor(LinkedList<Song> songList) { //todo descomentar quan calgui
         //Object[][] data = new Object[songList.size()][6];
-        Object[][] data = new Object[201][6];
+        Object[][] data = new Object[201][7];
 
         ImageIcon songCover = new ImageIcon("images/musicCoverMusicList.png");
         Image songCoverImage = songCover.getImage();
@@ -265,6 +275,7 @@ public class MusicListView {
             data[i][3] = "Album"+i;
             data[i][4] = "Genre"+i;
             data[i][5] = "Owner"+i;
+            data[i][6] = false;
         }
 
         /*for(int i=0; i < songList.size(); i++){
