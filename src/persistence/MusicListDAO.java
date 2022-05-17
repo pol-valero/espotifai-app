@@ -9,12 +9,18 @@ public interface MusicListDAO  {
 
      List<Song> loadAllMusic();
 
-     List<Playlist> loadAllPlaylist();
+     // recupera todas las playlist distintas del usuario
+     List<Playlist> loadPublicPlaylist(int id_user);
 
      List<Song> loadMusicUser(int id_user);
 
     List<Song> loadMusicPlaylist(Playlist playlist);
 
+    public boolean addSongPlaylist(Playlist playlist, Song song, int position);
+
+    public boolean deleteSongPlaylist(Playlist playlist, Song song);
+
+    public boolean updateSongPlaylist(Playlist playlist, Song song, int position);
     /**
      * Metodo para crear una nueva playlist
      * @param playlist Objeto Playlist con la informcion de la playlist
@@ -36,5 +42,5 @@ public interface MusicListDAO  {
 
      void canciones_Playlist (int playlist);
 
-    List<Playlist> playlistUser (int user_id);
+    List<Playlist> loadUserPlaylist (int user_id);
 }
