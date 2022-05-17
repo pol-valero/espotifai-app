@@ -26,7 +26,6 @@ public class MusicListController implements ActionListener, ListSelectionListene
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-
         switch (e.getActionCommand()){
             case MusicListView.BTN_SEARCH:
 

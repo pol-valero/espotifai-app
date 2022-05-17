@@ -48,7 +48,8 @@ public class UIController {
         //showLoginCard();
         //showSignUpCard();
         //showHomescreenCard();
-        showMusicListCard();
+        //showMusicListCard();
+        //showAddSongCard();
     }
 
     private void showMusicListCard() {
@@ -136,6 +137,10 @@ public class UIController {
 
     public void showLogoutCard () {
         logoutViewController.showLogoutCard();
+    }
+
+    public void showAddSongCard () {
+        addSongViewController.showAddSongCard();
     }
 
     public boolean findUserNameMatch(String username){//todo

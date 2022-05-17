@@ -255,7 +255,7 @@ public class AddSongView {
         panel.add(fill, BorderLayout.NORTH);
         panel.add(p, BorderLayout.CENTER);
 
-        topContainer.getContentPane().add(panel, "signupCard");
+        topContainer.getContentPane().add(panel, "addSongCard");
     }
     private Image getScaledImage(Image Img, int wt, int ht) {
         BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
