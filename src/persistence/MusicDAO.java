@@ -29,6 +29,6 @@ public interface MusicDAO {
      * Metodo para subir estadisticas a la base de datos
      * @param stadistic List con la informacion de las estadisticas
      */
-    public void createStadistic(List<Genre> stadistic);
+    public void updateStadistic(List<Genre> stadistic);
 
 }

@@ -122,7 +122,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
     // HOME / PLAYLIST
     // es la lista de todas las canciones distintas que tiene en las playlist el usuario
     @Override
-    public List<Song> loadMusicUser(int id_user) {
+    public List<Song> loadUserAddedSongs(int id_user) {
         List<Song> song = new LinkedList<>();
         String query = "select distinct name, listas_reproduccion.id_usuario as idOwnerLista, v_songs.* from lista_cancion\n" +
                 "            inner join v_songs on lista_cancion.id_cancion = v_songs.idSong\n" +

@@ -12,7 +12,7 @@ public interface MusicListDAO  {
      // recupera todas las playlist distintas del usuario
      List<Playlist> loadPublicPlaylist(int id_user);
 
-     List<Song> loadMusicUser(int id_user);
+     List<Song> loadUserAddedSongs(int id_user);
 
     List<Song> loadMusicPlaylist(Playlist playlist);
 

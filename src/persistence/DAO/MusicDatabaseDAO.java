@@ -64,11 +64,11 @@ public class MusicDatabaseDAO implements MusicDAO {
                 genre.setAmount(genre.getAmount() - 1);
             }
         }
-        createStadistic(genreList);
+        updateStadistic(genreList);
     }
 
     @Override
-    public void createStadistic(List<Genre> stadistic) {
+    public void updateStadistic(List<Genre> stadistic) {
         String query = "TRUNCATE genero";
         SQLConnector.getInstance().updateQuery(query); //todo probar si va bien
         for (Genre genre : stadistic) {
