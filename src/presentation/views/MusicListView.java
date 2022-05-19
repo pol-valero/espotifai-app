@@ -61,7 +61,7 @@ public class MusicListView {
         panel = new JPanel();
         panel.setLayout(new BorderLayout());
         JPanel westernPanel = westernPanelConfiguration();
-        centralPanel = centralPanelConfiguration(new LinkedList<>());
+        centralPanel = centralPanelConfiguration(new LinkedList<>(),false);
         northernPanel = northernPanelConfiguration(new String());
         JPanel easternPanel = easternPanelConfiguration();
 
@@ -181,7 +181,7 @@ public class MusicListView {
         return northernPanel;
     }
 
-    private JPanel centralPanelConfiguration(LinkedList<Song> songList) {
+    private JPanel centralPanelConfiguration(LinkedList<Song> songList, boolean showCheckbox) {
         Font titols = new Font("Trebuchet MS", Font.PLAIN, 20);
 
         //Central panel configuration
@@ -189,7 +189,7 @@ public class MusicListView {
         centralPanel.setBackground(negre);
 
         //Data conversion from Linkedlist to 2D Matrix
-        data = songConversor(songList);
+        data = songConversor(songList,showCheckbox);
 
         //Model creation and config
         String[] columnNames = {"","Name", "Author", "Album", "Genre", "Owner",""};
@@ -203,12 +203,13 @@ public class MusicListView {
                         return Icon.class;
                     }
                     case 6 -> {
-                        return Boolean.class;
+                        if(showCheckbox){return Boolean.class;} else{return String.class;}
                     }
                     default -> {return String.class;}
                 }
             }
         };
+
         table.setBackground(negre);
         table.setFont(titols);
         table.setForeground(Color.white);
@@ -303,7 +304,7 @@ public class MusicListView {
         return westernPanel;
     }
 
-    private Object[][] songConversor(LinkedList<Song> songList) { //todo descomentar quan calgui
+    private Object[][] songConversor(LinkedList<Song> songList, boolean showCheckbox) { //todo descomentar quan calgui
         //Object[][] data = new Object[songList.size()][6];
         Object[][] data = new Object[201][7];
 
@@ -319,7 +320,9 @@ public class MusicListView {
             data[i][3] = "Album"+i;
             data[i][4] = "Genre"+i;
             data[i][5] = "Owner"+i;
-            data[i][6] = false;
+            if(showCheckbox){
+                data[i][6] = false;
+            }
         }
 
         /*for(int i=0; i < songList.size(); i++){
@@ -383,6 +386,22 @@ public class MusicListView {
 
     public String getSongName(int row){
         return (String)data[row][1];
+    }
+
+    public void hideCheckBox(){
+        panel.remove(centralPanel);
+        centralPanel = centralPanelConfiguration(new LinkedList<>(),false);
+        panel.add(centralPanel,BorderLayout.CENTER);
+        topContainer.revalidate();
+        cardManager.show(topContainer.getContentPane(),"musicListCard");
+    }
+
+    public void showCheckbox(){
+        panel.remove(centralPanel);
+        centralPanel = centralPanelConfiguration(new LinkedList<>(),true);
+        panel.add(centralPanel,BorderLayout.CENTER);
+        topContainer.revalidate();
+        cardManager.show(topContainer.getContentPane(),"musicListCard");
     }
 
     public void showCard(Playlist playlist) {

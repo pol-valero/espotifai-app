@@ -40,10 +40,14 @@ public class MusicListController implements ActionListener, ListSelectionListene
                 break;
 
             case MusicListView.BTN_ADDSONG:
+                System.out.print("add song");
+                musicListView.showCheckbox();
 
                 break;
 
             case MusicListView.BTN_DELETE:
+                System.out.print("delete");
+                musicListView.hideCheckBox();
 
                 break;
 
