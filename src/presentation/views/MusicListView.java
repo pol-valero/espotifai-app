@@ -29,6 +29,14 @@ public class MusicListView {
     public static final String BTN_UP = "BTN_UP";
     public static final String BTN_DOWN = "BTN_DOWN";
 
+    JButton addSong;
+    JButton removeSong;
+    JButton renamePlaylist;
+    JButton deletePlaylist;
+    JButton addNewSong;
+    JButton upBtn ;
+    JButton downBtn;
+
     public JTable table;
     private Object[][] data;
 
@@ -50,7 +58,6 @@ public class MusicListView {
 
     private void configureView() {
         //Creation of main panels
-        //LinkedList<Song> songLinkedList = generateSong();
         panel = new JPanel();
         panel.setLayout(new BorderLayout());
         JPanel westernPanel = westernPanelConfiguration();
@@ -74,64 +81,82 @@ public class MusicListView {
         Color negre = new Color(48,48,48);
 
         JPanel easternPanel = new JPanel();
-        GridBagLayout easternLayout = new GridBagLayout();
+        BoxLayout easternLayout = new BoxLayout(easternPanel,BoxLayout.Y_AXIS);
         easternPanel.setLayout(easternLayout);
-        easternPanel.setBorder(new EmptyBorder(new Insets(10, 30, 400, 30)));
+        easternPanel.setBackground(Color.blue);
+        easternPanel.setBorder(new EmptyBorder(new Insets(50, 30, 40, 30)));
+        easternPanel.setPreferredSize(new Dimension(270,700));
         easternPanel.setBackground(negre);
 
+        //Upper buttons config
+        JPanel upperButtons = new JPanel();
+        GridBagLayout upperButtonsLayout = new GridBagLayout();
+        upperButtons.setLayout(upperButtonsLayout);
+        upperButtons.setMaximumSize(new Dimension(200,400));
+        upperButtons.setBackground(negre);
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(5,5,5,5); //Space between components
 
-        JButton addSong = createButton("Add song");
+        addSong = createButton("Add song");
         addSong.setActionCommand(BTN_ADDSONG);
 
-        JButton removeSong = createButton("Remove song");
+        removeSong = createButton("Remove song");
         removeSong.setActionCommand(BTN_REMOVESONG);
 
-        JButton renamePlaylist = createButton("Rename Playlist");
+        renamePlaylist = createButton("Rename Playlist");
         renamePlaylist.setActionCommand(BTN_RENAMEPLAYLIST);
 
-        JButton deletePlaylist = createButton("Delete Playlist");
+        deletePlaylist = createButton("Delete Playlist");
         deletePlaylist.setActionCommand(BTN_DELETE);
 
-        JButton addNewSong = createButton("Add new song");
+        addNewSong = createButton("Add new song");
         addNewSong.setActionCommand(BTN_ADDNEWSONG);
 
-        JButton upBtn = createButton("Up");
-        upBtn.setActionCommand(BTN_UP);
-
-        JButton downBtn = createButton("Down");
-        downBtn.setActionCommand(BTN_DOWN);
 
         c.gridx = 0;
         c.gridy = 0;
-        easternPanel.add(addSong,c);
+        upperButtons.add(addSong,c);
 
         c.gridx = 0;
         c.gridy = 1;
-        easternPanel.add(removeSong,c);
+        upperButtons.add(removeSong,c);
 
         c.gridx = 0;
         c.gridy = 2;
-        easternPanel.add(renamePlaylist,c);
+        upperButtons.add(renamePlaylist,c);
 
         c.gridx = 0;
         c.gridy = 3;
-        easternPanel.add(deletePlaylist,c);
+        upperButtons.add(deletePlaylist,c);
 
         c.gridx = 0;
         c.gridy = 4;
-        easternPanel.add(addNewSong,c);
+        upperButtons.add(addNewSong,c);
 
-        c.gridx = 0;
-        c.gridy = 5;
-        easternPanel.add(upBtn,c);
+        //Sorting Panel Config
+        JPanel sortingPanel = new JPanel();
+        BoxLayout sortingLayout = new BoxLayout(sortingPanel,BoxLayout.X_AXIS);
+        sortingPanel.setLayout(sortingLayout);
+        sortingPanel.setBackground(negre);
 
-        c.gridx = 0;
-        c.gridy = 6;
-        easternPanel.add(downBtn,c);
+        upBtn = createButton("Up");
+        upBtn.setActionCommand(BTN_UP);
+
+        downBtn = createButton("Down");
+        downBtn.setActionCommand(BTN_DOWN);
+
+        sortingPanel.add(upBtn);
+        sortingPanel.add(Box.createRigidArea(new Dimension(20,0)));
+        sortingPanel.add(downBtn);
+
+        easternPanel.add(upperButtons);
+        easternPanel.add(Box.createRigidArea(new Dimension(0,40)));
+        easternPanel.add(sortingPanel);
+
+
 
         return easternPanel;
+
     }
 
     private JPanel northernPanelConfiguration(String playlistName) {
@@ -172,7 +197,7 @@ public class MusicListView {
 
         //Table creation and config
         table = new JTable(model){
-            public Class getColumnClass(int column) {//Specifiing class for column 0 and 6
+            public Class getColumnClass(int column) {//Specifing class for column 0 and 6
                 switch(column){
                     case 0 -> {
                         return Icon.class;
@@ -194,6 +219,7 @@ public class MusicListView {
         table.getColumnModel().getColumn(0).setPreferredWidth(10);
         table.getColumnModel().getColumn(6).setPreferredWidth(10);
         table.setDefaultEditor(Object.class, null);
+        //table.removeColumn(table.getColumnModel().getColumn(6)); todo mètode per "amagar" una playlist
 
         //Scrollpane creation and config
         JScrollPane scrollPane = new JScrollPane();
@@ -213,7 +239,7 @@ public class MusicListView {
         westernPanel.setLayout(westernLayout);
         westernPanel.setBackground(Color.white);
         westernPanel.setBorder(new EmptyBorder(new Insets(50, 30, 40, 30)));
-        westernPanel.setMinimumSize(new Dimension(200,900));
+        westernPanel.setPreferredSize(new Dimension(270,900));
         westernPanel.setBackground(negre);
 
         //Search Panel
@@ -319,12 +345,12 @@ public class MusicListView {
     }
 
     private JButton createButton(String name) {
-        Dimension button_shape = new Dimension(200,40);
-        Font text = new Font("Gulim", Font.PLAIN, 19);
+        Dimension button_shape = new Dimension(170,40);
+        Font text = new Font("Gulim", Font.PLAIN, 17);
 
         JButton btn = new JButton(name);
 
-        btn.setMinimumSize(button_shape);
+        btn.setPreferredSize(button_shape);
         btn.setBackground(vermell);
         btn.setForeground(Color.white);
         btn.setFocusable(false);
@@ -337,10 +363,22 @@ public class MusicListView {
 
     public void registerController(MusicListController musicListController) {
         table.getSelectionModel().addListSelectionListener(musicListController);
+        addSong.addActionListener(musicListController);
+        removeSong.addActionListener(musicListController);
+        addSong.addActionListener(musicListController);
+        renamePlaylist.addActionListener(musicListController);
+        removeSong.addActionListener(musicListController);
+        deletePlaylist.addActionListener(musicListController);
+        upBtn.addActionListener(musicListController);
+        downBtn.addActionListener(musicListController);
     }
 
     public int getRow() {
         return table.getSelectedRow();
+    }
+
+    public int getColumn() {
+        return table.getSelectedColumn();
     }
 
     public String getSongName(int row){

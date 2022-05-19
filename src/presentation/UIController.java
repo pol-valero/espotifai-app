@@ -48,7 +48,7 @@ public class UIController {
         //showLoginCard();
         //showSignUpCard();
         //showHomescreenCard();
-        //showMusicListCard();
+        showMusicListCard();
         //showAddSongCard();
     }
 

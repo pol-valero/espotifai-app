@@ -60,13 +60,13 @@ public class MusicListController implements ActionListener, ListSelectionListene
                 break;
 
             case MusicListView.BTN_UP:
-               if(musicListView.table.getSelectedRow() > 0){
+               if(musicListView.getColumn() != 0 && musicListView.table.getSelectedRow() > 0){
                    moveUp();
                }
                 break;
 
             case MusicListView.BTN_DOWN:
-                if(musicListView.table.getSelectedRow() < getSongListSize()){
+                if(musicListView.getColumn() != 0 && musicListView.table.getSelectedRow() < getSongListSize()){
                     moveDown();
                 }
                 break;
