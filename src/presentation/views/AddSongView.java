@@ -14,6 +14,10 @@ public class AddSongView {
     private final CardLayout cardManager;
 
     public static final String BTN_ADD = "BTN_ADD";
+    public static final String BTN_MANAGEMENT = "BTN_MANAGEMENT";
+
+
+    private JButton jbManagement = new JButton();
     private JButton jbAdd = new JButton();
     private JTextField songNameField = new JTextField(40);
     private JTextField artistField = new JTextField(25);
@@ -42,10 +46,12 @@ public class AddSongView {
         Color vermell = new Color (232,74,77);
         Font subtitle = new Font("Trebuchet MS", Font.PLAIN, 30);
         Font titol = new Font("Trebuchet MS", Font.PLAIN, 38);
+        Font button = new Font("Trebuchet MS", Font.PLAIN, 20);
         Font text = new Font("Gulim", Font.PLAIN, 14);
         Font information = new Font("Gulim", Font.PLAIN, 14);
 
         Dimension button_shape = new Dimension(445,40);
+        Dimension button_shape_2 = new Dimension(245,40);
 
 
         // Panel no bounds
@@ -57,7 +63,7 @@ public class AddSongView {
 
         GridBagConstraints c = new GridBagConstraints();
         GridBagConstraints d = new GridBagConstraints();
-        GridBagConstraints e = new GridBagConstraints();
+
 
         c.insets = new Insets(10,30,10,30); //Space between components
         d.insets = new Insets(0,30,0,30); //Space between components
@@ -88,12 +94,9 @@ public class AddSongView {
         tittle_panel.add(titleLabel);
         tittle_panel.add(explanation);
 
-
-
-
         // Set go back Image and Imatge filler
 
-        ImageIcon boto = new ImageIcon("images/boto.png");
+        ImageIcon boto = new ImageIcon("src/edu/salleurl/boto.png");
         Image imageIcon_2 = boto.getImage();
         Image Image_2 = getScaledImage(imageIcon_2, 50, 50);
         ImageIcon new_Boto = new ImageIcon(Image_2);
@@ -105,11 +108,11 @@ public class AddSongView {
 
         JPanel FillNORTH = new JPanel();
         FillNORTH.setBackground(negre);
-        FillNORTH.setSize(50, 20);
+        FillNORTH.setSize(20, 10);
 
         JPanel FillWEST = new JPanel();
         FillWEST.setBackground(negre);
-        FillWEST.setSize(20, 50);
+        FillWEST.setSize(10, 20);
 
         BorderAdjustment.add(goBackImage, BorderLayout.CENTER);
         BorderAdjustment.add(FillNORTH, BorderLayout.NORTH);
@@ -121,6 +124,42 @@ public class AddSongView {
         FillPanel.setBackground(negre);
         fill.add(FillPanel, BorderLayout.CENTER);
         fill.add(BorderAdjustment, BorderLayout.WEST);
+
+        // Set go back Button
+
+
+        jbManagement.setBackground(vermell);
+        jbManagement.setForeground(Color.white);
+        jbManagement.setText("Acount Management");
+        jbManagement.setFont(button);
+        jbManagement.setPreferredSize(button_shape_2);
+        jbManagement.setFocusable(false);
+        jbManagement.setOpaque(true);
+        jbManagement.setBorderPainted(false);
+        jbManagement.setActionCommand(BTN_MANAGEMENT);
+
+        JPanel BorderAdjustment_2 = new JPanel(new BorderLayout());
+
+
+
+        JPanel FillSOUTH = new JPanel();
+        FillSOUTH.setBackground(negre);
+
+
+        JPanel FillWEST_2 = new JPanel();
+        FillWEST_2.setBackground(negre);
+
+
+        BorderAdjustment_2.add(jbManagement, BorderLayout.CENTER);
+        BorderAdjustment_2.add(FillSOUTH, BorderLayout.SOUTH);
+        BorderAdjustment_2.add(FillWEST_2, BorderLayout.WEST);
+
+        JPanel fill_2 = new JPanel(new BorderLayout());
+
+        JPanel FillPanel_2 = new JPanel();
+        FillPanel_2.setBackground(negre);
+        fill_2.add(FillPanel_2, BorderLayout.CENTER);
+        fill_2.add(BorderAdjustment_2, BorderLayout.WEST);
 
         //Song name and Song text
 
@@ -254,6 +293,7 @@ public class AddSongView {
 
         panel.add(fill, BorderLayout.NORTH);
         panel.add(p, BorderLayout.CENTER);
+        panel.add(fill_2, BorderLayout.SOUTH);
 
         topContainer.getContentPane().add(panel, "addSongCard");
     }
