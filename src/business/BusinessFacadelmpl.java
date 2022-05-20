@@ -1,5 +1,7 @@
 package business;
 
+import business.entities.Playlist;
+import business.entities.Song;
 import business.entities.User;
 
 import java.io.UnsupportedEncodingException;
@@ -8,6 +10,7 @@ import java.security.MessageDigest;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 /**
  * Clase para gestionar la informacion entre el controller y las clases de Business
@@ -15,6 +18,7 @@ import java.security.NoSuchAlgorithmException;
 public class BusinessFacadelmpl implements BusinessFacade{
 
     private LoginManager loginManager = new LoginManager();
+    private MusicListManager musicListManager = new MusicListManager();
 
     @Override
     public boolean checkEmail(String email){
@@ -57,6 +61,21 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     public User getCurrentUser(){
         return loginManager.getCurrentUSer();
+    }
+
+    public List<Playlist> loadPublicPlaylist(){
+       return musicListManager.loadPublicPlaylist(loginManager.getCurrentUSer().getId());
+    }
+
+    public List<Playlist> loadUserPlaylist(){
+        return musicListManager.loadUserPlaylist(loginManager.getCurrentUSer().getId());
+    }
+    public  void addSongPlaylist(String playlistName, Song song, int position){
+        musicListManager.addSongPlaylist(playlistName, song, position, loginManager.getCurrentUSer().getId());
+    }
+
+    public List<Song> loadAllMusic(){
+        return musicListManager.loadAllMusic();
     }
 
 }

@@ -16,7 +16,11 @@ public interface MusicListDAO  {
 
     List<Song> loadMusicPlaylist(Playlist playlist);
 
-    public boolean addSongPlaylist(Playlist playlist, Song song, int position);
+     void addSongPlaylist(Playlist playlist, Song song, int position);
+
+    // añade una canción a la playlist
+    // IGUAL interesa que siempre se añada a la posición y la rutina determine la posición ultima y después update posición
+    void addSongPlaylist(String playlist, Song song, int position);
 
     public boolean deleteSongPlaylist(Playlist playlist, Song song);
 
@@ -38,7 +42,7 @@ public interface MusicListDAO  {
      * Metodo para eliminar una playlist de la base de datos
      * @param playlist Objeto Playlist con la informcion de la playlist
      */
-     boolean deletePlaylist(Playlist playlist);
+     void deletePlaylist(Playlist playlist);
 
      void canciones_Playlist (int playlist);
 

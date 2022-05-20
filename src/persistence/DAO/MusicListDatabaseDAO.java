@@ -5,7 +5,6 @@ import business.entities.Song;
 import persistence.MusicListDAO;
 import persistence.SQLConnector;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -99,14 +98,12 @@ public class MusicListDatabaseDAO implements MusicListDAO {
     //borra playlist del usuario y las canciones relacionadas en el playlist
     // debería solo borrarse el playlist si no hay canciones?? para decidir
     @Override
-    public boolean deletePlaylist(Playlist playlist) {
+    public void deletePlaylist(Playlist playlist) {
         String query1 = "DELETE FROM listas_reproduccion WHERE id = " + playlist.getId();
         String query2 = "DELETE FROM lista_cancion WHERE id_lista = " + playlist.getId();
 
         SQLConnector.getInstance().deleteQuery(query1);
         SQLConnector.getInstance().deleteQuery(query2);
-
-        return true;
 
         /*
         String query = "DELETE FROM listas_reproduccion WHERE nombre = '" + playlist.getName() + "';";
@@ -223,7 +220,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
     // añade una canción a la playlist
     // IGUAL interesa que siempre se añada a la posición y la rutina determine la posición ultima y después update posición
     @Override
-    public boolean addSongPlaylist(Playlist playlist, Song song, int position) {
+    public void addSongPlaylist(Playlist playlist, Song song, int position) {
         String query = "INSERT INTO lista_cancion(id_lista, id_cancion, orden) VALUES ('" +
                 playlist.getId() + "," +
                 song.getIdSong() + "," +
@@ -231,7 +228,12 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
         SQLConnector.getInstance().insertQuery(query);
 
-        return true;
+
+    }
+
+    @Override
+    public void addSongPlaylist(String playlist, Song song, int position) {
+
     }
 
     // borra una canción de la playlist

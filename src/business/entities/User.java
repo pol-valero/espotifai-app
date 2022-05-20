@@ -29,7 +29,7 @@ public class User {
         this.password = password;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -48,7 +48,7 @@ public class User {
     public String getPassword() {
         return password;
     }
-    //nuevo borrarnbsfekeji
+
 
     private String pwdHash(String password) {
         MessageDigest digest = null;

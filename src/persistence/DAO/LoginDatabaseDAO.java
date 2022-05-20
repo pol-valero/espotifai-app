@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class LoginDatabaseDAO implements LoginDAO {
-
+/*
     @Override
     public int checkLogin(String login, String pwdhash) {
         String query = "SELECT * FROM usuario where nombre = '" + login + "' and pwd = '" + pwdhash+"'";
@@ -32,6 +32,8 @@ public class LoginDatabaseDAO implements LoginDAO {
         }
     }
 
+ */
+/*
     public boolean checkUser(String username) {
         String query = "SELECT * FROM usuario where nombre = '" + username + "'";
 
@@ -47,7 +49,7 @@ public class LoginDatabaseDAO implements LoginDAO {
             return true;
         }
     }
-
+ */
         @Override
     public List<User> getAllUsers() {
         List<User> users = new LinkedList<>();
@@ -74,7 +76,6 @@ public class LoginDatabaseDAO implements LoginDAO {
 
     @Override
     public void singUpRequest(User user) {
-        // creamos el usuario en la bbdd, el id es un clave unica con auto-incremento por eso no lo pasoamo
         String query = "INSERT INTO usuario (nombre, correo, pwd) VALUES ('"
                 + user.getName() + "', '" +
                 user.getEmail() + "', '" +
@@ -82,15 +83,6 @@ public class LoginDatabaseDAO implements LoginDAO {
 
         SQLConnector.getInstance().insertQuery(query);
 
-        /*
-        String query = "INSERT INTO usuario (id, nombre, correo, pwd) VALUES ('"
-                + user.getId() + "', '" +
-                user.getName() + "', '" +
-                user.getEmail() + "', '" +
-                user.getPassword() + "');";
-
-        SQLConnector.getInstance().insertQuery(query);
-         */
     }
 
     @Override
@@ -98,8 +90,8 @@ public class LoginDatabaseDAO implements LoginDAO {
         String query = "DELETE FROM usuario WHERE nombre = " + userName + ";";
         SQLConnector.getInstance().deleteQuery(query);
     }
-
-    @Override
+/*
+    @Override //
     public User getUser(String name, String pwd) {
 
         ResultSet rs = null;
@@ -124,4 +116,6 @@ public class LoginDatabaseDAO implements LoginDAO {
         }
         return null;
     }
+
+ */
 }

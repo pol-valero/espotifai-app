@@ -33,12 +33,13 @@ public class LoginManager {
      * @return boolean true si se a podido iniciar sesion, false si no a sido posible iniciar sesion
      */
     public boolean loginRequest(String login, String password){
+       /*
         String passwordSHA = pwdHash(password);
 
         if (loginDAO.checkLogin(login, passwordSHA) > 0 ) return OK;
         else return ERROR;
+        */
 
-        /*
         List<User> users = loginDAO.getAllUsers();
         String passwordSHA = pwdHash(password);
         if(itsEmail(login)){
@@ -65,7 +66,7 @@ public class LoginManager {
             }
         }
         return ERROR;
-        */
+
     }
 
 
@@ -109,21 +110,16 @@ public class LoginManager {
     public void singUpRequest(User user){
 
         // miro si existe primero el usuario
-        if (loginDAO.checkUser(user.getName())) {
+      //  if (loginDAO.checkUser(user.getName())) {
             // si existe o existe un error al verificar si existe el usuario obtendremos True
             // NO podemos dar de alta. Falta cambiar la función a boolean
-        } else {
+
+       // } else {
             //si NO EXISTE EL USUARIO, lo damos de alta
             loginDAO.singUpRequest(user);
-        }
+            setCurrentUser(user);
+        //}
 
-
-        /*List<User> users = loginDAO.getAllUsers();
-        int id = users.size() + 1;
-        user.setId(id);
-        setCurrentUser(user);
-        loginDAO.singUpRequest(user);
-         */
     }
 
     /**

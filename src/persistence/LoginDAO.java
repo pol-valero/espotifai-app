@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface LoginDAO {
 
-    public int checkLogin(String login, String pwdhash);
+    //public int checkLogin(String login, String pwdhash);
 
-    public boolean checkUser(String username);
+   // public boolean checkUser(String username);
 
     /***
      * Metodo para obtener todos los usuarios almacenados en la base de datos
@@ -28,5 +28,5 @@ public interface LoginDAO {
      */
     public void deleteAccountRequest(String userName);
 
-    User getUser(String name, String pwd);
+   // User getUser(String name, String pwd);
 }
