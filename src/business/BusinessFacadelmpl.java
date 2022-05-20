@@ -19,7 +19,6 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     private LoginManager loginManager = new LoginManager();
     private MusicListManager musicListManager = new MusicListManager();
-    private
 
     @Override
     public boolean checkEmail(String email){
