@@ -6,14 +6,13 @@ import persistence.DAO.MusicDatabaseDAO;
 import persistence.DAO.MusicListDatabaseDAO;
 import persistence.MusicDAO;
 import persistence.MusicListDAO;
-
-import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Clase encargada de gestionar la informacion de Song y Playlist
  */
 public class MusicManager {
+
     private MusicDAO musicDAO = new MusicDatabaseDAO();
     private MusicListDAO musicListDAO = new MusicListDatabaseDAO();
 
@@ -47,6 +46,14 @@ public class MusicManager {
 
     public void deleteUserAddedSong(String songName){
         musicDAO.deleteSong(songName);
+    }
+
+    public void playMusic(){
+        currentSong.playMusic();
+    }
+
+    public void stopMusic(){
+        currentSong.stopSong();
     }
 
 }
