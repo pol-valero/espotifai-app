@@ -64,34 +64,22 @@ public class MusicListController implements ActionListener, ListSelectionListene
                 break;
 
             case MusicListView.BTN_UP:
-               if(musicListView.getColumn() != 0 && musicListView.table.getSelectedRow() > 0){
-                   moveUp();
+               if(musicListView.getColumn() != 0 && musicListView.getRow() > 0){
+                   musicListView.moveUp();
                }
                 break;
 
             case MusicListView.BTN_DOWN:
-                if(musicListView.getColumn() != 0 && musicListView.table.getSelectedRow() < getSongListSize()){
-                    moveDown();
+                if(musicListView.getColumn() != 0 && musicListView.getRow() < getSongListSize()){
+                    musicListView.moveDown();
                 }
                 break;
         }
     }
 
-    private void moveDown() {
-        int index = musicListView.table.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) musicListView.table.getModel();
 
-        model.moveRow(index, index,index+1);
-        musicListView.table.setRowSelectionInterval(index+1,index+1);
-    }
 
-    private void moveUp() {
-        int index = musicListView.table.getSelectedRow();
-        DefaultTableModel model = (DefaultTableModel) musicListView.table.getModel();
 
-        model.moveRow(index, index,index-1);
-        musicListView.table.setRowSelectionInterval(index-1,index-1);
-    }
 
     private int getSongListSize() {
         return musicListView.getSongListSize();

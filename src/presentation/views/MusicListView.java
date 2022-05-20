@@ -29,23 +29,25 @@ public class MusicListView {
     public static final String BTN_UP = "BTN_UP";
     public static final String BTN_DOWN = "BTN_DOWN";
 
-    JButton addSong;
-    JButton removeSong;
-    JButton renamePlaylist;
-    JButton deletePlaylist;
-    JButton addNewSong;
-    JButton upBtn ;
-    JButton downBtn;
+    private JButton addSong;
+    private JButton removeSong;
+    private JButton renamePlaylist;
+    private JButton deletePlaylist;
+    private JButton addNewSong;
+    private JButton upBtn ;
+    private JButton downBtn;
 
-    public JTable table;
+    private DefaultTableModel model;
+
+    private JTable table;
     private Object[][] data;
 
     private final Color negre = new Color(48,48,48);
     private final Color vermell = new Color (232,74,77);
 
-    JPanel panel;
-    JPanel centralPanel;
-    JPanel northernPanel;
+    private JPanel panel;
+    private JPanel centralPanel;
+    private JPanel northernPanel;
 
     public MusicListView (JFrame topContainer, CardLayout cardManager){
         this.topContainer=topContainer;
@@ -193,7 +195,7 @@ public class MusicListView {
 
         //Model creation and config
         String[] columnNames = {"","Name", "Author", "Album", "Genre", "Owner",""};
-        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        model = new DefaultTableModel(data, columnNames);
 
         //Table creation and config
         table = new JTable(model){
@@ -385,7 +387,7 @@ public class MusicListView {
     }
 
     public String getSongName(int row){
-        return (String)data[row][1];
+        return (String) table.getValueAt(row, 1);
     }
 
     public void hideCheckBox(){
@@ -402,6 +404,18 @@ public class MusicListView {
         panel.add(centralPanel,BorderLayout.CENTER);
         topContainer.revalidate();
         cardManager.show(topContainer.getContentPane(),"musicListCard");
+    }
+
+    public void moveDown() {
+        int index = table.getSelectedRow();
+        model.moveRow(index, index,index+1);
+        table.setRowSelectionInterval(index+1,index+1);
+    }
+
+    public void moveUp() {
+        int index = table.getSelectedRow();
+        model.moveRow(index, index,index-1);
+        table.setRowSelectionInterval(index-1,index-1);
     }
 
     public void showCard(Playlist playlist) {
