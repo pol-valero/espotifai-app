@@ -19,6 +19,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     private LoginManager loginManager = new LoginManager();
     private MusicListManager musicListManager = new MusicListManager();
+    private
 
     @Override
     public boolean checkEmail(String email){
@@ -76,6 +77,11 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     public List<Song> loadAllMusic(){
         return musicListManager.loadAllMusic();
+    }
+
+    public void deleteSongPlaylist(String playlistName, List<String> songName){
+
+        musicListManager.deleteSongPlaylist(playlistName, songName,  loginManager.getCurrentUSer().getId());
     }
 
 }

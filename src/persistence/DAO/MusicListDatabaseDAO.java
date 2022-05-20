@@ -181,6 +181,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
             }
         } catch (SQLException exception){
             exception.getErrorCode();
+            return null;
         }
         return song;
     }
