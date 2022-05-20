@@ -389,16 +389,14 @@ public class MusicListView {
         return (String) table.getValueAt(row, 1);
     }
 
-    public void hideCheckBox(){
+    private void hideCheckBox(){
         table.getColumnModel().getColumn(6).setMinWidth(0);
         table.getColumnModel().getColumn(6).setMaxWidth(0);
-        topContainer.revalidate();
     }
 
-    public void showCheckbox(){
+    private void showCheckbox(){
         table.getColumnModel().getColumn(6).setMinWidth(100);
         table.getColumnModel().getColumn(6).setMaxWidth(100);
-        topContainer.revalidate();
     }
 
     public void moveDown() {
@@ -433,5 +431,11 @@ public class MusicListView {
 
     public int getSongListSize() {
         return table.getRowCount()-1; //todo revisar
+    }
+
+    public void removeSongsVariation() {
+        showCheckbox();
+        //mostrar botons que toqui
+        topContainer.revalidate();
     }
 }

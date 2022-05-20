@@ -50,7 +50,7 @@ public class MusicListController implements ActionListener, ListSelectionListene
                 break;
 
             case MusicListView.BTN_REMOVESONG:
-                musicListView.showCheckbox();
+                musicListView.removeSongsVariation();
                 break;
 
             case MusicListView.BTN_ADDNEWSONG:
