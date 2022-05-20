@@ -337,7 +337,6 @@ public class MusicListView {
 
         return data;
     }
-
     private Image getScaledImage(Image Img, int wt, int ht) {
         BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImg.createGraphics();
@@ -395,7 +394,7 @@ public class MusicListView {
         centralPanel = centralPanelConfiguration(new LinkedList<>(),false);
         panel.add(centralPanel,BorderLayout.CENTER);
         topContainer.revalidate();
-        cardManager.show(topContainer.getContentPane(),"musicListCard");
+        //cardManager.show(topContainer.getContentPane(),"musicListCard");
     }
 
     public void showCheckbox(){
@@ -403,7 +402,7 @@ public class MusicListView {
         centralPanel = centralPanelConfiguration(new LinkedList<>(),true);
         panel.add(centralPanel,BorderLayout.CENTER);
         topContainer.revalidate();
-        cardManager.show(topContainer.getContentPane(),"musicListCard");
+        //cardManager.show(topContainer.getContentPane(),"musicListCard");
     }
 
     public void moveDown() {
