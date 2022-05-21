@@ -35,12 +35,12 @@ public class MusicDatabaseDAO implements MusicDAO {
     @Override
     public void createSong(Song song) { //cambiar al campo pathFile en char en la base
         String query = "INSERT INTO v_canciones (titulo, id_genero, id_album, id_usuario," +
-                "pathFile) VALUES ('"
+                "filePath) VALUES ('"
                 + song.getName() + ","
                 + song.getIdGenre() + ","
-                + song.getAlbum() +
-                + song.getIdOwne() +
-                //+ song.getFilePath() +
+                + song.getAlbum()
+                + song.getIdOwne()
+                + song.getFilePath() +
                 "');";
 
         SQLConnector.getInstance().insertQuery(query);
