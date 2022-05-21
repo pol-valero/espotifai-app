@@ -5,12 +5,6 @@ import business.entities.Playlist;
 import business.entities.Song;
 import business.entities.User;
 
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -123,15 +117,18 @@ public class BusinessFacadelmpl implements BusinessFacade{
         return musicListManager.loadSearchMusic(filterName);
     }
 
+    @Override
     public void createSong(Song song){
         song.setIdOwne(loginManager.getCurrentUSer().getId());
         musicManager.createSong(song);
     }
 
+    @Override
     public List<Genre> loadStadistic(){
-        return musicManager.loadStadistic();
+        return musicManager.loadStadistc();
     }
 
+    @Override
     public void deleteUserAddedSong(String songName){ //TODO llamar a las funciones de eliminar cancion de playlist quizas n hace falta
         List<Song> songs = musicListManager.loadAllMusic();
         for (Song song: songs){
@@ -142,6 +139,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
         }
     }
 
+    @Override
     public Song findSong(String songName){
         return musicManager.findSong(songName);
     }
