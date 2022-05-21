@@ -19,7 +19,8 @@ public class MusicListController implements ActionListener, ListSelectionListene
         this.controller = controller;
         musicListView = new MusicListView(topContainer, cardManager);
         musicListView.registerController(this);
-        //la variacio que es carrega realment es fara desde la funcio "show", a on a partir del propietari de la playlist (el usuari logejat, un altre usuari, o null) carregarem la variacio que toqui
+        //la variacio que es carrega realment es fara desde la funcio "show", a on a partir del propietari de la playlist (el usuari logejat, un altre usuari, o null) carregarem la variacio que toqui. Tambe podem
+        //jugar amb el fet que sabem el nom de les playlist "MySongs" i "AllSongs"?
         musicListView.userPlaylistVariation();
     }
 

@@ -141,7 +141,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     @Override
     public Song findSong(String songName){
-        return musicManager.findSong(songName);
+        return musicManager.loadSongInformation(songName);
     }
 
 

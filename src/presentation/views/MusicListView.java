@@ -484,8 +484,6 @@ public class MusicListView {
         removeSelectedSongs.setVisible(true);
         cancel.setVisible(true);
         topContainer.revalidate();
-        //setVariationsToInactive();
-        //removeSongsVariationActive = true;
     }
 
     public void userPersonalSongsVariation() {
@@ -549,9 +547,6 @@ public class MusicListView {
     }
 
     public void returnToPreviousVariation() {
-        /*if (removeSongsVariationActive) {
-            removeSongsVariation();
-        }*/
 
         if (userPersonalSongsVariationActive) {
             userPersonalSongsVariation();

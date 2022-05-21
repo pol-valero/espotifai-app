@@ -46,7 +46,7 @@ public class MusicManager {
     //ahora
 
 
-    public Song findSong(String songName){
+    public Song loadSongInformation(String songName){
         List<Song> songs = musicListDAO.loadAllMusic();
 
         for (Song song: songs) {
