@@ -29,8 +29,8 @@ public class MusicManager {
     public void changeCurrentSong(Song song){
         this.currentSong = song;
     }
-/* //todo polete hemos heco lo mismo pero en distinto lugar
-    public List<Genre> loadStadistic(){
+
+    public List<Genre> loadStadistc() {
         LinkedList<Genre> stadistic = (LinkedList<Genre>) musicDAO.loadStadistic();
         stadistic.sort(Comparator.reverseOrder());
 
@@ -44,10 +44,6 @@ public class MusicManager {
         return topGenres;
     }
 
- */
-    public List<Genre> loadStadistic(){
-        return musicDAO.loadStadistic();
-    }
 
     public Song findSong(String songName){
         List<Song> songs = musicListDAO.loadAllMusic();
@@ -79,12 +75,10 @@ public class MusicManager {
                 musicDAO.createSong(song);
 
             } else {
-                if (stadistic.size() < 10){
                     musicDAO.createStadistic(song.getGenre());
                     stadistic = musicDAO.loadStadistic();
                     song.setIdGenre(stadistic.get(stadistic.size() - 1).getId());
                     musicDAO.createSong(song);
-                }
             }
         } else {
             musicDAO.createStadistic(song.getGenre());

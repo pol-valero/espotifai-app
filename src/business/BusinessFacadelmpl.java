@@ -5,12 +5,6 @@ import business.entities.Playlist;
 import business.entities.Song;
 import business.entities.User;
 
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 /**
@@ -131,7 +125,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     @Override
     public List<Genre> loadStadistic(){
-        return musicManager.loadStadistic();
+        return musicManager.loadStadistc();
     }
 
     @Override
