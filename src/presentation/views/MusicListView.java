@@ -24,7 +24,8 @@ public class MusicListView {
     public static final String BTN_REMOVESONG = "BTN_REMOVESONG";
     public static final String BTN_RENAMEPLAYLIST = "BTN_RENAMEPLAYLIST";
     public static final String BTN_DELETE = "BTN_DELETE";
-    public static final String BTN_ADDNEWSONG = "BTN_ADDNEWSONG";
+    public static final String BTN_ADDPERSONALSONG = "BTN_ADDPERSONALSONG";
+    public static final String BTN_REMOVEPERSONALSONG = "BTN_REMOVEPERSONALSONG";
     public static final String BTN_UP = "BTN_UP";
     public static final String BTN_DOWN = "BTN_DOWN";
     public static final String BTN_REMOVE_SELECTED = "BTN_REMOVE_SELECTED";
@@ -35,6 +36,7 @@ public class MusicListView {
     private JButton renamePlaylist;
     private JButton deletePlaylist;
     private JButton addPersonalSong;
+    private JButton removePersonalSong;
     private JButton removeSelectedSongs;
     private JButton cancel;
     private JButton upBtn ;
@@ -53,6 +55,10 @@ public class MusicListView {
     private JPanel northernPanel;
 
     private boolean removeSongsVariationActive;
+    private boolean userPersonalSongsVariationActive;
+    private boolean userPlaylistVariationActive;
+    private boolean publicPlaylistVariationActive;
+    private boolean allSongsVariationActive;
 
     public MusicListView (JFrame topContainer, CardLayout cardManager){
         this.topContainer=topContainer;
@@ -116,14 +122,19 @@ public class MusicListView {
         deletePlaylist = createButton("Delete Playlist");
         deletePlaylist.setActionCommand(BTN_DELETE);
 
-        addPersonalSong = createButton("Add new song");
-        addPersonalSong.setActionCommand(BTN_ADDNEWSONG);
+        addPersonalSong = createButton("Add personal song");
+        addPersonalSong.setActionCommand(BTN_ADDPERSONALSONG);
+
+        removePersonalSong = createButton("Remove personal song");
+        removePersonalSong.setActionCommand(BTN_REMOVEPERSONALSONG);
+
+        cancel = createButton("Cancel");
+        cancel.setActionCommand(BTN_CANCEL);
 
         removeSelectedSongs = createButton("Remove selected");
         removeSelectedSongs.setActionCommand(BTN_REMOVE_SELECTED);
 
-        cancel = createButton("Cancel");
-        cancel.setActionCommand(BTN_CANCEL);
+
 
 
         c.gridx = 0;
@@ -148,10 +159,14 @@ public class MusicListView {
 
         c.gridx = 0;
         c.gridy = 5;
-        upperButtons.add(removeSelectedSongs,c);
+        upperButtons.add(removePersonalSong,c);
 
         c.gridx = 0;
         c.gridy = 6;
+        upperButtons.add(removeSelectedSongs,c);
+
+        c.gridx = 0;
+        c.gridy = 7;
         upperButtons.add(cancel, c);
 
         //Sorting Panel Config
@@ -238,8 +253,8 @@ public class MusicListView {
         table.setGridColor(negre);
         table.setRowHeight(50);
         table.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
-        table.getColumnModel().getColumn(0).setPreferredWidth(10);
-        table.getColumnModel().getColumn(6).setPreferredWidth(10);
+        //table.getColumnModel().getColumn(0).setPreferredWidth(10);
+        //table.getColumnModel().getColumn(6).setPreferredWidth(10);
         table.setDefaultEditor(Object.class, null);
         table.getColumnModel().getColumn(6).setMinWidth(0);
         table.getColumnModel().getColumn(6).setMaxWidth(0);
@@ -388,10 +403,12 @@ public class MusicListView {
         table.getSelectionModel().addListSelectionListener(musicListController);
         addSong.addActionListener(musicListController);
         removeSong.addActionListener(musicListController);
-        addSong.addActionListener(musicListController);
         renamePlaylist.addActionListener(musicListController);
-        removeSong.addActionListener(musicListController);
         deletePlaylist.addActionListener(musicListController);
+        addPersonalSong.addActionListener(musicListController);
+        removePersonalSong.addActionListener(musicListController);
+        removeSelectedSongs.addActionListener(musicListController);
+        cancel.addActionListener(musicListController);
         upBtn.addActionListener(musicListController);
         downBtn.addActionListener(musicListController);
     }
@@ -411,9 +428,13 @@ public class MusicListView {
     private void hideCheckBox(){
         table.getColumnModel().getColumn(6).setMinWidth(0);
         table.getColumnModel().getColumn(6).setMaxWidth(0);
+        table.getColumnModel().getColumn(6).setMinWidth(0);
+        table.getColumnModel().getColumn(6).setMaxWidth(0);
     }
 
-    private void showCheckbox(){
+    public void showCheckbox(){
+        table.getColumnModel().getColumn(6).setMinWidth(100);
+        table.getColumnModel().getColumn(6).setMaxWidth(100);
         table.getColumnModel().getColumn(6).setMinWidth(100);
         table.getColumnModel().getColumn(6).setMaxWidth(100);
     }
@@ -459,17 +480,102 @@ public class MusicListView {
         renamePlaylist.setVisible(false);
         deletePlaylist.setVisible(false);
         addPersonalSong.setVisible(false);
+        removePersonalSong.setVisible(false);
         removeSelectedSongs.setVisible(true);
         cancel.setVisible(true);
         topContainer.revalidate();
-        removeSongsVariationActive = true;
+        //setVariationsToInactive();
+        //removeSongsVariationActive = true;
+    }
+
+    public void userPersonalSongsVariation() {
+        hideCheckBox();
+        addSong.setVisible(false);
+        removeSong.setVisible(false);
+        renamePlaylist.setVisible(false);
+        deletePlaylist.setVisible(false);
+        addPersonalSong.setVisible(true);
+        removePersonalSong.setVisible(true);
+        removeSelectedSongs.setVisible(false);
+        cancel.setVisible(false);
+        topContainer.revalidate();
+        setVariationsToInactive();
+        userPersonalSongsVariationActive = true;
+    }
+
+    public void userPlaylistVariation() {
+        hideCheckBox();
+        addSong.setVisible(true);
+        removeSong.setVisible(true);
+        renamePlaylist.setVisible(true);
+        deletePlaylist.setVisible(true);
+        addPersonalSong.setVisible(false);
+        removePersonalSong.setVisible(false);
+        removeSelectedSongs.setVisible(false);
+        cancel.setVisible(false);
+        topContainer.revalidate();
+        setVariationsToInactive();
+        userPlaylistVariationActive = true;
+    }
+
+    public void publicPlaylistVariation() {
+        hideCheckBox();
+        addSong.setVisible(false);
+        removeSong.setVisible(false);
+        renamePlaylist.setVisible(false);
+        deletePlaylist.setVisible(false);
+        addPersonalSong.setVisible(false);
+        removePersonalSong.setVisible(false);
+        removeSelectedSongs.setVisible(false);
+        cancel.setVisible(false);
+        topContainer.revalidate();
+        setVariationsToInactive();
+        publicPlaylistVariationActive = true;
+    }
+
+    public void publicSongsVariation(){
+        hideCheckBox();
+        addSong.setVisible(false);
+        removeSong.setVisible(false);
+        renamePlaylist.setVisible(false);
+        deletePlaylist.setVisible(false);
+        addPersonalSong.setVisible(false);
+        removePersonalSong.setVisible(false);
+        removeSelectedSongs.setVisible(false);
+        cancel.setVisible(false);
+        topContainer.revalidate();
+        setVariationsToInactive();
+        allSongsVariationActive = true;
     }
 
     public void returnToPreviousVariation() {
-        //aqui farem if else per depenent de quina variacio estava activa abans, tornar a carregar aquesta variacio
+        /*if (removeSongsVariationActive) {
+            removeSongsVariation();
+        }*/
+
+        if (userPersonalSongsVariationActive) {
+            userPersonalSongsVariation();
+        }
+
+        if (userPlaylistVariationActive) {
+            userPlaylistVariation();
+        }
+
+        if (publicPlaylistVariationActive) {
+            publicPlaylistVariation();
+        }
+
+        if (allSongsVariationActive) {
+            publicSongsVariation();
+        }
     }
 
-    public void setVariationInactive() {
+    public void setVariationsToInactive() {
         //aquesta funcio posara totes les variacions a false. Cridarem aquesta funcio dins del procediment de cada variacio (just abans d'activar el boolean de la variacio)
+        removeSongsVariationActive = false;
+        userPersonalSongsVariationActive = false;
+        userPlaylistVariationActive = false;
+        publicPlaylistVariationActive = false;
+        allSongsVariationActive = false;
     }
 }

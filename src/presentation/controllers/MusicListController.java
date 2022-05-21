@@ -2,15 +2,11 @@ package presentation.controllers;
 
 import business.entities.Playlist;
 import presentation.UIController;
-import presentation.views.HomeScreenView;
 import presentation.views.MusicListView;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,7 +19,10 @@ public class MusicListController implements ActionListener, ListSelectionListene
         this.controller = controller;
         musicListView = new MusicListView(topContainer, cardManager);
         musicListView.registerController(this);
+        //la variacio que es carrega realment es fara desde la funcio "show", a on a partir del propietari de la playlist (el usuari logejat, un altre usuari, o null) carregarem la variacio que toqui
+        musicListView.userPlaylistVariation();
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()){
@@ -50,10 +49,15 @@ public class MusicListController implements ActionListener, ListSelectionListene
                 break;
 
             case MusicListView.BTN_REMOVESONG:
+                System.out.println("prova");
                 musicListView.removeSongsVariation();
                 break;
 
-            case MusicListView.BTN_ADDNEWSONG:
+            case MusicListView.BTN_ADDPERSONALSONG:
+
+                break;
+
+            case MusicListView.BTN_REMOVEPERSONALSONG:
 
                 break;
 
@@ -62,7 +66,8 @@ public class MusicListController implements ActionListener, ListSelectionListene
                 break;
 
             case MusicListView.BTN_CANCEL:
-
+                System.out.println("dfasfsaf");
+                musicListView.returnToPreviousVariation();
                 break;
 
             case MusicListView.BTN_UP:
