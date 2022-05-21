@@ -1,5 +1,6 @@
 package business;
 
+import business.entities.Genre;
 import business.entities.Playlist;
 import business.entities.Song;
 import business.entities.User;
@@ -19,6 +20,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     private LoginManager loginManager = new LoginManager();
     private MusicListManager musicListManager = new MusicListManager();
+    private MusicManager musicManager = new MusicManager();
 
     @Override
     public boolean checkEmail(String email){
@@ -120,4 +122,29 @@ public class BusinessFacadelmpl implements BusinessFacade{
     public List<Song> loadSearchMusic(String filterName){
         return musicListManager.loadSearchMusic(filterName);
     }
+
+    public void createSong(Song song){
+        song.setIdOwne(loginManager.getCurrentUSer().getId());
+        musicManager.createSong(song);
+    }
+
+    public List<Genre> loadStadistic(){
+        return musicManager.loadStadistic();
+    }
+
+    public void deleteUserAddedSong(String songName){ //TODO llamar a las funciones de eliminar cancion de playlist quizas n hace falta
+        List<Song> songs = musicListManager.loadAllMusic();
+        for (Song song: songs){
+            if (songName.equals(song.getName())) {
+                musicManager.deleteUserAddedSong(song);
+                break;
+            }
+        }
+    }
+
+    public Song findSong(String songName){
+        return musicManager.findSong(songName);
+    }
+
+
 }
