@@ -1,6 +1,6 @@
 package business.entities;
 
-public class Genre {
+public class Genre implements Comparable<Genre>{
 
     private int id;
     private String genre;
@@ -34,5 +34,10 @@ public class Genre {
         } else {
             amount = 0;
         }
+    }
+
+    @Override
+    public int compareTo(Genre o) {
+        return Integer.compare(this.amount, o.getAmount());
     }
 }

@@ -2,6 +2,7 @@ package presentation;
 
 import business.BusinessFacade;
 import business.BusinessFacadelmpl;
+import business.entities.Genre;
 import business.entities.Playlist;
 import business.entities.User;
 import presentation.controllers.*;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Comparator;
 import java.util.LinkedList;
 
 /**
@@ -40,7 +42,6 @@ public class UIController {
         verificationCodeViewController = new VerificationCodeViewController(this,topContainer,cardManager);
         musicListController = new MusicListController(this, topContainer, cardManager);
         addSongViewController = new AddSongViewController(this, topContainer, cardManager);
-
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
         //showSignUpCard();

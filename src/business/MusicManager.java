@@ -7,6 +7,7 @@ import persistence.DAO.MusicListDatabaseDAO;
 import persistence.MusicDAO;
 import persistence.MusicListDAO;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,7 +19,6 @@ public class MusicManager {
     private MusicListDAO musicListDAO = new MusicListDatabaseDAO();
 
     private Song currentSong;
-
 
     public Song getCurrentSong() {
         return currentSong;
@@ -32,96 +32,40 @@ public class MusicManager {
         return musicDAO.loadStadistic();
     }
 
-    public Song findSong(String songName){
+    public Song loadSongInformation(String songName){
         List<Song> songs = musicListDAO.loadAllMusic();
-
-        for (Song song: songs) {
-            if(song.getName().equals(songName)) {
+        for (Song song: songs){
+            if(song.getName().equals(songName)){
                 return song;
             }
         }
         return null;
     }
 
-    public void createSong(Song song) {
-        boolean existGenre = false;
+    public void createSong(Song song){
+        musicDAO.createSong(song);
+
         List<Genre> stadistic = musicDAO.loadStadistic();
-
-        insertIdSingerAlbum(song);
-
-        if (stadistic.size() != 0) {
-            for(Genre genre: stadistic) {
-                if (genre.getGenre().equals(song.getGenre())) {
-                    genre.incrementAmount();
-                    song.setIdGenre(genre.getId());
-                    musicDAO.updateStadistic(song.getGenre(), genre.getAmount());
-                    existGenre = true;
-                }
-            }
-            if (existGenre) {
-                musicDAO.createSong(song);
-
-            } else {
-                if (stadistic.size() < 10){
-                    musicDAO.createStadistic(song.getGenre());
-                    stadistic = musicDAO.loadStadistic();
-                    song.setIdGenre(stadistic.get(stadistic.size() - 1).getId());
-                    musicDAO.createSong(song);
-                }
-            }
-        } else {
-            musicDAO.createStadistic(song.getGenre());
-            stadistic = musicDAO.loadStadistic();
-            song.setIdGenre(stadistic.get(stadistic.size() - 1).getId());
-            musicDAO.createSong(song);
-        }
-    }
-
-    public void deleteUserAddedSong(Song song){
-        List<Genre> stadistic = musicDAO.loadStadistic();
-
-        if (stadistic.size() != 0) {
-            for(Genre genre: stadistic) {
-                if (genre.getGenre().equals(song.getGenre())) {
-                    genre.decrementAmount();
-
-                    if (genre.getAmount() < 1) {
-                        musicDAO.deleteGenre(genre.getGenre());
-
-                    } else {
-                        musicDAO.updateStadistic(song.getGenre(), genre.getAmount());
-
-                    }
-                    musicDAO.deleteSong(song);
-                }
+        for(Genre genre: stadistic) {
+            if (genre.getGenre().equals(song.getGenre())) {
+                genre.incrementAmount();
             }
         }
+        musicDAO.updateStadistic(stadistic);
     }
 
-    private void insertIdSingerAlbum(Song song){
-        int idSinger = musicDAO.loadIdSinger(song.getSinger());
-        if (idSinger != 0){
-             song.setIdSinger(idSinger);
-        } else {
-            musicDAO.createSinger(song.getSinger());
-            idSinger = musicDAO.loadIdSinger(song.getSinger());
-            song.setIdSinger(idSinger);
+    public void deleteUserAddedSong(String songName){
+        musicDAO.deleteSong(songName);
+
+        List<Genre> stadistic = loadStadistic();
+        for (Genre genre: stadistic) {
+            if (genre.getGenre().equals(songName)){
+                genre.decrementAmount();
+            }
         }
-        insertIdAlbum(song);
+        musicDAO.updateStadistic(stadistic);
     }
 
-    private void insertIdAlbum(Song song){
-        int idAlbum = musicDAO.loadIdAlbum(song.getAlbum());
-        if (idAlbum != 0) {
-            song.setIdAlbum(idAlbum);
-
-        } else  {
-            musicDAO.createAlbum(song.getAlbum(), song.getIdSinger());
-            song.setIdSinger(musicDAO.loadIdSinger(song.getSinger()));
-        }
-    }
-
-    //todo para la reproduccion de musica
     public void playMusic(){
         currentSong.playMusic();
     }
