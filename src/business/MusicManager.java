@@ -66,15 +66,19 @@ public class MusicManager {
     }
 
     public void deleteUserAddedSong(String songName){
-        musicDAO.deleteSong(songName);
 
-        List<Genre> stadistic = loadStadistic();
-        for (Genre genre: stadistic) {
-            if (genre.getGenre().equalsIgnoreCase(songName)){
-                genre.decrementAmount();
+        if (!songName.equals(currentSong.getName())) {
+
+            musicDAO.deleteSong(songName);
+
+            List<Genre> stadistic = loadStadistic();
+            for (Genre genre : stadistic) {
+                if (genre.getGenre().equalsIgnoreCase(songName)) {
+                    genre.decrementAmount();
+                }
             }
+            musicDAO.updateStadistic(stadistic);
         }
-        musicDAO.updateStadistic(stadistic);
     }
 
     public void playMusic(){

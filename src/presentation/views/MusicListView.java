@@ -464,4 +464,12 @@ public class MusicListView {
         topContainer.revalidate();
         removeSongsVariationActive = true;
     }
+
+    public void returnToPreviousVariation() {
+        //aqui farem if else per depenent de quina variacio estava activa abans, tornar a carregar aquesta variacio
+    }
+
+    public void setVariationInactive() {
+        //aquesta funcio posara totes les variacions a false. Cridarem aquesta funcio dins del procediment de cada variacio (just abans d'activar el boolean de la variacio)
+    }
 }
