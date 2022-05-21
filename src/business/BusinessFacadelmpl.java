@@ -78,4 +78,9 @@ public class BusinessFacadelmpl implements BusinessFacade{
         return musicListManager.loadAllMusic();
     }
 
+    public void deleteSongPlaylist(String playlistName, List<String> songName){
+
+        musicListManager.deleteSongPlaylist(playlistName, songName,  loginManager.getCurrentUSer().getId());
+    }
+
 }
