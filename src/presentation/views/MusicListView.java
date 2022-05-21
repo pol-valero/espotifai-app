@@ -8,7 +8,6 @@ import presentation.Components.SimpleHeaderRenderer;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
@@ -28,12 +27,16 @@ public class MusicListView {
     public static final String BTN_ADDNEWSONG = "BTN_ADDNEWSONG";
     public static final String BTN_UP = "BTN_UP";
     public static final String BTN_DOWN = "BTN_DOWN";
+    public static final String BTN_REMOVE_SELECTED = "BTN_REMOVE_SELECTED";
+    public static final String BTN_CANCEL = "BTN_CANCEL";
 
     private JButton addSong;
     private JButton removeSong;
     private JButton renamePlaylist;
     private JButton deletePlaylist;
-    private JButton addNewSong;
+    private JButton addPersonalSong;
+    private JButton removeSelectedSongs;
+    private JButton cancel;
     private JButton upBtn ;
     private JButton downBtn;
 
@@ -48,6 +51,8 @@ public class MusicListView {
     private JPanel panel;
     private JPanel centralPanel;
     private JPanel northernPanel;
+
+    private boolean removeSongsVariationActive;
 
     public MusicListView (JFrame topContainer, CardLayout cardManager){
         this.topContainer=topContainer;
@@ -111,8 +116,14 @@ public class MusicListView {
         deletePlaylist = createButton("Delete Playlist");
         deletePlaylist.setActionCommand(BTN_DELETE);
 
-        addNewSong = createButton("Add new song");
-        addNewSong.setActionCommand(BTN_ADDNEWSONG);
+        addPersonalSong = createButton("Add new song");
+        addPersonalSong.setActionCommand(BTN_ADDNEWSONG);
+
+        removeSelectedSongs = createButton("Remove selected");
+        removeSelectedSongs.setActionCommand(BTN_REMOVE_SELECTED);
+
+        cancel = createButton("Cancel");
+        cancel.setActionCommand(BTN_CANCEL);
 
 
         c.gridx = 0;
@@ -133,7 +144,15 @@ public class MusicListView {
 
         c.gridx = 0;
         c.gridy = 4;
-        upperButtons.add(addNewSong,c);
+        upperButtons.add(addPersonalSong,c);
+
+        c.gridx = 0;
+        c.gridy = 5;
+        upperButtons.add(removeSelectedSongs,c);
+
+        c.gridx = 0;
+        c.gridy = 6;
+        upperButtons.add(cancel, c);
 
         //Sorting Panel Config
         JPanel sortingPanel = new JPanel();
@@ -435,7 +454,14 @@ public class MusicListView {
 
     public void removeSongsVariation() {
         showCheckbox();
-        //mostrar botons que toqui
+        addSong.setVisible(false);
+        removeSong.setVisible(false);
+        renamePlaylist.setVisible(false);
+        deletePlaylist.setVisible(false);
+        addPersonalSong.setVisible(false);
+        removeSelectedSongs.setVisible(true);
+        cancel.setVisible(true);
         topContainer.revalidate();
+        removeSongsVariationActive = true;
     }
 }

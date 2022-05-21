@@ -7,6 +7,7 @@ import persistence.DAO.MusicListDatabaseDAO;
 import persistence.MusicDAO;
 import persistence.MusicListDAO;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,7 +30,17 @@ public class MusicManager {
     }
 
     public List<Genre> loadStadistic(){
-        return musicDAO.loadStadistic();
+        LinkedList<Genre> stadistic = (LinkedList<Genre>) musicDAO.loadStadistic();
+        stadistic.sort(Comparator.reverseOrder());
+
+        LinkedList<Genre> topGenres = new LinkedList<>();
+        for (Genre genre: stadistic) {
+            if (stadistic.indexOf(genre) < 10) {
+                topGenres.add(genre);
+            }
+        }
+
+        return topGenres;
     }
 
     public Song loadSongInformation(String songName){
@@ -47,7 +58,7 @@ public class MusicManager {
 
         List<Genre> stadistic = musicDAO.loadStadistic();
         for(Genre genre: stadistic) {
-            if (genre.getGenre().equals(song.getGenre())) {
+            if (genre.getGenre().equalsIgnoreCase(song.getGenre())) {
                 genre.incrementAmount();
             }
         }
@@ -59,7 +70,7 @@ public class MusicManager {
 
         List<Genre> stadistic = loadStadistic();
         for (Genre genre: stadistic) {
-            if (genre.getGenre().equals(songName)){
+            if (genre.getGenre().equalsIgnoreCase(songName)){
                 genre.decrementAmount();
             }
         }
