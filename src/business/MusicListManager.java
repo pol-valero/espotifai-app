@@ -42,9 +42,54 @@ public class MusicListManager {
         }
     }
 
-    public Playlist findPlaylist(String playlistName){ //todo hacer una funcion para cargar todas las playlist del dao
+    public Playlist findPlaylist(String playlistName, int idUser){
+        Playlist playlist = findUserPlaylist(playlistName, idUser);
+        if (playlist != null) {
+            return playlist;
+        } else {
+            playlist = findOnePublicPlaylist(playlistName, idUser);
+            if(playlist != null){
+                return playlist;
+            }
+        }
+        return null;
+    }
 
+    public void deletePlaylist(String playlistName, int idUser){
+        Playlist playlist = findUserPlaylist(playlistName, idUser);
+        if(playlist != null){
+            musicListDAO.deletePlaylist(playlist);
+        }
+    }
 
+    public void createPlaylist(String playlistName, int idUser){
+        Playlist playlist = findUserPlaylist(playlistName, idUser);
+        if(playlist != null){
+            musicListDAO.createPlaylist(playlist, idUser);
+        }
+    }
+
+    public List<Song> loadMusicPlaylist(String playlistName, int ideUser){
+        Playlist playlist = findPlaylist(playlistName, ideUser);
+        if(playlist != null){
+            return musicListDAO.loadMusicPlaylist(playlist);
+        }
+        return null;
+    }
+
+    public List<Song> loadSearchMusic(String filterName){
+        List<Song> songs = musicListDAO.loadAllMusic();
+        List<Song> searchSong = new LinkedList<>();
+
+        if (songs.size() != 0 ){
+            for(Song song: songs){
+                if(filterName.equals(song.getName()) || filterName.equals(song.getGenre())
+                        || filterName.equals(song.getAlbum()) || filterName.equals(song.getSinger())) {
+                    searchSong.add(song);
+                }
+            }
+            return searchSong;
+        }
         return null;
     }
 
@@ -79,6 +124,19 @@ public class MusicListManager {
         }
 
         return newSong;
+    }
+
+    private Playlist findOnePublicPlaylist(String playlistName , int idUser){
+        List<Playlist> playlistList = loadPublicPlaylist(idUser);
+
+        if (playlistList.size() != 0) {
+            for (Playlist playlist: playlistList) {
+                if (playlistName.equals(playlist.getName())) {
+                    return playlist;
+                }
+            }
+        }
+        return null;
     }
 
 

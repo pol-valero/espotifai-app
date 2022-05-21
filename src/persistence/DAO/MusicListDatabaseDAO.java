@@ -83,7 +83,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
     // crea playlist de un usuario
     @Override
-    public void createPlaylist(Playlist playlist, long id_user) {
+    public void createPlaylist(Playlist playlist, int id_user) {
         // no hay control de si ya existe el "playlist", permitir mismo nombre con distinto usuario ? o no
 
         String query = "INSERT INTO listas_reproduccion(nombre, id_usuario) VALUES ('" +
@@ -220,7 +220,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
     // añade una canción a la playlist
     // IGUAL interesa que siempre se añada a la posición y la rutina determine la posición ultima y después update posición
-    @Override
+    @Override // todo hace falta la posicion si la queremos añadir al final??
     public void addSongPlaylist(Playlist playlist, Song song, int position) {
         String query = "INSERT INTO lista_cancion(id_lista, id_cancion, orden) VALUES ('" +
                 playlist.getId() + "," +
@@ -232,10 +232,6 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
     }
 
-    @Override
-    public void addSongPlaylist(String playlist, Song song, int position) {
-
-    }
 
     // borra una canción de la playlist
     @Override
@@ -249,7 +245,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
     }
 
     // actualiza una canción de la playlist... principalmente es actualizar el orden/posiición
-    @Override
+    @Override //todo mirar lo de la posicion
     public boolean updateSongPlaylist(Playlist playlist, Song song, int position) {
         String query = "UPDATE lista_cancion SET orden = " + position + " WHERE id_lista = " + playlist.getId() + " and id_cancion = " + song.getIdSong();
 
@@ -294,7 +290,8 @@ public class MusicListDatabaseDAO implements MusicListDAO {
      * @param idAlbum long indentificador del album de la cancion
      * @return String con el nombre del cantante
      */
-    private String singerName(long idAlbum) {
+
+   /* private String singerName(long idAlbum) {
 
         String query = "SELECT id_cantante FROM album WHERE id = "
                 + idAlbum + ";";
@@ -317,7 +314,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
      * @param idSinger long con el identificador de la cancion
      * @return String con el nombre del cantante
      */
-    private String singerNameInCantantes(long idSinger){
+   /* private String singerNameInCantantes(long idSinger){
         String query = "SELECT nombre FROM cantantes WHERE id = " +
                 idSinger + ";";
         ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
@@ -336,7 +333,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
      * @param idAlbum long con el identificador del album
      * @return String con el nombre del album
      */
-    private String albumName(long idAlbum) {
+   /* private String albumName(long idAlbum) {
         String query = "SELECT titulo FROM album WHERE id = "
                 + idAlbum + ";";
         ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
@@ -356,7 +353,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
      * @param idUser long con el identificador del usuario
      * @return String con el nombre del usuario
      */
-    private String owneName(long idUser) {
+  /*  private String owneName(long idUser) {
         String query = "SELECT nombre FROM ususario WHERE id = "
                 + idUser + ";";
         ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
@@ -376,7 +373,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
      * @param idGenre long identificador de genero
      * @return String con el genero
      */
-    private String genre(long idGenre) {
+    /*private String genre(long idGenre) {
         String query = "SELECT genero FROM genero WHERE id = "
                 + idGenre + ";";
         ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
@@ -412,5 +409,6 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         }
     }
 
+    */
 
 }

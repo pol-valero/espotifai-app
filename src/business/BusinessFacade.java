@@ -1,6 +1,10 @@
 package business;
 
+import business.entities.Playlist;
+import business.entities.Song;
 import business.entities.User;
+
+import java.util.List;
 
 /**
  * Interficie con los metodos para gestionar la informacion entre presentation y business
@@ -68,4 +72,25 @@ public interface BusinessFacade {
      void deleteAccountRequest();
 
     User getCurrentUser();
+
+     List<Playlist> loadPublicPlaylist();
+
+     List<Playlist> loadUserPlaylist();
+
+    void addSongPlaylist(String playlistName, Song song, int position);
+
+     List<Song> loadAllMusic();
+
+     void deleteSongPlaylist(String playlistName, List<String> songName);
+
+     void deletePlaylist(String playlistName);
+
+     void createPlaylist(String playlistName);
+
+     Playlist findPlaylist(String playlistName);
+
+     List<Song> loadMusicPlaylist(String playlistName);
+
+    List<Song> loadSearchMusic(String filterName);
+
 }
