@@ -123,15 +123,18 @@ public class BusinessFacadelmpl implements BusinessFacade{
         return musicListManager.loadSearchMusic(filterName);
     }
 
+    @Override
     public void createSong(Song song){
         song.setIdOwne(loginManager.getCurrentUSer().getId());
         musicManager.createSong(song);
     }
 
+    @Override
     public List<Genre> loadStadistic(){
         return musicManager.loadStadistic();
     }
 
+    @Override
     public void deleteUserAddedSong(String songName){ //TODO llamar a las funciones de eliminar cancion de playlist quizas n hace falta
         List<Song> songs = musicListManager.loadAllMusic();
         for (Song song: songs){
@@ -142,6 +145,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
         }
     }
 
+    @Override
     public Song findSong(String songName){
         return musicManager.findSong(songName);
     }

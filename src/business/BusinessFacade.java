@@ -1,5 +1,6 @@
 package business;
 
+import business.entities.Genre;
 import business.entities.Playlist;
 import business.entities.Song;
 import business.entities.User;
@@ -92,5 +93,13 @@ public interface BusinessFacade {
      List<Song> loadMusicPlaylist(String playlistName);
 
     List<Song> loadSearchMusic(String filterName);
+
+     void createSong(Song song);
+
+     List<Genre> loadStadistic();
+
+     void deleteUserAddedSong(String songName);
+
+     Song findSong(String songName);
 
 }
