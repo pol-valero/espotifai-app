@@ -24,7 +24,15 @@ public class Genre {
         return amount;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void incrementAmount() {
+        amount++;
+    }
+
+    public void decrementAmount() {
+        if (amount > 0) {
+            amount--;
+        } else {
+            amount = 0;
+        }
     }
 }

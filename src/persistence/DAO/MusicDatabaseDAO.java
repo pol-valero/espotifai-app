@@ -58,13 +58,6 @@ public class MusicDatabaseDAO implements MusicDAO {
                 + songName + ";";
         SQLConnector.getInstance().deleteQuery(query);
 
-        List<Genre> genreList = loadStadistic();
-        for (Genre genre: genreList) {
-            if (genre.getId() == idGenre ){
-                genre.setAmount(genre.getAmount() - 1);
-            }
-        }
-        updateStadistic(genreList);
     }
 
     @Override

@@ -6,6 +6,8 @@ import persistence.DAO.MusicDatabaseDAO;
 import persistence.DAO.MusicListDatabaseDAO;
 import persistence.MusicDAO;
 import persistence.MusicListDAO;
+
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -42,10 +44,26 @@ public class MusicManager {
 
     public void createSong(Song song){
         musicDAO.createSong(song);
+
+        List<Genre> stadistic = musicDAO.loadStadistic();
+        for(Genre genre: stadistic) {
+            if (genre.getGenre().equals(song.getGenre())) {
+                genre.incrementAmount();
+            }
+        }
+        musicDAO.updateStadistic(stadistic);
     }
 
     public void deleteUserAddedSong(String songName){
         musicDAO.deleteSong(songName);
+
+        List<Genre> stadistic = loadStadistic();
+        for (Genre genre: stadistic) {
+            if (genre.getGenre().equals(songName)){
+                genre.decrementAmount();
+            }
+        }
+        musicDAO.updateStadistic(stadistic);
     }
 
     public void playMusic(){
@@ -55,5 +73,7 @@ public class MusicManager {
     public void stopMusic(){
         currentSong.stopSong();
     }
+
+
 
 }
