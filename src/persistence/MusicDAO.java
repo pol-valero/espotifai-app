@@ -13,22 +13,22 @@ public interface MusicDAO {
      */
      List<Genre> loadStadistic();
 
-    /**
-     *
-     * @param song
-     */
      void createSong(Song song);
 
-    /**
-     * Metodo para eliminar una cancion de la base de datos
-     * @param songName
-     */
-     void deleteSong(String songName);
+     void deleteSong(Song song);
 
-    /**
-     * Metodo para subir estadisticas a la base de datos
-     * @param stadistic List con la informacion de las estadisticas
-     */
-    public void updateStadistic(List<Genre> stadistic);
+     void updateStadistic(String genreName, int amount);
+
+     void createStadistic(String genreName);
+
+     void deleteGenre(String genreName);
+
+     void createAlbum(String album, int idSinger);
+
+     int loadIdAlbum(String albumName);
+
+     void createSinger(String singerName);
+
+     int loadIdSinger(String singerName);
 
 }

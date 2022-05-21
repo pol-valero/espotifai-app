@@ -33,77 +33,93 @@ public class MusicDatabaseDAO implements MusicDAO {
     }
 
     @Override
-    public void createSong(Song song) { //la columna cancion hace referencia al path
-      /*  String query = "INSERT INTO usuario (id, titulo, id_genero, id_album, id_usuario," +
-                "tiempo_segundos, cancion) VALUES ('"
-                + song.getIdSong() + "', '" +
-                song.getName() + "', '" +
-                song.getGenre() + "', '" +
-                user.getPassword() + "');";
+    public void createSong(Song song) { //cambiar al campo pathFile en char en la base
+        String query = "INSERT INTO v_canciones (titulo, id_genero, id_album, id_usuario," +
+                "pathFile) VALUES ('"
+                + song.getName() + ","
+                + song.getIdGenre() + ","
+                + song.getAlbum() +
+                + song.getIdOwne() +
+                //+ song.getFilePath() +
+                "');";
 
         SQLConnector.getInstance().insertQuery(query);
-       */
+
     }
 
     @Override
-    public void deleteSong(String songName) {
-
-        int idGenre = idGenre(songName);
+    public void deleteSong(Song song) {
 
         String query = "DELETE FROM lista_canciones WHERE id_cancion = "
-                + idSong(songName) + ";";
+                + song.getIdSong() + ";";
         SQLConnector.getInstance().deleteQuery(query);
 
         query = "DELETE FROM canciones WHERE titulo = "
-                + songName + ";";
+                + song.getName() + ";";
+
         SQLConnector.getInstance().deleteQuery(query);
+    }
+
+    @Override
+    public void updateStadistic(String genreName, int amount) {
+        String query = "UPDATE genero SET cantidad = " + amount + "Where genero = "+ genreName + ";";
+        SQLConnector.getInstance().updateQuery(query); //todo probar si va bien
 
     }
 
     @Override
-    public void updateStadistic(List<Genre> stadistic) {
-        String query = "TRUNCATE genero";
-        SQLConnector.getInstance().updateQuery(query); //todo probar si va bien
-        for (Genre genre : stadistic) {
-            query = "INSERT INTO genero(id, genero, cantidad) VALUES ('" +
-                    genre.getId() + "', '" +
-                    genre.getGenre() + "', '" +
-                    genre.getAmount() + "');";
-            SQLConnector.getInstance().insertQuery(query);
-        }
+    public void createStadistic(String genreName){
+        String query = "INSERT INTO genero (genero, cantidad ) VALUES ('"
+                + genreName + 1 + "');"; //todo quizas el 1 va entre comillas
+
+        SQLConnector.getInstance().insertQuery(query);
     }
 
-    /**
-     * Metodo para obteber la id de una cancion a traves de su nombre
-     * @param songName String con el nombre de la cancion
-     * @return int con el identificador de la cancion
-     */
-    private int idSong(String songName){
-        String query = "SElECT id FROM canciones WHERE titulo = " + songName + ";";
-        ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
-        int id = -1;
-        try {
-            id = resultSet.getInt("titulo");
-        } catch (SQLException exception){
-            exception.getErrorCode();
-        }
-        return id;
+    @Override
+    public void deleteGenre(String genreName){
+        String query = "DELETE From genero Where genero = " + genreName + ";";
+        SQLConnector.getInstance().deleteQuery(query);
     }
 
-    /**
-     * MEtodo para obtener la id del genero a partir del nombre de la cancion
-     * @return int con el identificador de la cancion
-     */
-    private int idGenre(String songName){
-        String query = "SELECT id_genero FROM canciones WHERE titulo = "
-                + songName + ";";
-        ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
+    @Override
+    public void createAlbum(String album, int idSinger){
+        String query = "INSERT INTO genero (titulo, id_cantante) VALUES ('"
+                + album + idSinger + "');";
 
+        SQLConnector.getInstance().insertQuery(query);
+    }
+
+    @Override
+    public int loadIdAlbum(String albumName){
+        String query = "SELECT id FROM album Where titulo =" + albumName + ";" ;
+        ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
         try {
-            return resultSet.getInt("id_genero");
+            return  resultSet.getInt("id");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1;
+
+        return 0;
+    }
+
+    @Override
+    public void createSinger(String singerName){
+        String query = "INSERT INTO cantantes (nombre) VALUES ('"
+                + singerName + "');";
+        SQLConnector.getInstance().insertQuery(query);
+    }
+
+    @Override
+    public int loadIdSinger(String singerName){
+        String query = "SELECT id FROM cantantes Where nombre =" + singerName + ";" ;
+        ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
+
+        try {
+            return resultSet.getInt("id");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }

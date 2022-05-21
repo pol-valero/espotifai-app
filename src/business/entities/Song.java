@@ -70,7 +70,37 @@ public class Song extends PlaybackListener implements Runnable{
         return owne;
     }
 
+    public int getIdGenre() {
+        return idGenre;
+    }
 
+    public int getIdAlbum() {
+        return idAlbum;
+    }
+
+    public int getIdSinger() {
+        return idSinger;
+    }
+
+    public int getIdOwne() {
+        return idOwne;
+    }
+
+    public void setIdOwne(int idOwne) {
+        this.idOwne = idOwne;
+    }
+
+    public void setIdGenre(int idGenre) {
+        this.idGenre = idGenre;
+    }
+
+    public void setIdSinger(int idSinger) {
+        this.idSinger = idSinger;
+    }
+
+    public void setIdAlbum(int idAlbum) {
+        this.idAlbum = idAlbum;
+    }
     //parte de la reproduccion
 
     //empezar a reproducir
