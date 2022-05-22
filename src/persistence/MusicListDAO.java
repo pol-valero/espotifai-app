@@ -17,12 +17,14 @@ public interface MusicListDAO  {
     List<Song> loadMusicPlaylist(Playlist playlist);
 
     // añade una canción a la playlist
-    // IGUAL interesa que siempre se añada a la posición y la rutina determine la posición ultima y después update posición
-    void addSongPlaylist(Playlist playlist, Song song, int position);
+    void addSongPlaylist(Playlist playlist, Song song);
 
     public boolean deleteSongPlaylist(Playlist playlist, Song song);
 
-    public boolean updateSongPlaylist(Playlist playlist, Song song, int position);
+    public boolean moveSongUp(Playlist playlist, Song song);
+
+    public boolean moveSongDown(Playlist playlist, Song song);
+
     /**
      * Metodo para crear una nueva playlist
      * @param playlist Objeto Playlist con la informcion de la playlist

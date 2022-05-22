@@ -19,6 +19,7 @@ public class Song extends PlaybackListener implements Runnable{
     private int idOwne; //user
     private String owne;
     private String filePath;
+    private int orden;
 
     private AdvancedPlayer music; //audio
     private Thread musicThread; //para reproducir
@@ -26,7 +27,7 @@ public class Song extends PlaybackListener implements Runnable{
 
 
     public Song(int idSong, String name, int idGenre, String genre, int idAlbum,
-                String album, int idSinger, String singer, int idOwne, String owne, String filePath) {
+                String album, int idSinger, String singer, int idOwne, String owne, String filePath, int orden) {
 
     this.idSong = idSong;
     this.name = name;
@@ -39,6 +40,7 @@ public class Song extends PlaybackListener implements Runnable{
     this.idOwne = idOwne;
     this.owne = owne;
     this.filePath = filePath;
+    this.orden = orden;
 
     }
 
@@ -86,6 +88,11 @@ public class Song extends PlaybackListener implements Runnable{
         return idOwne;
     }
 
+
+    public int getOrden() {
+        return orden;
+    }
+
     public void setIdOwne(int idOwne) {
         this.idOwne = idOwne;
     }
@@ -101,6 +108,7 @@ public class Song extends PlaybackListener implements Runnable{
     public void setIdAlbum(int idAlbum) {
         this.idAlbum = idAlbum;
     }
+
     //parte de la reproduccion
 
     //empezar a reproducir
