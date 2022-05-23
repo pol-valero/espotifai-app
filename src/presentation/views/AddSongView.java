@@ -340,6 +340,7 @@ public class AddSongView {
     public void registerController (AddSongViewController addSongViewController){
 
         jbAdd.addActionListener(addSongViewController);
+        jbManagement.addActionListener(addSongViewController);
         goBackImage.addMouseListener(addSongViewController);
     }
     public String getSongName() {

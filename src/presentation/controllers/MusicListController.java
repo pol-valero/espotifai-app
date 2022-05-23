@@ -36,7 +36,11 @@ public class MusicListController implements ActionListener, ListSelectionListene
                 break;
 
             case MusicListView.BTN_ACCOUNTMANAGER:
+                controller.showLogoutCard();
+                break;
 
+            case MusicListView.BTN_HOME:
+                controller.showHomescreenCard();
                 break;
 
             case MusicListView.BTN_ADDSONG:
@@ -56,11 +60,11 @@ public class MusicListController implements ActionListener, ListSelectionListene
                 break;
 
             case MusicListView.BTN_ADDPERSONALSONG:
-
+                controller.showAddSongCard();
                 break;
 
             case MusicListView.BTN_REMOVEPERSONALSONG:
-
+                musicListView.removeSongsVariation();
                 break;
 
             case MusicListView.BTN_REMOVE_SELECTED:

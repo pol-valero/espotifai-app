@@ -30,8 +30,12 @@ public class AddSongViewController implements ActionListener, MouseListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()){
-            case SignupView.BTN_SIGNUP:
-                //checkAllSignupFields();
+            case AddSongView.BTN_ADD:
+                controller.showMusicListCard();
+                break;
+
+            case AddSongView.BTN_MANAGEMENT:
+                controller.showLogoutCard();
                 break;
         }
     }
@@ -43,7 +47,7 @@ public class AddSongViewController implements ActionListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        controller.showLoginCard();
+        controller.showMusicListCard();
     }
 
     @Override
