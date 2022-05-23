@@ -1,14 +1,6 @@
 package presentation.views;
 
-import presentation.controllers.AddSongViewController;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.image.BufferedImage;
-
-import presentation.controllers.AddSongViewController;
-import presentation.controllers.SignupViewController;
+import presentation.controllers.SetPlaylistNameController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,12 +8,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 
 
-public class AddPlaylistName {
+public class SetPlaylistNameView {
 
     private final JFrame topContainer;
     private final CardLayout cardManager;
 
-    public static final String BTN_ADD = "BTN_ADD";
+    public static final String BTN_MANAGEMENT = "BTN_MANAGEMENT";
+    public static final String BTN_DONE = "BTN_DONE";
 
     private JButton jbAdd = new JButton();
     private JButton jbManagement = new JButton();
@@ -30,7 +23,7 @@ public class AddPlaylistName {
     private JLabel jlWrongNameError = new JLabel();
     private JLabel goBackImage = new JLabel();
 
-        public AddPlaylistName (JFrame topContainer, CardLayout cardManager) {
+        public SetPlaylistNameView(JFrame topContainer, CardLayout cardManager) {
             this.topContainer = topContainer;
             this.cardManager = cardManager;
             configureView();
@@ -98,7 +91,7 @@ public class AddPlaylistName {
 
             // Set go back Image and Imatge filler
 
-            ImageIcon boto = new ImageIcon("src/edu/salleurl/boto.png");
+            ImageIcon boto = new ImageIcon("images/boto.png");
             Image imageIcon_2 = boto.getImage();
             Image Image_2 = getScaledImage(imageIcon_2, 50, 50);
             ImageIcon new_Boto = new ImageIcon(Image_2);
@@ -138,7 +131,7 @@ public class AddPlaylistName {
             jbManagement.setFocusable(false);
             jbManagement.setOpaque(true);
             jbManagement.setBorderPainted(false);
-            jbManagement.setActionCommand(BTN_ADD);
+            jbManagement.setActionCommand(BTN_MANAGEMENT);
 
             JPanel BorderAdjustment_2 = new JPanel(new BorderLayout());
 
@@ -173,19 +166,16 @@ public class AddPlaylistName {
             jlWrongNameError.setForeground(vermell);
             jlWrongNameError.setFont(text);
             info_panel.add(jlWrongNameError);
-            //Sign up button
 
             jbAdd.setBackground(vermell);
             jbAdd.setForeground(Color.white);
-            jbAdd.setText("Add ");
+            jbAdd.setText("Done");
             jbAdd.setFont(subtitle);
             jbAdd.setPreferredSize(button_shape);
             jbAdd.setFocusable(false);
             jbAdd.setOpaque(true);
             jbAdd.setBorderPainted(false);
-            jbAdd.setActionCommand(BTN_ADD);
-
-            //   btnSignup.setActionCommand(BTN_LOGOUT);
+            jbAdd.setActionCommand(BTN_DONE);
 
 
             //Position and addition
@@ -232,13 +222,15 @@ public class AddPlaylistName {
     }
 
     public void showCard () {
-        setErrorsInvisible();
         cardManager.show(topContainer.getContentPane(),"addPlaylistNameCard");
+        wrongNameErrorVisibility(false);
     }
 
-    private void setErrorsInvisible() {
-
-        topContainer.revalidate();
+    public void registerController(SetPlaylistNameController setPlaylistNameController) {
+            jbAdd.addActionListener(setPlaylistNameController);
+            jbManagement.addActionListener(setPlaylistNameController);
+            goBackImage.addMouseListener(setPlaylistNameController);
     }
+
     }
 
