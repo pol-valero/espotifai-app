@@ -9,6 +9,8 @@ import presentation.controllers.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -53,6 +55,34 @@ public class UIController {
         //showHomescreenCard();
         showMusicListCard();
         //showAddSongCard();
+
+        //Les seguents linies son simplement una prova per a fer el "popup" que utilitzarem per a la barra de reproduccio
+        JPanel jPanel = new JPanel();
+        JLabel jLabel = new JLabel("This is a popup");
+        jPanel.add(jLabel);
+        JWindow jWindow = new JWindow(topContainer);
+        jWindow.add(jPanel);
+        jWindow.setVisible(true);
+        jWindow.setSize(200,200);
+        jWindow.addMouseMotionListener(new MouseMotionListener() {
+            private int mx, my;
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                mx = e.getXOnScreen();
+                my = e.getYOnScreen();
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                Point p = jWindow.getLocation();
+                p.x += e.getXOnScreen() - mx;
+                p.y += e.getYOnScreen() - my;
+                mx = e.getXOnScreen();
+                my = e.getYOnScreen();
+                jWindow.setLocation(p);
+            }
+        });
     }
 
     public void showMusicListCard() {
