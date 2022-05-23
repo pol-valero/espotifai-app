@@ -30,6 +30,7 @@ public class UIController {
     private VerificationCodeViewController verificationCodeViewController;
     private MusicListController musicListController;
     private AddSongViewController addSongViewController;
+    private SetPlaylistNameController setPlaylistNameController;
 
     public void run () {
         JFrame topContainer = new JFrame();
@@ -42,6 +43,7 @@ public class UIController {
         verificationCodeViewController = new VerificationCodeViewController(this,topContainer,cardManager);
         musicListController = new MusicListController(this, topContainer, cardManager);
         addSongViewController = new AddSongViewController(this, topContainer, cardManager);
+        setPlaylistNameController = new SetPlaylistNameController(this, topContainer, cardManager);
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
         //showSignUpCard();
@@ -53,7 +55,7 @@ public class UIController {
         //showAddSongCard();
     }
 
-    private void showMusicListCard() {
+    public void showMusicListCard() {
         //todo cal fer un mètode per obtenir una string (songname)
         musicListController.showMusicListCard(new Playlist(122,"Chill out testing",2323,"You"));
     }
@@ -142,6 +144,10 @@ public class UIController {
 
     public void showAddSongCard () {
         addSongViewController.showAddSongCard();
+    }
+
+    public void showSetPlaylistNameCard () {
+        setPlaylistNameController.showSetPlaylistNameCard();
     }
 
     public boolean findUserNameMatch(String username){//todo
