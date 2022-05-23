@@ -21,6 +21,7 @@ public class AddPlaylistName {
     private final JFrame topContainer;
     private final CardLayout cardManager;
 
+    public static final String BTN_GO_BACK = "BTN_GO_BACK";
     public static final String BTN_ADD = "BTN_ADD";
 
     private JButton jbAdd = new JButton();
@@ -138,7 +139,7 @@ public class AddPlaylistName {
             jbManagement.setFocusable(false);
             jbManagement.setOpaque(true);
             jbManagement.setBorderPainted(false);
-            jbManagement.setActionCommand(BTN_ADD);
+            jbManagement.setActionCommand(BTN_GO_BACK);
 
             JPanel BorderAdjustment_2 = new JPanel(new BorderLayout());
 
