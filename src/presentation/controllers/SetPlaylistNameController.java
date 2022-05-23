@@ -1,9 +1,7 @@
 package presentation.controllers;
-import business.entities.User;
-import presentation.UIController;
 
-import presentation.views.AddSongView;
-import presentation.views.SignupView;
+import presentation.UIController;
+import presentation.views.SetPlaylistNameView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,37 +10,33 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class AddSongViewController implements ActionListener, MouseListener {
+public class SetPlaylistNameController implements ActionListener, MouseListener {
 
-    private final AddSongView addSongView;
+    private final SetPlaylistNameView setPlaylistNameView;
     private final UIController controller;
 
-    public AddSongViewController(UIController controller, JFrame topContainer, CardLayout cardManager){
+    public SetPlaylistNameController (UIController controller, JFrame topContainer, CardLayout cardManager) {
+        setPlaylistNameView = new SetPlaylistNameView(topContainer, cardManager);
+        setPlaylistNameView.registerController(this);
         this.controller = controller;
-        addSongView = new AddSongView(topContainer, cardManager);
-        addSongView.registerController(this);
     }
 
-    /**
-     * S'ha de fer la funció que rep els parametres i fica o treu els errors
-     * @param e
-     */
     @Override
     public void actionPerformed(ActionEvent e) {
-        switch(e.getActionCommand()){
-            case AddSongView.BTN_ADD:
+        switch (e.getActionCommand()) {
+            case SetPlaylistNameView.BTN_DONE:
                 controller.showMusicListCard();
                 break;
 
-            case AddSongView.BTN_MANAGEMENT:
+            case SetPlaylistNameView.BTN_MANAGEMENT:
                 controller.showLogoutCard();
                 break;
         }
+
     }
 
-
-    public void showAddSongCard () {
-        addSongView.showCard();
+    public void showSetPlaylistNameCard () {
+        setPlaylistNameView.showCard();
     }
 
     @Override

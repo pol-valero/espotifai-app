@@ -36,30 +36,35 @@ public class MusicListController implements ActionListener, ListSelectionListene
                 break;
 
             case MusicListView.BTN_ACCOUNTMANAGER:
+                controller.showLogoutCard();
+                break;
 
+            case MusicListView.BTN_HOME:
+                controller.showHomescreenCard();
                 break;
 
             case MusicListView.BTN_ADDSONG:
+                //falta posar aqui una funcio "refresh()" i que li passem una playlist amb totes les cançons del sistema
+                musicListView.addSongsVariation();
                 break;
 
             case MusicListView.BTN_DELETE:
                 break;
 
             case MusicListView.BTN_RENAMEPLAYLIST:
-
+                controller.showSetPlaylistNameCard();
                 break;
 
             case MusicListView.BTN_REMOVESONG:
-                System.out.println("prova");
                 musicListView.removeSongsVariation();
                 break;
 
             case MusicListView.BTN_ADDPERSONALSONG:
-
+                controller.showAddSongCard();
                 break;
 
             case MusicListView.BTN_REMOVEPERSONALSONG:
-
+                musicListView.removeSongsVariation();
                 break;
 
             case MusicListView.BTN_REMOVE_SELECTED:
@@ -67,7 +72,7 @@ public class MusicListController implements ActionListener, ListSelectionListene
                 break;
 
             case MusicListView.BTN_CANCEL:
-                System.out.println("dfasfsaf");
+
                 musicListView.returnToPreviousVariation();
                 break;
 

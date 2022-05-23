@@ -29,7 +29,9 @@ public class MusicListView {
     public static final String BTN_UP = "BTN_UP";
     public static final String BTN_DOWN = "BTN_DOWN";
     public static final String BTN_REMOVE_SELECTED = "BTN_REMOVE_SELECTED";
+    public static final String BTN_ADD_SELECTED = "BTN_ADD_SELECTED";
     public static final String BTN_CANCEL = "BTN_CANCEL";
+    public static final String BTN_HOME = "BTN_HOME";
 
     private JButton addSong;
     private JButton removeSong;
@@ -38,9 +40,15 @@ public class MusicListView {
     private JButton addPersonalSong;
     private JButton removePersonalSong;
     private JButton removeSelectedSongs;
+    private JButton addSelectedSongs;
     private JButton cancel;
     private JButton upBtn ;
     private JButton downBtn;
+    private JButton searchBtn;
+    private JTextField searchBar;
+    private JButton stadisticsBtn;
+    private JButton jbHome;
+    private JButton accManBtn;
 
     private DefaultTableModel model;
 
@@ -54,7 +62,6 @@ public class MusicListView {
     private JPanel centralPanel;
     private JPanel northernPanel;
 
-    private boolean removeSongsVariationActive;
     private boolean userPersonalSongsVariationActive;
     private boolean userPlaylistVariationActive;
     private boolean publicPlaylistVariationActive;
@@ -134,6 +141,9 @@ public class MusicListView {
         removeSelectedSongs = createButton("Remove selected");
         removeSelectedSongs.setActionCommand(BTN_REMOVE_SELECTED);
 
+        addSelectedSongs = createButton("Add selected");
+        addSelectedSongs.setActionCommand(BTN_ADD_SELECTED);
+
 
 
 
@@ -167,6 +177,10 @@ public class MusicListView {
 
         c.gridx = 0;
         c.gridy = 7;
+        upperButtons.add(addSelectedSongs, c);
+
+        c.gridx = 0;
+        c.gridy = 8;
         upperButtons.add(cancel, c);
 
         //Sorting Panel Config
@@ -288,7 +302,7 @@ public class MusicListView {
         searchPanel.setBackground(negre);
         searchPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JTextField searchBar = new JTextField();
+        searchBar = new JTextField();
         searchBar.setMaximumSize(new Dimension(300,30));
 
         ImageIcon magLens = new ImageIcon("images/LUPA AI.png");
@@ -296,7 +310,7 @@ public class MusicListView {
         Image magLensIconScaled = getScaledImage(magLensIcon,20,20);
         ImageIcon magnifyingLens = new ImageIcon(magLensIconScaled);
 
-        JButton searchBtn = new JButton();
+        searchBtn = new JButton();
         searchBtn.setIcon(magnifyingLens);
         searchBtn.setBackground(vermell);
         searchBtn.setFocusable(false);
@@ -315,11 +329,16 @@ public class MusicListView {
 
         GridBagConstraints constraints = new GridBagConstraints();
 
-        JButton stadisticsBtn = createButton("Stadistics");
+        jbHome = createButton("Home");
+        jbHome.setActionCommand(BTN_HOME);
+
+        stadisticsBtn = createButton("Stadistics");
         stadisticsBtn.setActionCommand(BTN_STADISTICS);
 
-        JButton accManBtn = createButton("Account Manager");
+        accManBtn = createButton("Account Manager");
         accManBtn.setActionCommand(BTN_ACCOUNTMANAGER);
+
+        constraints.insets = new Insets(5,5,5,5);
 
         constraints.gridx=0;
         constraints.gridy=0;
@@ -327,10 +346,14 @@ public class MusicListView {
 
         constraints.gridx=0;
         constraints.gridy=1;
-        buttonsPanel.add(Box.createRigidArea(new Dimension(0,400)),constraints);
+        buttonsPanel.add(jbHome, constraints);
 
         constraints.gridx=0;
         constraints.gridy=2;
+        buttonsPanel.add(Box.createRigidArea(new Dimension(0,400)),constraints);
+
+        constraints.gridx=0;
+        constraints.gridy=3;
         buttonsPanel.add(accManBtn,constraints);
 
 
@@ -408,9 +431,14 @@ public class MusicListView {
         addPersonalSong.addActionListener(musicListController);
         removePersonalSong.addActionListener(musicListController);
         removeSelectedSongs.addActionListener(musicListController);
+        addSelectedSongs.addActionListener(musicListController);
         cancel.addActionListener(musicListController);
         upBtn.addActionListener(musicListController);
         downBtn.addActionListener(musicListController);
+        searchBtn.addActionListener(musicListController);
+        stadisticsBtn.addActionListener(musicListController);
+        jbHome.addActionListener(musicListController);
+        accManBtn.addActionListener(musicListController);
     }
 
     public int getRow() {
@@ -482,7 +510,30 @@ public class MusicListView {
         addPersonalSong.setVisible(false);
         removePersonalSong.setVisible(false);
         removeSelectedSongs.setVisible(true);
+        addSelectedSongs.setVisible(false);
         cancel.setVisible(true);
+        upBtn.setVisible(false);
+        downBtn.setVisible(false);
+        searchBtn.setVisible(false);
+        searchBar.setVisible(false);
+        topContainer.revalidate();
+    }
+
+    public void addSongsVariation() {
+        showCheckbox();
+        addSong.setVisible(false);
+        removeSong.setVisible(false);
+        renamePlaylist.setVisible(false);
+        deletePlaylist.setVisible(false);
+        addPersonalSong.setVisible(false);
+        removePersonalSong.setVisible(false);
+        removeSelectedSongs.setVisible(false);
+        addSelectedSongs.setVisible(true);
+        cancel.setVisible(true);
+        upBtn.setVisible(false);
+        downBtn.setVisible(false);
+        searchBtn.setVisible(false);
+        searchBar.setVisible(false);
         topContainer.revalidate();
     }
 
@@ -495,7 +546,12 @@ public class MusicListView {
         addPersonalSong.setVisible(true);
         removePersonalSong.setVisible(true);
         removeSelectedSongs.setVisible(false);
+        addSelectedSongs.setVisible(false);
         cancel.setVisible(false);
+        upBtn.setVisible(true);
+        downBtn.setVisible(true);
+        searchBtn.setVisible(false);
+        searchBar.setVisible(false);
         topContainer.revalidate();
         setVariationsToInactive();
         userPersonalSongsVariationActive = true;
@@ -510,7 +566,12 @@ public class MusicListView {
         addPersonalSong.setVisible(false);
         removePersonalSong.setVisible(false);
         removeSelectedSongs.setVisible(false);
+        addSelectedSongs.setVisible(false);
         cancel.setVisible(false);
+        upBtn.setVisible(true);
+        downBtn.setVisible(true);
+        searchBtn.setVisible(false);
+        searchBar.setVisible(false);
         topContainer.revalidate();
         setVariationsToInactive();
         userPlaylistVariationActive = true;
@@ -525,7 +586,12 @@ public class MusicListView {
         addPersonalSong.setVisible(false);
         removePersonalSong.setVisible(false);
         removeSelectedSongs.setVisible(false);
+        addSelectedSongs.setVisible(false);
         cancel.setVisible(false);
+        upBtn.setVisible(false);
+        downBtn.setVisible(false);
+        searchBtn.setVisible(false);
+        searchBar.setVisible(false);
         topContainer.revalidate();
         setVariationsToInactive();
         publicPlaylistVariationActive = true;
@@ -540,7 +606,12 @@ public class MusicListView {
         addPersonalSong.setVisible(false);
         removePersonalSong.setVisible(false);
         removeSelectedSongs.setVisible(false);
+        addSelectedSongs.setVisible(false);
         cancel.setVisible(false);
+        upBtn.setVisible(false);
+        downBtn.setVisible(false);
+        searchBtn.setVisible(true);
+        searchBar.setVisible(true);
         topContainer.revalidate();
         setVariationsToInactive();
         allSongsVariationActive = true;
@@ -567,7 +638,6 @@ public class MusicListView {
 
     public void setVariationsToInactive() {
         //aquesta funcio posara totes les variacions a false. Cridarem aquesta funcio dins del procediment de cada variacio (just abans d'activar el boolean de la variacio)
-        removeSongsVariationActive = false;
         userPersonalSongsVariationActive = false;
         userPlaylistVariationActive = false;
         publicPlaylistVariationActive = false;

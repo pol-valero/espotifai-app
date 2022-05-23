@@ -27,7 +27,7 @@ public class MusicListManager {
         Playlist playlist = findUserPlaylist(playlistName, idUser);
 
         if (playlist != null){
-            musicListDAO.addSongPlaylist(playlist, song, position);
+            musicListDAO.addSongPlaylist(playlist, song);
         }
     }
 

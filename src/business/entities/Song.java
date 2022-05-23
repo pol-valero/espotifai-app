@@ -1,12 +1,9 @@
 package business.entities;
 
-import javazoom.jl.player.advanced.AdvancedPlayer;
-import javazoom.jl.player.advanced.PlaybackListener;
-
 /**
  * Clase encargada de gestionar la informacion de los objetos Song
  */
-public class Song extends PlaybackListener implements Runnable{
+public class Song {
 
     private int idSong;
     private String name;
@@ -19,14 +16,11 @@ public class Song extends PlaybackListener implements Runnable{
     private int idOwne; //user
     private String owne;
     private String filePath;
-
-    private AdvancedPlayer music; //audio
-    private Thread musicThread; //para reproducir
-    private boolean stop;
+    private int orden;
 
 
     public Song(int idSong, String name, int idGenre, String genre, int idAlbum,
-                String album, int idSinger, String singer, int idOwne, String owne, String filePath) {
+                String album, int idSinger, String singer, int idOwne, String owne, String filePath, int orden) {
 
     this.idSong = idSong;
     this.name = name;
@@ -39,6 +33,7 @@ public class Song extends PlaybackListener implements Runnable{
     this.idOwne = idOwne;
     this.owne = owne;
     this.filePath = filePath;
+    this.orden = orden;
 
     }
 
@@ -86,6 +81,11 @@ public class Song extends PlaybackListener implements Runnable{
         return idOwne;
     }
 
+
+    public int getOrden() {
+        return orden;
+    }
+
     public void setIdOwne(int idOwne) {
         this.idOwne = idOwne;
     }
@@ -101,52 +101,6 @@ public class Song extends PlaybackListener implements Runnable{
     public void setIdAlbum(int idAlbum) {
         this.idAlbum = idAlbum;
     }
-    //parte de la reproduccion
 
-    //empezar a reproducir
-    public void playMusic() {
-        try
-        {
-            String urlAsString =
-                    "file:///"
-                            + new java.io.File(".").getCanonicalPath()
-                            + "/"
-                            + this.filePath;
 
-            this.music = new AdvancedPlayer (
-                    new java.net.URL(urlAsString).openStream(),
-                    javazoom.jl.player.FactoryRegistry.systemRegistry().createAudioDevice()
-            );
-
-            this.music.setPlayBackListener(this);
-
-            this.musicThread = new Thread(this, "AudioThread");
-
-            this.stop = false;
-            this.musicThread.start();
-
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-    }
-
-    public void stopSong(){
-        music.close();
-    }
-
-    @Override
-    public void run() {
-        try {
-            this.music.play();
-        }
-        catch (javazoom.jl.decoder.JavaLayerException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void setStop(boolean stop) {
-        this.stop = stop;
-    }
 }

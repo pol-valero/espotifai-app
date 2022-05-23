@@ -1,12 +1,16 @@
 package business;
 
 import business.entities.Genre;
+import business.entities.MusicPlayer;
 import business.entities.Song;
+import javazoom.jl.decoder.JavaLayerException;
 import persistence.DAO.MusicDatabaseDAO;
 import persistence.DAO.MusicListDatabaseDAO;
 import persistence.MusicDAO;
 import persistence.MusicListDAO;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,7 +24,11 @@ public class MusicManager {
     private MusicListDAO musicListDAO = new MusicListDatabaseDAO();
 
     private Song currentSong;
-
+    private MusicPlayer musicPlayer;
+    private boolean playlist = false;
+    private List<Song> songs;
+    private boolean paused = false;
+    private int position;
 
     public Song getCurrentSong() {
         return currentSong;
@@ -134,13 +142,56 @@ public class MusicManager {
     }
 
     //todo para la reproduccion de musica
-    public void playMusic(){
-        currentSong.playMusic();
+
+    public void pausedSong(){ //para cuando se le da al boton de pausar  reproducir
+        paused = !paused;
+        if (paused) {
+            musicPlayer.resume();
+        } else {
+            musicPlayer.stop();
+        }
     }
 
-    public void stopMusic(){
-        currentSong.stopSong();
+    //podria ser un boolean y retorna false si falla en el path
+    public void previusNextSong(int next){ //para la parte de la barra de reproduccion las fleechas
+        musicPlayer.stop();
+        int position = this.position + next; //next debe ser uno o menos uno
+
+        if ( position >= songs.size() || position < 0) {
+            position = 0;
+            changeCurrentSong(position);
+            this.position = position;
+        } else {
+            changeCurrentSong(position);
+        }
+        playNewSong();
     }
 
+    public void playSong(boolean playlist, List<Song> songs, int position){
+        this.playlist = playlist;
+        this.songs = songs;
+        this.position = position;
+        changeCurrentSong(position);
+        playNewSong();
+    }
+
+    private void changeCurrentSong(int position){
+        currentSong = songs.get(position);
+    }
+
+    private boolean playNewSong(){ //podria ser void si no queremos mirar si el path falla
+        try {
+            FileInputStream inputStream = new FileInputStream(currentSong.getFilePath());
+            paused  = false;
+            musicPlayer = new MusicPlayer(inputStream);
+            return true;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        } catch (JavaLayerException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }
