@@ -1,12 +1,9 @@
 package business.entities;
 
-import javazoom.jl.player.advanced.AdvancedPlayer;
-import javazoom.jl.player.advanced.PlaybackListener;
-
 /**
  * Clase encargada de gestionar la informacion de los objetos Song
  */
-public class Song extends PlaybackListener implements Runnable{
+public class Song {
 
     private int idSong;
     private String name;
@@ -20,10 +17,6 @@ public class Song extends PlaybackListener implements Runnable{
     private String owne;
     private String filePath;
     private int orden;
-
-    private AdvancedPlayer music; //audio
-    private Thread musicThread; //para reproducir
-    private boolean stop;
 
 
     public Song(int idSong, String name, int idGenre, String genre, int idAlbum,
@@ -109,52 +102,5 @@ public class Song extends PlaybackListener implements Runnable{
         this.idAlbum = idAlbum;
     }
 
-    //parte de la reproduccion
 
-    //empezar a reproducir
-    public void playMusic() {
-        try
-        {
-            String urlAsString =
-                    "file:///"
-                            + new java.io.File(".").getCanonicalPath()
-                            + "/"
-                            + this.filePath;
-
-            this.music = new AdvancedPlayer (
-                    new java.net.URL(urlAsString).openStream(),
-                    javazoom.jl.player.FactoryRegistry.systemRegistry().createAudioDevice()
-            );
-
-            this.music.setPlayBackListener(this);
-
-            this.musicThread = new Thread(this, "AudioThread");
-
-            this.stop = false;
-            this.musicThread.start();
-
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-        }
-    }
-
-    public void stopSong(){
-        music.close();
-    }
-
-    @Override
-    public void run() {
-        try {
-            this.music.play();
-        }
-        catch (javazoom.jl.decoder.JavaLayerException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void setStop(boolean stop) {
-        this.stop = stop;
-    }
 }
