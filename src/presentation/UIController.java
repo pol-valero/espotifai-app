@@ -64,6 +64,7 @@ public class UIController {
         jWindow.add(jPanel);
         jWindow.setVisible(true);
         jWindow.setSize(200,200);
+        jWindow.setAlwaysOnTop(true);
         jWindow.addMouseMotionListener(new MouseMotionListener() {
             private int mx, my;
 
