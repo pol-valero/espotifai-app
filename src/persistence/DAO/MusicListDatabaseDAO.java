@@ -145,10 +145,13 @@ public class MusicListDatabaseDAO implements MusicListDAO {
                 String owner = resultSet.getString("Owner");
                 String filePath = resultSet.getString("filepath");
                 int orden = resultSet.getInt("orden");
+                int minutes = resultSet.getInt("timeMinutes");
+                int seconds = resultSet.getInt("timeSec");
+                String lyrics = resultSet.getString("lyrics");
 
 
                 //aquí el campo orden no es significativo pero se lo pasamos
-                song.add(new Song(idSong, name, idGenere, genere, idAlbum, album, idSinger, singer, idOwner, owner, filePath, orden));
+                song.add(new Song(idSong, name, idGenere, genere, idAlbum, album, idSinger, singer, idOwner, owner, filePath, orden, minutes, seconds, lyrics));
             }
         } catch (SQLException exception){
             exception.getErrorCode();
@@ -182,8 +185,11 @@ public class MusicListDatabaseDAO implements MusicListDAO {
                 String owner = resultSet.getString("Owner");
                 String filePath = resultSet.getString("filepath");
                 int orden = resultSet.getInt("orden");
+                int minutes = resultSet.getInt("timeMinutes");
+                int seconds = resultSet.getInt("timeSec");
+                String lyrics = resultSet.getString("lyrics");
 
-                song.add(new Song(idSong, name, idGenere, genere, idAlbum, album, idSinger, singer, idOwner, owner, filePath, orden));
+                song.add(new Song(idSong, name, idGenere, genere, idAlbum, album, idSinger, singer, idOwner, owner, filePath, orden, minutes, seconds, lyrics));
             }
         } catch (SQLException exception){
             exception.getErrorCode();
@@ -215,9 +221,12 @@ public class MusicListDatabaseDAO implements MusicListDAO {
                 int idOwner = resultSet.getInt("idOwner");
                 String owner = resultSet.getString("Owner");
                 String filePath = resultSet.getString("filepath");
+                int minutes = resultSet.getInt("timeMinutes");
+                int seconds = resultSet.getInt("timeSec");
+                String lyrics = resultSet.getString("lyrics");
                 int orden = 0; //ponemos 0 porque el orden nos da igual, las canciones se ordenan por nombre y no se requiere
 
-                song.add(new Song(idSong, name, idGenere, genere, idAlbum, album, idSinger, singer, idOwner, owner, filePath,orden));
+                song.add(new Song(idSong, name, idGenere, genere, idAlbum, album, idSinger, singer, idOwner, owner, filePath,orden, minutes, seconds, lyrics));
             }
         } catch (SQLException exception){
             exception.getErrorCode();

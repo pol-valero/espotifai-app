@@ -17,10 +17,13 @@ public class Song {
     private String owne;
     private String filePath;
     private int orden;
+    private int minutes;
+    private int seconds;
+    private String lyrics;
 
 
     public Song(int idSong, String name, int idGenre, String genre, int idAlbum,
-                String album, int idSinger, String singer, int idOwne, String owne, String filePath, int orden) {
+                String album, int idSinger, String singer, int idOwne, String owne, String filePath, int orden, int minutes, int seconds, String lyrics) {
 
     this.idSong = idSong;
     this.name = name;
@@ -34,6 +37,9 @@ public class Song {
     this.owne = owne;
     this.filePath = filePath;
     this.orden = orden;
+    this.minutes = minutes;
+    this.seconds = seconds;
+    this.lyrics = lyrics;
 
     }
 
