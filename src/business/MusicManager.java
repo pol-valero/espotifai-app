@@ -185,6 +185,7 @@ public class MusicManager {
             FileInputStream inputStream = new FileInputStream(currentSong.getFilePath());
             paused  = false;
             musicPlayer = new MusicPlayer(inputStream);
+            musicPlayer.play();
             return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
