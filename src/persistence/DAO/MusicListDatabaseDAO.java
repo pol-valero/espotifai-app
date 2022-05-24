@@ -18,7 +18,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
     public List<Playlist> loadPublicPlaylist(int user_id) {
         List<Playlist> playlist = new LinkedList<>();
         // recupero todas las listas por orden de alta (id)
-        String query = "select * from v_playlist where id_usuario <> " + user_id+ "' order by playlist_name asc";
+        String query = "select * from v_playlist where id_usuario <> '" + user_id + "' order by playlist_name asc";
 
         try {
             ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
@@ -63,7 +63,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
     @Override
     public List<Playlist> loadUserPlaylist (int user_id) {
         List<Playlist> playlist = new LinkedList<>();
-        String query = "Select * from v_playlista where id_usuario = '"+user_id+"' order by playlist_name asc";
+        String query = "select * from v_playlista where id_usuario = '" + user_id + "' order by playlist_name asc";
 
         try {
             ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
