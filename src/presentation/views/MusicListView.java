@@ -267,8 +267,6 @@ public class MusicListView {
         table.setGridColor(negre);
         table.setRowHeight(50);
         table.getTableHeader().setDefaultRenderer(new SimpleHeaderRenderer());
-        //table.getColumnModel().getColumn(0).setPreferredWidth(10);
-        //table.getColumnModel().getColumn(6).setPreferredWidth(10);
         table.setDefaultEditor(Object.class, null);
         table.getColumnModel().getColumn(6).setMinWidth(0);
         table.getColumnModel().getColumn(6).setMaxWidth(0);
@@ -374,7 +372,7 @@ public class MusicListView {
         Image songCoverScaled = getScaledImage(songCoverImage,40,40);
         ImageIcon songCoverDone = new ImageIcon(songCoverScaled);
 
-        for(int i=0; i < 200; i++){
+        /*for(int i=0; i < 200; i++){
             data[i][0] = songCoverDone;
             data[i][1] = "songName"+i;
             data[i][2] = "Singer"+i;
@@ -382,15 +380,17 @@ public class MusicListView {
             data[i][4] = "Genre"+i;
             data[i][5] = "Owner"+i;
             data[i][6] = false;
-        }
-
-        /*for(int i=0; i < songList.size(); i++){
-            data[i][0] = songList.get(i).getName();
-            data[i][1] = songList.get(i).getSinger();
-            data[i][2] = songList.get(i).getAlbum();
-            data[i][3] = songList.get(i).getGenre();
-            data[i][4] = songList.get(i).getOwne();
         }*/
+
+        for(int i=0; i < songList.size(); i++){
+            data[i][0] = songCoverDone;
+            data[i][1] = songList.get(i).getName();
+            data[i][2] = songList.get(i).getSinger();
+            data[i][3] = songList.get(i).getAlbum();
+            data[i][4] = songList.get(i).getGenre();
+            data[i][5] = songList.get(i).getOwne();
+            data[i][6] = false;
+        }
 
         return data;
     }
@@ -479,15 +479,12 @@ public class MusicListView {
         table.setRowSelectionInterval(index-1,index-1);
     }
 
-    public void showCard(Playlist playlist) {
-
-        //LinkedList<Song> musicList = playlist.getSonglist(); //todo obtenir de la playlist
-        String playlistName = playlist.getName();
+    public void showCard(LinkedList<Song> musicList, String playlistName) {
 
         panel.remove(centralPanel);
         panel.remove(northernPanel);
 
-        //centralPanel = centralPanelConfiguration(musicList);
+        centralPanel = centralPanelConfiguration(musicList);
         northernPanel = northernPanelConfiguration(playlistName);
 
         panel.add(centralPanel,BorderLayout.CENTER);

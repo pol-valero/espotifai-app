@@ -4,6 +4,7 @@ import business.BusinessFacade;
 import business.BusinessFacadelmpl;
 import business.entities.Genre;
 import business.entities.Playlist;
+import business.entities.Song;
 import business.entities.User;
 import presentation.controllers.*;
 
@@ -53,7 +54,7 @@ public class UIController {
         //showLoginCard();
         //showSignUpCard();
         //showHomescreenCard();
-        showMusicListCard();
+        //showMusicListCard();
         //showAddSongCard();
 
         //Les seguents linies son simplement una prova per a fer el "popup" que utilitzarem per a la barra de reproduccio
@@ -218,6 +219,10 @@ public class UIController {
 
 
     public void deleteAccountRequest() {
+    }
+
+    public LinkedList<Song> loadPlaylistMusic(String playlistName) {
+        return (LinkedList<Song>) businessFacade.loadMusicPlaylist(playlistName);
     }
 
 
