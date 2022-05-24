@@ -27,8 +27,8 @@ public class HomescreenViewController implements ActionListener {
             case HomeScreenView.BTN_ACCOUNTMANAGER:
                 controller.showLogoutCard();
                 break;
-            case HomeScreenView.BTN_NEWPLAYLIST:
-                //controller.show
+            case HomeScreenView.BTN_CREATEPLAYLIST:
+                controller.showSetPlaylistNameCard();
                 break;
         }
     }

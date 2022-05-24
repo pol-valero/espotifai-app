@@ -91,7 +91,7 @@ public class SetPlaylistNameView {
 
             // Set go back Image and Imatge filler
 
-            ImageIcon boto = new ImageIcon("images/boto.png");
+            ImageIcon boto = new ImageIcon("images/home.png");
             Image imageIcon_2 = boto.getImage();
             Image Image_2 = getScaledImage(imageIcon_2, 50, 50);
             ImageIcon new_Boto = new ImageIcon(Image_2);

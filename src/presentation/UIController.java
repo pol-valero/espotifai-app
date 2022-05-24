@@ -54,7 +54,7 @@ public class UIController {
         //showHomescreenCard();
         //showMusicListCard();
         //showAddSongCard();
-
+        //showSetPlaylistNameCard();
         //Les seguents linies son simplement una prova per a fer el "popup" que utilitzarem per a la barra de reproduccio
         JPanel jPanel = new JPanel();
         JLabel jLabel = new JLabel("This is a popup");
