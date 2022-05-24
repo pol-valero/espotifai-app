@@ -2,6 +2,7 @@ package presentation.views;
 
 import business.entities.Playlist;
 import business.entities.Song;
+import presentation.Components.ImagePanel;
 import presentation.controllers.MusicListController;
 import presentation.Components.SimpleHeaderRenderer;
 
@@ -54,6 +55,8 @@ public class MusicListView {
 
     private JTable table;
     private Object[][] data;
+
+    private ImagePanel imagePanel;
 
     private final Color negre = new Color(48,48,48);
     private final Color vermell = new Color (232,74,77);

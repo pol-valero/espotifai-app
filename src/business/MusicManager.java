@@ -1,9 +1,9 @@
 package business;
 
 import business.entities.Genre;
-import business.entities.MusicPlayer;
+//import business.entities.MusicPlayer;
 import business.entities.Song;
-import javazoom.jl.decoder.JavaLayerException;
+//import javazoom.jl.decoder.JavaLayerException;
 import persistence.DAO.MusicDatabaseDAO;
 import persistence.DAO.MusicListDatabaseDAO;
 import persistence.MusicDAO;
@@ -24,7 +24,7 @@ public class MusicManager {
     private MusicListDAO musicListDAO = new MusicListDatabaseDAO();
 
     private Song currentSong;
-    private MusicPlayer musicPlayer;
+    //private MusicPlayer musicPlayer;
     private boolean playlist = false;
     private List<Song> songs;
     private boolean paused = false;
@@ -143,7 +143,7 @@ public class MusicManager {
 
     //todo para la reproduccion de musica
 
-    public void pausedSong(){ //para cuando se le da al boton de pausar  reproducir
+    /*public void pausedSong(){ //para cuando se le da al boton de pausar  reproducir
         paused = !paused;
         if (paused) {
             musicPlayer.resume();
@@ -192,6 +192,6 @@ public class MusicManager {
             e.printStackTrace();
             return false;
         }
-    }
+    }*/
 
 }

@@ -125,7 +125,6 @@ public class HomeScreenView {
         JPanel westernPanel = new JPanel();
         BoxLayout westernLayout = new BoxLayout(westernPanel,BoxLayout.Y_AXIS);
         westernPanel.setLayout(westernLayout);
-        westernPanel.setBackground(Color.white);
         westernPanel.setBorder(new EmptyBorder(new Insets(50, 30, 40, 30)));
         westernPanel.setMinimumSize(new Dimension(200,900));
         westernPanel.setBackground(negre);
@@ -261,7 +260,7 @@ public class HomeScreenView {
         }
 
         JScrollPane scrollPane = new JScrollPane(panel,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        //scrollPane.setViewportView(panel);
+        scrollPane.setViewportView(panel);
         scrollPane.setPreferredSize(new Dimension(1060,280));
         scrollPane.setBackground(negre);
 
@@ -270,8 +269,24 @@ public class HomeScreenView {
     }
 
     private int getIdealHeight(int size) {
-        double factor = 40.47;
-        return (int) (size*factor);
+        double residu = size%5;
+
+
+        if (residu == 1) {
+            size += 4;
+        }
+        else if (residu == 2) {
+            size += 3;
+
+        }
+        else if (residu == 3) {
+            size += 2;
+
+        }
+        else if (residu == 4) {
+            size += 1;
+        }
+        return size*38;
     }
 
 
