@@ -102,4 +102,9 @@ public interface BusinessFacade {
 
      Song findSong(String songName);
 
+     void playMusic(String playlistName, int position);
+
+    void previusNextSong(int next);
+
+    void pausedSong();
 }

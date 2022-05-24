@@ -5,6 +5,7 @@ import business.entities.Playlist;
 import business.entities.Song;
 import business.entities.User;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -15,6 +16,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
     private LoginManager loginManager = new LoginManager();
     private MusicListManager musicListManager = new MusicListManager();
     private MusicManager musicManager = new MusicManager();
+    private final String NOTPLAYLIST = "All songs";
 
     @Override
     public boolean checkEmail(String email){
@@ -142,6 +144,28 @@ public class BusinessFacadelmpl implements BusinessFacade{
     @Override
     public Song findSong(String songName){
         return musicManager.loadSongInformation(songName);
+    }
+
+    public void playMusic(String playlistName, int position){
+        List<Song> songs = new LinkedList<>();
+
+        if (playlistName.equals(NOTPLAYLIST)){
+            List<Song> oneSong= musicListManager.loadAllMusic();
+            songs.add(oneSong.get(position));
+            musicManager.playSong(false, songs, 0);
+
+        } else {
+            songs = musicListManager.loadMusicPlaylist(playlistName, loginManager.getCurrentUSer().getId());
+            musicManager.playSong(true, songs, position);
+        }
+    }
+
+    public void previusNextSong(int next){
+        musicManager.previusNextSong(next);
+    }
+
+    public void pausedSong(){
+        musicManager.pausedSong();
     }
 
 
