@@ -17,11 +17,20 @@ public class HomescreenViewController implements ActionListener {
     public HomescreenViewController(UIController controller, JFrame topContainer, CardLayout cardManager){
         this.controller = controller;
         homeScreenView = new HomeScreenView(topContainer,cardManager);
-
+        homeScreenView.registerController(this);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        switch (e.getActionCommand()) {
+            case HomeScreenView.BTN_STATISTICS:
+                break;
+            case HomeScreenView.BTN_ACCOUNTMANAGER:
+                controller.showLogoutCard();
+                break;
+            case HomeScreenView.BTN_NEWPLAYLIST:
+                //controller.show
+                break;
+        }
     }
 
     public void showHomescreenCard(LinkedList<String> usersPlaylists, LinkedList<String> publicPlaylists) {

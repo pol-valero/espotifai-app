@@ -1,6 +1,7 @@
 package presentation.views;
 
 import business.entities.Playlist;
+import presentation.controllers.HomescreenViewController;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -17,6 +18,14 @@ public class HomeScreenView {
 
     JPanel panel;
     JPanel centralPanel;
+
+    public static final String BTN_STATISTICS = "BTN_STATISTICS";
+    public static final String BTN_ACCOUNTMANAGER = "BTN_ACCOUNTMANAGER";
+    public static final String BTN_NEWPLAYLIST = "BTN_NEWPLAYLIST";
+
+    private JButton stadisticsBtn;
+    private JButton accManBtn;
+    private JButton newPlaylistBtn;
 
     public HomeScreenView (JFrame topContainer, CardLayout cardManager){
         this.topContainer = topContainer;
@@ -64,7 +73,8 @@ public class HomeScreenView {
         urPlaylistLab.setFont(titols);
         urPlaylistLab.setForeground(Color.white);
 
-        JButton newPlaylistBtn = createButton("New Playlist");
+        newPlaylistBtn = createButton("New Playlist");
+        newPlaylistBtn.setActionCommand(BTN_NEWPLAYLIST);
 
         urPlaylistP.add(urPlaylistLab);
         urPlaylistP.add(Box.createRigidArea(new Dimension(680,0)));
@@ -165,8 +175,11 @@ public class HomeScreenView {
 
         GridBagConstraints constraints = new GridBagConstraints();
 
-        JButton stadisticsBtn = createButton("Stadistics");
-        JButton accManBtn = createButton("Account Manager");
+        stadisticsBtn = createButton("Stadistics");
+        stadisticsBtn.setActionCommand(BTN_STATISTICS);
+
+        accManBtn = createButton("Account Manager");
+        accManBtn.setActionCommand(BTN_ACCOUNTMANAGER);
 
         constraints.gridx=0;
         constraints.gridy=0;
@@ -274,6 +287,12 @@ public class HomeScreenView {
     private int getIdealHeight(int size) {
         double factor = 40.47;
         return (int) (size*factor);
+    }
+
+    public void registerController(HomescreenViewController homescreenViewController) {
+        stadisticsBtn.addActionListener(homescreenViewController);
+        newPlaylistBtn.addActionListener(homescreenViewController);
+        accManBtn.addActionListener(homescreenViewController);
     }
 
 
