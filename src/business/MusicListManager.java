@@ -11,12 +11,20 @@ import java.util.List;
 public class MusicListManager {
     private MusicListDAO  musicListDAO = new MusicListDatabaseDAO();
 
-    public List<Playlist> loadPublicPlaylist(int idUser){
-        return  musicListDAO.loadPublicPlaylist(idUser);
+    public LinkedList<String> loadPublicPlaylist(int idUser){
+        LinkedList<String> publicPlaylistNames = new LinkedList<>();
+        for (Playlist playlist: musicListDAO.loadPublicPlaylist(idUser)) {
+            publicPlaylistNames.add(playlist.getName());
+        }
+        return  publicPlaylistNames;
     }
 
-    public List<Playlist> loadUserPlaylist(int idUser){
-        return musicListDAO.loadUserPlaylist(idUser);
+    public LinkedList<String> loadUserPlaylist(int idUser){
+        LinkedList<String> userPlaylistNames = new LinkedList<>();
+        for (Playlist playlist: musicListDAO.loadUserPlaylist(idUser)) {
+            userPlaylistNames.add(playlist.getName());
+        }
+        return userPlaylistNames;
     }
 
     public List<Song> loadAllMusic(){
@@ -127,7 +135,7 @@ public class MusicListManager {
     }
 
     private Playlist findOnePublicPlaylist(String playlistName , int idUser){
-        List<Playlist> playlistList = loadPublicPlaylist(idUser);
+        List<Playlist> playlistList = musicListDAO.loadPublicPlaylist(idUser);
 
         if (playlistList.size() != 0) {
             for (Playlist playlist: playlistList) {

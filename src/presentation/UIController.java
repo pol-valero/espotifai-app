@@ -105,7 +105,7 @@ public class UIController {
     }
 
     public void showHomescreenCard() {
-        LinkedList<String> prova1 = new LinkedList<>();
+        /*LinkedList<String> prova1 = new LinkedList<>();
         prova1.add("test1");
         prova1.add("test2");
         prova1.add("test1");
@@ -155,7 +155,8 @@ public class UIController {
         prova2.add("test3");
         prova2.add("test3");
         prova2.add("final");
-        homescreenViewController.showHomescreenCard(prova1,prova2);
+        */
+        homescreenViewController.showHomescreenCard(businessFacade.loadUserPlaylist(),businessFacade.loadPublicPlaylist());
     }
 
     public void showLoginCard() {

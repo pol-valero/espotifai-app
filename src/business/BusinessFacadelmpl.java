@@ -69,12 +69,12 @@ public class BusinessFacadelmpl implements BusinessFacade{
     }
 
     @Override
-    public List<Playlist> loadPublicPlaylist(){
+    public LinkedList<String> loadPublicPlaylist(){
        return musicListManager.loadPublicPlaylist(loginManager.getCurrentUSer().getId());
     }
 
     @Override
-    public List<Playlist> loadUserPlaylist(){
+    public LinkedList<String> loadUserPlaylist(){
         return musicListManager.loadUserPlaylist(loginManager.getCurrentUSer().getId());
     }
 

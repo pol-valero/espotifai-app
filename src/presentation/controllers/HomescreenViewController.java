@@ -1,5 +1,6 @@
 package presentation.controllers;
 
+import business.entities.Playlist;
 import presentation.UIController;
 import presentation.views.HomeScreenView;
 
