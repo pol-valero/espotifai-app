@@ -22,14 +22,15 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
         try {
             ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
+            if (resultSet != null) {
+                while (resultSet.next()) {
+                    long id = resultSet.getLong("id_playlist");
+                    String name = resultSet.getString("playlist_name");
+                    long id_user = resultSet.getLong("id_usuario");
+                    String owner = resultSet.getString("owner");
 
-            while (resultSet.next()) {
-                long id = resultSet.getLong("id_playlist");
-                String name = resultSet.getString("playlist_name");
-                long id_user = resultSet.getLong("id_usuario");
-                String owner = resultSet.getString("owner");
-
-                playlist.add(new Playlist(id, name, id_user,owner));
+                    playlist.add(new Playlist(id, name, id_user, owner));
+                }
             }
         } catch (SQLException exception){
             exception.getErrorCode();
@@ -66,14 +67,15 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
         try {
             ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
+            if (resultSet != null) {
+                while (resultSet.next()) {
+                    long id = resultSet.getLong("id_playlist");
+                    String name = resultSet.getString("playlist_name");
+                    long id_user = resultSet.getLong("id_usuario");
+                    String owner = resultSet.getString("owner");
 
-            while (resultSet.next()) {
-                long id = resultSet.getLong("id_playlist");
-                String name = resultSet.getString("playlist_name");
-                long id_user = resultSet.getLong("id_usuario");
-                String owner = resultSet.getString("owner");
-
-                playlist.add(new Playlist(id, name, id_user,owner));
+                    playlist.add(new Playlist(id, name, id_user, owner));
+                }
             }
         } catch (SQLException exception){
             exception.getErrorCode();

@@ -5,6 +5,7 @@ import business.entities.Playlist;
 import business.entities.Song;
 import business.entities.User;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -74,9 +75,9 @@ public interface BusinessFacade {
 
     User getCurrentUser();
 
-     List<Playlist> loadPublicPlaylist();
+     LinkedList<String> loadPublicPlaylist();
 
-     List<Playlist> loadUserPlaylist();
+     LinkedList<String> loadUserPlaylist();
 
     void addSongPlaylist(String playlistName, Song song, int position);
 
