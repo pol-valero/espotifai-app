@@ -30,7 +30,6 @@ public class UIController {
     private SignupViewController signupViewController;
     private HomescreenViewController homescreenViewController;
     private BusinessFacade businessFacade = new BusinessFacadelmpl();
-    private VerificationCodeViewController verificationCodeViewController;
     private MusicListController musicListController;
     private AddSongViewController addSongViewController;
     private SetPlaylistNameController setPlaylistNameController;
@@ -43,7 +42,6 @@ public class UIController {
         signupViewController = new SignupViewController(this, topContainer, cardManager);
         logoutViewController = new LogoutViewController(this, topContainer, cardManager);
         homescreenViewController = new HomescreenViewController(this,topContainer,cardManager);
-        verificationCodeViewController = new VerificationCodeViewController(this,topContainer,cardManager);
         musicListController = new MusicListController(this, topContainer, cardManager);
         addSongViewController = new AddSongViewController(this, topContainer, cardManager);
         setPlaylistNameController = new SetPlaylistNameController(this, topContainer, cardManager);
@@ -105,57 +103,6 @@ public class UIController {
     }
 
     public void showHomescreenCard() {
-        /*LinkedList<String> prova1 = new LinkedList<>();
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("final");
-
-        LinkedList<String> prova2 = new LinkedList<>();
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("final");
-        */
         homescreenViewController.showHomescreenCard(businessFacade.loadUserPlaylist(),businessFacade.loadPublicPlaylist());
     }
 
@@ -165,10 +112,6 @@ public class UIController {
 
     public void showSignUpCard() {
         signupViewController.showSignupCard();
-    }
-    public void showVerificationCodeViewCard() {
-
-        verificationCodeViewController.showVerificationCodeViewCard();
     }
 
     public void showLogoutCard () {
