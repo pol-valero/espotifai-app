@@ -18,18 +18,19 @@ public class MusicListDatabaseDAO implements MusicListDAO {
     public List<Playlist> loadPublicPlaylist(int user_id) {
         List<Playlist> playlist = new LinkedList<>();
         // recupero todas las listas por orden de alta (id)
-        String query = "select * from v_playlist where id_usuario <> " + user_id+ "' order by playlist_name asc";
+        String query = "select * from v_playlist where id_usuario <> '" + user_id + "' order by playlist_name asc";
 
         try {
             ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
+            if (resultSet != null) {
+                while (resultSet.next()) {
+                    long id = resultSet.getLong("id_playlist");
+                    String name = resultSet.getString("playlist_name");
+                    long id_user = resultSet.getLong("id_usuario");
+                    String owner = resultSet.getString("owner");
 
-            while (resultSet.next()) {
-                long id = resultSet.getLong("id_playlist");
-                String name = resultSet.getString("playlist_name");
-                long id_user = resultSet.getLong("id_usuario");
-                String owner = resultSet.getString("owner");
-
-                playlist.add(new Playlist(id, name, id_user,owner));
+                    playlist.add(new Playlist(id, name, id_user, owner));
+                }
             }
         } catch (SQLException exception){
             exception.getErrorCode();
@@ -62,18 +63,19 @@ public class MusicListDatabaseDAO implements MusicListDAO {
     @Override
     public List<Playlist> loadUserPlaylist (int user_id) {
         List<Playlist> playlist = new LinkedList<>();
-        String query = "Select * from v_playlista where id_usuario = '"+user_id+"' order by playlist_name asc";
+        String query = "select * from v_playlista where id_usuario = '" + user_id + "' order by playlist_name asc";
 
         try {
             ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
+            if (resultSet != null) {
+                while (resultSet.next()) {
+                    long id = resultSet.getLong("id_playlist");
+                    String name = resultSet.getString("playlist_name");
+                    long id_user = resultSet.getLong("id_usuario");
+                    String owner = resultSet.getString("owner");
 
-            while (resultSet.next()) {
-                long id = resultSet.getLong("id_playlist");
-                String name = resultSet.getString("playlist_name");
-                long id_user = resultSet.getLong("id_usuario");
-                String owner = resultSet.getString("owner");
-
-                playlist.add(new Playlist(id, name, id_user,owner));
+                    playlist.add(new Playlist(id, name, id_user, owner));
+                }
             }
         } catch (SQLException exception){
             exception.getErrorCode();

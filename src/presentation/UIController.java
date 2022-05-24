@@ -4,6 +4,7 @@ import business.BusinessFacade;
 import business.BusinessFacadelmpl;
 import business.entities.Genre;
 import business.entities.Playlist;
+import business.entities.Song;
 import business.entities.User;
 import presentation.Components.RoundButton;
 import presentation.Components.RoundPanel;
@@ -35,7 +36,6 @@ public class UIController {
     private SignupViewController signupViewController;
     private HomescreenViewController homescreenViewController;
     private BusinessFacade businessFacade = new BusinessFacadelmpl();
-    private VerificationCodeViewController verificationCodeViewController;
     private MusicListController musicListController;
     private AddSongViewController addSongViewController;
     private SetPlaylistNameController setPlaylistNameController;
@@ -50,7 +50,6 @@ public class UIController {
         signupViewController = new SignupViewController(this, topContainer, cardManager);
         logoutViewController = new LogoutViewController(this, topContainer, cardManager);
         homescreenViewController = new HomescreenViewController(this,topContainer,cardManager);
-        verificationCodeViewController = new VerificationCodeViewController(this,topContainer,cardManager);
         musicListController = new MusicListController(this, topContainer, cardManager);
         addSongViewController = new AddSongViewController(this, topContainer, cardManager);
         setPlaylistNameController = new SetPlaylistNameController(this, topContainer, cardManager);
@@ -69,6 +68,7 @@ public class UIController {
         //showHomescreenCard();
         //showMusicListCard();
         //showAddSongCard();
+        //showSetPlaylistNameCard();
         //showStadisticsCard();
         //showAddToPLaylistCard();
 
@@ -77,6 +77,7 @@ public class UIController {
         JWindow jWindow = new JWindow(topContainer);
         jWindow.add(barRepro);
         jWindow.setVisible(true);
+        jWindow.setAlwaysOnTop(true);
         jWindow.setSize(400,80);
         jWindow.addMouseMotionListener(new MouseMotionListener() {
             private int mx, my;
@@ -204,57 +205,7 @@ public class UIController {
     }
 
     public void showHomescreenCard() {
-        LinkedList<String> prova1 = new LinkedList<>();
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("final");
-
-        LinkedList<String> prova2 = new LinkedList<>();
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("final");
-        homescreenViewController.showHomescreenCard(prova1,prova2);
+        homescreenViewController.showHomescreenCard(businessFacade.loadUserPlaylist(),businessFacade.loadPublicPlaylist());
     }
 
     public void showLoginCard() {
@@ -263,10 +214,6 @@ public class UIController {
 
     public void showSignUpCard() {
         signupViewController.showSignupCard();
-    }
-    public void showVerificationCodeViewCard() {
-
-        verificationCodeViewController.showVerificationCodeViewCard();
     }
 
     public void showLogoutCard () {
@@ -318,6 +265,10 @@ public class UIController {
 
 
     public void deleteAccountRequest() {
+    }
+
+    public LinkedList<Song> loadPlaylistMusic(String playlistName) {
+        return (LinkedList<Song>) businessFacade.loadMusicPlaylist(playlistName);
     }
 
 

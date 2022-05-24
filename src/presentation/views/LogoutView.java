@@ -1,9 +1,12 @@
 package presentation.views;
 
+import presentation.controllers.LogoutViewController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 public class LogoutView {
@@ -44,13 +47,12 @@ public class LogoutView {
 
         // Set go back Image and Imatge filler
 
-        ImageIcon boto = new ImageIcon("images/boto.png");
+        ImageIcon boto = new ImageIcon("images/home.png");
         Image imageIcon_2 = boto.getImage();
         Image Image_2 = getScaledImage(imageIcon_2, 50, 50);
         ImageIcon new_Boto = new ImageIcon(Image_2);
 
         goBackImage.setIcon(new_Boto);
-        goBackImage.addMouseListener(new MouseAdapter() {});
 
         JPanel BorderAdjustment = new JPanel(new BorderLayout());
 
@@ -131,9 +133,10 @@ public class LogoutView {
 
         return resizedImg;
     }
-    public void registerController (ActionListener logoutViewController){ //Todo crida aquesta funció on toqui
+    public void registerController (LogoutViewController logoutViewController){ //Todo crida aquesta funció on toqui
         btnLogout.addActionListener(logoutViewController);
         btnDeleteAccount.addActionListener(logoutViewController);
+        goBackImage.addMouseListener(logoutViewController);
     }
 
     public void showCard () {

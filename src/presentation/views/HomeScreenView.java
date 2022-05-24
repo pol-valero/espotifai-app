@@ -1,5 +1,7 @@
 package presentation.views;
 
+import presentation.controllers.HomescreenViewController;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -15,6 +17,15 @@ public class HomeScreenView {
 
     JPanel panel;
     JPanel centralPanel;
+
+    public static final String BTN_STATISTICS = "BTN_STATISTICS";
+    public static final String BTN_ACCOUNTMANAGER = "BTN_ACCOUNTMANAGER";
+    public static final String BTN_CREATEPLAYLIST = "BTN_CREATEPLAYLIST";
+
+    private JButton stadisticsBtn;
+    private JButton accManBtn;
+    private JButton jbNewPlaylist  = createButton("New Playlist");
+
 
     public HomeScreenView (JFrame topContainer, CardLayout cardManager){
         this.topContainer = topContainer;
@@ -62,11 +73,12 @@ public class HomeScreenView {
         urPlaylistLab.setFont(titols);
         urPlaylistLab.setForeground(Color.white);
 
-        JButton newPlaylistBtn = createButton("New Playlist");
+
+        jbNewPlaylist.setActionCommand(BTN_CREATEPLAYLIST);
 
         urPlaylistP.add(urPlaylistLab);
         urPlaylistP.add(Box.createRigidArea(new Dimension(680,0)));
-        urPlaylistP.add(newPlaylistBtn);
+        urPlaylistP.add(jbNewPlaylist);
 
         //Panel ScrollPane Your Playlists
         usersPlaylists.addFirst("MySongs");
@@ -130,7 +142,7 @@ public class HomeScreenView {
         westernPanel.setBackground(negre);
 
         //Search Panel
-        JPanel searchPanel = new JPanel();
+        /*JPanel searchPanel = new JPanel();
         BoxLayout searchLayout = new BoxLayout(searchPanel,BoxLayout.X_AXIS);
         searchPanel.setLayout(searchLayout);
         searchPanel.setBackground(negre);
@@ -154,7 +166,7 @@ public class HomeScreenView {
 
         searchPanel.add(searchBar);
         searchPanel.add(Box.createRigidArea(new Dimension(20,0))); //Create space between both buttons
-        searchPanel.add(searchBtn);
+        searchPanel.add(searchBtn);*/
 
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridBagLayout());
@@ -162,8 +174,11 @@ public class HomeScreenView {
 
         GridBagConstraints constraints = new GridBagConstraints();
 
-        JButton stadisticsBtn = createButton("Stadistics");
-        JButton accManBtn = createButton("Account Manager");
+        stadisticsBtn = createButton("Stadistics");
+        stadisticsBtn.setActionCommand(BTN_STATISTICS);
+
+        accManBtn = createButton("Account Manager");
+        accManBtn.setActionCommand(BTN_ACCOUNTMANAGER);
 
         constraints.gridx=0;
         constraints.gridy=0;
@@ -178,7 +193,7 @@ public class HomeScreenView {
         buttonsPanel.add(accManBtn,constraints);
 
 
-        westernPanel.add(searchPanel);
+        //westernPanel.add(searchPanel);
         westernPanel.add(Box.createRigidArea(new Dimension(0,40)));
         westernPanel.add(buttonsPanel);
 
@@ -287,6 +302,12 @@ public class HomeScreenView {
             size += 1;
         }
         return size*38;
+    }
+
+    public void registerController(HomescreenViewController homescreenViewController) {
+        stadisticsBtn.addActionListener(homescreenViewController);
+        accManBtn.addActionListener(homescreenViewController);
+        jbNewPlaylist.addActionListener(homescreenViewController);
     }
 
 

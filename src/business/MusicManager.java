@@ -181,9 +181,11 @@ public class MusicManager {
 
     private boolean playNewSong(){ //podria ser void si no queremos mirar si el path falla
         try {
+            musicPlayer.stop();
             FileInputStream inputStream = new FileInputStream(currentSong.getFilePath());
             paused  = false;
             musicPlayer = new MusicPlayer(inputStream);
+            musicPlayer.play();
             return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -193,5 +195,13 @@ public class MusicManager {
             return false;
         }
     }*/
+
+    public void automaticSongChange(){ //depende donde este el Thread sera publico o priv
+        if (!playlist){
+            previusNextSong(0);
+        } else {
+            previusNextSong(1);
+        }
+    }
 
 }

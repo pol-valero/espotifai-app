@@ -99,7 +99,8 @@ public class MusicListController implements ActionListener, ListSelectionListene
     }
 
     public void showMusicListCard(Playlist playlist){
-        musicListView.showCard(playlist);
+        String playlistName = playlist.getName();
+        musicListView.showCard(controller.loadPlaylistMusic(playlistName),playlistName);
     }
 
     @Override

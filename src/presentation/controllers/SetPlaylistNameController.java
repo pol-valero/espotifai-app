@@ -41,7 +41,7 @@ public class SetPlaylistNameController implements ActionListener, MouseListener 
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        controller.showMusicListCard();
+        controller.showHomescreenCard();
     }
 
     @Override
