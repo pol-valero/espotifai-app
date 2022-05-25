@@ -285,4 +285,8 @@ public class UIController {
     public boolean findPlaylistName(String playlistName){
         return businessFacade.findPlaylistName(playlistName);
     }
+
+    public void changePlaylistName(String currentName, String newName){
+        businessFacade.changePlaylistName(currentName, newName);
+    }
 }

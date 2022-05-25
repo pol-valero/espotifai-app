@@ -48,4 +48,5 @@ public interface MusicListDAO  {
 
     List<Playlist> loadUserPlaylist (int user_id);
 
+     void changePlaylistName(String currentName, String newName)
 }

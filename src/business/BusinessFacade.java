@@ -110,4 +110,6 @@ public interface BusinessFacade {
     void pausedSong();
 
     boolean findPlaylistName(String playlistName);
+
+     void changePlaylistName(String currentName, String newName);
 }

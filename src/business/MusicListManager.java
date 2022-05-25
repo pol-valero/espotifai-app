@@ -151,5 +151,7 @@ public class MusicListManager {
         return null;
     }
 
-
+    public void changePlaylistName(String currentName, String newName){
+        musicListDAO.changePlaylistName(currentName, newName);
+    }
 }

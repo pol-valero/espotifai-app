@@ -351,6 +351,11 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         return true;
     }
 
+    public void changePlaylistName(String currentName, String newName){
+        String query = "UPDATE lista_reproduccion SET nombre = \"" + newName + "\" WHERE  nombre = \"" + currentName + "\";";
+        SQLConnector.getInstance().updateQuery(query);
+    }
+
 
     //------------------ PENDIENTE REVISAR ---------------//
 
