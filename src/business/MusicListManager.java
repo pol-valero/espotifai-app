@@ -52,6 +52,7 @@ public class MusicListManager {
 
     public Playlist findPlaylist(String playlistName, int idUser){
         Playlist playlist = findUserPlaylist(playlistName, idUser);
+
         if (playlist != null) {
             return playlist;
         } else {
@@ -132,6 +133,7 @@ public class MusicListManager {
     }
 
     public boolean findPlaylistName(String playlistName, int idUser){
+
         if(findPlaylist(playlistName, idUser) != null){
             return true;
         }
