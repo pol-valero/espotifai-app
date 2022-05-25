@@ -6,20 +6,14 @@ import business.entities.Genre;
 import business.entities.Playlist;
 import business.entities.Song;
 import business.entities.User;
-import presentation.Components.RoundButton;
-import presentation.Components.RoundPanel;
-import presentation.Components.RowIcon;
 import presentation.controllers.*;
-import presentation.views.HomeScreenView;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.GenericDeclaration;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -39,8 +33,6 @@ public class UIController {
     private MusicListController musicListController;
     private AddSongViewController addSongViewController;
     private SetPlaylistNameController setPlaylistNameController;
-    private StadisticViewController stadisticViewController;
-    private AddToPlaylistViewController addToPlaylistViewController;
 
     public void run () {
         JFrame topContainer = new JFrame();
@@ -53,12 +45,6 @@ public class UIController {
         musicListController = new MusicListController(this, topContainer, cardManager);
         addSongViewController = new AddSongViewController(this, topContainer, cardManager);
         setPlaylistNameController = new SetPlaylistNameController(this, topContainer, cardManager);
-        stadisticViewController = new StadisticViewController(this, topContainer,cardManager);
-        addToPlaylistViewController = new AddToPlaylistViewController(this,topContainer,cardManager);
-
-
-
-
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
         //showSignUpCard();
@@ -68,17 +54,16 @@ public class UIController {
         //showHomescreenCard();
         //showMusicListCard();
         //showAddSongCard();
-        //showSetPlaylistNameCard();
-        //showStadisticsCard();
-        //showAddToPLaylistCard();
 
         //Les seguents linies son simplement una prova per a fer el "popup" que utilitzarem per a la barra de reproduccio
-        JPanel barRepro =barReproConfiguration();
+        JPanel jPanel = new JPanel();
+        JLabel jLabel = new JLabel("This is a popup");
+        jPanel.add(jLabel);
         JWindow jWindow = new JWindow(topContainer);
-        jWindow.add(barRepro);
+        jWindow.add(jPanel);
         jWindow.setVisible(true);
+        jWindow.setSize(200,200);
         jWindow.setAlwaysOnTop(true);
-        jWindow.setSize(400,80);
         jWindow.addMouseMotionListener(new MouseMotionListener() {
             private int mx, my;
 
@@ -100,93 +85,6 @@ public class UIController {
         });
     }
 
-    private void showAddToPLaylistCard() {
-        addToPlaylistViewController.showAddToPlaylistView();
-    }
-
-    private JPanel barReproConfiguration() {
-        JPanel barRepro = new RoundPanel();
-        barRepro.setLayout(new BorderLayout());
-        barRepro.setBorder(new EmptyBorder(new Insets(10,10,10,10)));
-
-        //Western Panel config
-        JPanel westernPanel = new JPanel();
-        westernPanel.setLayout(new BoxLayout(westernPanel,BoxLayout.Y_AXIS));
-        westernPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        westernPanel.setBackground(Color.red);
-        String song = "Zorra";
-        String artist = "BadGyal";
-
-        JLabel songName = new JLabel(song);
-        JLabel artistName = new JLabel(artist);
-
-        westernPanel.add(songName);
-        westernPanel.add(artistName);
-
-        //CentralPanel config
-        JPanel centralPanel = new JPanel();
-        centralPanel.setLayout(new BoxLayout(centralPanel,BoxLayout.Y_AXIS));
-
-        //Main buttons Panel config
-        JPanel mainBtns = new JPanel();
-
-        for(int i=0; i < 3; i++){
-            JButton button = new RoundButton("Play");
-            button.setBackground(Color.red);
-            button.setPreferredSize(new Dimension(25,25));
-            mainBtns.add(button);
-        }
-
-        //Bar reproduction Panel config
-        JPanel barPanel = new JPanel();
-        barPanel.setLayout(new BoxLayout(barPanel,BoxLayout.X_AXIS));
-
-        String actualTime = "2:22";
-        String endTime = "4:45";
-
-        JLabel actualTimeLabel = new JLabel(actualTime);
-        JLabel endTimeLabel = new JLabel(endTime);
-        /*Icon barIcon = new RowIcon(160,10,Color.red);
-        JLabel iconLabel = new JLabel();
-        iconLabel.setIcon(barIcon);*/
-        JProgressBar bar = new JProgressBar(SwingConstants.HORIZONTAL);
-        bar.setBackground(Color.lightGray);
-
-
-        barPanel.add(actualTimeLabel);
-        barPanel.add(bar);
-        barPanel.add(endTimeLabel);
-
-        centralPanel.add(mainBtns);
-        centralPanel.add(barPanel);
-
-        //Eastern Panel config
-        JPanel easternPanel = new JPanel();
-        easternPanel.setLayout(new BoxLayout(easternPanel,BoxLayout.X_AXIS));
-
-        JButton repetedButton = new JButton("1");
-        repetedButton.setOpaque(false);
-        repetedButton.setPreferredSize(new Dimension(30,30));
-
-        JButton repetedButton2 = new JButton("2");
-        repetedButton2.setOpaque(false);
-        repetedButton2.setPreferredSize(new Dimension(30,30));
-
-        easternPanel.add(repetedButton);
-        easternPanel.add(repetedButton2);
-
-        barRepro.add(easternPanel,BorderLayout.EAST);
-        barRepro.add(westernPanel,BorderLayout.WEST);
-        barRepro.add(centralPanel,BorderLayout.CENTER);
-
-
-        return barRepro;
-    }
-
-    private void showStadisticsCard() {
-        stadisticViewController.showStadisticsView();
-    }
-
     public void showMusicListCard() {
         //todo cal fer un mètode per obtenir una string (songname)
         musicListController.showMusicListCard(new Playlist(122,"Chill out testing",2323,"You"));
@@ -205,6 +103,57 @@ public class UIController {
     }
 
     public void showHomescreenCard() {
+        /*LinkedList<String> prova1 = new LinkedList<>();
+        prova1.add("test1");
+        prova1.add("test2");
+        prova1.add("test1");
+        prova1.add("test2");
+        prova1.add("test1");
+        prova1.add("test2");
+        prova1.add("test1");
+        prova1.add("test2");
+        prova1.add("test1");
+        prova1.add("test2");
+        prova1.add("test1");
+        prova1.add("test2");
+        prova1.add("test1");
+        prova1.add("test2");
+        prova1.add("test1");
+        prova1.add("test2");
+        prova1.add("test1");
+        prova1.add("test2");
+        prova1.add("test1");
+        prova1.add("final");
+
+        LinkedList<String> prova2 = new LinkedList<>();
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("final");
+        */
         homescreenViewController.showHomescreenCard(businessFacade.loadUserPlaylist(),businessFacade.loadPublicPlaylist());
     }
 

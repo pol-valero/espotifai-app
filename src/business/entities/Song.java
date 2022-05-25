@@ -20,7 +20,23 @@ public class Song {
     private int minutes;
     private int seconds;
     private String lyrics;
+    private String Lyrics;
+    private int minutos;
+    private int segundos;
 
+
+    public Song(String name, String artist, String album, String genre,String owne, String filePath, String lyrics, int minutos, int segundos){
+        this.name = name;
+        this.singer = artist;
+        this.album = album;
+        this.genre = genre;
+        this.owne = owne;
+        this.filePath = filePath;
+        this.lyrics = lyrics;
+        this.minutes = minutos;
+        this.seconds = segundos;
+
+    }
 
     public Song(int idSong, String name, int idGenre, String genre, int idAlbum,
                 String album, int idSinger, String singer, int idOwne, String owne, String filePath, int orden, int minutes, int seconds, String lyrics) {
@@ -108,5 +124,15 @@ public class Song {
         this.idAlbum = idAlbum;
     }
 
+    public int getMinutes() {
+        return minutes;
+    }
 
+    public int getSeconds() {
+        return seconds;
+    }
+
+    public String getLyrics() {
+        return lyrics;
+    }
 }

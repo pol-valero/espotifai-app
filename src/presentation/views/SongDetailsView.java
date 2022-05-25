@@ -31,7 +31,7 @@ public class SongDetailsView {
     JPanel panel;
     JPanel centralPanel;
     Song innitializeSong = new Song(0, "", 0, "", 0,
-            "", 0, "", 0, "", "", 0);
+            "", 0, "", 0, "", "", 0, 0, 0,"" );
 
     public SongDetailsView (JFrame topContainer, CardLayout cardManager) {
         this.topContainer = topContainer;

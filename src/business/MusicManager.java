@@ -1,9 +1,9 @@
 package business;
 
 import business.entities.Genre;
-//import business.entities.MusicPlayer;
+import business.entities.MusicPlayer;
 import business.entities.Song;
-//import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.decoder.JavaLayerException;
 import persistence.DAO.MusicDatabaseDAO;
 import persistence.DAO.MusicListDatabaseDAO;
 import persistence.MusicDAO;
@@ -24,7 +24,7 @@ public class MusicManager {
     private MusicListDAO musicListDAO = new MusicListDatabaseDAO();
 
     private Song currentSong;
-    //private MusicPlayer musicPlayer;
+    private MusicPlayer musicPlayer;
     private boolean playlist = false;
     private List<Song> songs;
     private boolean paused = false;
@@ -68,7 +68,7 @@ public class MusicManager {
     public void createSong(Song song) {
         boolean existGenre = false;
         List<Genre> stadistic = musicDAO.loadStadistic();
-
+        System.out.println("la lista de generos tiene = " + stadistic.size());
         insertIdSingerAlbum(song);
 
         if (stadistic.size() != 0) {
@@ -143,7 +143,7 @@ public class MusicManager {
 
     //todo para la reproduccion de musica
 
-    /*public void pausedSong(){ //para cuando se le da al boton de pausar  reproducir
+    public void pausedSong(){ //para cuando se le da al boton de pausar  reproducir
         paused = !paused;
         if (paused) {
             musicPlayer.resume();
@@ -179,11 +179,11 @@ public class MusicManager {
         currentSong = songs.get(position);
     }
 
-    private boolean playNewSong(){ //podria ser void si no queremos mirar si el path falla
+    private boolean playNewSong() { //podria ser void si no queremos mirar si el path falla
         try {
             musicPlayer.stop();
             FileInputStream inputStream = new FileInputStream(currentSong.getFilePath());
-            paused  = false;
+            paused = false;
             musicPlayer = new MusicPlayer(inputStream);
             musicPlayer.play();
             return true;
@@ -194,7 +194,8 @@ public class MusicManager {
             e.printStackTrace();
             return false;
         }
-    }*/
+    }
+
 
     public void automaticSongChange(){ //depende donde este el Thread sera publico o priv
         if (!playlist){
@@ -203,5 +204,7 @@ public class MusicManager {
             previusNextSong(1);
         }
     }
+
+
 
 }

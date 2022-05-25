@@ -34,13 +34,16 @@ public class MusicDatabaseDAO implements MusicDAO {
 
     @Override
     public void createSong(Song song) { //cambiar al campo pathFile en char en la base
-        String query = "INSERT INTO v_canciones (titulo, id_genero, id_album, id_usuario," +
-                "filePath) VALUES ('"
-                + song.getName() + ","
-                + song.getIdGenre() + ","
-                + song.getAlbum()
-                + song.getIdOwne()
-                + song.getFilePath() +
+        String query = "INSERT INTO canciones (titulo, id_genero, id_album, id_usuario," +
+                "filePath,timeMinutes, timeSec,lyrics) VALUES ('"
+                + song.getName() + "', '"
+                + song.getIdGenre() + "', '"
+                + song.getIdAlbum() + "', '"
+                + song.getIdOwne() + "', '"
+                + song.getFilePath() + "', '"
+                + song.getMinutes() + "', '"
+                + song.getSeconds() + "', '"
+                + song.getLyrics() +
                 "');";
 
         SQLConnector.getInstance().insertQuery(query);
@@ -61,8 +64,9 @@ public class MusicDatabaseDAO implements MusicDAO {
     }
 
     @Override
-    public void updateStadistic(String genreName, int amount) {
-        String query = "UPDATE genero SET cantidad = " + amount + "Where genero = "+ genreName + ";";
+    public void updateStadistic(String genreName, int amount) { //UPDATE `genero` SET `cantidad` = '2' WHERE `genero`.`id` = 4;
+
+        String query = "UPDATE genero SET cantidad = '" + amount + "' WHERE  genero = \"" + genreName+ "\";";
         SQLConnector.getInstance().updateQuery(query); //todo probar si va bien
 
     }
@@ -70,7 +74,7 @@ public class MusicDatabaseDAO implements MusicDAO {
     @Override
     public void createStadistic(String genreName){
         String query = "INSERT INTO genero (genero, cantidad ) VALUES ('"
-                + genreName + 1 + "');"; //todo quizas el 1 va entre comillas
+                + genreName + "', '1'" + ");";
 
         SQLConnector.getInstance().insertQuery(query);
     }
@@ -83,19 +87,25 @@ public class MusicDatabaseDAO implements MusicDAO {
 
     @Override
     public void createAlbum(String album, int idSinger){
-        String query = "INSERT INTO genero (titulo, id_cantante) VALUES ('"
-                + album + idSinger + "');";
+        String query = "INSERT INTO album (titulo, id_cantante) VALUES ('"
+                + album + "', '"+ idSinger + "'" + ");";
 
         SQLConnector.getInstance().insertQuery(query);
     }
 
     @Override
     public int loadIdAlbum(String albumName){
-        String query = "SELECT id FROM album Where titulo =" + albumName + ";" ;
-        ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
-        try {
-            return  resultSet.getInt("id");
 
+        String query = "SELECT id FROM `album` WHERE titulo = \"" + albumName + "\";";
+        try {
+            ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
+            if (resultSet != null) {
+                resultSet.next();
+                System.out.println("id vale en album = " + resultSet.getInt("id"));
+
+                return resultSet.getInt("id");
+            }
+            return 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -112,11 +122,16 @@ public class MusicDatabaseDAO implements MusicDAO {
 
     @Override
     public int loadIdSinger(String singerName){
-        String query = "SELECT id FROM cantantes Where nombre =" + singerName + ";" ;
+        String query = "SELECT id FROM cantantes Where nombre = \"" + singerName + "\";";
         ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
 
         try {
-            return resultSet.getInt("id");
+            if (resultSet != null) {
+                resultSet.next();
+                System.out.println("la id vale = "+ resultSet.getInt("id"));
+                return resultSet.getInt("id");
+            }
+           return 0;
         } catch (SQLException e) {
             e.printStackTrace();
             return 0;
