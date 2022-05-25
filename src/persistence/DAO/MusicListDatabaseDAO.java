@@ -206,7 +206,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
     @Override
     public List<Song> loadAllMusic() {
         List<Song> song = new LinkedList<>();
-        String query = "SELECT distinct name from v_song order by name";
+        String query = "SELECT * FROM v_songs;";
 
         try {
             ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
@@ -214,18 +214,18 @@ public class MusicListDatabaseDAO implements MusicListDAO {
             while (resultSet.next()) {
                 int idSong = resultSet.getInt("idSong");
                 String name = resultSet.getString("name");
-                int idGenere = resultSet.getInt("id_genere");
+                int idGenere = resultSet.getInt("idGenere");
                 String genere = resultSet.getString("genere");
-                int idAlbum = resultSet.getInt("id_album");
+                int idAlbum = resultSet.getInt("idAlbum");
                 String album = resultSet.getString("album");
                 int idSinger = resultSet.getInt("idSinger");
                 String singer = resultSet.getString("singer");
                 int idOwner = resultSet.getInt("idOwner");
-                String owner = resultSet.getString("Owner");
-                String filePath = resultSet.getString("filepath");
+                String owner = resultSet.getString("owner");
                 int minutes = resultSet.getInt("timeMinutes");
                 int seconds = resultSet.getInt("timeSec");
                 String lyrics = resultSet.getString("lyrics");
+                String filePath = resultSet.getString("filepath");
                 int orden = 0; //ponemos 0 porque el orden nos da igual, las canciones se ordenan por nombre y no se requiere
 
                 song.add(new Song(idSong, name, idGenere, genere, idAlbum, album, idSinger, singer, idOwner, owner, filePath,orden, minutes, seconds, lyrics));

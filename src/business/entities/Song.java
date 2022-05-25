@@ -135,4 +135,8 @@ public class Song {
     public String getLyrics() {
         return lyrics;
     }
+
+    public void setOwne(String owne) {
+        this.owne = owne;
+    }
 }

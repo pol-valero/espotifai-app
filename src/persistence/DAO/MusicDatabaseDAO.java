@@ -67,7 +67,7 @@ public class MusicDatabaseDAO implements MusicDAO {
     public void updateStadistic(String genreName, int amount) { //UPDATE `genero` SET `cantidad` = '2' WHERE `genero`.`id` = 4;
 
         String query = "UPDATE genero SET cantidad = '" + amount + "' WHERE  genero = \"" + genreName+ "\";";
-        SQLConnector.getInstance().updateQuery(query); //todo probar si va bien
+        SQLConnector.getInstance().updateQuery(query);
 
     }
 
@@ -81,7 +81,7 @@ public class MusicDatabaseDAO implements MusicDAO {
 
     @Override
     public void deleteGenre(String genreName){
-        String query = "DELETE From genero Where genero = " + genreName + ";";
+        String query = "DELETE From genero Where genero = \"" + genreName + "\";";
         SQLConnector.getInstance().deleteQuery(query);
     }
 
@@ -96,18 +96,17 @@ public class MusicDatabaseDAO implements MusicDAO {
     @Override
     public int loadIdAlbum(String albumName){
 
-        String query = "SELECT id FROM `album` WHERE titulo = \"" + albumName + "\";";
+        String query = "SELECT id FROM album WHERE titulo = \"" + albumName + "\";";
         try {
             ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
             if (resultSet != null) {
                 resultSet.next();
-                System.out.println("id vale en album = " + resultSet.getInt("id"));
-
                 return resultSet.getInt("id");
             }
             return 0;
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Error ");
         }
 
         return 0;
@@ -128,7 +127,7 @@ public class MusicDatabaseDAO implements MusicDAO {
         try {
             if (resultSet != null) {
                 resultSet.next();
-                System.out.println("la id vale = "+ resultSet.getInt("id"));
+                //System.out.println("la id vale = "+ resultSet.getInt("id"));
                 return resultSet.getInt("id");
             }
            return 0;

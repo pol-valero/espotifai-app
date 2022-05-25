@@ -131,6 +131,7 @@ public class MusicManager {
     }
 
     private void insertIdAlbum(Song song){
+        System.out.println("el nombre del album es = " + song.getAlbum());
         int idAlbum = musicDAO.loadIdAlbum(song.getAlbum());
         if (idAlbum != 0) {
             song.setIdAlbum(idAlbum);

@@ -122,6 +122,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
     @Override
     public void createSong(Song song){
         song.setIdOwne(loginManager.getCurrentUSer().getId());
+        song.setOwne(loginManager.getCurrentUSer().getName());
         musicManager.createSong(song);
     }
 
