@@ -25,7 +25,8 @@ public class RemovePlaylistController implements ActionListener {
             case RemovePlaylistView.BTN_REMOVE:
                 break;
             case RemovePlaylistView.BTN_CANCEL:
-
+                String playlistName = controller.getCurrentPlaylist();
+                controller.showMusicListCard(controller.loadPlaylistMusic(playlistName), playlistName);
                 break;
             case RemovePlaylistView.BTN_MANAGEMENT:
                 controller.showLogoutCard();

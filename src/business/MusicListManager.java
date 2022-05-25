@@ -11,6 +11,8 @@ import java.util.List;
 public class MusicListManager {
     private MusicListDAO  musicListDAO = new MusicListDatabaseDAO();
 
+    private Playlist currentPlaylist;
+
     public LinkedList<String> loadPublicPlaylist(int idUser){
         LinkedList<String> publicPlaylistNames = new LinkedList<>();
         for (Playlist playlist: musicListDAO.loadPublicPlaylist(idUser)) {
@@ -182,5 +184,13 @@ public class MusicListManager {
                 }
             }
         return userSongs;
+    }
+
+    public String getCurrentPlaylist () {
+        return currentPlaylist.getName();
+    }
+
+    public void setCurrentPlaylist (String playlistName, int idUser) {
+        currentPlaylist = findPlaylist(playlistName, idUser);
     }
 }

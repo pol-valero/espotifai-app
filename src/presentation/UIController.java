@@ -210,4 +210,12 @@ public class UIController {
     public boolean isPublicPlaylist(String playlistName) {
         return businessFacade.isPublicPlaylist(playlistName);
     }
+
+    public String getCurrentPlaylist () {
+        return businessFacade.getCurrentPlaylist();
+    }
+
+    public void setCurrentPlaylist (String playlistName) {
+        businessFacade.setCurrentPlaylist(playlistName);
+    }
 }
