@@ -25,7 +25,7 @@ public class CreatePlaylistViewController implements ActionListener, MouseListen
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case CreatePlaylistView.BTN_DONE:
-                if(!controller.findPlaylistName(createPlaylistView.getPlaylistName())) {
+                if(!controller.findPlaylistName(createPlaylistView.getPlaylistName()) && !createPlaylistView.getPlaylistName().isBlank()) {
                     createPlaylistView.wrongNameErrorVisibility(false);
                     controller.createPlaylist(createPlaylistView.getPlaylistName());
                     controller.showHomescreenCard();
