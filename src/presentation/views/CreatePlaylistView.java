@@ -8,7 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 
 
-public class CreatePlaylistNameView {
+public class CreatePlaylistView {
 
     private final JFrame topContainer;
     private final CardLayout cardManager;
@@ -23,7 +23,7 @@ public class CreatePlaylistNameView {
     private JLabel jlWrongNameError = new JLabel();
     private JLabel goBackImage = new JLabel();
 
-        public CreatePlaylistNameView(JFrame topContainer, CardLayout cardManager) {
+        public CreatePlaylistView(JFrame topContainer, CardLayout cardManager) {
             this.topContainer = topContainer;
             this.cardManager = cardManager;
             configureView();

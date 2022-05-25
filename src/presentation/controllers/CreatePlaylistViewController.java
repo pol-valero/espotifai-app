@@ -1,7 +1,7 @@
 package presentation.controllers;
 
 import presentation.UIController;
-import presentation.views.CreatePlaylistNameView;
+import presentation.views.CreatePlaylistView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,11 +12,11 @@ import java.awt.event.MouseListener;
 
 public class CreatePlaylistViewController implements ActionListener, MouseListener {
 
-    private final CreatePlaylistNameView setPlaylistNameView;
+    private final CreatePlaylistView setPlaylistNameView;
     private final UIController controller;
 
     public CreatePlaylistViewController(UIController controller, JFrame topContainer, CardLayout cardManager) {
-        setPlaylistNameView = new CreatePlaylistNameView(topContainer, cardManager);
+        setPlaylistNameView = new CreatePlaylistView(topContainer, cardManager);
         setPlaylistNameView.registerController(this);
         this.controller = controller;
     }
@@ -24,13 +24,13 @@ public class CreatePlaylistViewController implements ActionListener, MouseListen
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case CreatePlaylistNameView.BTN_DONE:
+            case CreatePlaylistView.BTN_DONE:
                 System.out.print(setPlaylistNameView.getPlaylistName());
                 controller.createPlaylist(setPlaylistNameView.getPlaylistName());
                 controller.showHomescreenCard();
                 break;
 
-            case CreatePlaylistNameView.BTN_MANAGEMENT:
+            case CreatePlaylistView.BTN_MANAGEMENT:
                 controller.showLogoutCard();
                 break;
         }
