@@ -232,7 +232,7 @@ public class SongDetailsView {
 
         // Album image
 
-        ImageIcon a = new ImageIcon("src/edu/salleurl/mySongCover.png");
+        ImageIcon a = new ImageIcon("images/mySongCover.png");
         Image b = a.getImage();
         Image t = getScaledImage(b, 300, 350);
         ImageIcon dale = new ImageIcon(t);
@@ -253,7 +253,7 @@ public class SongDetailsView {
         button_panel.setLayout(new BoxLayout(button_panel, BoxLayout.LINE_AXIS));
         button_panel.setBackground(negre);
 
-        ImageIcon boto = new ImageIcon("src/edu/salleurl/example png.png");
+        ImageIcon boto = new ImageIcon("images/playButton.png");
         Image imageIcon_2 = boto.getImage();
         Image Image_2 = getScaledImage(imageIcon_2, 50, 50);
         ImageIcon new_Boto = new ImageIcon(Image_2);
@@ -339,7 +339,7 @@ public class SongDetailsView {
     private JPanel northernPanelConfiguration() {
 
         //Fonts, colours and sizes
-        ImageIcon boto = new ImageIcon("src/edu/salleurl/boto.png");
+        ImageIcon boto = new ImageIcon("images/boto.png");
         Image imageIcon_2 = boto.getImage();
         Image Image_2 = getScaledImage(imageIcon_2, 50, 50);
         ImageIcon new_Boto = new ImageIcon(Image_2);
