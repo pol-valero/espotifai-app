@@ -1,6 +1,7 @@
 package presentation.controllers;
 
 import business.entities.Playlist;
+import business.entities.Song;
 import presentation.UIController;
 import presentation.views.MusicListView;
 
@@ -10,6 +11,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
 public class MusicListController implements ActionListener, ListSelectionListener {
     private final MusicListView musicListView;
@@ -98,9 +100,8 @@ public class MusicListController implements ActionListener, ListSelectionListene
         return musicListView.getSongListSize();
     }
 
-    public void showMusicListCard(Playlist playlist){
-        String playlistName = playlist.getName();
-        musicListView.showCard(controller.loadPlaylistMusic(playlistName),playlistName);
+    public void showMusicListCard(LinkedList<Song> songList, String songListName){
+        musicListView.showCard(songList,songListName);
     }
 
     @Override

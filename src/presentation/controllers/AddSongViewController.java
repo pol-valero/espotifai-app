@@ -31,7 +31,7 @@ public class AddSongViewController implements ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()){
             case AddSongView.BTN_ADD:
-                controller.showMusicListCard();
+                //controller.showMusicListCard();
                 break;
 
             case AddSongView.BTN_MANAGEMENT:
@@ -47,7 +47,7 @@ public class AddSongViewController implements ActionListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        controller.showMusicListCard();
+        //controller.showMusicListCard();
     }
 
     @Override

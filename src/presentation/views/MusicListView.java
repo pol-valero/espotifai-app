@@ -215,7 +215,6 @@ public class MusicListView {
     private JPanel northernPanelConfiguration(String playlistName) {
         //Fonts, colours and sizes
         Font titols = new Font("Trebuchet MS", Font.PLAIN, 65);
-        playlistName = "Chill out";
 
         JPanel northernPanel = new JPanel();
         BoxLayout northernLayout = new BoxLayout(northernPanel,BoxLayout.X_AXIS);
@@ -223,7 +222,7 @@ public class MusicListView {
         northernPanel.setBackground(negre);
         northernPanel.setBorder(new EmptyBorder(new Insets(50, 250, 0, 50)));
 
-        JTextField playlistTitle = new JTextField();
+        JLabel playlistTitle = new JLabel();
         playlistTitle.setFont(titols);
         playlistTitle.setText(playlistName);
         playlistTitle.setForeground(Color.white);

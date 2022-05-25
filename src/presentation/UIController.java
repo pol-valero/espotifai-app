@@ -51,12 +51,8 @@ public class UIController {
         //showAddSongCard();
     }
 
-    public void showMusicListCard() {
-
-        //todo cal fer un mètode per obtenir una string (songname)
-        musicListController.showMusicListCard(new Playlist(122,"Chill out testing",2323,"You"));
-        //musicListController.showMusicListCard(loadPlaylistMusic("nombre de la playlist"));//todo
-
+    public void showMusicListCard(LinkedList<Song> songList, String songListName) {
+        musicListController.showMusicListCard(songList, songListName);
     }
 
     public LinkedList<String> loadPublicPlaylists() {

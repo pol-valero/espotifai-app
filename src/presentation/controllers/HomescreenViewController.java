@@ -21,6 +21,7 @@ public class HomescreenViewController implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+
         switch (e.getActionCommand()) {
             case HomeScreenView.BTN_STATISTICS:
                 break;
@@ -31,7 +32,8 @@ public class HomescreenViewController implements ActionListener {
                 controller.showSetPlaylistNameCard();
                 break;
             default:
-                System.out.print(e.getActionCommand());
+                String playlistName = e.getActionCommand();
+                controller.showMusicListCard(controller.loadPlaylistMusic(playlistName), playlistName);
                 break;
         }
     }
