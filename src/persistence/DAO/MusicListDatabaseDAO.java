@@ -63,20 +63,21 @@ public class MusicListDatabaseDAO implements MusicListDAO {
     @Override
     public List<Playlist> loadUserPlaylist (int user_id) {
         List<Playlist> playlist = new LinkedList<>();
-        String query = "select * from v_playlista where id_usuario = \"" + user_id + "\" order by playlist_name asc";
+        String query = "select * from v_playlist where id_usuario = '" + user_id + "' order by playlist_name asc;";
 
         try {
             ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
-            resultSet.next();
+
             if (resultSet != null) {
-                while (resultSet.next()) {
+                resultSet.next();
+                //while (resultSet.next()) {
                     long id = resultSet.getLong("id_playlist");
                     String name = resultSet.getString("playlist_name");
                     long id_user = resultSet.getLong("id_usuario");
                     String owner = resultSet.getString("owner");
 
                     playlist.add(new Playlist(id, name, id_user, owner));
-                }
+                //}
             }
         } catch (SQLException exception){
             exception.getErrorCode();
