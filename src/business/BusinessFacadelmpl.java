@@ -16,7 +16,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
     private LoginManager loginManager = new LoginManager();
     private MusicListManager musicListManager = new MusicListManager();
     private MusicManager musicManager = new MusicManager();
-    private final String NOTPLAYLIST = "All songs";
+    private final String NOTPLAYLIST = "AllSongs";
 
     @Override
     public boolean checkEmail(String email){
@@ -179,5 +179,13 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     public boolean isPublicPlaylist(String playlistName) {
         return musicListManager.isPublicPlaylist(playlistName, loginManager.getCurrentUSer().getId());
+    }
+
+    public String getCurrentPlaylist () {
+        return musicListManager.getCurrentPlaylist();
+    }
+
+    public void setCurrentPlaylist (String playlistName) {
+        musicListManager.setCurrentPlaylist(playlistName, loginManager.getCurrentUSer().getId());
     }
 }

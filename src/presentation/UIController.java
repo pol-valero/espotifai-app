@@ -10,8 +10,6 @@ import presentation.controllers.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,7 +25,8 @@ public class UIController {
     private BusinessFacade businessFacade = new BusinessFacadelmpl();
     private MusicListController musicListController;
     private AddSongViewController addSongViewController;
-    private CreatePlaylistViewController setPlaylistNameController;
+    private CreatePlaylistViewController createPlaylistViewController;
+    private RemovePlaylistController removePlaylistController;
 
     public void run () {
         JFrame topContainer = new JFrame();
@@ -39,7 +38,9 @@ public class UIController {
         homescreenViewController = new HomescreenViewController(this,topContainer,cardManager);
         musicListController = new MusicListController(this, topContainer, cardManager);
         addSongViewController = new AddSongViewController(this, topContainer, cardManager);
-        setPlaylistNameController = new CreatePlaylistViewController(this, topContainer, cardManager);
+        createPlaylistViewController = new CreatePlaylistViewController(this, topContainer, cardManager);
+        removePlaylistController = new RemovePlaylistController(this, topContainer, cardManager);
+
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
         //showSignUpCard();
@@ -49,6 +50,10 @@ public class UIController {
         //showHomescreenCard();
         //showMusicListCard();
         //showAddSongCard();
+    }
+
+    public void showRemovePlaylistCard(String playlistName, int songNumber) {
+        removePlaylistController.showRemovePlaylistCard(playlistName, songNumber);
     }
 
     public void showMusicListCard(LinkedList<Song> songList, String songListName) {
@@ -68,59 +73,7 @@ public class UIController {
     }
 
     public void showHomescreenCard() {
-        /*LinkedList<String> prova1 = new LinkedList<>();
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("test2");
-        prova1.add("test1");
-        prova1.add("final");
-
-        LinkedList<String> prova2 = new LinkedList<>();
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("test3");
-        prova2.add("final");
-        */
         homescreenViewController.showHomescreenCard(businessFacade.loadUserPlaylist(),businessFacade.loadPublicPlaylist());
-        //System.out.println(businessFacade.loadUserPlaylist().getFirst());
     }
 
     public void showLoginCard() {
@@ -140,7 +93,7 @@ public class UIController {
     }
 
     public void showSetPlaylistNameCard () {
-        setPlaylistNameController.showSetPlaylistNameCard();
+        createPlaylistViewController.showSetPlaylistNameCard();
     }
 
     public boolean findUserNameMatch(String username){//todo
@@ -255,5 +208,13 @@ public class UIController {
 
     public boolean isPublicPlaylist(String playlistName) {
         return businessFacade.isPublicPlaylist(playlistName);
+    }
+
+    public String getCurrentPlaylist () {
+        return businessFacade.getCurrentPlaylist();
+    }
+
+    public void setCurrentPlaylist (String playlistName) {
+        businessFacade.setCurrentPlaylist(playlistName);
     }
 }

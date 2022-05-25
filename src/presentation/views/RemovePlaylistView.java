@@ -1,15 +1,14 @@
 package presentation.views;
 
+import presentation.controllers.RemovePlaylistController;
+
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
-import java.util.LinkedList;
 
 public class RemovePlaylistView {
 
-    public static final String BTN_GO_BACK = "BTN_GO_BACK";
+    public static final String BTN_MANAGEMENT = "BTN_MANAGEMENT";
     public static final String BTN_REMOVE = "BTN_REMOVE";
     public static final String  BTN_CANCEL = "BTN_CANCEL";
 
@@ -19,7 +18,6 @@ public class RemovePlaylistView {
     private JButton jbManagement = new JButton();
     private JButton jbRemovePlaylist = new JButton();
     private JButton jbCancel = new JButton();
-    private JLabel goBackImage = new JLabel();
 
     private final Color negre = new Color(48,48,48);
     private final Color vermell = new Color (232,74,77);
@@ -185,13 +183,6 @@ public class RemovePlaylistView {
 
     private JPanel northernPanelConfiguration() {
         //Fonts, colours and sizes
-        ImageIcon boto = new ImageIcon("src/edu/salleurl/boto.png");
-        Image imageIcon_2 = boto.getImage();
-        Image Image_2 = getScaledImage(imageIcon_2, 50, 50);
-        ImageIcon new_Boto = new ImageIcon(Image_2);
-
-        goBackImage.setIcon(new_Boto);
-        goBackImage.addMouseListener(new MouseAdapter() {});
 
         JPanel BorderAdjustment = new JPanel(new BorderLayout());
 
@@ -203,7 +194,6 @@ public class RemovePlaylistView {
         FillWEST.setBackground(negre);
         FillWEST.setSize(10, 20);
 
-        BorderAdjustment.add(goBackImage, BorderLayout.CENTER);
         BorderAdjustment.add(FillNORTH, BorderLayout.NORTH);
         BorderAdjustment.add(FillWEST, BorderLayout.WEST);
 
@@ -234,7 +224,7 @@ public class RemovePlaylistView {
         jbManagement.setFocusable(false);
         jbManagement.setOpaque(true);
         jbManagement.setBorderPainted(false);
-        jbManagement.setActionCommand(BTN_GO_BACK);
+        jbManagement.setActionCommand(BTN_MANAGEMENT);
 
         JPanel BorderAdjustment_2 = new JPanel(new BorderLayout());
 
@@ -274,6 +264,12 @@ public class RemovePlaylistView {
         g2.dispose();
 
         return resizedImg;
+    }
+
+    public void registerController (RemovePlaylistController removePlaylistController) {
+        jbCancel.addActionListener(removePlaylistController);
+        jbRemovePlaylist.addActionListener(removePlaylistController);
+        jbManagement.addActionListener(removePlaylistController);
     }
 
 

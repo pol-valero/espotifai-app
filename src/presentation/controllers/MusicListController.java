@@ -51,10 +51,12 @@ public class MusicListController implements ActionListener, ListSelectionListene
                 break;
 
             case MusicListView.BTN_DELETE:
+                String playlistName = controller.getCurrentPlaylist();
+                controller.showRemovePlaylistCard(playlistName, controller.loadPlaylistMusic(playlistName).size());
                 break;
 
             case MusicListView.BTN_RENAMEPLAYLIST:
-                controller.showSetPlaylistNameCard();
+                //controller.showRenamePlaylistCard();
                 break;
 
             case MusicListView.BTN_REMOVESONG:
@@ -101,6 +103,7 @@ public class MusicListController implements ActionListener, ListSelectionListene
     }
 
     public void showMusicListCard(LinkedList<Song> songList, String songListName){
+        controller.setCurrentPlaylist(songListName);
         musicListView.showCard(songList,songListName);
         chooseVariation(songListName);
     }

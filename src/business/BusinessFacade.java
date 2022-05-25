@@ -114,4 +114,8 @@ public interface BusinessFacade {
      void changePlaylistName(String currentName, String newName);
 
      boolean isPublicPlaylist(String playlistName);
+
+     String getCurrentPlaylist();
+
+     void setCurrentPlaylist(String playlistName);
 }
