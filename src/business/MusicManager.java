@@ -29,6 +29,7 @@ public class MusicManager {
     private List<Song> songs;
     private boolean paused = false;
     private int position;
+    private Song createSong;
 
     public Song getCurrentSong() {
         return currentSong;
@@ -66,10 +67,15 @@ public class MusicManager {
     }
 
     public void createSong(Song song) {
+        this.createSong = song;
         boolean existGenre = false;
         List<Genre> stadistic = musicDAO.loadStadistic();
         System.out.println("la lista de generos tiene = " + stadistic.size());
         insertIdSingerAlbum(song);
+        song.setIdSinger(createSong.getIdSinger());
+        song.setIdAlbum(createSong.getIdAlbum());
+        System.out.println("id album song = "+ song.getIdAlbum() +"album = "+ createSong.getIdAlbum());
+        System.out.println("id artista song = "+ song.getIdSinger());
 
         if (stadistic.size() != 0) {
             for(Genre genre: stadistic) {
@@ -95,6 +101,7 @@ public class MusicManager {
             song.setIdGenre(stadistic.get(stadistic.size() - 1).getId());
             musicDAO.createSong(song);
         }
+        createSong = null;
     }
 
     public void deleteUserAddedSong(Song song){
@@ -120,25 +127,29 @@ public class MusicManager {
 
     private void insertIdSingerAlbum(Song song){
         int idSinger = musicDAO.loadIdSinger(song.getSinger());
+
         if (idSinger != 0){
-            song.setIdSinger(idSinger);
+            createSong.setIdSinger(idSinger);
         } else {
             musicDAO.createSinger(song.getSinger());
             idSinger = musicDAO.loadIdSinger(song.getSinger());
-            song.setIdSinger(idSinger);
+            createSong.setIdSinger(idSinger);
         }
-        insertIdAlbum(song);
+        insertIdAlbum();
     }
 
-    private void insertIdAlbum(Song song){
-        System.out.println("el nombre del album es = " + song.getAlbum());
-        int idAlbum = musicDAO.loadIdAlbum(song.getAlbum());
+    private void insertIdAlbum(){
+        System.out.println("el nombre del album es = " + createSong.getAlbum());
+        int idAlbum = musicDAO.loadIdAlbum(createSong.getAlbum());
+        System.out.println("managerMusic id albu = " + idAlbum);
         if (idAlbum != 0) {
-            song.setIdAlbum(idAlbum);
+            createSong.setIdAlbum(idAlbum);
 
         } else  {
-            musicDAO.createAlbum(song.getAlbum(), song.getIdSinger());
-            song.setIdSinger(musicDAO.loadIdSinger(song.getSinger()));
+            musicDAO.createAlbum(createSong.getAlbum(), createSong.getIdSinger());
+            createSong.setIdAlbum(musicDAO.loadIdSinger(createSong.getSinger()));
+            System.out.println("managerMusic id albu al crearse = " + musicDAO.loadIdSinger(createSong.getSinger()) +
+                    "current song = " + createSong.getIdSinger());
         }
     }
 

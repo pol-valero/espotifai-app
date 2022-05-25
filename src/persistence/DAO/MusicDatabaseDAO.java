@@ -53,8 +53,8 @@ public class MusicDatabaseDAO implements MusicDAO {
     @Override
     public void deleteSong(Song song) {
 
-        String query = "DELETE FROM lista_canciones WHERE id_cancion = \""
-                + song.getIdSong() + "\";";
+        String query = "DELETE FROM lista_cancion WHERE id_cancion = '"
+                + song.getIdSong() + "';";
         SQLConnector.getInstance().deleteQuery(query);
 
         query = "DELETE FROM canciones WHERE titulo = \""
@@ -105,11 +105,11 @@ public class MusicDatabaseDAO implements MusicDAO {
             }
             return 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Error ");
+            //e.printStackTrace();
+            System.out.println("ERROR album");
+            return 0;
         }
 
-        return 0;
     }
 
     @Override
@@ -132,7 +132,8 @@ public class MusicDatabaseDAO implements MusicDAO {
             }
            return 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+           //e.printStackTrace();
+            System.out.println("error singer");
             return 0;
         }
     }
