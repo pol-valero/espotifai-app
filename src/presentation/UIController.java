@@ -50,6 +50,38 @@ public class UIController {
         //showMusicListCard();
         //showAddSongCard();
 
+        //Les seguents linies son simplement una prova per a fer el "popup" que utilitzarem per a la barra de reproduccio
+        JPanel jPanel = new JPanel();
+        JLabel jLabel = new JLabel("This is a popup");
+        jPanel.add(jLabel);
+        JWindow jWindow = new JWindow(topContainer);
+        jWindow.add(jPanel);
+        jWindow.setVisible(true);
+        jWindow.setSize(200,200);
+        jWindow.setAlwaysOnTop(true);
+        jWindow.addMouseMotionListener(new MouseMotionListener() {
+            private int mx, my;
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                mx = e.getXOnScreen();
+                my = e.getYOnScreen();
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                Point p = jWindow.getLocation();
+                p.x += e.getXOnScreen() - mx;
+                p.y += e.getYOnScreen() - my;
+                mx = e.getXOnScreen();
+                my = e.getYOnScreen();
+                jWindow.setLocation(p);
+            }
+        });
+
+       businessFacade.changePlaylistName("patata", "pruebaxxx");
+        System.out.println(businessFacade.findPlaylistName("lacasito"));
+        businessFacade.deletePlaylist("listaPrueba2");
     }
 
     public void showMusicListCard() {
@@ -73,7 +105,59 @@ public class UIController {
     }
 
     public void showHomescreenCard() {
+        /*LinkedList<String> prova1 = new LinkedList<>();
+        prova1.add("test1");
+        prova1.add("test2");
+        prova1.add("test1");
+        prova1.add("test2");
+        prova1.add("test1");
+        prova1.add("test2");
+        prova1.add("test1");
+        prova1.add("test2");
+        prova1.add("test1");
+        prova1.add("test2");
+        prova1.add("test1");
+        prova1.add("test2");
+        prova1.add("test1");
+        prova1.add("test2");
+        prova1.add("test1");
+        prova1.add("test2");
+        prova1.add("test1");
+        prova1.add("test2");
+        prova1.add("test1");
+        prova1.add("final");
+
+        LinkedList<String> prova2 = new LinkedList<>();
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("test3");
+        prova2.add("final");
+        */
         homescreenViewController.showHomescreenCard(businessFacade.loadUserPlaylist(),businessFacade.loadPublicPlaylist());
+        //System.out.println(businessFacade.loadUserPlaylist().getFirst());
     }
 
     public void showLoginCard() {

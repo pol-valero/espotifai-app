@@ -103,8 +103,8 @@ public class MusicListDatabaseDAO implements MusicListDAO {
     // debería solo borrarse el playlist si no hay canciones?? para decidir
     @Override
     public void deletePlaylist(Playlist playlist) {
-        String query1 = "DELETE FROM listas_reproduccion WHERE id = " + playlist.getId();
-        String query2 = "DELETE FROM lista_cancion WHERE id_lista = " + playlist.getId();
+        String query1 = "DELETE FROM listas_reproduccion WHERE id = '" + playlist.getId() + "';";
+        String query2 = "DELETE FROM lista_cancion WHERE id_lista = '" + playlist.getId() + "';";
 
         SQLConnector.getInstance().deleteQuery(query1);
         SQLConnector.getInstance().deleteQuery(query2);
