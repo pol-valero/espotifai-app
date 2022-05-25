@@ -19,6 +19,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Clase que gestiona el funcionamiento del programa
@@ -88,6 +89,7 @@ public class UIController {
     public void showMusicListCard() {
         //todo cal fer un mètode per obtenir una string (songname)
         musicListController.showMusicListCard(new Playlist(122,"Chill out testing",2323,"You"));
+
     }
 
     public LinkedList<String> loadPublicPlaylists() {
@@ -211,14 +213,71 @@ public class UIController {
         businessFacade.singUpRequest(user);
     }
 
-
+    public void logoutRequest(){
+        businessFacade.logoutRequest();
+    }
 
     public void deleteAccountRequest() {
+        businessFacade.deleteAccountRequest();
     }
 
     public LinkedList<Song> loadPlaylistMusic(String playlistName) {
         return (LinkedList<Song>) businessFacade.loadMusicPlaylist(playlistName);
     }
 
+    public List<Song> loadAllMusic(){
+        return businessFacade.loadAllMusic();
+    }
 
+    public void deleteSongPlaylist(String playlistName, List<String> songName){
+        businessFacade.deleteSongPlaylist(playlistName, songName);
+    }
+
+    public void deletePlaylist(String playlistName){
+        businessFacade.deletePlaylist(playlistName);
+    }
+
+    public void createPlaylist(String playlistName){
+        businessFacade.createPlaylist(playlistName);
+    }
+
+    public Playlist findPlaylist(String playlistName){ //Todo examinar
+       return businessFacade.findPlaylist(playlistName);
+    }
+
+    public List<Song> loadSearchMusic(String filterName){
+        return businessFacade.loadSearchMusic(filterName);
+    }
+
+    public void createSong(Song song){
+        businessFacade.createSong(song);
+    }
+
+    public List<Genre> loadStadistic(){
+        return businessFacade.loadStadistic();
+    }
+
+    public void deleteUserAddedSong(String songName){
+        businessFacade.deleteUserAddedSong(songName);
+    }
+
+    public Song findSong(String songName){
+        return businessFacade.findSong(songName);
+    }
+
+    public void addSongPlaylist(String playlistName, Song song, int position){
+        businessFacade.addSongPlaylist(playlistName,song,position);
+    }
+
+    public void playMusic(String playlistName, int position){
+        businessFacade.playMusic(playlistName, position);
+    }
+
+    public void previusNextSong(int next){ //todo para la barra de reproduccion alante o atras
+        businessFacade.previusNextSong(next);
+    }
+
+    public void pausedSong(){
+        businessFacade.pausedSong();
+    }
 }

@@ -89,7 +89,7 @@ public interface BusinessFacade {
 
      void createPlaylist(String playlistName);
 
-     Playlist findPlaylist(String playlistName);
+     Playlist findPlaylist(String playlistName); //todo mirar
 
      List<Song> loadMusicPlaylist(String playlistName);
 
