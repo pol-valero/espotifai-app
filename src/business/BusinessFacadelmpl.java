@@ -17,7 +17,6 @@ public class BusinessFacadelmpl implements BusinessFacade{
     private MusicListManager musicListManager = new MusicListManager();
     private MusicManager musicManager = new MusicManager();
     private final String NOTPLAYLIST = "All songs";
-    private final int loginManagergetCurrentUSergetId = 8;  //loginManager.getCurrentUSer()..getId() //todo CAMBIAR
 
     @Override
     public boolean checkEmail(String email){
@@ -71,17 +70,17 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     @Override
     public LinkedList<String> loadPublicPlaylist(){
-       return musicListManager.loadPublicPlaylist(loginManagergetCurrentUSergetId);
+       return musicListManager.loadPublicPlaylist(loginManager.getCurrentUSer().getId());
     }
 
     @Override
     public LinkedList<String> loadUserPlaylist(){
-        return musicListManager.loadUserPlaylist(loginManagergetCurrentUSergetId);
+        return musicListManager.loadUserPlaylist(loginManager.getCurrentUSer().getId());
     }
 
     @Override
     public  void addSongPlaylist(String playlistName, Song song, int position){
-        musicListManager.addSongPlaylist(playlistName, song, position, loginManagergetCurrentUSergetId);
+        musicListManager.addSongPlaylist(playlistName, song, position, loginManager.getCurrentUSer().getId());
     }
 
     @Override
@@ -92,27 +91,27 @@ public class BusinessFacadelmpl implements BusinessFacade{
     @Override
     public void deleteSongPlaylist(String playlistName, List<String> songName){
 
-        musicListManager.deleteSongPlaylist(playlistName, songName,  loginManagergetCurrentUSergetId);
+        musicListManager.deleteSongPlaylist(playlistName, songName,  loginManager.getCurrentUSer().getId());
     }
 
     @Override
     public void deletePlaylist(String playlistName){
-        musicListManager.deletePlaylist(playlistName, loginManagergetCurrentUSergetId);
+        musicListManager.deletePlaylist(playlistName, loginManager.getCurrentUSer().getId());
     }
 
     @Override
     public void createPlaylist(String playlistName){
-        musicListManager.createPlaylist(playlistName, loginManagergetCurrentUSergetId);
+        musicListManager.createPlaylist(playlistName, loginManager.getCurrentUSer().getId());
     }
 
     @Override
     public Playlist findPlaylist(String playlistName){
-        return musicListManager.findPlaylist(playlistName, loginManagergetCurrentUSergetId);
+        return musicListManager.findPlaylist(playlistName, loginManager.getCurrentUSer().getId());
     }
 
     @Override
     public List<Song> loadMusicPlaylist(String playlistName){
-        return musicListManager.loadMusicPlaylist(playlistName, loginManagergetCurrentUSergetId);
+        return musicListManager.loadMusicPlaylist(playlistName, loginManager.getCurrentUSer().getId());
     }
 
     @Override
@@ -122,7 +121,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     @Override
     public void createSong(Song song){
-        song.setIdOwne(loginManagergetCurrentUSergetId);
+        song.setIdOwne(loginManager.getCurrentUSer().getId());
         musicManager.createSong(song);
     }
 
@@ -156,7 +155,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
             musicManager.playSong(false, songs, 0);
 
         } else {
-            songs = musicListManager.loadMusicPlaylist(playlistName, loginManagergetCurrentUSergetId);
+            songs = musicListManager.loadMusicPlaylist(playlistName, loginManager.getCurrentUSer().getId());
             musicManager.playSong(true, songs, position);
         }
     }
