@@ -67,6 +67,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
         try {
             ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
+            resultSet.next();
             if (resultSet != null) {
                 while (resultSet.next()) {
                     long id = resultSet.getLong("id_playlist");
@@ -123,11 +124,11 @@ public class MusicListDatabaseDAO implements MusicListDAO {
     @Override
     public List<Song> loadUserAddedSongs(int id_user) {
         List<Song> song = new LinkedList<>();
-        String query = "select distinct name, listas_reproduccion.id_usuario as idOwnerLista, v_songs.* from lista_cancion\n" +
-                "            inner join v_songs on lista_cancion.id_cancion = v_songs.idSong\n" +
-                "            inner join listas_reproduccion on lista_cancion.id_lista = listas_reproduccion.id\n" +
-                " where listas_reproduccion.id_usuario = "+ id_user +
-                " order by name asc";
+        String query = "select distinct name, listas_reproduccion.id_usuario as idOwnerLista, v_songs.* from lista_cancion " +
+                "            inner join v_songs on lista_cancion.id_cancion = v_songs.idSong " +
+                "            inner join listas_reproduccion on lista_cancion.id_lista = listas_reproduccion.id " +
+                " where listas_reproduccion.id_usuario = \""+ id_user +
+                "\" order by name asc";
 
         try {
             ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
