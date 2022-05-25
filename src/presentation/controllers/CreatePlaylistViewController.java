@@ -12,12 +12,12 @@ import java.awt.event.MouseListener;
 
 public class CreatePlaylistViewController implements ActionListener, MouseListener {
 
-    private final CreatePlaylistView setPlaylistNameView;
+    private final CreatePlaylistView createPlaylistView;
     private final UIController controller;
 
     public CreatePlaylistViewController(UIController controller, JFrame topContainer, CardLayout cardManager) {
-        setPlaylistNameView = new CreatePlaylistView(topContainer, cardManager);
-        setPlaylistNameView.registerController(this);
+        createPlaylistView = new CreatePlaylistView(topContainer, cardManager);
+        createPlaylistView.registerController(this);
         this.controller = controller;
     }
 
@@ -25,9 +25,13 @@ public class CreatePlaylistViewController implements ActionListener, MouseListen
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case CreatePlaylistView.BTN_DONE:
-                System.out.print(setPlaylistNameView.getPlaylistName());
-                controller.createPlaylist(setPlaylistNameView.getPlaylistName());
-                controller.showHomescreenCard();
+                if(!controller.findPlaylistName(e.getActionCommand())) {
+                    createPlaylistView.wrongNameErrorVisibility(false);
+                    controller.createPlaylist(createPlaylistView.getPlaylistName());
+                    controller.showHomescreenCard();
+                } else {
+                    createPlaylistView.wrongNameErrorVisibility(true);
+                }
                 break;
 
             case CreatePlaylistView.BTN_MANAGEMENT:
@@ -38,7 +42,7 @@ public class CreatePlaylistViewController implements ActionListener, MouseListen
     }
 
     public void showSetPlaylistNameCard () {
-        setPlaylistNameView.showCard();
+        createPlaylistView.showCard();
     }
 
     @Override

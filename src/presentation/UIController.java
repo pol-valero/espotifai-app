@@ -43,7 +43,7 @@ public class UIController {
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
         //showSignUpCard();
-        //showHomescreenCard();
+        showHomescreenCard();
         //showLoginCard();
         //showSignUpCard();
         //showHomescreenCard();
@@ -78,6 +78,8 @@ public class UIController {
                 jWindow.setLocation(p);
             }
         });
+
+       businessFacade.changePlaylistName("patata", "pruebaxxx");
     }
 
     public void showMusicListCard() {
