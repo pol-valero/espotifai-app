@@ -27,9 +27,9 @@ public interface MusicListDAO  {
 
     /**
      * Metodo para crear una nueva playlist
-     * @param playlist Objeto Playlist con la informcion de la playlist
+     * @param playlistName Nombre de la playlist
      */
-     void createPlaylist(Playlist playlist, int id_user);
+     void createPlaylist(String playlistName, int id_user);
 
     /**
      * Metodo para eliminar una cancion de una playlist ya existente

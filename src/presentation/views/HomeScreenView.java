@@ -5,6 +5,7 @@ import presentation.controllers.HomescreenViewController;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
@@ -25,6 +26,7 @@ public class HomeScreenView {
     private JButton stadisticsBtn;
     private JButton accManBtn;
     private JButton jbNewPlaylist  = createButton("New Playlist");
+    private ActionListener actionListener;
 
 
     public HomeScreenView (JFrame topContainer, CardLayout cardManager){
@@ -263,6 +265,8 @@ public class HomeScreenView {
             jbPlaylist.setPreferredSize(new Dimension(160,160));
             jbPlaylist.setAlignmentX(Component.CENTER_ALIGNMENT);
             jbPlaylist.setIcon(albumCoverDefault);
+            jbPlaylist.setActionCommand(playListName);
+            jbPlaylist.addActionListener(actionListener);
 
             //Adding components to panel
             miniPanel.add(jbPlaylist);
@@ -308,6 +312,7 @@ public class HomeScreenView {
         stadisticsBtn.addActionListener(homescreenViewController);
         accManBtn.addActionListener(homescreenViewController);
         jbNewPlaylist.addActionListener(homescreenViewController);
+        actionListener = homescreenViewController;
     }
 
 

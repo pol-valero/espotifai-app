@@ -85,13 +85,13 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
     // crea playlist de un usuario
     @Override
-    public void createPlaylist(Playlist playlist, int id_user) {
+    public void createPlaylist(String playlistName, int id_user) {
         // no hay control de si ya existe el "playlist", permitir mismo nombre con distinto usuario ? o no
 
         String query = "INSERT INTO listas_reproduccion(nombre, id_usuario) VALUES ('" +
                 //playlist.getId() + "," +
                 //el getId no es necesario porque lo crea la propia bbdd, en realidad vendría con 0
-                playlist.getName() + "," +
+                playlistName + "', '" +
                 id_user + "')";
 
         SQLConnector.getInstance().insertQuery(query);

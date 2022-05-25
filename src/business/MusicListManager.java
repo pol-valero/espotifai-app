@@ -71,10 +71,7 @@ public class MusicListManager {
     }
 
     public void createPlaylist(String playlistName, int idUser){
-        Playlist playlist = findUserPlaylist(playlistName, idUser);
-        if(playlist != null){
-            musicListDAO.createPlaylist(playlist, idUser);
-        }
+            musicListDAO.createPlaylist(playlistName, idUser);
     }
 
     public List<Song> loadMusicPlaylist(String playlistName, int ideUser){

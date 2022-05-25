@@ -30,6 +30,9 @@ public class HomescreenViewController implements ActionListener {
             case HomeScreenView.BTN_CREATEPLAYLIST:
                 controller.showSetPlaylistNameCard();
                 break;
+            default:
+                System.out.print(e.getActionCommand());
+                break;
         }
     }
 

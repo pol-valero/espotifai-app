@@ -25,7 +25,9 @@ public class SetPlaylistNameController implements ActionListener, MouseListener 
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case SetPlaylistNameView.BTN_DONE:
-                controller.showMusicListCard();
+                System.out.print(setPlaylistNameView.getPlaylistName());
+                controller.createPlaylist(setPlaylistNameView.getPlaylistName());
+                controller.showHomescreenCard();
                 break;
 
             case SetPlaylistNameView.BTN_MANAGEMENT:
