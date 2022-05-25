@@ -108,4 +108,6 @@ public interface BusinessFacade {
     void previusNextSong(int next);
 
     void pausedSong();
+
+    boolean findPlaylistName(String playlistName);
 }

@@ -134,6 +134,13 @@ public class MusicListManager {
         return newSong;
     }
 
+    public boolean findPlaylistName(String playlistName, int idUser){
+        if(findPlaylist(playlistName, idUser) != null){
+            return true;
+        }
+        return false;
+    }
+
     private Playlist findOnePublicPlaylist(String playlistName , int idUser){
         List<Playlist> playlistList = musicListDAO.loadPublicPlaylist(idUser);
 

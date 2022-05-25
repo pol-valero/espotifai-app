@@ -89,6 +89,7 @@ public class UIController {
     public void showMusicListCard() {
         //todo cal fer un mètode per obtenir una string (songname)
         musicListController.showMusicListCard(new Playlist(122,"Chill out testing",2323,"You"));
+        //musicListController.showMusicListCard(loadPlaylistMusic("nombre de la playlist"));//todo
 
     }
 
@@ -279,5 +280,9 @@ public class UIController {
 
     public void pausedSong(){
         businessFacade.pausedSong();
+    }
+
+    public boolean findPlaylistName(String playlistName){
+        return businessFacade.findPlaylistName(playlistName);
     }
 }

@@ -87,7 +87,7 @@ public class LoginDatabaseDAO implements LoginDAO {
 
     @Override
     public void deleteAccountRequest(String userName) {
-        String query = "DELETE FROM usuario WHERE nombre = " + userName + ";";
+        String query = "DELETE FROM usuario WHERE nombre = \"" + userName + "\";";
         SQLConnector.getInstance().deleteQuery(query);
     }
 /*

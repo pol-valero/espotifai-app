@@ -53,12 +53,12 @@ public class MusicDatabaseDAO implements MusicDAO {
     @Override
     public void deleteSong(Song song) {
 
-        String query = "DELETE FROM lista_canciones WHERE id_cancion = "
-                + song.getIdSong() + ";";
+        String query = "DELETE FROM lista_canciones WHERE id_cancion = \""
+                + song.getIdSong() + "\";";
         SQLConnector.getInstance().deleteQuery(query);
 
-        query = "DELETE FROM canciones WHERE titulo = "
-                + song.getName() + ";";
+        query = "DELETE FROM canciones WHERE titulo = \""
+                + song.getName() + "\";";
 
         SQLConnector.getInstance().deleteQuery(query);
     }

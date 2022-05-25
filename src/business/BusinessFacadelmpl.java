@@ -168,5 +168,8 @@ public class BusinessFacadelmpl implements BusinessFacade{
         musicManager.pausedSong();
     }
 
+    public boolean findPlaylistName(String playlistName){
+        return musicListManager.findPlaylistName(playlistName, loginManager.getCurrentUSer().getId());
+    }
 
 }
