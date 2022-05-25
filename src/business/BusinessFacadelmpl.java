@@ -175,4 +175,8 @@ public class BusinessFacadelmpl implements BusinessFacade{
     public void changePlaylistName(String currentName, String newName){
         musicListManager.changePlaylistName(currentName, newName);
     }
+
+    public boolean isPublicPlaylist(String playlistName) {
+        return musicListManager.isPublicPlaylist(playlistName, loginManager.getCurrentUSer().getId());
+    }
 }

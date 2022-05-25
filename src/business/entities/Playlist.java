@@ -32,6 +32,10 @@ public class Playlist {
         return owner;
     }
 
+    public long getUserId() {
+        return id_user;
+    }
+
     //public List<Song> getSongList() {
     //    return songList;
     //}

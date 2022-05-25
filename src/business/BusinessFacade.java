@@ -112,4 +112,6 @@ public interface BusinessFacade {
     boolean findPlaylistName(String playlistName);
 
      void changePlaylistName(String currentName, String newName);
+
+     boolean isPublicPlaylist(String playlistName);
 }

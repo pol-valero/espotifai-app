@@ -79,6 +79,13 @@ public class MusicListManager {
         Playlist playlist = findPlaylist(playlistName, ideUser);
         if(playlist != null){
             return musicListDAO.loadMusicPlaylist(playlist);
+        } else {
+            switch (playlistName) {
+                case "MySongs":
+                    break;
+                case "AllSongs":
+                    break;
+            }
         }
         return null;
     }
@@ -155,5 +162,14 @@ public class MusicListManager {
 
     public void changePlaylistName(String currentName, String newName){
         musicListDAO.changePlaylistName(currentName, newName);
+    }
+
+    public boolean isPublicPlaylist(String playlistName, int idUser) {
+       Playlist playlist = findPlaylist(playlistName, idUser);
+       if (playlist.getUserId() == idUser) {
+           return false;
+       } else {
+           return true;
+       }
     }
 }

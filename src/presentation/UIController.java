@@ -252,4 +252,8 @@ public class UIController {
     public void changePlaylistName(String currentName, String newName){
         businessFacade.changePlaylistName(currentName, newName);
     }
+
+    public boolean isPublicPlaylist(String playlistName) {
+        return businessFacade.isPublicPlaylist(playlistName);
+    }
 }

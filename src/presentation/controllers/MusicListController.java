@@ -102,6 +102,7 @@ public class MusicListController implements ActionListener, ListSelectionListene
 
     public void showMusicListCard(LinkedList<Song> songList, String songListName){
         musicListView.showCard(songList,songListName);
+        chooseVariation(songListName);
     }
 
     @Override
@@ -110,6 +111,24 @@ public class MusicListController implements ActionListener, ListSelectionListene
 
             String songName = musicListView.getSongName(musicListView.getRow());
             System.out.println("Row: " + musicListView.getRow()+ " Song name: "+songName);
+        }
+    }
+
+    private void chooseVariation(String playlistName) {
+        switch (playlistName) {
+            case "MySongs":
+                musicListView.userPersonalSongsVariation();
+                break;
+            case "AllSongs":
+                musicListView.publicSongsVariation();
+                break;
+            default:
+                if (controller.isPublicPlaylist(playlistName)) {
+                    musicListView.publicPlaylistVariation();
+                } else {
+                    musicListView.userPlaylistVariation();
+                }
+                break;
         }
     }
 
