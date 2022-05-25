@@ -82,9 +82,9 @@ public class MusicListManager {
         } else {
             switch (playlistName) {
                 case "MySongs":
-                    break;
+                    return loadAllUserSongs(ideUser);
                 case "AllSongs":
-                    break;
+                    return loadAllMusic();
             }
         }
         return null;
@@ -171,5 +171,16 @@ public class MusicListManager {
        } else {
            return true;
        }
+    }
+
+    private List<Song> loadAllUserSongs (int idUser) {
+        List<Song> userSongs = new LinkedList<>();
+        List<Song> allSongs = loadAllMusic();
+            for(Song song: allSongs) {
+                if(song.getIdOwne() == idUser) {
+                    userSongs.add(song);
+                }
+            }
+        return userSongs;
     }
 }
