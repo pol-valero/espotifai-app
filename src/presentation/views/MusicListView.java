@@ -51,6 +51,8 @@ public class MusicListView {
     private JButton jbHome;
     private JButton accManBtn;
 
+    private JLabel playlistTitle;
+
     private DefaultTableModel model;
 
     private JTable table;
@@ -222,7 +224,7 @@ public class MusicListView {
         northernPanel.setBackground(negre);
         northernPanel.setBorder(new EmptyBorder(new Insets(50, 250, 0, 50)));
 
-        JLabel playlistTitle = new JLabel();
+        playlistTitle = new JLabel();
         playlistTitle.setFont(titols);
         playlistTitle.setText(playlistName);
         playlistTitle.setForeground(Color.white);
@@ -641,5 +643,9 @@ public class MusicListView {
         userPlaylistVariationActive = false;
         publicPlaylistVariationActive = false;
         allSongsVariationActive = false;
+    }
+
+    public String getDisplayedPlaylistName() {
+        return playlistTitle.getText();
     }
 }
