@@ -12,12 +12,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,7 +27,7 @@ public class UIController {
     private BusinessFacade businessFacade = new BusinessFacadelmpl();
     private MusicListController musicListController;
     private AddSongViewController addSongViewController;
-    private SetPlaylistNameController setPlaylistNameController;
+    private CreatePlaylistViewController setPlaylistNameController;
 
     public void run () {
         JFrame topContainer = new JFrame();
@@ -45,7 +39,7 @@ public class UIController {
         homescreenViewController = new HomescreenViewController(this,topContainer,cardManager);
         musicListController = new MusicListController(this, topContainer, cardManager);
         addSongViewController = new AddSongViewController(this, topContainer, cardManager);
-        setPlaylistNameController = new SetPlaylistNameController(this, topContainer, cardManager);
+        setPlaylistNameController = new CreatePlaylistViewController(this, topContainer, cardManager);
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
         //showSignUpCard();
@@ -158,6 +152,7 @@ public class UIController {
         prova2.add("final");
         */
         homescreenViewController.showHomescreenCard(businessFacade.loadUserPlaylist(),businessFacade.loadPublicPlaylist());
+        //System.out.println(businessFacade.loadUserPlaylist().getFirst());
     }
 
     public void showLoginCard() {

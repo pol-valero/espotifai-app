@@ -1,6 +1,6 @@
 package presentation.views;
 
-import presentation.controllers.SetPlaylistNameController;
+import presentation.controllers.CreatePlaylistViewController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 
 
-public class SetPlaylistNameView {
+public class CreatePlaylistNameView {
 
     private final JFrame topContainer;
     private final CardLayout cardManager;
@@ -23,7 +23,7 @@ public class SetPlaylistNameView {
     private JLabel jlWrongNameError = new JLabel();
     private JLabel goBackImage = new JLabel();
 
-        public SetPlaylistNameView(JFrame topContainer, CardLayout cardManager) {
+        public CreatePlaylistNameView(JFrame topContainer, CardLayout cardManager) {
             this.topContainer = topContainer;
             this.cardManager = cardManager;
             configureView();
@@ -226,7 +226,7 @@ public class SetPlaylistNameView {
         wrongNameErrorVisibility(false);
     }
 
-    public void registerController(SetPlaylistNameController setPlaylistNameController) {
+    public void registerController(CreatePlaylistViewController setPlaylistNameController) {
             jbAdd.addActionListener(setPlaylistNameController);
             jbManagement.addActionListener(setPlaylistNameController);
             goBackImage.addMouseListener(setPlaylistNameController);
