@@ -194,7 +194,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
                 song.add(new Song(idSong, name, idGenere, genere, idAlbum, album, idSinger, singer, idOwner, owner, filePath, orden, minutes, seconds, lyrics));
             }
         } catch (SQLException exception){
-            exception.getErrorCode();
+            exception.printStackTrace();
             return null;
         }
         return song;
