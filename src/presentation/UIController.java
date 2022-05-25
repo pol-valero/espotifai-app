@@ -80,7 +80,8 @@ public class UIController {
         });
 
        businessFacade.changePlaylistName("patata", "pruebaxxx");
-        System.out.println(businessFacade.findPlaylistName("prueba51"));
+        System.out.println(businessFacade.findPlaylistName("lacasito"));
+        businessFacade.deletePlaylist("listaPrueba2");
     }
 
     public void showMusicListCard() {
