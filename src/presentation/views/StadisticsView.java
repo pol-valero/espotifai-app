@@ -9,18 +9,19 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
+import java.util.List;
 
 public class StadisticsView {
-    private final JFrame topContainer;
+    private final JPanel mainViewCenter;
     private final CardLayout cardManager;
     private final Color negre = new Color(48,48,48);
     private final Color vermell = new Color (232,74,77);
 
-    public StadisticsView (JFrame topContainer, CardLayout cardManager){
-        this.topContainer=topContainer;
+    public StadisticsView (JPanel mainViewCenter, CardLayout cardManager){
+        this.mainViewCenter=mainViewCenter;
         this.cardManager=cardManager;
         configureView();
-        topContainer.pack();
+
     }
 
     private void configureView() {
@@ -35,7 +36,7 @@ public class StadisticsView {
         panel.add(westernPanel,BorderLayout.WEST);
         panel.add(centralPanel,BorderLayout.CENTER);
 
-        topContainer.getContentPane().add(panel, "stadisticsCard");
+        mainViewCenter.add(panel,"stadisticsCard");
 
     }
 
@@ -141,59 +142,18 @@ public class StadisticsView {
 
     private JPanel createScalePanel(int amount) {
         JPanel scalePanel = new JPanel();
-        int flag=0;
-        int interval=0;
+        scalePanel.setLayout(new FlowLayout());
+        scalePanel.setBorder(new EmptyBorder(new Insets(0,30,0,80)));
 
-
-        scalePanel.setBackground(negre);
-        scalePanel.setPreferredSize(new Dimension(1000,50));
-        scalePanel.setBorder(new EmptyBorder(0,65,0,130));
-
-        if(amount <= 20){
-            GridBagLayout scaleLayout = new GridBagLayout();
-            scalePanel.setLayout(scaleLayout);
-            GridBagConstraints c = new GridBagConstraints();
-            c.gridy=0;
-            for(int i=0; i < amount+1;i++){
-                c.gridx=i;
-                JLabel label = new JLabel(i+"");
-                scalePanel.add(label,c);
-
-            }
-
-
-        }
-        else if(amount <= 50){
-            GridLayout scaleLayout = new GridLayout(1,0,0,0);
-            scalePanel.setLayout(scaleLayout);
-
-            for(int i=0; i < amount+1; i++){
-                JLabel label = new JLabel(i+"");
-                label.setForeground(Color.white);
-                scalePanel.add(label);
-            }
-        }
-        else if(amount <=70){
-
-            GridLayout scaleLayout = new GridLayout(1,0,0,0);
-            scalePanel.setLayout(scaleLayout);
-
-            interval=2;
-            for(int i=0; i < amount+3; i++){
-                if(flag == interval){
-                    scalePanel.add(new JLabel(i+""));
-                    flag=0;
-                }
-                else{
-                    scalePanel.add(new JLabel(""));
-                    flag++;
-                }
-
-            }
-
-        }
-        else{
-
+        for(int i=1; i < amount+1;i++ ){
+            JPanel panel1 = new JPanel();
+            JLabel label = new JLabel(i+"");
+            label.setAlignmentX(Component.RIGHT_ALIGNMENT);
+            panel1.add(label);
+            panel1.setPreferredSize(new Dimension(100,40));
+            panel1.setBackground(Color.white);
+            panel1.setBorder(new LineBorder(Color.black));
+            scalePanel.add(panel1);
         }
 
         return scalePanel;
@@ -274,8 +234,9 @@ public class StadisticsView {
 
     }
 
-    public void showCard(String[][] data) {
-        cardManager.show(topContainer.getContentPane(),"stadisticsCard");
+    public void showCard(LinkedList<Genre> genres) {
+
+        cardManager.show(mainViewCenter,"stadisticsCard");
     }
 }
 

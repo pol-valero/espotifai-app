@@ -12,9 +12,9 @@ public class AddToPlaylistViewController implements ActionListener {
     private final AddToPlaylistView addToPlaylistView;
     private final UIController controller;
 
-    public AddToPlaylistViewController(UIController controller, JFrame topContainer, CardLayout cardManager){
+    public AddToPlaylistViewController(UIController controller, JPanel mainViewCenter, CardLayout cardManager){
         this.controller=controller;
-        addToPlaylistView=new AddToPlaylistView(topContainer,cardManager);
+        addToPlaylistView=new AddToPlaylistView(mainViewCenter,cardManager);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
