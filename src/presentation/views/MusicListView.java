@@ -269,6 +269,8 @@ public class MusicListView {
 
         //Table creation and config
         table.setModel(model);
+
+        table.setFillsViewportHeight(true);
         /*table = new JTable(model){
         table {
             public Class getColumnClass(int column) {//Specifing class for column 0 and 6
