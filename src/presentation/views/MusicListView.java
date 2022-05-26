@@ -74,11 +74,26 @@ public class MusicListView {
     public MusicListView (JPanel mainViewCenter, CardLayout cardManager){
         this.mainViewCenter =mainViewCenter;
         this.cardManager=cardManager;
+        configureTable();
         configureView();
         //topContainer.pack();
     }
 
-
+    private void configureTable () {
+        table = new JTable(model){
+            public Class getColumnClass(int column) {//Specifing class for column 0 and 6
+                switch(column){
+                    case 0 -> {
+                        return Icon.class;
+                    }
+                    case 6 -> {
+                        return Boolean.class;
+                    }
+                    default -> {return String.class;}
+                }
+            }
+        };
+    }
 
     private void configureView() {
         //Creation of main panels
@@ -88,6 +103,8 @@ public class MusicListView {
         centralPanel = centralPanelConfiguration(new LinkedList<>());
         northernPanel = northernPanelConfiguration(new String());
         JPanel easternPanel = easternPanelConfiguration();
+
+
 
 
         panel.add(westernPanel,BorderLayout.WEST);
@@ -241,6 +258,8 @@ public class MusicListView {
         JPanel centralPanel = new JPanel();
         centralPanel.setBackground(negre);
 
+
+
         //Data conversion from Linkedlist to 2D Matrix
         data = songConversor(songList);
 
@@ -249,7 +268,9 @@ public class MusicListView {
         model = new DefaultTableModel(data, columnNames);
 
         //Table creation and config
-        table = new JTable(model){
+        table.setModel(model);
+        /*table = new JTable(model){
+        table {
             public Class getColumnClass(int column) {//Specifing class for column 0 and 6
                 switch(column){
                     case 0 -> {
@@ -261,7 +282,7 @@ public class MusicListView {
                     default -> {return String.class;}
                 }
             }
-        };
+        };*/
 
         table.setBackground(negre);
         table.setFont(titols);
@@ -368,7 +389,7 @@ public class MusicListView {
 
     private Object[][] songConversor(LinkedList<Song> songList) { //todo descomentar quan calgui
         //Object[][] data = new Object[songList.size()][6];
-        Object[][] data = new Object[201][7];
+        Object[][] data = new Object[songList.size()][7];
 
         ImageIcon songCover = new ImageIcon("images/musicCoverMusicList.png");
         Image songCoverImage = songCover.getImage();
