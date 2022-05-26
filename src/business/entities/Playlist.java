@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Clase encargada de gestionar la informacion de los objetos playlist
+ * Class in charged of managing information related to Playlist objects
  */
 public class Playlist {
     private long id;
