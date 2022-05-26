@@ -7,6 +7,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
+
+
+/**
+ * Class representing the AddSongView. This class contains all the methods and attributes
+ * needed to use and show the AddSong View
+ *
+ * @author Pol Valero, Oriol Centeno , Adrià Estevam, Joaquim Balletbo and Manel Martos
+ * @version 1.0
+ */
 public class AddSongView {
 
     private final JPanel mainViewCenter;
@@ -31,6 +40,15 @@ public class AddSongView {
     private JLabel goBackImage = new JLabel();
     private JLabel jlWrongGenreError = new JLabel();
 
+    /**
+     * Constructor to create AddSongView
+     * Creates the AddSongView linking it to the UIController. This function
+     * initializes the AddSongView.
+     *
+     * @param mainViewCenter this is the JPanel displayed in the Center of the mainView
+     * @param cardManager the cardManager is the component that manages when to show each view
+     */
+
     public AddSongView (JPanel mainViewCenter, CardLayout cardManager) {
         this.mainViewCenter = mainViewCenter;
         this.cardManager = cardManager;
@@ -38,6 +56,11 @@ public class AddSongView {
         //this.mainViewCenter.pack();
     }
 
+    /**
+     * configureView is the main method of this class , creating the view and
+     * adding the view to the JPPanel mainviewCenter in order to be displayed.
+     *
+     */
     private void configureView() {
 
         //Colors, fonts and sizes
@@ -296,6 +319,15 @@ public class AddSongView {
 
         mainViewCenter.add(panel, "addSongCard");
     }
+
+    /**
+     * getScaledImage is a method that receives an image with a certain length and height
+     * and resizes the image to mach the length and height.
+     * @param Img Image to be resized
+     * @param wt Width of the image to resize
+     * @param ht Height of the image to resize
+     * @return The image introduced in this method but resized to mach the Width and Height
+     */
     private Image getScaledImage(Image Img, int wt, int ht) {
         BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImg.createGraphics();
@@ -305,6 +337,56 @@ public class AddSongView {
         g2.dispose();
 
         return resizedImg;
+    }
+
+    /**
+     * registerController as it's name implies registers the three controllers
+     * of the AddSongView in order to be accessed from the addSongViewController class
+     * @param addSongViewController Is the parameter that will receive this class in order to
+     *                              link the listeners of this view with the Controller
+     */
+    public void registerController (AddSongViewController addSongViewController){
+
+        jbAdd.addActionListener(addSongViewController);
+        jbManagement.addActionListener(addSongViewController);
+        goBackImage.addMouseListener(addSongViewController);
+    }
+
+    /**
+     *  The function getGenre calls the method getText() of  the parameter genreField
+     *  from this class
+     *
+     * @return The text introduced in the JTextField genreField
+     *
+     */
+    public String getGenre() {
+        return genreField.getText();
+    }
+
+    /**
+     * showCard  callas a method to set the error visibility no false
+     * and introduces the current state of the mainViewCenter Frame in the cardManager
+     * and shows to the user the screen
+     *
+     */
+
+    public void showCard () {
+        setErrorsInvisible();
+        cardManager.show(mainViewCenter,"addSongCard");
+    }
+
+    /**
+     *  The function setErrorsInvisible calls the method setVisible of  the different
+     *  error messages in order for them to not be visible at the start of the class
+     *
+     */
+    private void setErrorsInvisible() {
+        jlExistingSong.setVisible(false);
+        jlUnfoundArtistError.setVisible(false);
+        jlAlbumNotFoundError.setVisible(false);
+        jlWrongGenreError.setVisible(false);
+        jlWrongFilepathError.setVisible(false);
+        mainViewCenter.revalidate();
     }
     public void existingSongErrorVisibility(boolean error){
         jlExistingSong.setVisible(error);
@@ -336,12 +418,6 @@ public class AddSongView {
         mainViewCenter.revalidate();
     }
 
-    public void registerController (AddSongViewController addSongViewController){
-
-        jbAdd.addActionListener(addSongViewController);
-        jbManagement.addActionListener(addSongViewController);
-        goBackImage.addMouseListener(addSongViewController);
-    }
     public String getSongName() {
         return songNameField.getText();
     }
@@ -354,21 +430,5 @@ public class AddSongView {
         return albumField.getText();
     }
 
-    public String getGenre() {
-        return genreField.getText();
-    }
 
-    public void showCard () {
-        setErrorsInvisible();
-        cardManager.show(mainViewCenter,"addSongCard");
-    }
-
-    private void setErrorsInvisible() {
-        jlExistingSong.setVisible(false);
-        jlUnfoundArtistError.setVisible(false);
-        jlAlbumNotFoundError.setVisible(false);
-        jlWrongGenreError.setVisible(false);
-        jlWrongFilepathError.setVisible(false);
-        mainViewCenter.revalidate();
-    }
 }
