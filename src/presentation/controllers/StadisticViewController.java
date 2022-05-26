@@ -1,5 +1,6 @@
 package presentation.controllers;
 
+import business.entities.Genre;
 import presentation.UIController;
 import presentation.views.StadisticsView;
 
@@ -7,14 +8,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
 
 public class StadisticViewController implements ActionListener {
     private final StadisticsView stadisticsView;
     private final UIController controller;
 
-    public StadisticViewController(UIController controller, JFrame topContainer, CardLayout cardManager){
+    public StadisticViewController(UIController controller, JPanel mainViewCenter, CardLayout cardManager){
         this.controller=controller;
-        stadisticsView=new StadisticsView(topContainer,cardManager);
+        stadisticsView=new StadisticsView(mainViewCenter,cardManager);
         stadisticsView.registerController(this);
     }
 
@@ -23,8 +26,7 @@ public class StadisticViewController implements ActionListener {
 
     }
 
-    public void showStadisticsView(){
-        String[][] data = new String[0][];
-        stadisticsView.showCard(data);
+    public void showStadisticsView(LinkedList<Genre> genres){
+        stadisticsView.showCard(genres);
     }
 }

@@ -9,16 +9,16 @@ import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
 public class AddToPlaylistView {
-    private final JFrame topContainer;
+    private final JPanel mainViewCenter;
     private final CardLayout cardManager;
     private final Color negre = new Color(48,48,48);
     private final Color vermell = new Color (232,74,77);
 
-    public AddToPlaylistView(JFrame topContainer, CardLayout cardManager){
-        this.topContainer = topContainer;
+    public AddToPlaylistView(JPanel mainViewCenter, CardLayout cardManager){
+        this.mainViewCenter = mainViewCenter;
         this.cardManager=cardManager;
         configureView();
-        topContainer.pack();
+        //topContainer.pack();
     }
 
     private void configureView() {
@@ -30,7 +30,7 @@ public class AddToPlaylistView {
         panel.add(westernPanel,BorderLayout.WEST);
         panel.add(centralPanel,BorderLayout.CENTER);
 
-        topContainer.getContentPane().add(panel, "addToPlaylistCard");
+        mainViewCenter.add(panel,"addToPlaylistCard");
 
     }
 
@@ -220,6 +220,6 @@ public class AddToPlaylistView {
     }
 
     public void showCard(){
-        cardManager.show(topContainer.getContentPane(),"addToPlaylistCard");
+        cardManager.show(mainViewCenter,"addToPlaylistCard");
     }
 }

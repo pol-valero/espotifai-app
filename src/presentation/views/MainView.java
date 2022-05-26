@@ -14,6 +14,7 @@ public class MainView {
         oneTimeConfiguration(cardManager, mainViewCenter, reproductionBar);
     }
 
+
     private void oneTimeConfiguration (CardLayout cardManager, JPanel mainViewCenter, JPanel reproductionBar) {
         JPanel mainView = new JPanel();
         mainView.setLayout(new BorderLayout());

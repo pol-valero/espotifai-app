@@ -78,6 +78,7 @@ public class ReproductionBar extends JPanel {
         return titlePanel;
 
     }
+
     private JPanel barPanelConfig(int currentMin, int currentSec, int maxMin, int maxSec) {
 
         JPanel barPanel = new JPanel();
