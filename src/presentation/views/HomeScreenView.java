@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
+
 public class HomeScreenView {
     private final JPanel mainViewCenter;
     private final CardLayout cardManager;
