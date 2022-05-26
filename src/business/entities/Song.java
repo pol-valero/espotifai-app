@@ -25,6 +25,17 @@ public class Song {
     private int segundos;
 
 
+    public Song(String name, String artist, String album, String genre, String filePath, String lyrics, int minutos, int segundos){
+        this.name = name;
+        this.singer = artist;
+        this.album = album;
+        this.genre = genre;
+        this.filePath = filePath;
+        this.lyrics = lyrics;
+        this.minutes = minutos;
+        this.seconds = segundos;
+
+    }
     public Song(String name, String artist, String album, String genre,String owne, String filePath, String lyrics, int minutos, int segundos){
         this.name = name;
         this.singer = artist;
@@ -140,5 +151,7 @@ public class Song {
         this.owne = owne;
     }
 
-
+    public void setOrden(int orden) {
+        this.orden = orden;
+    }
 }
