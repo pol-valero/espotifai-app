@@ -57,4 +57,5 @@ public interface MusicListDAO  {
     void moveSongsInPlaylist(int idPlaylist, int idSong1, int idSong2, int idOrder1, int idOrder2);
 
     void deleteSongAllPlaylist(int idSong);
+
 }
