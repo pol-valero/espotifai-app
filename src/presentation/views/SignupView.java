@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 public class SignupView {
 
     private final JFrame topContainer;
-    private final CardLayout cardManager;
+    private final CardLayout jFrameCardManager;
 
     public static final String BTN_SIGNUP = "BTN_SIGNUP";
     private JButton jbSignup = new JButton();
@@ -28,9 +28,9 @@ public class SignupView {
 
 
 
-    public SignupView (JFrame topContainer, CardLayout cardManager) {
+    public SignupView (JFrame topContainer, CardLayout jFrameCardManager) {
         this.topContainer = topContainer;
-        this.cardManager = cardManager;
+        this.jFrameCardManager = jFrameCardManager;
         configureView();
         topContainer.pack();
     }
@@ -292,7 +292,7 @@ public class SignupView {
 
     public void showCard () {
         setErrorsInvisible();
-        cardManager.show(topContainer.getContentPane(),"signupCard");
+        jFrameCardManager.show(topContainer.getContentPane(),"signupCard");
     }
 
     private void setErrorsInvisible() {

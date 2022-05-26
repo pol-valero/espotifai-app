@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
 public class HomeScreenView {
-    private final JFrame topContainer;
+    private final JPanel mainView;
     private final CardLayout cardManager;
 
     private final Color negre = new Color(48,48,48);
@@ -29,11 +29,11 @@ public class HomeScreenView {
     private ActionListener actionListener;
 
 
-    public HomeScreenView (JFrame topContainer, CardLayout cardManager){
-        this.topContainer = topContainer;
+    public HomeScreenView (JPanel mainView, CardLayout cardManager){
+        this.mainView = mainView;
         this.cardManager = cardManager;
         configureView();
-        topContainer.pack();
+        //topContainer.pack();
     }
 
     private void configureView() {
@@ -49,7 +49,7 @@ public class HomeScreenView {
         panel.add(westernPanel,BorderLayout.WEST);
         panel.add(centralPanel,BorderLayout.CENTER);
 
-        topContainer.getContentPane().add(panel, "homescreenCard");
+        mainView.add(panel, "homescreenCard");
     }
 
     private JPanel centralPanelConfiguration(LinkedList<String> usersPlaylists, LinkedList<String> publicPlaylists) {
@@ -320,7 +320,7 @@ public class HomeScreenView {
         panel.remove(centralPanel);
         centralPanel = centralPanelConfiguration(usersPlaylists, publicPlaylists);
         panel.add(centralPanel,BorderLayout.CENTER);
-        topContainer.revalidate();
-        cardManager.show(topContainer.getContentPane(),"homescreenCard");
+        mainView.revalidate();
+        cardManager.show(mainView,"homescreenCard");
     }
 }

@@ -18,6 +18,7 @@ import java.util.List;
  */
 public class UIController {
 
+    private MainViewController mainViewController;
     private LoginViewController loginViewController;
     private LogoutViewController logoutViewController;
     private SignupViewController signupViewController;
@@ -30,26 +31,35 @@ public class UIController {
 
     public void run () {
         JFrame topContainer = new JFrame();
+        JPanel mainViewCenter = new JPanel();
+        CardLayout jFrameCardManager = new CardLayout();
         CardLayout cardManager = new CardLayout();
 
-        loginViewController = new LoginViewController(this, topContainer, cardManager);
-        signupViewController = new SignupViewController(this, topContainer, cardManager);
-        logoutViewController = new LogoutViewController(this, topContainer, cardManager);
-        homescreenViewController = new HomescreenViewController(this,topContainer,cardManager);
-        musicListController = new MusicListController(this, topContainer, cardManager);
+        loginViewController = new LoginViewController(this, topContainer, jFrameCardManager);
+        signupViewController = new SignupViewController(this, topContainer, jFrameCardManager);
+
+        mainViewController = new MainViewController(topContainer, jFrameCardManager, cardManager, mainViewCenter, new JPanel());
+
+        logoutViewController = new LogoutViewController(this, mainViewCenter, cardManager);
+        homescreenViewController = new HomescreenViewController(this,mainViewCenter,cardManager);
+        /*musicListController = new MusicListController(this, topContainer, cardManager);
         addSongViewController = new AddSongViewController(this, topContainer, cardManager);
         createPlaylistViewController = new CreatePlaylistViewController(this, topContainer, cardManager);
-        removePlaylistController = new RemovePlaylistController(this, topContainer, cardManager);
+        removePlaylistController = new RemovePlaylistController(this, topContainer, cardManager);*/
 
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
         //showSignUpCard();
-        showHomescreenCard();
+        //showHomescreenCard();
         //showLoginCard();
         //showSignUpCard();
         //showHomescreenCard();
         //showMusicListCard();
         //showAddSongCard();
+    }
+
+    private void showMainViewCard() {
+        mainViewController.showMainViewCard();
     }
 
     public void showRemovePlaylistCard(String playlistName, int songNumber) {
@@ -73,6 +83,7 @@ public class UIController {
     }
 
     public void showHomescreenCard() {
+        showMainViewCard();
         homescreenViewController.showHomescreenCard(businessFacade.loadUserPlaylist(),businessFacade.loadPublicPlaylist());
     }
 

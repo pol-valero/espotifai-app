@@ -4,13 +4,10 @@ import presentation.controllers.LogoutViewController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 public class LogoutView {
-    private final JFrame topContainer;
+    private final JPanel mainView;
     private final CardLayout cardManager;
 
     public static final String BTN_LOGOUT = "BTN_LOGOUT";
@@ -20,11 +17,12 @@ public class LogoutView {
     private JButton btnDeleteAccount = new JButton("Delete Account");
     private JLabel goBackImage = new JLabel();
     
-    public LogoutView (JFrame topContainer, CardLayout cardManager) {
-        this.topContainer = topContainer;
+    public LogoutView (JPanel mainView, CardLayout cardManager) {
+        this.mainView = mainView;
         this.cardManager = cardManager;
         configureView();
-        topContainer.pack();
+        //topContainer.pack();
+
     }
 
 
@@ -121,7 +119,7 @@ public class LogoutView {
         panel.add(fill, BorderLayout.NORTH);
         panel.add(p, BorderLayout.CENTER);
 
-        topContainer.getContentPane().add(panel, "logoutCard");
+        mainView.add(panel, "logoutCard");
     }
     private Image getScaledImage(Image Img, int wt, int ht) {
         BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
@@ -140,7 +138,7 @@ public class LogoutView {
     }
 
     public void showCard () {
-        cardManager.show(topContainer.getContentPane(),"logoutCard");
+        cardManager.show(mainView,"logoutCard");
     }
 
 }

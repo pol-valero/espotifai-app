@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 public class LoginView {
 
     private final JFrame topContainer;
-    private final CardLayout cardManager;
+    private final CardLayout jFrameCardManager;
 
     public static final String BTN_LOGIN = "BTN_LOGING";
     public static final String BTN_SIGNUP = "BTN_SIGNUP";
@@ -21,9 +21,9 @@ public class LoginView {
     private JLabel loginError = new JLabel();
     private JLabel signUpLabel = new JLabel();
 
-    public LoginView (JFrame topContainer, CardLayout cardManager) {
+    public LoginView (JFrame topContainer, CardLayout jFrameCardManager) {
         this.topContainer = topContainer;
-        this.cardManager = cardManager;
+        this.jFrameCardManager = jFrameCardManager;
         oneTimeConfiguration();
         configureView();
         topContainer.pack();
@@ -37,7 +37,7 @@ public class LoginView {
     private void oneTimeConfiguration () {
         //The following three lines only need to be added to this class as it is the first class whose object is created. All the other view classes must not have these three lines.
         topContainer.setTitle("Spotifai");
-        topContainer.getContentPane().setLayout(cardManager);
+        topContainer.getContentPane().setLayout(jFrameCardManager);
         topContainer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         topContainer.setPreferredSize(new Dimension(1600,900));
         topContainer.setResizable(false);
@@ -201,7 +201,7 @@ public class LoginView {
 
     public void showCard () {
         loginErrorVisibility(false);
-        cardManager.show(topContainer.getContentPane(),"loginCard");
+        jFrameCardManager.show(topContainer.getContentPane(),"loginCard");
     }
 
 
