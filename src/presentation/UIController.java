@@ -40,8 +40,8 @@ public class UIController {
 
         mainViewController = new MainViewController(topContainer, jFrameCardManager, cardManager, mainViewCenter, new JPanel());
 
-        logoutViewController = new LogoutViewController(this, mainViewCenter, cardManager);
         homescreenViewController = new HomescreenViewController(this,mainViewCenter,cardManager);
+        logoutViewController = new LogoutViewController(this, mainViewCenter, cardManager);
         musicListController = new MusicListController(this, mainViewCenter, cardManager);
         addSongViewController = new AddSongViewController(this, mainViewCenter, cardManager);
         createPlaylistViewController = new CreatePlaylistViewController(this, mainViewCenter, cardManager);
