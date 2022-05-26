@@ -9,11 +9,19 @@ import persistence.DAO.MusicListDatabaseDAO;
 import persistence.MusicDAO;
 import persistence.MusicListDAO;
 
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.beans.Encoder;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.time.temporal.TemporalAdjuster;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Clase encargada de gestionar la informacion de Song y Playlist
@@ -30,6 +38,10 @@ public class MusicManager {
     private boolean paused = false;
     private int position;
     private Song createSong;
+
+    public MusicManager () {
+        System.out.println(getSongLenght());
+    }
 
     public Song getCurrentSong() {
         return currentSong;
@@ -215,6 +227,21 @@ public class MusicManager {
         } else {
             previusNextSong(1);
         }
+    }
+
+    public int getSongLenght () {
+        AudioFileFormat fileFormat = null;
+        try {
+            fileFormat = AudioSystem.getAudioFileFormat(new File("songs/Clash Royal.mp3"));
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Long microseconds = (long) fileFormat.properties().get("duration");
+        int seconds = (int) (microseconds / 10^6);
+        return seconds;
+
     }
 
 
