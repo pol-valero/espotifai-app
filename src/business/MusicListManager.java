@@ -12,6 +12,7 @@ public class MusicListManager {
     private MusicListDAO  musicListDAO = new MusicListDatabaseDAO();
 
     private Playlist currentPlaylist;
+    private String currentPlaylistName;
 
     public LinkedList<String> loadPublicPlaylist(int idUser){
         LinkedList<String> publicPlaylistNames = new LinkedList<>();
@@ -187,10 +188,12 @@ public class MusicListManager {
     }
 
     public String getCurrentPlaylist () {
-        return currentPlaylist.getName();
+        //return currentPlaylist.getName();
+        return currentPlaylistName;
     }
 
     public void setCurrentPlaylist (String playlistName, int idUser) {
-        currentPlaylist = findPlaylist(playlistName, idUser);
+        //currentPlaylist = findPlaylist(playlistName, idUser);
+        currentPlaylistName = playlistName;
     }
 }
