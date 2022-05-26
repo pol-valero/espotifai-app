@@ -14,9 +14,9 @@ public class LogoutViewController implements ActionListener, MouseListener{
     private UIController controller;
     private LogoutView logoutView;
 
-    public LogoutViewController(UIController controller, JPanel mainView, CardLayout cardManager){
+    public LogoutViewController(UIController controller, JPanel mainViewCenter, CardLayout cardManager){
         this.controller = controller;
-        logoutView = new LogoutView(mainView,cardManager);
+        logoutView = new LogoutView(mainViewCenter,cardManager);
         logoutView.registerController(this);
     }
     @Override

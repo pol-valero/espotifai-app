@@ -17,9 +17,9 @@ public class MusicListController implements ActionListener, ListSelectionListene
     private final MusicListView musicListView;
     private final UIController controller;
 
-    public MusicListController (UIController controller, JFrame topContainer, CardLayout cardManager){
+    public MusicListController (UIController controller, JPanel mainViewCenter, CardLayout cardManager){
         this.controller = controller;
-        musicListView = new MusicListView(topContainer, cardManager);
+        musicListView = new MusicListView(mainViewCenter, cardManager);
         musicListView.registerController(this);
         //la variacio que es carrega realment es fara desde la funcio "show", a on a partir del propietari de la playlist (el usuari logejat, un altre usuari, o null) carregarem la variacio que toqui. Tambe podem
         //jugar amb el fet que sabem el nom de les playlist "MySongs" i "AllSongs"?

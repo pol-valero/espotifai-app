@@ -2,7 +2,6 @@ package presentation.views;
 
 
 import presentation.controllers.AddSongViewController;
-import presentation.controllers.SignupViewController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 public class AddSongView {
 
-    private final JFrame topContainer;
+    private final JPanel mainViewCenter;
     private final CardLayout cardManager;
 
     public static final String BTN_ADD = "BTN_ADD";
@@ -32,11 +31,11 @@ public class AddSongView {
     private JLabel goBackImage = new JLabel();
     private JLabel jlWrongGenreError = new JLabel();
 
-    public AddSongView (JFrame topContainer, CardLayout cardManager) {
-        this.topContainer = topContainer;
+    public AddSongView (JPanel mainViewCenter, CardLayout cardManager) {
+        this.mainViewCenter = mainViewCenter;
         this.cardManager = cardManager;
         configureView();
-        topContainer.pack();
+        //this.mainViewCenter.pack();
     }
 
     private void configureView() {
@@ -295,7 +294,7 @@ public class AddSongView {
         panel.add(p, BorderLayout.CENTER);
         panel.add(fill_2, BorderLayout.SOUTH);
 
-        topContainer.getContentPane().add(panel, "addSongCard");
+        mainViewCenter.add(panel, "addSongCard");
     }
     private Image getScaledImage(Image Img, int wt, int ht) {
         BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
@@ -309,32 +308,32 @@ public class AddSongView {
     }
     public void existingSongErrorVisibility(boolean error){
         jlExistingSong.setVisible(error);
-        topContainer.revalidate();
+        mainViewCenter.revalidate();
     }
 
     public void unusableSongErrorVisibility(boolean error){
         jlUnusableSong.setVisible(error);
-        topContainer.revalidate();
+        mainViewCenter.revalidate();
     }
 
     public void unfoundArtistErrorVisibility(boolean error){
         jlUnfoundArtistError.setVisible(error);
-        topContainer.revalidate();
+        mainViewCenter.revalidate();
     }
 
     public void WrongFilepathErrorErrorVisibility (boolean error) {
         jlWrongFilepathError.setVisible(error);
-        topContainer.revalidate();
+        mainViewCenter.revalidate();
     }
 
     public void AlbumNotFoundErrorVisibility(boolean error){
         jlAlbumNotFoundError.setVisible(error);
-        topContainer.revalidate();
+        mainViewCenter.revalidate();
     }
 
     public void wrongGenreErrorVisibility(boolean error){
         jlWrongGenreError.setVisible(error);
-        topContainer.revalidate();
+        mainViewCenter.revalidate();
     }
 
     public void registerController (AddSongViewController addSongViewController){
@@ -361,7 +360,7 @@ public class AddSongView {
 
     public void showCard () {
         setErrorsInvisible();
-        cardManager.show(topContainer.getContentPane(),"addSongCard");
+        cardManager.show(mainViewCenter,"addSongCard");
     }
 
     private void setErrorsInvisible() {
@@ -370,6 +369,6 @@ public class AddSongView {
         jlAlbumNotFoundError.setVisible(false);
         jlWrongGenreError.setVisible(false);
         jlWrongFilepathError.setVisible(false);
-        topContainer.revalidate();
+        mainViewCenter.revalidate();
     }
 }

@@ -14,9 +14,9 @@ public class HomescreenViewController implements ActionListener {
     private final HomeScreenView homeScreenView;
     private final UIController controller;
 
-    public HomescreenViewController(UIController controller, JPanel mainView, CardLayout cardManager){
+    public HomescreenViewController(UIController controller, JPanel mainViewCenter, CardLayout cardManager){
         this.controller = controller;
-        homeScreenView = new HomeScreenView(mainView,cardManager);
+        homeScreenView = new HomeScreenView(mainViewCenter,cardManager);
         homeScreenView.registerController(this);
     }
     @Override

@@ -15,8 +15,8 @@ public class CreatePlaylistViewController implements ActionListener, MouseListen
     private final CreatePlaylistView createPlaylistView;
     private final UIController controller;
 
-    public CreatePlaylistViewController(UIController controller, JFrame topContainer, CardLayout cardManager) {
-        createPlaylistView = new CreatePlaylistView(topContainer, cardManager);
+    public CreatePlaylistViewController(UIController controller, JPanel mainViewCenter, CardLayout cardManager) {
+        createPlaylistView = new CreatePlaylistView(mainViewCenter, cardManager);
         createPlaylistView.registerController(this);
         this.controller = controller;
     }

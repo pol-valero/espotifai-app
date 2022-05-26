@@ -13,7 +13,7 @@ public class RemovePlaylistView {
     public static final String  BTN_CANCEL = "BTN_CANCEL";
 
 
-    private final JFrame topContainer;
+    private final JPanel mainViewCenter;
     private final CardLayout cardManager;
     private JButton jbManagement = new JButton();
     private JButton jbRemovePlaylist = new JButton();
@@ -25,11 +25,11 @@ public class RemovePlaylistView {
     JPanel panel;
     JPanel centralPanel;
 
-    public RemovePlaylistView (JFrame topContainer, CardLayout cardManager){
-        this.topContainer = topContainer;
+    public RemovePlaylistView (JPanel mainViewCenter, CardLayout cardManager){
+        this.mainViewCenter = mainViewCenter;
         this.cardManager = cardManager;
         configureView();
-        topContainer.pack();
+        //this.mainViewCenter.pack();
     }
 
     private void configureView() {
@@ -46,7 +46,7 @@ public class RemovePlaylistView {
         panel.add(southernPanel,BorderLayout.SOUTH);
         panel.add(centralPanel,BorderLayout.CENTER);
 
-        topContainer.getContentPane().add(panel, "removePlaylistCard");
+        mainViewCenter.add(panel, "removePlaylistCard");
     }
 
     private JPanel centralPanelConfiguration(String playlistName, int songNumber) {
@@ -277,7 +277,7 @@ public class RemovePlaylistView {
         panel.remove(centralPanel);
         centralPanel = centralPanelConfiguration(playlistName, songNumber);
         panel.add(centralPanel,BorderLayout.CENTER);
-        topContainer.revalidate();
-        cardManager.show(topContainer.getContentPane(),"removePlaylistCard");
+        mainViewCenter.revalidate();
+        cardManager.show(mainViewCenter,"removePlaylistCard");
     }
 }

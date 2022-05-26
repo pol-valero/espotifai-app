@@ -13,8 +13,8 @@ public class RemovePlaylistController implements ActionListener {
     private UIController controller;
     private RemovePlaylistView removePlaylistView;
 
-    public RemovePlaylistController (UIController controller, JFrame topContainer, CardLayout cardManager) {
-        removePlaylistView = new RemovePlaylistView(topContainer, cardManager);
+    public RemovePlaylistController (UIController controller, JPanel mainViewCenter, CardLayout cardManager) {
+        removePlaylistView = new RemovePlaylistView(mainViewCenter, cardManager);
         removePlaylistView.registerController(this);
         this.controller = controller;
     }

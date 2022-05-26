@@ -1,6 +1,5 @@
 package presentation.views;
 
-import business.entities.Playlist;
 import business.entities.Song;
 import presentation.Components.ImagePanel;
 import presentation.controllers.MusicListController;
@@ -15,7 +14,7 @@ import java.util.LinkedList;
 
 
 public class MusicListView {
-    private final JFrame topContainer;
+    private final JPanel mainViewCenter;
     private final CardLayout cardManager;
 
     public static final String BTN_ACCOUNTMANAGER = "BTN_ACCOUNTMANAGER";
@@ -72,11 +71,11 @@ public class MusicListView {
     private boolean publicPlaylistVariationActive;
     private boolean allSongsVariationActive;
 
-    public MusicListView (JFrame topContainer, CardLayout cardManager){
-        this.topContainer=topContainer;
+    public MusicListView (JPanel mainViewCenter, CardLayout cardManager){
+        this.mainViewCenter =mainViewCenter;
         this.cardManager=cardManager;
         configureView();
-        topContainer.pack();
+        //topContainer.pack();
     }
 
 
@@ -98,7 +97,7 @@ public class MusicListView {
         panel.remove(centralPanel);
         panel.remove(northernPanel);
 
-        topContainer.getContentPane().add(panel, "musicListCard");//todo ??
+        mainViewCenter.add(panel, "musicListCard");//todo ??
 
     }
 
@@ -494,8 +493,8 @@ public class MusicListView {
         panel.add(centralPanel,BorderLayout.CENTER);
         panel.add(northernPanel,BorderLayout.NORTH);
 
-        topContainer.revalidate();
-        cardManager.show(topContainer.getContentPane(),"musicListCard");
+        mainViewCenter.revalidate();
+        cardManager.show(mainViewCenter,"musicListCard");
     }
 
     public int getSongListSize() {
@@ -517,7 +516,7 @@ public class MusicListView {
         downBtn.setVisible(false);
         searchBtn.setVisible(false);
         searchBar.setVisible(false);
-        topContainer.revalidate();
+        mainViewCenter.revalidate();
     }
 
     public void addSongsVariation() {
@@ -535,7 +534,7 @@ public class MusicListView {
         downBtn.setVisible(false);
         searchBtn.setVisible(false);
         searchBar.setVisible(false);
-        topContainer.revalidate();
+        mainViewCenter.revalidate();
     }
 
     public void userPersonalSongsVariation() {
@@ -553,7 +552,7 @@ public class MusicListView {
         downBtn.setVisible(true);
         searchBtn.setVisible(false);
         searchBar.setVisible(false);
-        topContainer.revalidate();
+        mainViewCenter.revalidate();
         setVariationsToInactive();
         userPersonalSongsVariationActive = true;
     }
@@ -573,7 +572,7 @@ public class MusicListView {
         downBtn.setVisible(true);
         searchBtn.setVisible(false);
         searchBar.setVisible(false);
-        topContainer.revalidate();
+        mainViewCenter.revalidate();
         setVariationsToInactive();
         userPlaylistVariationActive = true;
     }
@@ -593,7 +592,7 @@ public class MusicListView {
         downBtn.setVisible(false);
         searchBtn.setVisible(false);
         searchBar.setVisible(false);
-        topContainer.revalidate();
+        mainViewCenter.revalidate();
         setVariationsToInactive();
         publicPlaylistVariationActive = true;
     }
@@ -613,7 +612,7 @@ public class MusicListView {
         downBtn.setVisible(false);
         searchBtn.setVisible(true);
         searchBar.setVisible(true);
-        topContainer.revalidate();
+        mainViewCenter.revalidate();
         setVariationsToInactive();
         allSongsVariationActive = true;
     }

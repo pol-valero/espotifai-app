@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 
 public class CreatePlaylistView {
 
-    private final JFrame topContainer;
+    private final JPanel mainViewCenter;
     private final CardLayout cardManager;
 
     public static final String BTN_MANAGEMENT = "BTN_MANAGEMENT";
@@ -23,11 +23,11 @@ public class CreatePlaylistView {
     private JLabel jlWrongNameError = new JLabel();
     private JLabel goBackImage = new JLabel();
 
-        public CreatePlaylistView(JFrame topContainer, CardLayout cardManager) {
-            this.topContainer = topContainer;
+        public CreatePlaylistView(JPanel mainViewCenter, CardLayout cardManager) {
+            this.mainViewCenter = mainViewCenter;
             this.cardManager = cardManager;
             configureView();
-            topContainer.pack();
+            //this.mainViewCenter.pack();
         }
 
         private void configureView() {
@@ -200,7 +200,7 @@ public class CreatePlaylistView {
             panel.add(fill_2, BorderLayout.SOUTH);
 
 
-            topContainer.getContentPane().add(panel, "addPlaylistNameCard");
+            mainViewCenter.add(panel, "addPlaylistNameCard");
         }
         private Image getScaledImage(Image Img, int wt, int ht) {
             BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
@@ -214,7 +214,7 @@ public class CreatePlaylistView {
         }
     public void wrongNameErrorVisibility(boolean error){
         jlWrongNameError.setVisible(error);
-        topContainer.revalidate();
+        mainViewCenter.revalidate();
     }
 
     public String getPlaylistName() {
@@ -222,7 +222,7 @@ public class CreatePlaylistView {
     }
 
     public void showCard () {
-        cardManager.show(topContainer.getContentPane(),"addPlaylistNameCard");
+        cardManager.show(mainViewCenter,"addPlaylistNameCard");
         wrongNameErrorVisibility(false);
     }
 

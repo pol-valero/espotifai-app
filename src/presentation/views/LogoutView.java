@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class LogoutView {
-    private final JPanel mainView;
+    private final JPanel mainViewCenter;
     private final CardLayout cardManager;
 
     public static final String BTN_LOGOUT = "BTN_LOGOUT";
@@ -17,8 +17,8 @@ public class LogoutView {
     private JButton btnDeleteAccount = new JButton("Delete Account");
     private JLabel goBackImage = new JLabel();
     
-    public LogoutView (JPanel mainView, CardLayout cardManager) {
-        this.mainView = mainView;
+    public LogoutView (JPanel mainViewCenter, CardLayout cardManager) {
+        this.mainViewCenter = mainViewCenter;
         this.cardManager = cardManager;
         configureView();
         //topContainer.pack();
@@ -119,7 +119,7 @@ public class LogoutView {
         panel.add(fill, BorderLayout.NORTH);
         panel.add(p, BorderLayout.CENTER);
 
-        mainView.add(panel, "logoutCard");
+        mainViewCenter.add(panel, "logoutCard");
     }
     private Image getScaledImage(Image Img, int wt, int ht) {
         BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
@@ -138,7 +138,7 @@ public class LogoutView {
     }
 
     public void showCard () {
-        cardManager.show(mainView,"logoutCard");
+        cardManager.show(mainViewCenter,"logoutCard");
     }
 
 }

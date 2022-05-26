@@ -17,9 +17,9 @@ public class AddSongViewController implements ActionListener, MouseListener {
     private final AddSongView addSongView;
     private final UIController controller;
 
-    public AddSongViewController(UIController controller, JFrame topContainer, CardLayout cardManager){
+    public AddSongViewController(UIController controller, JPanel mainViewCenter, CardLayout cardManager){
         this.controller = controller;
-        addSongView = new AddSongView(topContainer, cardManager);
+        addSongView = new AddSongView(mainViewCenter, cardManager);
         addSongView.registerController(this);
     }
 

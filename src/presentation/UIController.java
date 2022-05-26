@@ -42,10 +42,10 @@ public class UIController {
 
         logoutViewController = new LogoutViewController(this, mainViewCenter, cardManager);
         homescreenViewController = new HomescreenViewController(this,mainViewCenter,cardManager);
-        /*musicListController = new MusicListController(this, topContainer, cardManager);
-        addSongViewController = new AddSongViewController(this, topContainer, cardManager);
-        createPlaylistViewController = new CreatePlaylistViewController(this, topContainer, cardManager);
-        removePlaylistController = new RemovePlaylistController(this, topContainer, cardManager);*/
+        musicListController = new MusicListController(this, mainViewCenter, cardManager);
+        addSongViewController = new AddSongViewController(this, mainViewCenter, cardManager);
+        createPlaylistViewController = new CreatePlaylistViewController(this, mainViewCenter, cardManager);
+        removePlaylistController = new RemovePlaylistController(this, mainViewCenter, cardManager);
 
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
