@@ -40,7 +40,7 @@ public class MusicManager {
     private Song createSong;
 
     public MusicManager () {
-        System.out.println(getSongLenght());
+        //System.out.println(getSongLenght());
     }
 
     public Song getCurrentSong() {
@@ -229,6 +229,8 @@ public class MusicManager {
         }
     }
 
+
+    /*
     public int getSongLenght () {
         AudioFileFormat fileFormat = null;
         try {
@@ -242,8 +244,7 @@ public class MusicManager {
         int seconds = (int) (microseconds / 10^6);
         return seconds;
 
-    }
-
+    }*/
 
 
 }
