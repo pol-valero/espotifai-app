@@ -30,7 +30,6 @@ public class UIController {
     private CreatePlaylistViewController createPlaylistViewController;
     private RemovePlaylistController removePlaylistController;
     private RenamePlaylistViewController renamePlaylistViewController;
-    private StadisticViewController stadisticViewController;
 
     public void run () {
         JFrame topContainer = new JFrame();
@@ -50,7 +49,6 @@ public class UIController {
         createPlaylistViewController = new CreatePlaylistViewController(this, mainViewCenter, cardManager);
         removePlaylistController = new RemovePlaylistController(this, mainViewCenter, cardManager);
         renamePlaylistViewController = new RenamePlaylistViewController(this, mainViewCenter, cardManager);
-        stadisticViewController = new StadisticViewController(this, mainViewCenter,cardManager);
 
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
@@ -58,9 +56,13 @@ public class UIController {
         //showHomescreenCard();
         //showLoginCard();
         //showSignUpCard();
-        //showHomescreenCard();
+        showHomescreenCard();
         //showMusicListCard();
         //showAddSongCard();
+
+        LinkedList<String> prueva = new LinkedList<>();
+        prueva.add("prettySong");
+        addSongPlaylist("provanova", prueva);
 
 
     }
