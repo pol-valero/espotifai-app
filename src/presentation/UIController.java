@@ -59,6 +59,12 @@ public class UIController {
         showHomescreenCard();
         //showMusicListCard();
         //showAddSongCard();
+
+        LinkedList<String> prueva = new LinkedList<>();
+        prueva.add("prettySong");
+        addSongPlaylist("provanova", prueva);
+
+
     }
 
     private void showMainViewCard() {
