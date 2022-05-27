@@ -27,6 +27,7 @@ public class ReproductionBar extends JPanel {
         setBorder(new EmptyBorder(new Insets(20,20,20,20)));
         setBackground(negre);
 
+
         JPanel reproductionPanel = new JPanel(){
             @Override
             public void paintComponent(Graphics g) {
@@ -124,7 +125,7 @@ public class ReproductionBar extends JPanel {
         JButton indRepBtn = new JButton("IRB");
         indRepBtn.setBackground(Color.gray);
         indRepBtn.setPreferredSize(new Dimension(25,25));
-        indRepBtn.setIcon(getScaledImage("images/individualRepeticionIcon.png",25,25));
+        indRepBtn.setIcon(getScaledImage("images/individualRepeticion.png",25,25));
         mainBtns.add(indRepBtn);
 
         mainBtns.add(Box.createRigidArea(new Dimension(10,0)));
