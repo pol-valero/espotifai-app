@@ -50,7 +50,12 @@ public class LoginDatabaseDAO implements LoginDAO {
         }
     }
  */
-        @Override
+
+    /***
+     * Method to get all users stored in the database
+     * @return List of user with user information
+     */
+    @Override
     public List<User> getAllUsers() {
         List<User> users = new LinkedList<>();
         String query = "SELECT id, nombre, correo, pwd FROM usuario;";
@@ -74,6 +79,10 @@ public class LoginDatabaseDAO implements LoginDAO {
         return users;
     }
 
+    /***
+     * Method to register a user
+     * @param user object of the User class with the user data
+     */
     @Override
     public void singUpRequest(User user) {
         String query = "INSERT INTO usuario (nombre, correo, pwd) VALUES ('"
@@ -85,6 +94,10 @@ public class LoginDatabaseDAO implements LoginDAO {
 
     }
 
+    /**
+     * Method to remove a user from the database
+     * @param userName String with the name of the user to be deleted
+     */
     @Override
     public void deleteAccountRequest(String userName) {
         String query = "DELETE FROM usuario WHERE nombre = \"" + userName + "\";";
