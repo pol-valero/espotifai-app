@@ -571,8 +571,8 @@ public class MusicListView {
         removeSelectedSongs.setVisible(false);
         addSelectedSongs.setVisible(false);
         cancel.setVisible(false);
-        upBtn.setVisible(true);
-        downBtn.setVisible(true);
+        upBtn.setVisible(false);
+        downBtn.setVisible(false);
         searchBtn.setVisible(false);
         searchBar.setVisible(false);
         mainViewCenter.revalidate();
