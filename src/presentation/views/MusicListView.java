@@ -462,7 +462,7 @@ public class MusicListView {
     }
 
     public void registerController(MusicListController musicListController) {
-        table.getSelectionModel().addListSelectionListener(musicListController);
+        table.addMouseListener(musicListController);
         addSong.addActionListener(musicListController);
         removeSong.addActionListener(musicListController);
         renamePlaylist.addActionListener(musicListController);
@@ -487,6 +487,14 @@ public class MusicListView {
 
     public int getColumn() {
         return table.getSelectedColumn();
+    }
+
+    public int getRowAtPoint(Point point) {
+        return table.rowAtPoint(point);
+    }
+
+    public int getColumnAtPoint(Point point) {
+        return table.columnAtPoint(point);
     }
 
     public String getSongName(int row){
@@ -709,4 +717,17 @@ public class MusicListView {
     public String getDisplayedPlaylistName() {
         return playlistTitle.getText();
     }
+
+    public void clearCheckBoxes () {
+        System.out.println("prova");
+
+        for (int i = 0; i < data.length; i++) {
+            //data[i][6] = false;
+            //table.setModel();
+            table.setValueAt(false, i, 6);
+        }
+        table.revalidate();
+
+    }
+
 }

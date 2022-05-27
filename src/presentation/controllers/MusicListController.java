@@ -10,11 +10,15 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.LinkedList;
 
-public class MusicListController implements ActionListener, ListSelectionListener {
+public class MusicListController implements ActionListener, MouseListener {
     private final MusicListView musicListView;
     private final UIController controller;
+
+    LinkedList<String> selectedSongs = new LinkedList<>();
 
     public MusicListController (UIController controller, JPanel mainViewCenter, CardLayout cardManager){
         this.controller = controller;
@@ -45,7 +49,8 @@ public class MusicListController implements ActionListener, ListSelectionListene
                 break;
 
             case MusicListView.BTN_ADDSONG:
-                //falta posar aqui una funcio "refresh()" i que li passem una playlist amb totes les cançons del sistema
+                //fer crida a business per afegir
+                emptySelectedSongsList();
                 musicListView.addSongsVariation();
                 break;
 
@@ -71,15 +76,17 @@ public class MusicListController implements ActionListener, ListSelectionListene
                 break;
 
             case MusicListView.BTN_REMOVE_SELECTED_PLAYLIST_SONGS:
-                System.out.println("remove playlist songs");
+                //fer crida a business per eliminar
+                emptySelectedSongsList();
                 break;
 
             case MusicListView.BTN_REMOVE_SELECTED_PERSONAL_SONGS:
-                System.out.println("remove personal songs");
+                //fer crida a business per eliminar
+                emptySelectedSongsList();
                 break;
 
             case MusicListView.BTN_CANCEL:
-
+                emptySelectedSongsList();
                 musicListView.returnToPreviousVariation();
                 break;
 
@@ -111,14 +118,6 @@ public class MusicListController implements ActionListener, ListSelectionListene
         chooseVariation(songListName);
     }
 
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-        if(!e.getValueIsAdjusting()) {
-
-            String songName = musicListView.getSongName(musicListView.getRow());
-            System.out.println("Row: " + musicListView.getRow() + " Column: " + musicListView.getColumn() + " Song name: "+songName);
-        }
-    }
 
     private void chooseVariation(String playlistName) {
         switch (playlistName) {
@@ -138,4 +137,49 @@ public class MusicListController implements ActionListener, ListSelectionListene
         }
     }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        int row = musicListView.getRowAtPoint(e.getPoint());
+        int column = musicListView.getColumnAtPoint(e.getPoint());
+
+        String songName = musicListView.getSongName(row);
+
+        if (column != 6) {
+            //mostrar vista detalls canço
+        } else {
+            if (selectedSongs.contains(songName)) {
+                selectedSongs.remove(songName);
+                //System.out.println("Song borrada: " + songName);
+            } else {
+                selectedSongs.add(musicListView.getSongName(musicListView.getRow()));
+                //System.out.println("Song afegida: " + songName);
+            }
+
+        }
+    }
+
+    private void emptySelectedSongsList() {
+        musicListView.clearCheckBoxes();
+        selectedSongs.clear();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
 }
