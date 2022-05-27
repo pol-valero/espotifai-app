@@ -417,7 +417,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
     }
     public void deleteSongAllPlaylist(int idSong){
-        String query = "Delete From id_cancion Where = '" + idSong+"';";
+        String query = "Delete From lista_cancion Where id_cancion = '" + idSong+"';";
         SQLConnector.getInstance().deleteQuery(query);
     }
 

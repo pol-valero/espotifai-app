@@ -80,7 +80,6 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     @Override
     public  void addSongPlaylist(String playlistName, String  songName){
-
         musicListManager.addSongPlaylist(playlistName, songName, loginManager.getCurrentUSer().getId());
     }
 

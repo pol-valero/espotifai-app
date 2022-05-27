@@ -28,8 +28,7 @@ public class UIController {
     private AddSongViewController addSongViewController;
     private CreatePlaylistViewController createPlaylistViewController;
     private RemovePlaylistController removePlaylistController;
-    private StadisticViewController stadisticViewController;
-    private AddToPlaylistViewController addToPlaylistViewController;
+
     public void run () {
         JFrame topContainer = new JFrame();
         JPanel mainViewCenter = new JPanel();
@@ -41,14 +40,13 @@ public class UIController {
 
         mainViewController = new MainViewController(topContainer, jFrameCardManager, cardManager, mainViewCenter, new JPanel());
 
-        homescreenViewController = new HomescreenViewController(this,mainViewCenter,cardManager);
         logoutViewController = new LogoutViewController(this, mainViewCenter, cardManager);
+        homescreenViewController = new HomescreenViewController(this,mainViewCenter,cardManager);
         musicListController = new MusicListController(this, mainViewCenter, cardManager);
         addSongViewController = new AddSongViewController(this, mainViewCenter, cardManager);
         createPlaylistViewController = new CreatePlaylistViewController(this, mainViewCenter, cardManager);
         removePlaylistController = new RemovePlaylistController(this, mainViewCenter, cardManager);
-        stadisticViewController = new StadisticViewController(this, mainViewCenter, cardManager);
-        addToPlaylistViewController = new AddToPlaylistViewController(this, mainViewCenter,cardManager);
+
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
         //showSignUpCard();
@@ -58,17 +56,23 @@ public class UIController {
         //showHomescreenCard();
         //showMusicListCard();
         //showAddSongCard();
-        //showStadisticViewCard();
-        //showAddToPlaylistCard();
+        //businessFacade.createSong(new Song("Cancion26", "Artista26", "Album26", "genero", "path", "letra" , 1, 1 ));
+        //businessFacade.addSongPlaylist("provaPlaylist3" ,"Cancion6");
+       List<Song> songs = businessFacade.loadMusicOnePlaylist("provaPlaylist3");
 
-    }
+       for(Song song: songs){
+           System.out.println(song.getName() + song.getFilePath()  + song.getOrden());
+       }
+        //businessFacade.moveSongsInPlaylist("provaPlaylist3", 1, -1);
+        List<String> strings = new LinkedList<>();
+       strings.add("Cancion6");
+        //businessFacade.deleteSongPlaylist("provaPlaylist3", strings);
+        businessFacade.deleteSongAllPlaylist("Cancion6");
+         songs = businessFacade.loadMusicOnePlaylist("provaPlaylist3");
 
-    private void showAddToPlaylistCard() {
-        addToPlaylistViewController.showAddToPlaylistView();
-    }
-
-    private void showStadisticViewCard(){
-        stadisticViewController.showStadisticsView((LinkedList<Genre>) businessFacade.loadStadistic());
+        for(Song song: songs){
+            System.out.println(song.getName() + song.getFilePath()  + song.getOrden());
+        }
     }
 
     private void showMainViewCard() {
@@ -206,8 +210,8 @@ public class UIController {
         return businessFacade.findSong(songName);
     }
 
-    public void addSongPlaylist(String playlistName, Song song, int position){
-        businessFacade.addSongPlaylist(playlistName,song,position);
+    public void addSongPlaylist(String playlistName, String songName){
+        businessFacade.addSongPlaylist(playlistName, songName);
     }
 
     public void playMusic(String playlistName, int position){
