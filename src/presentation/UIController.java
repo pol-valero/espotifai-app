@@ -59,7 +59,7 @@ public class UIController {
         //showMusicListCard();
         //showAddSongCard();
         //showStadisticViewCard();
-        showAddToPlaylistCard();
+        //showAddToPlaylistCard();
 
     }
 
