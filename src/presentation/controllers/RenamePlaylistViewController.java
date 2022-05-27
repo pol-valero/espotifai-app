@@ -13,7 +13,7 @@ import java.awt.event.MouseListener;
 
 public class RenamePlaylistViewController implements ActionListener, MouseListener {
 
-    private final CreatePlaylistView renamePlaylistView;
+    private final RenamePlaylistView renamePlaylistView;
     private final UIController controller;
 
     /**
@@ -26,8 +26,8 @@ public class RenamePlaylistViewController implements ActionListener, MouseListen
      * @param cardManager the cardManager is the component that manages when to show each view
      */
     public RenamePlaylistViewController(UIController controller, JPanel mainViewCenter, CardLayout cardManager) {
-        renamePlaylistView = new CreatePlaylistView(mainViewCenter, cardManager);
-        renamePlaylistView.registerController(this, this);
+        renamePlaylistView = new RenamePlaylistView(mainViewCenter, cardManager);
+        renamePlaylistView.registerController(this);
         this.controller = controller;
     }
 
@@ -61,7 +61,7 @@ public class RenamePlaylistViewController implements ActionListener, MouseListen
      *
      */
     public void showRenamePlaylistCard () {
-        renamePlaylistView.showCard();
+        renamePlaylistView.showCreateCard();
     }
 
     /**

@@ -28,7 +28,8 @@ public class MusicListView {
     public static final String BTN_REMOVEPERSONALSONG = "BTN_REMOVEPERSONALSONG";
     public static final String BTN_UP = "BTN_UP";
     public static final String BTN_DOWN = "BTN_DOWN";
-    public static final String BTN_REMOVE_SELECTED = "BTN_REMOVE_SELECTED";
+    public static final String BTN_REMOVE_SELECTED_PLAYLIST_SONGS = "BTN_REMOVE_SELECTED_PLAYLIST_SONGS";
+    public static final String BTN_REMOVE_SELECTED_PERSONAL_SONGS = "BTN_REMOVE_SELECTED_PERSONAL_SONGS";
     public static final String BTN_ADD_SELECTED = "BTN_ADD_SELECTED";
     public static final String BTN_CANCEL = "BTN_CANCEL";
     public static final String BTN_HOME = "BTN_HOME";
@@ -39,7 +40,8 @@ public class MusicListView {
     private JButton deletePlaylist;
     private JButton addPersonalSong;
     private JButton removePersonalSong;
-    private JButton removeSelectedSongs;
+    private JButton removeSelectedPlaylistSongs;
+    private JButton removeSelectedPersonalSongs;
     private JButton addSelectedSongs;
     private JButton cancel;
     private JButton upBtn ;
@@ -159,8 +161,15 @@ public class MusicListView {
         cancel = createButton("Cancel");
         cancel.setActionCommand(BTN_CANCEL);
 
-        removeSelectedSongs = createButton("Remove selected");
-        removeSelectedSongs.setActionCommand(BTN_REMOVE_SELECTED);
+        removeSelectedPlaylistSongs = createButton("Remove selected");
+        removeSelectedPlaylistSongs.setActionCommand(BTN_REMOVE_SELECTED_PLAYLIST_SONGS);
+
+        removeSelectedPersonalSongs = createButton("Remove selected");
+        removeSelectedPersonalSongs.setActionCommand(BTN_REMOVE_SELECTED_PERSONAL_SONGS);
+
+
+
+
 
         addSelectedSongs = createButton("Add selected");
         addSelectedSongs.setActionCommand(BTN_ADD_SELECTED);
@@ -194,14 +203,18 @@ public class MusicListView {
 
         c.gridx = 0;
         c.gridy = 6;
-        upperButtons.add(removeSelectedSongs,c);
+        upperButtons.add(removeSelectedPlaylistSongs,c);
 
         c.gridx = 0;
         c.gridy = 7;
-        upperButtons.add(addSelectedSongs, c);
+        upperButtons.add(removeSelectedPersonalSongs, c);
 
         c.gridx = 0;
         c.gridy = 8;
+        upperButtons.add(addSelectedSongs, c);
+
+        c.gridx = 0;
+        c.gridy = 9;
         upperButtons.add(cancel, c);
 
         //Sorting Panel Config
@@ -456,7 +469,8 @@ public class MusicListView {
         deletePlaylist.addActionListener(musicListController);
         addPersonalSong.addActionListener(musicListController);
         removePersonalSong.addActionListener(musicListController);
-        removeSelectedSongs.addActionListener(musicListController);
+        removeSelectedPlaylistSongs.addActionListener(musicListController);
+        removeSelectedPersonalSongs.addActionListener(musicListController);
         addSelectedSongs.addActionListener(musicListController);
         cancel.addActionListener(musicListController);
         upBtn.addActionListener(musicListController);
@@ -524,7 +538,7 @@ public class MusicListView {
         return table.getRowCount()-1; //todo revisar
     }
 
-    public void removeSongsVariation() {
+    public void removePlaylistSongsVariation() {
         showCheckbox();
         addSong.setVisible(false);
         removeSong.setVisible(false);
@@ -532,7 +546,27 @@ public class MusicListView {
         deletePlaylist.setVisible(false);
         addPersonalSong.setVisible(false);
         removePersonalSong.setVisible(false);
-        removeSelectedSongs.setVisible(true);
+        removeSelectedPlaylistSongs.setVisible(true);
+        removeSelectedPersonalSongs.setVisible(false);
+        addSelectedSongs.setVisible(false);
+        cancel.setVisible(true);
+        upBtn.setVisible(false);
+        downBtn.setVisible(false);
+        searchBtn.setVisible(false);
+        searchBar.setVisible(false);
+        mainViewCenter.revalidate();
+    }
+
+    public void removePersonalSongsVariation() {
+        showCheckbox();
+        addSong.setVisible(false);
+        removeSong.setVisible(false);
+        renamePlaylist.setVisible(false);
+        deletePlaylist.setVisible(false);
+        addPersonalSong.setVisible(false);
+        removePersonalSong.setVisible(false);
+        removeSelectedPlaylistSongs.setVisible(false);
+        removeSelectedPersonalSongs.setVisible(true);
         addSelectedSongs.setVisible(false);
         cancel.setVisible(true);
         upBtn.setVisible(false);
@@ -550,7 +584,8 @@ public class MusicListView {
         deletePlaylist.setVisible(false);
         addPersonalSong.setVisible(false);
         removePersonalSong.setVisible(false);
-        removeSelectedSongs.setVisible(false);
+        removeSelectedPlaylistSongs.setVisible(false);
+        removeSelectedPersonalSongs.setVisible(false);
         addSelectedSongs.setVisible(true);
         cancel.setVisible(true);
         upBtn.setVisible(false);
@@ -568,7 +603,8 @@ public class MusicListView {
         deletePlaylist.setVisible(false);
         addPersonalSong.setVisible(true);
         removePersonalSong.setVisible(true);
-        removeSelectedSongs.setVisible(false);
+        removeSelectedPlaylistSongs.setVisible(false);
+        removeSelectedPersonalSongs.setVisible(false);
         addSelectedSongs.setVisible(false);
         cancel.setVisible(false);
         upBtn.setVisible(false);
@@ -588,7 +624,8 @@ public class MusicListView {
         deletePlaylist.setVisible(true);
         addPersonalSong.setVisible(false);
         removePersonalSong.setVisible(false);
-        removeSelectedSongs.setVisible(false);
+        removeSelectedPlaylistSongs.setVisible(false);
+        removeSelectedPersonalSongs.setVisible(false);
         addSelectedSongs.setVisible(false);
         cancel.setVisible(false);
         upBtn.setVisible(true);
@@ -608,7 +645,8 @@ public class MusicListView {
         deletePlaylist.setVisible(false);
         addPersonalSong.setVisible(false);
         removePersonalSong.setVisible(false);
-        removeSelectedSongs.setVisible(false);
+        removeSelectedPlaylistSongs.setVisible(false);
+        removeSelectedPersonalSongs.setVisible(false);
         addSelectedSongs.setVisible(false);
         cancel.setVisible(false);
         upBtn.setVisible(false);
@@ -628,7 +666,8 @@ public class MusicListView {
         deletePlaylist.setVisible(false);
         addPersonalSong.setVisible(false);
         removePersonalSong.setVisible(false);
-        removeSelectedSongs.setVisible(false);
+        removeSelectedPlaylistSongs.setVisible(false);
+        removeSelectedPersonalSongs.setVisible(false);
         addSelectedSongs.setVisible(false);
         cancel.setVisible(false);
         upBtn.setVisible(false);

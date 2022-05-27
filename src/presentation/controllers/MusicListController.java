@@ -1,6 +1,5 @@
 package presentation.controllers;
 
-import business.entities.Playlist;
 import business.entities.Song;
 import presentation.UIController;
 import presentation.views.MusicListView;
@@ -60,7 +59,7 @@ public class MusicListController implements ActionListener, ListSelectionListene
                 break;
 
             case MusicListView.BTN_REMOVESONG:
-                musicListView.removeSongsVariation();
+                musicListView.removePlaylistSongsVariation();
                 break;
 
             case MusicListView.BTN_ADDPERSONALSONG:
@@ -68,11 +67,15 @@ public class MusicListController implements ActionListener, ListSelectionListene
                 break;
 
             case MusicListView.BTN_REMOVEPERSONALSONG:
-                musicListView.removeSongsVariation();
+                musicListView.removePersonalSongsVariation();
                 break;
 
-            case MusicListView.BTN_REMOVE_SELECTED:
+            case MusicListView.BTN_REMOVE_SELECTED_PLAYLIST_SONGS:
+                System.out.println("remove playlist songs");
+                break;
 
+            case MusicListView.BTN_REMOVE_SELECTED_PERSONAL_SONGS:
+                System.out.println("remove personal songs");
                 break;
 
             case MusicListView.BTN_CANCEL:
@@ -113,7 +116,7 @@ public class MusicListController implements ActionListener, ListSelectionListene
         if(!e.getValueIsAdjusting()) {
 
             String songName = musicListView.getSongName(musicListView.getRow());
-            System.out.println("Row: " + musicListView.getRow()+ " Song name: "+songName);
+            System.out.println("Row: " + musicListView.getRow() + " Column: " + musicListView.getColumn() + " Song name: "+songName);
         }
     }
 

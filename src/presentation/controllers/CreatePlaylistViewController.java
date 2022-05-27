@@ -34,7 +34,7 @@ public class CreatePlaylistViewController implements ActionListener, MouseListen
      */
     public CreatePlaylistViewController(UIController controller, JPanel mainViewCenter, CardLayout cardManager) {
         createPlaylistView = new CreatePlaylistView(mainViewCenter, cardManager);
-        createPlaylistView.registerController(this, this);
+        createPlaylistView.registerController(this);
         this.controller = controller;
     }
 
@@ -68,7 +68,7 @@ public class CreatePlaylistViewController implements ActionListener, MouseListen
      *
      */
     public void showCreatePlaylistCard() {
-        createPlaylistView.showCard();
+        createPlaylistView.showCreateCard();
     }
 
     /**

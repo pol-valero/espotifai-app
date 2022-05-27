@@ -221,7 +221,7 @@ public class CreatePlaylistView {
             panel.add(fill_2, BorderLayout.SOUTH);
 
 
-            mainViewCenter.add(panel, "addPlaylistNameCard");
+            mainViewCenter.add(panel, "createPlaylistCard");
         }
 
     /**
@@ -270,21 +270,21 @@ public class CreatePlaylistView {
      * and shows to the user the screen
      *
      */
-    public void showCard () {
-        cardManager.show(mainViewCenter,"addPlaylistNameCard");
+    public void showCreateCard() {
+        cardManager.show(mainViewCenter,"createPlaylistCard");
         wrongNameErrorVisibility(false);
     }
 
     /**
      * registerController as it's name implies registers the three controllers
      * of the CreatePlaylistView in order to be accessed from the CreatePlaylistViewController class
-     * @param setPlaylistNameController Is the parameter that will receive this class in order to
+     * @param createPlaylistViewController Is the parameter that will receive this class in order to
      *                              link the listeners of this view with the Controller
      */
-    public void registerController(ActionListener actionListener, MouseListener mouseListener) {
-            jbAdd.addActionListener(actionListener);
-            jbManagement.addActionListener(actionListener);
-            goBackImage.addMouseListener(mouseListener);
+    public void registerController(CreatePlaylistViewController createPlaylistViewController) {
+            jbAdd.addActionListener(createPlaylistViewController);
+            jbManagement.addActionListener(createPlaylistViewController);
+            goBackImage.addMouseListener(createPlaylistViewController);
     }
 
     }
