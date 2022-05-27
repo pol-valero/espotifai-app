@@ -3,6 +3,9 @@ import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import java.io.InputStream;
 
+/**
+ * Class which executes methods related to the performance of song reproduction
+ */
 public class MusicPlayer {
 
     private final static int NOTSTARTED = 0;
@@ -20,7 +23,9 @@ public class MusicPlayer {
             this.player = new Player(inputStream);
     }
 
-
+    /**
+     * Method to begin the thread for playing a song or restart in case of pause
+     */
     public void play() {
         System.out.println("se acaba vale = "+ finishedSong);
         finishedSong = false;
@@ -53,7 +58,11 @@ public class MusicPlayer {
         }
     }
 
-
+    /**
+     * Method that pauses the thread in case of playing status
+     * @return returns true in case the previous status was Playing. In other cases, NotStarted or Finished;
+     * returns false.
+     */
     public boolean pause() {
         synchronized (synchronizedThread) {
             if (musicStatus == PLAYING) {
@@ -63,7 +72,11 @@ public class MusicPlayer {
         }
     }
 
-
+    /**
+     * Method that restrats the thread in case of pause status
+     * @return returns true in case the previous status was Pause. In other cases, NotStarted or Finished;
+     * returns false.
+     */
     public boolean resume() {
         synchronized (synchronizedThread) {
             if (musicStatus == PAUSED) {
@@ -74,7 +87,9 @@ public class MusicPlayer {
         }
     }
 
-
+    /**
+     * Method that sets the status to finished
+     */
     public void stop() {
         synchronized (synchronizedThread) {
             musicStatus = FINISHED;

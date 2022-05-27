@@ -28,7 +28,8 @@ public class UIController {
     private AddSongViewController addSongViewController;
     private CreatePlaylistViewController createPlaylistViewController;
     private RemovePlaylistController removePlaylistController;
-
+    private StadisticViewController stadisticViewController;
+    private AddToPlaylistViewController addToPlaylistViewController;
     public void run () {
         JFrame topContainer = new JFrame();
         JPanel mainViewCenter = new JPanel();
@@ -46,16 +47,28 @@ public class UIController {
         addSongViewController = new AddSongViewController(this, mainViewCenter, cardManager);
         createPlaylistViewController = new CreatePlaylistViewController(this, mainViewCenter, cardManager);
         removePlaylistController = new RemovePlaylistController(this, mainViewCenter, cardManager);
-
+        stadisticViewController = new StadisticViewController(this, mainViewCenter, cardManager);
+        addToPlaylistViewController = new AddToPlaylistViewController(this, mainViewCenter,cardManager);
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
         //showSignUpCard();
-        showHomescreenCard();
+        //showHomescreenCard();
         //showLoginCard();
         //showSignUpCard();
         //showHomescreenCard();
         //showMusicListCard();
         //showAddSongCard();
+        //showStadisticViewCard();
+        showAddToPlaylistCard();
+
+    }
+
+    private void showAddToPlaylistCard() {
+        addToPlaylistViewController.showAddToPlaylistView();
+    }
+
+    private void showStadisticViewCard(){
+        stadisticViewController.showStadisticsView((LinkedList<Genre>) businessFacade.loadStadistic());
     }
 
     private void showMainViewCard() {

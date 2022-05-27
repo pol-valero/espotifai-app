@@ -6,7 +6,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Clase encargada de gestionar la informacion de los objetos usuarios
+ * Class in charged of managing information related to User objects
  */
 public class User {
 

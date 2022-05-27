@@ -1,7 +1,7 @@
 package business.entities;
 
 /**
- * Clase encargada de gestionar la informacion de los objetos Song
+ * Class in charged of managing information related to Song objects
  */
 public class Song {
 
