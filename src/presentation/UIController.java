@@ -200,8 +200,8 @@ public class UIController {
         return businessFacade.findSong(songName);
     }
 
-    public void addSongPlaylist(String playlistName, String songName){
-        businessFacade.addSongPlaylist(playlistName, songName);
+    public void addSongPlaylist(String playlistName, List<String> songNameList){
+        businessFacade.addSongPlaylist(playlistName, songNameList);
     }
 
     public void playMusic(String playlistName, int position){
@@ -244,5 +244,8 @@ public class UIController {
         businessFacade.setCurrentPlaylist(playlistName);
     }
 
+    public void deletePersonalSong(List<String> songNameList){
+        businessFacade.deletePersonalSong(songNameList);
+    }
 
 }

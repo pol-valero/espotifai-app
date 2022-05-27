@@ -111,9 +111,9 @@ public interface BusinessFacade {
      * Method that adds a song into an existing playlist in a certain position
      *
      * @param playlistName Name of the playlist in which the song is added
-     * @param songName String song which is added to the playlist
+     * @param songNameList List song which is added to the playlist
      */
-    void addSongPlaylist(String playlistName, String songName);
+    void addSongPlaylist(String playlistName, List<String> songNameList);
 
     /**
      * Loads all songs in the Data-base
@@ -270,4 +270,6 @@ public interface BusinessFacade {
     public void moveSongsInPlaylist(String playlistName, int position, int upDown);
 
     public void deleteSongAllPlaylist(String songName);
+
+    void deletePersonalSong(List<String> songNameList);
 }

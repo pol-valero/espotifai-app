@@ -35,17 +35,22 @@ public class MusicListManager {
         return musicListDAO.loadAllMusic();
     }
 
-    public void addSongPlaylist(String playlistName, String songName, int idUser){ //todo falta mirar lo de la posicion
+    public void addSongPlaylist(String playlistName, List<String> songNameList, int idUser){ //todo falta mirar lo de la posicion
         Playlist playlist = findUserPlaylist(playlistName, idUser);
-        int positon = musicListDAO.idSongInPlaylist(playlist.getId());
-        positon++;
-        System.out.println("en el manager la posicion es = " + positon);
-        List<Song> songs = loadAllMusic();
-        for(Song newSong: songs){
-            if (songName.equals(newSong.getName())){
-                musicListDAO.addSongPlaylist(playlist.getId(), newSong.getIdSong(), positon);
+        for (int i = 0; i < songNameList.size(); i++) {
+            String songName = songNameList.get(i);
+            int positon = musicListDAO.idSongInPlaylist(playlist.getId());
+            positon++;
+            System.out.println("cancion añadida = " + songName);
+            System.out.println("en el manager la posicion es = " + positon);
+            List<Song> songs = loadAllMusic();
+            for(Song newSong: songs){
+                if (songName.equals(newSong.getName())){
+                    musicListDAO.addSongPlaylist(playlist.getId(), newSong.getIdSong(), positon);
+                }
             }
         }
+
     }
 
     public void deleteSongPlaylist(String playlistName, List<String> songName, int idUser){

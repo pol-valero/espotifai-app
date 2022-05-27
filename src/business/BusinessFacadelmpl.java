@@ -145,11 +145,11 @@ public class BusinessFacadelmpl implements BusinessFacade{
     /**
      * Method that adds a song into an existing playlist in a certain position
      * @param playlistName Name of the playlist in which the song is added
-     * @param songName  Object song which is added to the playlist
+     * @param songNameList  Object song which is added to the playlist
      */
     @Override
-    public  void addSongPlaylist(String playlistName, String  songName){
-        musicListManager.addSongPlaylist(playlistName, songName, loginManager.getCurrentUSer().getId());
+    public  void addSongPlaylist(String playlistName, List<String> songNameList){
+        musicListManager.addSongPlaylist(playlistName, songNameList, loginManager.getCurrentUSer().getId());
     }
 
     /**
@@ -365,5 +365,11 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     public void deleteSongAllPlaylist(String songName){
         musicListManager.deleteSongAllPlaylist(songName);
+    }
+
+    public void deletePersonalSong(List<String> songNameList){
+        for (String song: songNameList){
+            deleteUserAddedSong(song);
+        }
     }
 }

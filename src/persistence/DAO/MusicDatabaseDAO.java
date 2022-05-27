@@ -64,7 +64,7 @@ public class MusicDatabaseDAO implements MusicDAO {
     }
 
     @Override
-    public void updateStadistic(String genreName, int amount) { //UPDATE `genero` SET `cantidad` = '2' WHERE `genero`.`id` = 4;
+    public void updateStadistic(String genreName, int amount) {
 
         String query = "UPDATE genero SET cantidad = '" + amount + "' WHERE  genero = \"" + genreName+ "\";";
         SQLConnector.getInstance().updateQuery(query);
