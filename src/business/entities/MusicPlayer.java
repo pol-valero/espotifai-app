@@ -97,6 +97,10 @@ public class MusicPlayer {
         }
     }
 
+    /**
+     * Method that manages the reproduction of the
+     * @return
+     */
     private boolean playInternal() {
         while (musicStatus != FINISHED) {
             try {
@@ -122,7 +126,9 @@ public class MusicPlayer {
         return finishedSong = true;
     }
 
-
+    /**
+     * Method that sets song status to finished and stop the thread
+     */
     private void close() {
         synchronized (synchronizedThread) {
             musicStatus = FINISHED;

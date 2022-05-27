@@ -49,7 +49,11 @@ public class User {
         return password;
     }
 
-
+    /**
+     * Method that codifies a string (password) in hash. This will be used for security purposes.
+     * @param password password to codify
+     * @return return the codified password.
+     */
     private String pwdHash(String password) {
         MessageDigest digest = null;
         try {
