@@ -106,6 +106,12 @@ public class BusinessFacadelmpl implements BusinessFacade{
      */
     @Override
     public void deleteAccountRequest(){
+
+        for (Song song: loadAllMusic()){
+            if ( song.getIdOwne() == loginManager.getCurrentUSer().getId()){
+                deleteUserAddedSong(song.getName());
+            }
+        }
         loginManager.deleteAccountRequest();
     }
 
@@ -139,8 +145,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
     /**
      * Method that adds a song into an existing playlist in a certain position
      * @param playlistName Name of the playlist in which the song is added
-     * @param song Object song which is added to the playlist
-     * @param position integer representing the position of the song inside the playlist
+     * @param songName  Object song which is added to the playlist
      */
     @Override
     public  void addSongPlaylist(String playlistName, String  songName){
@@ -219,7 +224,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     /**
      * Method to create a song and saved it in the data-base
-     * @param song Song object to be saved
+     * @param name String  to song name
      */
     @Override
     public void createSong(String name, String artist, String album, String genre, String filePath){ //todo añadir los lyrics

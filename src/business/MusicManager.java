@@ -190,7 +190,7 @@ public class MusicManager {
         if (paused) {
             musicPlayer.resume();
         } else {
-            musicPlayer.stop();
+            musicPlayer.pause();
         }
     }
 
