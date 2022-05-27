@@ -51,7 +51,7 @@ public class UIController {
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
         //showSignUpCard();
-        showHomescreenCard();
+        //showHomescreenCard();
         //showLoginCard();
         //showSignUpCard();
         //showHomescreenCard();

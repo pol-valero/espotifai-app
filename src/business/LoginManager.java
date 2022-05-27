@@ -20,9 +20,9 @@ public class LoginManager {
 
     //El que hi ha dins d'aquest constructor s'ha de borrar. Nomes es per fer proves.
     public LoginManager () {
-        User userProva = new User("x", "x", "x");
-        userProva.setId(11);
-        setCurrentUser(userProva);
+       /* User userProva = new User("x", "x", "x");
+        userProva.setId(12);
+        setCurrentUser(userProva);*/
     }
 
     /**
