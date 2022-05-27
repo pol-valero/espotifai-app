@@ -29,6 +29,7 @@ public class UIController {
     private AddSongViewController addSongViewController;
     private CreatePlaylistViewController createPlaylistViewController;
     private RemovePlaylistController removePlaylistController;
+    private RenamePlaylistViewController renamePlaylistViewController;
 
     public void run () {
         JFrame topContainer = new JFrame();
@@ -47,6 +48,7 @@ public class UIController {
         addSongViewController = new AddSongViewController(this, mainViewCenter, cardManager);
         createPlaylistViewController = new CreatePlaylistViewController(this, mainViewCenter, cardManager);
         removePlaylistController = new RemovePlaylistController(this, mainViewCenter, cardManager);
+        renamePlaylistViewController = new RenamePlaylistViewController(this, mainViewCenter, cardManager);
 
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
@@ -104,8 +106,12 @@ public class UIController {
         addSongViewController.showAddSongCard();
     }
 
-    public void showSetPlaylistNameCard () {
-        createPlaylistViewController.showSetPlaylistNameCard();
+    public void showCreatePlaylistCard() {
+        createPlaylistViewController.showCreatePlaylistCard();
+    }
+
+    public void showRenamePlaylistCard () {
+        renamePlaylistViewController.showRenamePlaylistCard();
     }
 
     public boolean findUserNameMatch(String username){//todo

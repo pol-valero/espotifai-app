@@ -56,7 +56,7 @@ public class MusicListController implements ActionListener, ListSelectionListene
                 break;
 
             case MusicListView.BTN_RENAMEPLAYLIST:
-                //controller.showRenamePlaylistCard();
+                controller.showRenamePlaylistCard();
                 break;
 
             case MusicListView.BTN_REMOVESONG:

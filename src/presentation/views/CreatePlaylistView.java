@@ -4,7 +4,9 @@ import presentation.controllers.CreatePlaylistViewController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 /**
@@ -279,10 +281,10 @@ public class CreatePlaylistView {
      * @param setPlaylistNameController Is the parameter that will receive this class in order to
      *                              link the listeners of this view with the Controller
      */
-    public void registerController(CreatePlaylistViewController setPlaylistNameController) {
-            jbAdd.addActionListener(setPlaylistNameController);
-            jbManagement.addActionListener(setPlaylistNameController);
-            goBackImage.addMouseListener(setPlaylistNameController);
+    public void registerController(ActionListener actionListener, MouseListener mouseListener) {
+            jbAdd.addActionListener(actionListener);
+            jbManagement.addActionListener(actionListener);
+            goBackImage.addMouseListener(mouseListener);
     }
 
     }

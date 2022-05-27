@@ -1,6 +1,5 @@
 package presentation.controllers;
 
-import business.entities.Playlist;
 import presentation.UIController;
 import presentation.views.HomeScreenView;
 
@@ -51,7 +50,7 @@ public class HomescreenViewController implements ActionListener {
                 controller.showLogoutCard();
                 break;
             case HomeScreenView.BTN_CREATEPLAYLIST:
-                controller.showSetPlaylistNameCard();
+                controller.showCreatePlaylistCard();
                 break;
             default:
                 String playlistName = e.getActionCommand();
