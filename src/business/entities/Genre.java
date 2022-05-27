@@ -1,5 +1,8 @@
 package business.entities;
 
+/**
+ * Class that represents genres of songs. Is capable of saving data related to the amount of genres in the app.
+ */
 public class Genre implements Comparable<Genre>{
 
     private int id;

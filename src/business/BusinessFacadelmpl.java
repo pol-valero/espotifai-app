@@ -79,8 +79,8 @@ public class BusinessFacadelmpl implements BusinessFacade{
     }
 
     @Override
-    public  void addSongPlaylist(String playlistName, Song song, int position){
-        musicListManager.addSongPlaylist(playlistName, song, position, loginManager.getCurrentUSer().getId());
+    public  void addSongPlaylist(String playlistName, String  songName){
+        musicListManager.addSongPlaylist(playlistName, songName, loginManager.getCurrentUSer().getId());
     }
 
     @Override
@@ -96,7 +96,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     @Override
     public void deletePlaylist(String playlistName){
-        musicListManager.deletePlaylist(playlistName, loginManager.getCurrentUSer().getId());
+        musicListManager.deletePlaylist(playlistName);
     }
 
     @Override
@@ -187,5 +187,17 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     public void setCurrentPlaylist (String playlistName) {
         musicListManager.setCurrentPlaylist(playlistName, loginManager.getCurrentUSer().getId());
+    }
+
+    public List<Song> loadMusicOnePlaylist(String playlistName){
+        return musicListManager.loadMusicOnePlaylist(playlistName, loginManager.getCurrentUSer().getId());
+    }
+
+    public void moveSongsInPlaylist(String playlistName, int position, int upDown){
+        musicListManager.moveSongInPlaylist(playlistName, position ,upDown, loginManager.getCurrentUSer().getId());
+    }
+
+    public void deleteSongAllPlaylist(String songName){
+        musicListManager.deleteSongAllPlaylist(songName);
     }
 }

@@ -9,11 +9,19 @@ import persistence.DAO.MusicListDatabaseDAO;
 import persistence.MusicDAO;
 import persistence.MusicListDAO;
 
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.beans.Encoder;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.time.temporal.TemporalAdjuster;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Clase encargada de gestionar la informacion de Song y Playlist
@@ -30,6 +38,10 @@ public class MusicManager {
     private boolean paused = false;
     private int position;
     private Song createSong;
+
+    public MusicManager () {
+        //System.out.println(getSongLenght());
+    }
 
     public Song getCurrentSong() {
         return currentSong;
@@ -66,16 +78,17 @@ public class MusicManager {
         return null;
     }
 
+
     public void createSong(Song song) {
         this.createSong = song;
         boolean existGenre = false;
         List<Genre> stadistic = musicDAO.loadStadistic();
-        System.out.println("la lista de generos tiene = " + stadistic.size());
+       // System.out.println("la lista de generos tiene = " + stadistic.size());
         insertIdSingerAlbum(song);
         song.setIdSinger(createSong.getIdSinger());
         song.setIdAlbum(createSong.getIdAlbum());
-        System.out.println("id album song = "+ song.getIdAlbum() +"album = "+ createSong.getIdAlbum());
-        System.out.println("id artista song = "+ song.getIdSinger());
+        //System.out.println("id album song = "+ song.getIdAlbum() +"album = "+ createSong.getIdAlbum());
+       // System.out.println("id artista song = "+ song.getIdSinger());
 
         if (stadistic.size() != 0) {
             for(Genre genre: stadistic) {
@@ -101,7 +114,21 @@ public class MusicManager {
             song.setIdGenre(stadistic.get(stadistic.size() - 1).getId());
             musicDAO.createSong(song);
         }
+
         createSong = null;
+    }
+
+    private void checkCreateSong (Song newSong){
+        List<Song> song = musicListDAO.loadAllMusic();
+        boolean check = false;
+        for (Song songs: song){
+            if (newSong.getIdSong() == songs.getIdSong()){
+                check = true;
+            }
+        }
+        if (!check){
+            createSong(newSong);
+        }
     }
 
     public void deleteUserAddedSong(Song song){
@@ -147,7 +174,7 @@ public class MusicManager {
 
         } else  {
             musicDAO.createAlbum(createSong.getAlbum(), createSong.getIdSinger());
-            createSong.setIdAlbum(musicDAO.loadIdSinger(createSong.getSinger()));
+            createSong.setIdAlbum(musicDAO.loadIdAlbum(createSong.getAlbum()));
             System.out.println("managerMusic id albu al crearse = " + musicDAO.loadIdSinger(createSong.getSinger()) +
                     "current song = " + createSong.getIdSinger());
         }
@@ -217,6 +244,22 @@ public class MusicManager {
         }
     }
 
+
+    /*
+    public int getSongLenght () {
+        AudioFileFormat fileFormat = null;
+        try {
+            fileFormat = AudioSystem.getAudioFileFormat(new File("songs/Clash Royal.mp3"));
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Long microseconds = (long) fileFormat.properties().get("duration");
+        int seconds = (int) (microseconds / 10^6);
+        return seconds;
+
+    }*/
 
 
 }

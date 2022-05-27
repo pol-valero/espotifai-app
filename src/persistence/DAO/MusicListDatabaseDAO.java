@@ -24,9 +24,9 @@ public class MusicListDatabaseDAO implements MusicListDAO {
             ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
             if (resultSet != null) {
                 while (resultSet.next()) {
-                    long id = resultSet.getLong("id_playlist");
+                    int id = resultSet.getInt("id_playlist");
                     String name = resultSet.getString("playlist_name");
-                    long id_user = resultSet.getLong("id_usuario");
+                    int id_user = resultSet.getInt("id_usuario");
                     String owner = resultSet.getString("owner");
 
                     playlist.add(new Playlist(id, name, id_user, owner));
@@ -71,9 +71,9 @@ public class MusicListDatabaseDAO implements MusicListDAO {
             if (resultSet != null) {
                 resultSet.next();
                 while (resultSet.next()) {
-                    long id = resultSet.getLong("id_playlist");
+                    int id = resultSet.getInt("id_playlist");
                     String name = resultSet.getString("playlist_name");
-                    long id_user = resultSet.getLong("id_usuario");
+                    int id_user = resultSet.getInt("id_usuario");
                     String owner = resultSet.getString("owner");
 
                     playlist.add(new Playlist(id, name, id_user, owner));
@@ -102,12 +102,12 @@ public class MusicListDatabaseDAO implements MusicListDAO {
     //borra playlist del usuario y las canciones relacionadas en el playlist
     // debería solo borrarse el playlist si no hay canciones?? para decidir
     @Override
-    public void deletePlaylist(Playlist playlist) {
-        String query1 = "DELETE FROM listas_reproduccion WHERE id = '" + playlist.getId() + "';";
-        String query2 = "DELETE FROM lista_cancion WHERE id_lista = '" + playlist.getId() + "';";
+    public void deletePlaylist(String playlistName) {
+        String query1 = "DELETE FROM listas_reproduccion WHERE nombre = \"" + playlistName + "\";";
+       // String query2 = "DELETE FROM lista_cancion WHERE id_lista = '" + playlistName + "';";
 
         SQLConnector.getInstance().deleteQuery(query1);
-        SQLConnector.getInstance().deleteQuery(query2);
+        //SQLConnector.getInstance().deleteQuery(query2);
 
         /*
         String query = "DELETE FROM listas_reproduccion WHERE nombre = '" + playlist.getName() + "';";
@@ -166,9 +166,9 @@ public class MusicListDatabaseDAO implements MusicListDAO {
     @Override
     public List<Song> loadMusicPlaylist(Playlist playlist) {
         List<Song> song = new LinkedList<>();
-        String query = "select lista_cancion.id as idSongPlaylist, name, listas_reproduccion.id_usuario as idOwnerLista, orden, v_songs.* from lista_cancion\n" +
-                "            inner join v_songs on lista_cancion.id_cancion = v_songs.idSong\n" +
-                "            inner join listas_reproduccion on lista_cancion.id_lista = listas_reproduccion.id\n" +
+        String query = "select lista_cancion.id as idSongPlaylist, name, listas_reproduccion.id_usuario as idOwnerLista, orden, v_songs.* from lista_cancion" +
+                "            inner join v_songs on lista_cancion.id_cancion = v_songs.idSong" +
+                "            inner join listas_reproduccion on lista_cancion.id_lista = listas_reproduccion.id" +
                 " where lista_cancion.id_lista = "+ playlist.getId() + " order by orden";
 
         try {
@@ -240,11 +240,12 @@ public class MusicListDatabaseDAO implements MusicListDAO {
     // se añade al final de la lista. Pondremos por defecto el orden el id_ del registro.
     // como el id es un autonumerico, sera el ultimo id_ de registro y no sirve para indicar el ultimo valor de orden
     @Override // todo hace falta la posicion si la queremos añadir al final??
-    public void addSongPlaylist(Playlist playlist, Song song) {
+    public void addSongPlaylist(int idPlaylist, int idSong, int position) {
 
-            String query = "INSERT INTO lista_cancion(id_lista, id_cancion) VALUES ('" +
-                    playlist.getId() + "," +
-                    song.getIdSong() + "')";
+            String query = "INSERT INTO lista_cancion(id_lista, id_cancion, orden) VALUES ('" +
+                    idPlaylist + "', '" +
+                   idSong + "', '" +
+                    position + "');";
 
             SQLConnector.getInstance().insertQuery(query);
 
@@ -256,31 +257,34 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
             //buscamos el id_ recien creado
 
-
-
+/*
         try {
             String query1 = "SELECT * from lista_cancion WHERE id_lista = "+
-                    playlist.getId() + " and id_cancion = " +
-                    song.getIdSong() + ")";
+                    idPlaylist + " and id_cancion = " +
+                    idSong + ")";
 
             ResultSet resultSet = SQLConnector.getInstance().selectQuery(query1);
             int orden = resultSet.getInt("id");
 
             //updatamos el id_ en el campo orden
-            String query2 = "UPDATE lista_cancion SET orden = " + orden + " WHERE id_lista = " + playlist.getId() + " and id_cancion = " + song.getIdSong();
+            String query2 = "UPDATE lista_cancion SET orden = " + orden + " WHERE id_lista = " + idPlaylist + " and id_cancion = " + idSong;
 
             SQLConnector.getInstance().updateQuery(query2);
         } catch (SQLException e1) {
             e1.getErrorCode();
         }
 
+
+
+
+ */
     }
 
 
     // borra una canción de la playlist
     @Override
     public boolean deleteSongPlaylist(Playlist playlist, Song song) {
-        String query = "DELETE FROM lista_cancion WHERE id_lista = " + playlist.getId() + " and id_cancion = " + song.getIdSong();
+        String query = "DELETE FROM lista_cancion WHERE id_lista = '" + playlist.getId() + "' AND id_cancion = '" + song.getIdSong() + "';";
 
         SQLConnector.getInstance().deleteQuery(query);
 
@@ -356,6 +360,67 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         SQLConnector.getInstance().updateQuery(query);
 
     }
+
+    @Override
+    public int idSongInPlaylist(int idPlaylist) {
+        String query = "select id_cancion from lista_cancion where id_lista = '" + idPlaylist + "';";
+        ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
+
+        try {
+            int sizeId = 0;
+            while (resultSet.next()){
+                int id = resultSet.getInt("id_cancion");
+                System.out.println("id de la lista es = " + id);
+                sizeId++;
+            }
+            return sizeId;
+        } catch (SQLException e) {
+            //e.printStackTrace();
+            return 1;
+        }
+
+    }
+
+    public List<Song>  loadMusicOnePlaylist(int idPlaylist){
+        String query = "select id_cancion, orden from lista_cancion where id_lista = '" + idPlaylist + "' order by orden;";
+        ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
+        List<Song> allSong = loadAllMusic();
+        List<Song> songList = new LinkedList<>();
+        try {
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id_cancion");
+                int position = resultSet.getInt("orden");
+                for(Song song: allSong){
+                    if (id == song.getIdSong()){
+                        song.setOrden(position);
+                        songList.add(song);
+                    }
+                }
+            }
+            return songList;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    public void moveSongsInPlaylist(int idPlaylist, int idSong1, int idSong2, int idOrder1, int idOrder2){
+        String query1 = "UPDATE lista_cancion SET orden = '"+ idOrder2 +"' Where id_lista = '" + idPlaylist
+                        + "' AND id_cancion = '" + idSong1 + "';";
+
+        String query2 = "UPDATE lista_cancion SET orden = '"+ idOrder1 +"' Where id_lista = '" + idPlaylist
+                + "' AND id_cancion = '" + idSong2 + "';";
+
+        SQLConnector.getInstance().updateQuery(query1);
+        SQLConnector.getInstance().updateQuery(query2);
+
+    }
+    public void deleteSongAllPlaylist(int idSong){
+        String query = "Delete From lista_cancion Where id_cancion = '" + idSong+"';";
+        SQLConnector.getInstance().deleteQuery(query);
+    }
+
 
 
 }
