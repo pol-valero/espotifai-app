@@ -162,7 +162,6 @@ public class AddToPlaylistView {
 
     private int getIdealHeight(int size) {
        double residu = size%5;
-       System.out.print("Size: "+size+" Residu: "+residu+"\n");
 
         if (residu == 1) {
             size += 4;

@@ -9,29 +9,31 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Interficie con los metodos para gestionar la informacion entre presentation y business
+ * Interface capable of using methods in order to manage information flow between presentation and business
+ * layers.
  */
 public interface BusinessFacade {
 
-
     /**
-     * Metodo para comprobar que los campos del correo electronico son correctos
-     * @return boolean true si el correo es correcto, false si es incorrecto
+     * Method that checks if email fields are correct
+     * @param email string with the email to be checked
+     * @return bolean for true in case email fields are correct. False for the other case.
      */
     boolean checkEmail(String email);
 
     /**
-     * Metodo para saber si dos Strings son iguales
-     * @param generalString1 String principal
-     * @param compareString String con la que queremos comparar
-     * @return boolean true si son iguales, false si son diferentes
+     * Method to check if two strings are equal or not.
+     * @param generalString1 string to be checked
+     * @param compareString string of reference
+     * @return boolean true in case of two identical strings. False for the other case.
      */
     boolean sameString(String generalString1, String compareString);
 
     /**
-     * Metodo para comprobar que la contraseña cumpla los requisitos minimos
-     * @param password String a analizar
-     * @return boolean true si cumple los requisitos, false si no es correcta
+     * Method that checks if a password meets the requirements. This requirements are the same ones
+     * established by MIT.
+     * @param password String to check
+     * @return boolean true in case the password meets the requirements. False for opposite case.
      */
     boolean checkPassword(String password);
 
@@ -41,25 +43,34 @@ public interface BusinessFacade {
      * @param password contraseña del usuario
      * @return boolean true si se a podido iniciar sesion, false si no a sido posible iniciar sesion
      */
+    /**
+     * Method to log in an already signed-up user.
+     * @param login string of the user's login
+     * @param password string password
+     * @return
+     */
      boolean loginRequest(String login, String password);
 
+
     /**
-     * Metodo para buscar el nombre de un usuario en la base de datos
-     * @param name String con el nombre del usuario a buscar
-     * @return boolean true si el usuario se a encontrado, false si no a sido encontrado
+     * Method that checks if given a string, it corresponds to an already
+     * signed-up user.
+     * @param name string of a supposedly existing user.
+     * @return boolean true in case Data-base finds this user.
      */
      boolean findUsernameMach(String name);
 
     /**
-     * Metodo para buscar el email de un usuario en la base de datos
-     * @param email String con el email del usuario a buscar
-     * @return boolean true si el email del usuario se a encontrado, false si no a sido encontrado
+     * Method that checks if given an email address, this is already registered in the
+     * data-base.
+     * @param email string of the email address to look for.
+     * @return boolean true if the data-base finds the email address. False in opposite case.
      */
      boolean findEmailMach(String email);
 
     /**
-     * Metodo para registrar a un usuario
-     * @param user Obsejeto de la clase User con la informacion del usuario
+     *Method to register an user.
+     * @param user Object of the class User
      */
      void singUpRequest(User user);
 
