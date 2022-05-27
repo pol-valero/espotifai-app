@@ -21,10 +21,6 @@ public interface MusicListDAO  {
 
     public boolean deleteSongPlaylist(Playlist playlist, Song song);
 
-    public boolean moveSongUp(Playlist playlist, Song song);
-
-    public boolean moveSongDown(Playlist playlist, Song song);
-
     /**
      * Metodo para crear una nueva playlist
      * @param playlistName Nombre de la playlist
@@ -44,7 +40,6 @@ public interface MusicListDAO  {
      */
      void deletePlaylist(String playlistName);
 
-    // void canciones_Playlist (int playlist);
 
     List<Playlist> loadUserPlaylist (int user_id);
 

@@ -99,24 +99,12 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         SQLConnector.getInstance().insertQuery(query);
     }
 
-    //borra playlist del usuario y las canciones relacionadas en el playlist
-    // debería solo borrarse el playlist si no hay canciones?? para decidir
+
     @Override
     public void deletePlaylist(String playlistName) {
         String query1 = "DELETE FROM listas_reproduccion WHERE nombre = \"" + playlistName + "\";";
-       // String query2 = "DELETE FROM lista_cancion WHERE id_lista = '" + playlistName + "';";
 
         SQLConnector.getInstance().deleteQuery(query1);
-        //SQLConnector.getInstance().deleteQuery(query2);
-
-        /*
-        String query = "DELETE FROM listas_reproduccion WHERE nombre = '" + playlist.getName() + "';";
-        SQLConnector.getInstance().deleteQuery(query);
-
-        query = "DELETE FROM lista_cancion WHERE id_lista = '" + playlist.getId() + "';";
-        SQLConnector.getInstance().deleteQuery(query);
-
-         */
     }
 
 
@@ -236,10 +224,8 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         return song;
     }
 
-    // añade una canción a la playlist
-    // se añade al final de la lista. Pondremos por defecto el orden el id_ del registro.
-    // como el id es un autonumerico, sera el ultimo id_ de registro y no sirve para indicar el ultimo valor de orden
-    @Override // todo hace falta la posicion si la queremos añadir al final??
+
+    @Override
     public void addSongPlaylist(int idPlaylist, int idSong, int position) {
 
             String query = "INSERT INTO lista_cancion(id_lista, id_cancion, orden) VALUES ('" +
@@ -249,39 +235,10 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
             SQLConnector.getInstance().insertQuery(query);
 
-            //despúes de añadir la cación busco su id y updato al campo orden
-            // esto funciona si no se añade dos veces la misma canción
-            // quien lo controla ? si la capa bussines no nos envía una canción existente funciona
-            // sino habría que controlarlo aquí y cambiar "vodi" por "boolean" para indicar a la capa bussines que todo
-            // ha ido bien
-
-            //buscamos el id_ recien creado
-
-/*
-        try {
-            String query1 = "SELECT * from lista_cancion WHERE id_lista = "+
-                    idPlaylist + " and id_cancion = " +
-                    idSong + ")";
-
-            ResultSet resultSet = SQLConnector.getInstance().selectQuery(query1);
-            int orden = resultSet.getInt("id");
-
-            //updatamos el id_ en el campo orden
-            String query2 = "UPDATE lista_cancion SET orden = " + orden + " WHERE id_lista = " + idPlaylist + " and id_cancion = " + idSong;
-
-            SQLConnector.getInstance().updateQuery(query2);
-        } catch (SQLException e1) {
-            e1.getErrorCode();
-        }
-
-
-
-
- */
     }
 
 
-    // borra una canción de la playlist
+
     @Override
     public boolean deleteSongPlaylist(Playlist playlist, Song song) {
         String query = "DELETE FROM lista_cancion WHERE id_lista = '" + playlist.getId() + "' AND id_cancion = '" + song.getIdSong() + "';";
@@ -292,68 +249,6 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
     }
 
-    // cambia el orden de la canción por el orden de la canción posterior
-    // seguimos dando por hecho que no se puede repetir el id_playlist + id_song , sino no funcionará
-    // esta parte podría estar toda en bussines y aquí solo updatar el campo orden
-
-    @Override //todo mirar lo de la posicion
-    public boolean moveSongUp(Playlist playlist, Song song) {
-
-        List<Song> songPlaylist = new LinkedList<>();
-        songPlaylist = loadMusicPlaylist(playlist);
-
-
-        int c = 0;
-        while (songPlaylist.get(c).getIdSong() != song.getIdSong() && c < songPlaylist.size()) {
-            c++;
-        }
-
-        if (c == 0) return false; // esta condición se da si se quiere mover la canción de la posición 0;
-
-        int orderNow = songPlaylist.get(c).getOrden();
-        int orderNew = songPlaylist.get(c-1).getOrden();
-
-        String query = "UPDATE lista_cancion SET orden = " + orderNew + " WHERE id_lista = " + playlist.getId() + " and id_cancion = " + song.getIdSong();
-        SQLConnector.getInstance().updateQuery(query);
-
-        String query1 = "UPDATE lista_cancion SET orden = " + orderNow + " WHERE id_lista = " + playlist.getId() + " and id_cancion = " + songPlaylist.get(c-1).getIdSong();
-        SQLConnector.getInstance().updateQuery(query1);
-
-        return true;
-    }
-
-
-    // cambia el orden de la canción por el orden de la canción posterior
-    // seguimos dando por hecho que no se puede repetir el id_playlist + id_song , sino no funcionará
-    // esta parte podría estar toda en bussines y aquí solo updatar el campo orden
-
-    @Override //todo mirar lo de la posicion
-    public boolean moveSongDown(Playlist playlist, Song song) {
-
-        List<Song> songPlaylist = new LinkedList<>();
-        songPlaylist = loadMusicPlaylist(playlist);
-
-
-        int c = 0;
-        while (songPlaylist.get(c).getIdSong() != song.getIdSong() && c < songPlaylist.size()) {
-            c++;
-        }
-
-        if (c == songPlaylist.size()) return false; // esta condición se da si se quiere mover la canción de la posición última;
-
-        int orderNow = songPlaylist.get(c).getOrden();
-        int orderNew = songPlaylist.get(c+1).getOrden();
-
-        // updato la canción que quiero cambiar de posición
-        String query = "UPDATE lista_cancion SET orden = " + orderNew + " WHERE id_lista = " + playlist.getId() + " and id_cancion = " + song.getIdSong();
-        SQLConnector.getInstance().updateQuery(query);
-
-        //updato la canción que intercambio la posición
-        String query1 = "UPDATE lista_cancion SET orden = " + orderNow + " WHERE id_lista = " + playlist.getId() + " and id_cancion = " + songPlaylist.get(c+1).getIdSong();
-        SQLConnector.getInstance().updateQuery(query1);
-
-        return true;
-    }
 
     public void changePlaylistName(String currentName, String newName){
         String query = "UPDATE listas_reproduccion SET nombre = \"" + newName + "\" WHERE  nombre = \"" + currentName + "\";";
@@ -381,6 +276,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
     }
 
+    @Override
     public List<Song>  loadMusicOnePlaylist(int idPlaylist){
         String query = "select id_cancion, orden from lista_cancion where id_lista = '" + idPlaylist + "' order by orden;";
         ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
@@ -405,6 +301,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
     }
 
+    @Override
     public void moveSongsInPlaylist(int idPlaylist, int idSong1, int idSong2, int idOrder1, int idOrder2){
         String query1 = "UPDATE lista_cancion SET orden = '"+ idOrder2 +"' Where id_lista = '" + idPlaylist
                         + "' AND id_cancion = '" + idSong1 + "';";
@@ -416,6 +313,8 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         SQLConnector.getInstance().updateQuery(query2);
 
     }
+
+    @Override
     public void deleteSongAllPlaylist(int idSong){
         String query = "Delete From lista_cancion Where id_cancion = '" + idSong+"';";
         SQLConnector.getInstance().deleteQuery(query);
