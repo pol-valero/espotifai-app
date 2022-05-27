@@ -222,7 +222,10 @@ public class BusinessFacadelmpl implements BusinessFacade{
      * @param song Song object to be saved
      */
     @Override
-    public void createSong(Song song){
+    public void createSong(String name, String artist, String album, String genre, String filePath){ //todo añadir los lyrics
+
+        int time[] = musicManager.songTime(filePath);
+        Song song = new Song(name, artist, album, genre, filePath, ".", time[0], time[1]);
         song.setIdOwne(loginManager.getCurrentUSer().getId());
         song.setOwne(loginManager.getCurrentUSer().getName());
         musicManager.createSong(song);

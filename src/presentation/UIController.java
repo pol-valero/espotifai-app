@@ -56,6 +56,7 @@ public class UIController {
         //showHomescreenCard();
         //showMusicListCard();
         //showAddSongCard();
+
     }
 
     private void showMainViewCard() {
