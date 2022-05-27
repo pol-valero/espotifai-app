@@ -353,7 +353,7 @@ public class HomeScreenView {
         else if (residu == 4) {
             size += 1;
         }
-        return size*38;
+        return size*40;
     }
 
     /**

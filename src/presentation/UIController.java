@@ -6,6 +6,7 @@ import business.entities.Genre;
 import business.entities.Playlist;
 import business.entities.Song;
 import business.entities.User;
+import presentation.Components.ReproductionBar;
 import presentation.controllers.*;
 
 import javax.swing.*;
@@ -38,10 +39,10 @@ public class UIController {
         loginViewController = new LoginViewController(this, topContainer, jFrameCardManager);
         signupViewController = new SignupViewController(this, topContainer, jFrameCardManager);
 
-        mainViewController = new MainViewController(topContainer, jFrameCardManager, cardManager, mainViewCenter, new JPanel());
+        mainViewController = new MainViewController(topContainer, jFrameCardManager, cardManager, mainViewCenter, new ReproductionBar());
 
-        logoutViewController = new LogoutViewController(this, mainViewCenter, cardManager);
         homescreenViewController = new HomescreenViewController(this,mainViewCenter,cardManager);
+        logoutViewController = new LogoutViewController(this, mainViewCenter, cardManager);
         musicListController = new MusicListController(this, mainViewCenter, cardManager);
         addSongViewController = new AddSongViewController(this, mainViewCenter, cardManager);
         createPlaylistViewController = new CreatePlaylistViewController(this, mainViewCenter, cardManager);
@@ -53,7 +54,7 @@ public class UIController {
         //showHomescreenCard();
         //showLoginCard();
         //showSignUpCard();
-        //showHomescreenCard();
+        showHomescreenCard();
         //showMusicListCard();
         //showAddSongCard();
     }
