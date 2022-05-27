@@ -12,12 +12,10 @@ import java.util.List;
 
 public class MusicListDatabaseDAO implements MusicListDAO {
 
-    // recupera todas las playlist distintas del usuario
-    // ******
+
     @Override
     public List<Playlist> loadPublicPlaylist(int user_id) {
         List<Playlist> playlist = new LinkedList<>();
-        // recupero todas las listas por orden de alta (id)
         String query = "select * from v_playlist where id_usuario <> '" + user_id + "' order by playlist_name asc";
 
         try {
@@ -37,29 +35,8 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         }
         return playlist;
 
-    /*
-        List<Playlist> playlist = new LinkedList<>();
-        String query = "SELECT id, name, id_usuario FROM listas_reproduccion";
-        ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
-
-        try {
-            while (resultSet.next()) {
-                long id = resultSet.getLong("id");
-                String name = resultSet.getString("name");
-                long id_user = resultSet.getLong("id_usuario");
-
-                playlist.add(new Playlist(id, name, id_user));
-            }
-        } catch (SQLException exception){
-            exception.getErrorCode();
-        }
-        return playlist;
-
-     */
     }
 
-
-    //recupera las playlist del usuario
     @Override
     public List<Playlist> loadUserPlaylist (int user_id) {
         List<Playlist> playlist = new LinkedList<>();
@@ -68,8 +45,6 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         try {
             ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
 
-            if (resultSet != null) {
-                resultSet.next();
                 while (resultSet.next()) {
                     int id = resultSet.getInt("id_playlist");
                     String name = resultSet.getString("playlist_name");
@@ -78,7 +53,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
                     playlist.add(new Playlist(id, name, id_user, owner));
                 }
-            }
+
         } catch (SQLException exception){
             exception.getErrorCode();
         }
@@ -88,11 +63,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
     // crea playlist de un usuario
     @Override
     public void createPlaylist(String playlistName, int id_user) {
-        // no hay control de si ya existe el "playlist", permitir mismo nombre con distinto usuario ? o no
-
         String query = "INSERT INTO listas_reproduccion(nombre, id_usuario) VALUES ('" +
-                //playlist.getId() + "," +
-                //el getId no es necesario porque lo crea la propia bbdd, en realidad vendría con 0
                 playlistName + "', '" +
                 id_user + "')";
 
@@ -188,9 +159,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         return song;
     }
 
-    // todavía no existe la pantalla donde se usa
-    // se usará para buscar una canción para añadir a la playlist
-    // devuelven todas las canciones que existen para poder añadir
+
     @Override
     public List<Song> loadAllMusic() {
         List<Song> song = new LinkedList<>();
@@ -227,16 +196,13 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
     @Override
     public void addSongPlaylist(int idPlaylist, int idSong, int position) {
-
             String query = "INSERT INTO lista_cancion(id_lista, id_cancion, orden) VALUES ('" +
                     idPlaylist + "', '" +
                    idSong + "', '" +
                     position + "');";
 
             SQLConnector.getInstance().insertQuery(query);
-
     }
-
 
 
     @Override
@@ -248,7 +214,6 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         return true;
 
     }
-
 
     public void changePlaylistName(String currentName, String newName){
         String query = "UPDATE listas_reproduccion SET nombre = \"" + newName + "\" WHERE  nombre = \"" + currentName + "\";";
@@ -270,24 +235,25 @@ public class MusicListDatabaseDAO implements MusicListDAO {
             }
             return sizeId;
         } catch (SQLException e) {
-            //e.printStackTrace();
             return 1;
         }
 
     }
 
     @Override
-    public List<Song>  loadMusicOnePlaylist(int idPlaylist){
+    public List<Song>  loadMusicOnePlaylist(int idPlaylist) {
         String query = "select id_cancion, orden from lista_cancion where id_lista = '" + idPlaylist + "' order by orden;";
+
         ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
         List<Song> allSong = loadAllMusic();
         List<Song> songList = new LinkedList<>();
+
         try {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id_cancion");
                 int position = resultSet.getInt("orden");
-                for(Song song: allSong){
-                    if (id == song.getIdSong()){
+                for(Song song: allSong) {
+                    if (id == song.getIdSong()) {
                         song.setOrden(position);
                         songList.add(song);
                     }
@@ -319,7 +285,5 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         String query = "Delete From lista_cancion Where id_cancion = '" + idSong+"';";
         SQLConnector.getInstance().deleteQuery(query);
     }
-
-
 
 }

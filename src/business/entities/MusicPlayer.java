@@ -8,6 +8,9 @@ import java.io.InputStream;
  */
 public class MusicPlayer {
 
+    private final Object synchronizedThread = new Object();
+    private Thread thread;
+
     private final static int NOTSTARTED = 0;
     private final static int PLAYING = 1;
     private final static int PAUSED = 2;
@@ -17,7 +20,6 @@ public class MusicPlayer {
 
     private final Player player;
 
-    private final Object synchronizedThread = new Object();
 
     public MusicPlayer(final InputStream inputStream) throws JavaLayerException {
             this.player = new Player(inputStream);
@@ -41,11 +43,11 @@ public class MusicPlayer {
                         }
                     };
 
-                    final Thread t = new Thread(r);
-                    t.setDaemon(true);
-                    t.setPriority(Thread.MAX_PRIORITY);
+                    thread = new Thread(r);
+                    thread.setDaemon(true);
+                    thread.setPriority(Thread.MAX_PRIORITY);
                     musicStatus = PLAYING;
-                    t.start();
+                    thread.start();
                     break;
 
                 case PAUSED:
@@ -107,8 +109,11 @@ public class MusicPlayer {
                 if (!player.play(1)) {
                     break;
                 }
+                thread.sleep(100);
             } catch (final JavaLayerException e) {
                 break;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
 
             synchronized (synchronizedThread) {
