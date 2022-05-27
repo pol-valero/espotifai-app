@@ -6,6 +6,7 @@ import business.entities.Genre;
 import business.entities.Playlist;
 import business.entities.Song;
 import business.entities.User;
+import presentation.Components.ReproductionBar;
 import presentation.controllers.*;
 
 import javax.swing.*;
@@ -38,7 +39,7 @@ public class UIController {
         loginViewController = new LoginViewController(this, topContainer, jFrameCardManager);
         signupViewController = new SignupViewController(this, topContainer, jFrameCardManager);
 
-        mainViewController = new MainViewController(topContainer, jFrameCardManager, cardManager, mainViewCenter, new JPanel());
+        mainViewController = new MainViewController(topContainer, jFrameCardManager, cardManager, mainViewCenter, new ReproductionBar());
 
         homescreenViewController = new HomescreenViewController(this,mainViewCenter,cardManager);
         logoutViewController = new LogoutViewController(this, mainViewCenter, cardManager);
@@ -56,9 +57,10 @@ public class UIController {
         //showHomescreenCard();
         //showMusicListCard();
         //showAddSongCard();
+
         //businessFacade.createSong(new Song("Cancion26", "Artista26", "Album26", "genero", "path", "letra" , 1, 1 ));
         //businessFacade.addSongPlaylist("provaPlaylist3" ,"Cancion6");
-       List<Song> songs = businessFacade.loadMusicOnePlaylist("provaPlaylist3");
+       /*List<Song> songs = businessFacade.loadMusicOnePlaylist("provaPlaylist3");
 
        for(Song song: songs){
            System.out.println(song.getName() + song.getFilePath()  + song.getOrden());
@@ -72,7 +74,7 @@ public class UIController {
 
         for(Song song: songs){
             System.out.println(song.getName() + song.getFilePath()  + song.getOrden());
-        }
+        }*/
     }
 
     private void showMainViewCard() {
