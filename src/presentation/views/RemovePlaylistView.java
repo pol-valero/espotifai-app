@@ -19,6 +19,8 @@ public class RemovePlaylistView {
     private JButton jbRemovePlaylist = new JButton();
     private JButton jbCancel = new JButton();
 
+    private JLabel playListNameLabel;
+
     private final Color negre = new Color(48,48,48);
     private final Color vermell = new Color (232,74,77);
 
@@ -116,7 +118,7 @@ public class RemovePlaylistView {
         label_panel.setLayout(new BoxLayout(label_panel, BoxLayout.LINE_AXIS));
         label_panel.setBackground(negre);
 
-        JLabel playListNameLabel = new JLabel();
+        playListNameLabel = new JLabel();
         playListNameLabel.setText(playlistName);
         playListNameLabel.setForeground(Color.white);
         playListNameLabel.setFont(subtitle);
@@ -282,5 +284,9 @@ public class RemovePlaylistView {
         panel.add(centralPanel,BorderLayout.CENTER);
         mainViewCenter.revalidate();
         cardManager.show(mainViewCenter,"removePlaylistCard");
+    }
+
+    public String getPlaylistName() {
+        return playListNameLabel.getText();
     }
 }

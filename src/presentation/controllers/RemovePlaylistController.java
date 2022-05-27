@@ -23,6 +23,8 @@ public class RemovePlaylistController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case RemovePlaylistView.BTN_REMOVE:
+                controller.deletePlaylist(removePlaylistView.getPlaylistName());
+                controller.showHomescreenCard();
                 break;
             case RemovePlaylistView.BTN_CANCEL:
                 String playlistName = controller.getCurrentPlaylist();
