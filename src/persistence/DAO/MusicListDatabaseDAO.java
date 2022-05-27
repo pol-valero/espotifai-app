@@ -12,7 +12,10 @@ import java.util.List;
 
 public class MusicListDatabaseDAO implements MusicListDAO {
 
-
+    /***
+     * Method to load other users playlists from a query that is going to select us from a view
+     * @param user_id we receive the user id
+     */
     @Override
     public List<Playlist> loadPublicPlaylist(int user_id) {
         List<Playlist> playlist = new LinkedList<>();
@@ -37,6 +40,10 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
     }
 
+    /***
+     * Method for loading user-created Playlists from a query that is going to select us from a view
+     * @param user_id we receive the user id
+     */
     @Override
     public List<Playlist> loadUserPlaylist (int user_id) {
         List<Playlist> playlist = new LinkedList<>();
@@ -60,7 +67,11 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         return playlist;
     }
 
-    // crea playlist de un usuario
+    /***
+     * Method to create a user's playlist
+     * @param playlistName we receive the String with the playlist name
+     * @param id_user we receive the user id
+     */
     @Override
     public void createPlaylist(String playlistName, int id_user) {
         String query = "INSERT INTO listas_reproduccion(nombre, id_usuario) VALUES ('" +
@@ -70,7 +81,10 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         SQLConnector.getInstance().insertQuery(query);
     }
 
-
+    /***
+     * Method to delete a user's playlist
+     * @param playlistName we receive the String with the playlist name
+     */
     @Override
     public void deletePlaylist(String playlistName) {
         String query1 = "DELETE FROM listas_reproduccion WHERE nombre = \"" + playlistName + "\";";
@@ -79,8 +93,11 @@ public class MusicListDatabaseDAO implements MusicListDAO {
     }
 
 
-    // HOME / PLAYLIST
-    // es la lista de todas las canciones distintas que tiene en las playlist el usuario
+    /***
+     * Method that shows the list of all the different songs that the user
+     * has in the playlist in the Home view.
+     * @param id_user we receive the user id
+     */
     @Override
     public List<Song> loadUserAddedSongs(int id_user) {
         List<Song> song = new LinkedList<>();
@@ -120,8 +137,10 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         return song;
     }
 
-    // HOME / EXPLORER
-    // lista de canciones de una playlist. usamos el campo orden y es importante al estar las canciones dentro de la playlist
+    /***
+     * Method to list the songs in a playlist and this will be displayed in the Home view in the EXPLORE section.
+     * @param playlist we receive the playlist
+     */
     @Override
     public List<Song> loadMusicPlaylist(Playlist playlist) {
         List<Song> song = new LinkedList<>();
@@ -159,7 +178,9 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         return song;
     }
 
-
+    /***
+     * method that will allow to load all the songs by selecting them from the songs view.
+     */
     @Override
     public List<Song> loadAllMusic() {
         List<Song> song = new LinkedList<>();
@@ -193,7 +214,12 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         return song;
     }
 
-
+    /***
+     * Method to add songs to a playlist
+     * @param idPlaylist we receive the id of the playlist we want to work with
+     * @param idSong we receive the id of the song
+     * @param position song position
+     */
     @Override
     public void addSongPlaylist(int idPlaylist, int idSong, int position) {
             String query = "INSERT INTO lista_cancion(id_lista, id_cancion, orden) VALUES ('" +
@@ -204,7 +230,11 @@ public class MusicListDatabaseDAO implements MusicListDAO {
             SQLConnector.getInstance().insertQuery(query);
     }
 
-
+    /***
+     * Method to delete songs from a playlist
+     * @param playlist we receive the id of the playlist we want to work with
+     * @param song we received the song
+     */
     @Override
     public boolean deleteSongPlaylist(Playlist playlist, Song song) {
         String query = "DELETE FROM lista_cancion WHERE id_lista = '" + playlist.getId() + "' AND id_cancion = '" + song.getIdSong() + "';";
@@ -215,12 +245,21 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
     }
 
+    /***
+     * Method to change the name of the active user
+     * @param currentName: current user name
+     * @param newName: new name the user will receive
+     */
     public void changePlaylistName(String currentName, String newName){
         String query = "UPDATE listas_reproduccion SET nombre = \"" + newName + "\" WHERE  nombre = \"" + currentName + "\";";
         SQLConnector.getInstance().updateQuery(query);
 
     }
 
+    /***
+     * Method to get the id of a song belonging to a Playlist
+     * @param idPlaylist we receive the id of the playlist we want to work with
+     */
     @Override
     public int idSongInPlaylist(int idPlaylist) {
         String query = "select id_cancion from lista_cancion where id_lista = '" + idPlaylist + "';";
@@ -240,6 +279,10 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
     }
 
+    /***
+     * Method to load music from a specific playlist
+     * @param idPlaylist we receive the id of the playlist we want to work with
+     */
     @Override
     public List<Song>  loadMusicOnePlaylist(int idPlaylist) {
         String query = "select id_cancion, orden from lista_cancion where id_lista = '" + idPlaylist + "' order by orden;";
@@ -267,6 +310,14 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
     }
 
+    /***
+     * Method to move the songs to a different position
+     * @param idPlaylist we receive the id of the playlist we want to work with
+     * @param idSong1 id of the first song to move
+     * @param idSong2 id of the second song to move
+     * @param idOrder1 order of the first song
+     * @param idOrder2 order of the second song
+     */
     @Override
     public void moveSongsInPlaylist(int idPlaylist, int idSong1, int idSong2, int idOrder1, int idOrder2){
         String query1 = "UPDATE lista_cancion SET orden = '"+ idOrder2 +"' Where id_lista = '" + idPlaylist
@@ -280,6 +331,10 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
     }
 
+    /***
+     * Method to delete from all playlists
+     * @param idSong we receive the id of the song
+     */
     @Override
     public void deleteSongAllPlaylist(int idSong){
         String query = "Delete From lista_cancion Where id_cancion = '" + idSong+"';";

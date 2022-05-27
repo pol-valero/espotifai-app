@@ -12,6 +12,10 @@ import java.util.List;
 
 public class MusicDatabaseDAO implements MusicDAO {
 
+    /***
+     * Method to load the statistics which will show the different musical genres
+     * that exist in the program and the number of songs.
+     */
     @Override
     public List<Genre> loadStadistic() {
         List<Genre> genres = new LinkedList<>();
@@ -32,6 +36,10 @@ public class MusicDatabaseDAO implements MusicDAO {
         return genres;
     }
 
+    /***
+     * Method for creating a song, i.e. inserting a song
+     * @param song we receive the song to insert
+     */
     @Override
     public void createSong(Song song) { //cambiar al campo pathFile en char en la base
         String query = "INSERT INTO canciones (titulo, id_genero, id_album, id_usuario," +
@@ -50,6 +58,10 @@ public class MusicDatabaseDAO implements MusicDAO {
 
     }
 
+    /***
+     * Method to delete a song from a list
+     * @param song we receive the song to insert
+     */
     @Override
     public void deleteSong(Song song) {
 
@@ -63,6 +75,9 @@ public class MusicDatabaseDAO implements MusicDAO {
         SQLConnector.getInstance().deleteQuery(query);
     }
 
+    /***
+     * Method for updating statistics to be displayed later on
+     */
     @Override
     public void updateStadistic(String genreName, int amount) {
 
@@ -71,6 +86,10 @@ public class MusicDatabaseDAO implements MusicDAO {
 
     }
 
+    /***
+     * Method para crear las estadísticas muscicales
+     * @param genreName: the name of the genre
+     */
     @Override
     public void createStadistic(String genreName){
         String query = "INSERT INTO genero (genero, cantidad ) VALUES ('"
@@ -79,12 +98,21 @@ public class MusicDatabaseDAO implements MusicDAO {
         SQLConnector.getInstance().insertQuery(query);
     }
 
+    /***
+     * Method for deleting a class
+     * @param genreName: name of the genre we intend to delete
+     */
     @Override
     public void deleteGenre(String genreName){
         String query = "DELETE From genero Where genero = \"" + genreName + "\";";
         SQLConnector.getInstance().deleteQuery(query);
     }
 
+    /***
+     * Method to create an album, in which songs are to be added
+     * @param album: album into which we want to insert the song in question
+     * @param idSinger: the id of the singer to know the one we want to refer to
+     */
     @Override
     public void createAlbum(String album, int idSinger){
         String query = "INSERT INTO album (titulo, id_cantante) VALUES ('"
@@ -93,6 +121,10 @@ public class MusicDatabaseDAO implements MusicDAO {
         SQLConnector.getInstance().insertQuery(query);
     }
 
+    /***
+     * Method to load an album and we will do it by means of its title
+     * @param albumName: album into which we want to insert the song in question
+     */
     @Override
     public int loadIdAlbum(String albumName){
 
@@ -112,6 +144,11 @@ public class MusicDatabaseDAO implements MusicDAO {
 
     }
 
+    /***
+     * Method to create a singer that we are going to insert from a query
+     * to which we will introduce the name of the singer.
+     * @param singerName: the name of the singer to whom we are referring to
+     */
     @Override
     public void createSinger(String singerName){
         String query = "INSERT INTO cantantes (nombre) VALUES ('"
@@ -119,6 +156,10 @@ public class MusicDatabaseDAO implements MusicDAO {
         SQLConnector.getInstance().insertQuery(query);
     }
 
+    /***
+     * Method to load a singer and we will do it from the id of the singers.
+     * @param singerName: the name of the singer to whom we are referring to
+     */
     @Override
     public int loadIdSinger(String singerName){
         String query = "SELECT id FROM cantantes Where nombre = \"" + singerName + "\";";

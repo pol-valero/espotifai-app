@@ -16,8 +16,6 @@ public class JsonDAO implements ConfigDAO {
     private String url ;
 
     public String getUsuariobbdd() {
-
-
         return usuariobbdd;
     }
 
