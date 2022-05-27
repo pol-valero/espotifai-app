@@ -45,7 +45,7 @@ public class AddSongViewController implements ActionListener, MouseListener {
     /**
      * Overrides the function actionPerformed to use the showAddSongCard
      * this function manages the main logic of this class
-     * @param e
+     * @param e Is the event that activates this method
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -71,7 +71,7 @@ public class AddSongViewController implements ActionListener, MouseListener {
 
     /**
      * Overrides the function mouseClicked to call the method
-     * getCurrentPlaylist every time the mouse clicks in the corresponding are
+     * getCurrentPlaylist every time the mouse clicks in the corresponding area
      *  and send the string with the current playlist to
      * the method loadPlaylistMusic within the controller of howMusicListCard
      *

@@ -6,6 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Class representing the LoginView. This class contains all the methods and attributes
+ * needed to use and show the Login View.
+ *
+ * @author Pol Valero, Oriol Centeno , Adrià Estevam, Joaquim Balletbo and Manel Martos
+ * @version 1.0
+ */
 public class LoginView {
 
     private final JFrame topContainer;
@@ -21,6 +28,14 @@ public class LoginView {
     private JLabel loginError = new JLabel();
     private JLabel signUpLabel = new JLabel();
 
+    /**
+     * Constructor to create LoginView
+     * Creates the LoginView linking it to the UIController. This function
+     * initializes the LoginView.
+     *
+     * @param topContainer this is the JPanel displayed in the view of shown in the beginning of the program
+     * @param jFrameCardManager the cardManager is the component that manages when to show each view
+     */
     public LoginView (JFrame topContainer, CardLayout jFrameCardManager) {
         this.topContainer = topContainer;
         this.jFrameCardManager = jFrameCardManager;
@@ -29,13 +44,23 @@ public class LoginView {
         topContainer.pack();
     }
 
+    /**
+     * registerController as it's name implies registers the two controllers
+     * of the LoginView in order to be accessed from the LoginViewController class
+     * @param loginViewController Is the parameter that will receive this class in order to
+     *                              link the listeners of this view with the Controller
+     */
     public void registerController (LoginViewController loginViewController){ //Todo crida aquesta funció on toqui
         btnLogin.addActionListener(loginViewController);
         signUpLabel.addMouseListener(loginViewController);
     }
 
+    /**
+     * oneTimeConfiguration function applies the following lines only need to be added to this class as it is
+     * the first class whose object is created. All the other view classes must not have these three lines.
+     */
     private void oneTimeConfiguration () {
-        //The following three lines only need to be added to this class as it is the first class whose object is created. All the other view classes must not have these three lines.
+
         topContainer.setTitle("Spotifai");
         topContainer.getContentPane().setLayout(jFrameCardManager);
         topContainer.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,6 +72,11 @@ public class LoginView {
 
     }
 
+    /**
+     * configureView is the main method of this class , creating the view and
+     * adding the view to the JPanel view in order to be displayed.
+     *
+     */
     private void configureView() {
         //Colors, fonts and sizes
         Color negre = new Color(48, 48, 48);
@@ -173,6 +203,14 @@ public class LoginView {
     }
 
 
+    /**
+     * getScaledImage is a method that receives an image with a certain length and height
+     * and resizes the image to mach the length and height.
+     * @param Img Image to be resized
+     * @param wt Width of the image to resize
+     * @param ht Height of the image to resize
+     * @return The image introduced in this method but resized to mach the Width and Height
+     */
     private Image getScaledImage(Image Img, int wt, int ht) {
         BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImg.createGraphics();
@@ -184,21 +222,45 @@ public class LoginView {
         return resizedImg;
     }
 
+    /**
+     *  The function loginErrorVisibility calls the method setVisible of the loginError
+     *  in order for them to not be visible at the start of the class and then revalidates the main JPanel
+     *
+     */
     public void loginErrorVisibility(boolean error) {
         loginError.setVisible(error);
         topContainer.revalidate();
     }
 
+    /**
+     *  The function getLoginField calls the method getText() of  the parameter loginField
+     *  from this class
+     *
+     * @return The text introduced in the JTextField loginField
+     */
     public String getLoginField() {
 
         return loginField.getText();
     }
 
+    /**
+     *  The function getPasswordField calls the method getText() of  the parameter passwordField
+     *  from this class
+     *
+     * @return The text introduced in the JTextField passwordField
+     *
+     */
     public String getPasswordField() {
 
         return passwordField.getText();
     }
 
+    /**
+     * showCard  callas a method to set the error visibility no false
+     * and introduces the current state of the mainViewCenter Frame in the cardManager
+     * and shows to the user the screen
+     *
+     */
     public void showCard () {
         loginErrorVisibility(false);
         jFrameCardManager.show(topContainer.getContentPane(),"loginCard");
