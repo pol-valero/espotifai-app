@@ -121,15 +121,18 @@ public class RemovePlaylistView {
         playListNameLabel.setForeground(Color.white);
         playListNameLabel.setFont(subtitle);
 
-        label_panel.add( playListNameLabel);
+        label_panel.add(playListNameLabel);
         label_panel.add(Box.createRigidArea(new Dimension(50, 0)));
 
-        String showNumber = null;
+        JLabel numberSongsLabel = new JLabel("Number of songs: ");
+        numberSongsLabel.setForeground(Color.white);
+        numberSongsLabel.setFont(subtitle);
+        label_panel.add(numberSongsLabel);
+
         JLabel songNumberLabel = new JLabel();
-        songNumberLabel.setText( showNumber.valueOf(songNumber));
+        songNumberLabel.setText(String.valueOf(songNumber));
         songNumberLabel.setForeground(Color.white);
         songNumberLabel.setFont(subtitle);
-
         label_panel.add(songNumberLabel);
         info_panel.add(label_panel);
         info_panel.add(Box.createRigidArea(new Dimension(0, 10)));
