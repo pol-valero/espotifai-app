@@ -26,18 +26,18 @@ public class LoginManager {
     }
 
     /**
-     * Metodo para obtener la informacio del usuario actual
-     * @return objseto de la Clase User con el usuario actual
+     * Method to obtain information from current user
+     * @return Object of the User class with the current user     *
      */
     public User getCurrentUSer(){  //todo guardarlo al iniciar sesion/crear cuenta
         return currentUser;
     }
 
     /**
-     * Metofo par iniciar sesion en un suuario ya registrado
-     * @param login String con el email o name del usuario
-     * @param password contraseña del usuario
-     * @return boolean true si se a podido iniciar sesion, false si no a sido posible iniciar sesion
+     * Method capable to log in with the already registered user
+     * @param login String corresponding the email or name of the user
+     * @param password String corresponding the users password
+     * @return boolean true in case the log in was successfully done
      */
     public boolean loginRequest(String login, String password){
        /*
@@ -82,6 +82,9 @@ public class LoginManager {
      * Metodo para buscar el nombre de un usuario en la base de datos
      * @param name String con el nombre del usuario a buscar
      * @return boolean true si el usuario se a encontrado, false si no a sido encontrado
+     *
+     * Method
+     *
      */
     public boolean findUsernameMach(String name){
         List<User> users = loginDAO.getAllUsers();
@@ -252,15 +255,21 @@ public class LoginManager {
         return ERROR;
     }
 
-    /***
-     * Metodo para saber si una String esta vacia
-     * @param generalString String a comprobar
-     * @return boolean, false si esta vacia, true si contiene caracteres
+
+    /**
+     * method to know if a String is empty
+     * @param generalString String to check
+     * @return Boolean for true in case is empty, false for opposite case
      */
     private boolean checkNonEmptyString(String generalString) {
         return !generalString.equals("");
     }
 
+    /**
+     * Method that codifies a string (password) in hash. This will be used for security purposes.
+     * @param password String to codify
+     * @return String of the codified password
+     */
     private String pwdHash(String password) {
         MessageDigest digest = null;
         try {
