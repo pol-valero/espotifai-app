@@ -79,11 +79,9 @@ public class LoginManager {
 
 
     /**
-     * Metodo para buscar el nombre de un usuario en la base de datos
-     * @param name String con el nombre del usuario a buscar
-     * @return boolean true si el usuario se a encontrado, false si no a sido encontrado
-     *
-     * Method
+     * Method to look for the name of the user in the data-base
+     * @param name Strin with the name of the searched user
+     * @return boolean true in case the user has been found, false of the opposite case
      *
      */
     public boolean findUsernameMach(String name){
@@ -98,9 +96,10 @@ public class LoginManager {
     }
 
     /**
-     * Metodo para buscar el email de un usuario en la base de datos
-     * @param email String con el email del usuario a buscar
-     * @return boolean true si el email del usuario se a encontrado, false si no a sido encontrado
+     * Method to look for the email of the user in the data-base
+     * @param email String corresponding to the email address to look for
+     * @return boolean true in case the email has been found, false of the opposite case
+     *
      */
     public boolean findEmailMach(String email){
         List<User> users = loginDAO.getAllUsers();
@@ -114,8 +113,8 @@ public class LoginManager {
     }
 
     /**
-     * Metodo para registrar a un usuario
-     * @param user Obsejeto de la clase User con la informacion del usuario
+     * Method to sign the user up
+     * @param user User object with the information of the user who has sign up
      */
     public void singUpRequest(User user){
 
@@ -133,7 +132,7 @@ public class LoginManager {
     }
 
     /**
-     * Metofo para eliminar la cuenta del usuario actual
+     * Method to delete the accoun of the current user
      */
     public void deleteAccountRequest(){
         loginDAO.deleteAccountRequest(currentUser.getName());
@@ -141,29 +140,34 @@ public class LoginManager {
     }
 
     /**
-     * Metodo para cerrar sesion es decir el atributo cuurentUser es null
+     * Method to set the current user attribute to null, meaning that there is no current user
      */
     public void logoutRequest(){
         this.currentUser = null;
     }
 
     /**
-     * Metodo para asignar el atributo currentUser
-     * @param currentUser objeto con el usuario a guardar
+     * Method to assign the current user to an specific one
+     * @param currentUser User object corresponding to the user to be saved
      */
     public void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
     }
 
     /**
-     * Metodo para saber si el String es un email o un nombre
-     * @param email String com el email a comprobar
-     * @return
+     * Method to know if a String corresponds to an email
+     * @param email String corresponding to the email to check
+     * @return boolean true in case the string is an actual email, false for opposite case
      */
     private boolean itsEmail(String email){ //todo el nombre provisional
         return email.contains("@");
     }
 
+    /**
+     * Method that checks that the email meets the requirements
+     * @param email String of the email to check
+     * @return boolean true in case the email meets the requirements, false in opposite case.
+     */
     public boolean checkEmail(String email){ //todo falta comprobar que solo hayan numeros, letras y puntos
                                             // (contando que ya se comprueba que solo haya un@), poner metodo
                                             //que lo compruebe ya que sera para cada parte del String
@@ -193,6 +197,11 @@ public class LoginManager {
         return ERROR;
     }
 
+    /**
+     * Method which checks a given string.
+     * @param password String corresponding to the password to check.
+     * @return boolean true in case the given string meets the requirements established by MIT.
+     */
     public boolean checkPassword(String password) {
 
         if (password.length() >= 8) {
@@ -207,9 +216,9 @@ public class LoginManager {
         return ERROR;
     }
     /**
-     * Metodo que comprueba que haya al menos una mayuscula en la contraseña
-     * @param password array de char, donde en cada posicion del array esta un caracter de la contraseña
-     * @return boolean OK (true) si hay una mayuscula, ERROR (false) si no hya ninguna mayuscula
+     * Method that checks that there is at least one capital letter in a given String
+     * @param password Char[] where there are the letters of the password to check
+     * @return boolean OK (true) if the there is at least one capital letter, ERROR (false) in the opposite case
      */
     private boolean checkCapitalLetter(char[] password){
 
@@ -224,9 +233,9 @@ public class LoginManager {
     }
 
     /**
-     * Metodo que comprueba que haya al menos una minuscula en la contraseña
-     * @param password array de char, donde en cada posicion del array esta un caracter de la contraseña
-     * @return boolean OK (true) si hay una minuscula, ERROR (false) si no hya ninguna minuscula
+     * Method that checks that there is at least one letter case in a given String
+     * @param password Char[] where there are the letters of the password to check
+     * @return boolean OK (true) if the there is at least one letter case, ERROR (false) in the opposite case
      */
     private boolean checkLowercaseLetter(char[] password){
 
@@ -240,10 +249,11 @@ public class LoginManager {
         return ERROR;
     }
 
+
     /**
-     * Metodo que comprueba que al menos haya un numero en la contraseña
-     * @param password array de char con los characteres de la contraseña
-     * @return boolean OK (true) si contiene al menos un numero, ERROR (false) si no contiene al menos uno
+     * Method that checks that there's at least one number in a char array
+     * @param password Char array with the characters to be checked
+     * @return boolean true in case the requirements al meet, false for the opposite case
      */
     private boolean containsNumber(char[] password){
 

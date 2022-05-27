@@ -70,46 +70,90 @@ public class Song {
 
     }
 
+    /**
+     * Method to get the name of a song
+     * @return String corresponding to the name of the song
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Method to get the id of the object song
+     * @return Integer corresponding to the song's id
+     */
     public int getIdSong() {
         return idSong;
     }
 
+    /**
+     * Method the get the name of the genre were the song is classified in
+     * @return String corresponding to the name of the genre were the song belongs to
+     */
     public String getGenre() {
         return genre;
     }
 
+    /**
+     * Method to get the name of the album were the song belongs to.
+     * @return String corresponding to the name of the album were the songs belongs to
+     */
     public String getAlbum() {
         return album;
     }
 
+    /**
+     * Method to get the name of the singer of the song
+     * @return String corresponding to the name of the singer of the song
+     */
     public String getSinger() {
         return singer;
     }
 
+    /**
+     * Method to get the filepath of the song
+     * @return String corresponding to the filepath of the song
+     */
     public String getFilePath() {
         return filePath;
     }
 
+    /**
+     * Method to get the owner of the song (user who has added the song into the system)
+     * @return String corresponding to the user who had added the song into de system
+     */
     public String getOwne() {
         return owne;
     }
 
+    /**
+     * Method the get the id of the genre of the song
+     * @return Integer corresponding to the genre's song id
+     */
     public int getIdGenre() {
         return idGenre;
     }
 
+    /**
+     * Method to get the id of the album of the song
+     * @return Integer corresponding to the album's id
+     */
     public int getIdAlbum() {
         return idAlbum;
     }
 
+    /**
+     * Method to get the id of the singer of the song
+     * @return Integer corresponding to the singer's id
+     */
     public int getIdSinger() {
         return idSinger;
     }
 
+    /**
+     * Method the get the id of the owner.
+     * @return Integer corresponding to the owner's id
+     */
     public int getIdOwne() {
         return idOwne;
     }
@@ -119,34 +163,65 @@ public class Song {
         return orden;
     }
 
+    /**
+     * Sets the owner's Id
+     * @param idOwne Integer corresponding to the onwer's id
+     */
     public void setIdOwne(int idOwne) {
         this.idOwne = idOwne;
     }
 
+    /**
+     * Sets the genre's id
+     * @param idGenre Integer corresponding to the genre's id
+     */
     public void setIdGenre(int idGenre) {
         this.idGenre = idGenre;
     }
 
+    /**
+     * Sets the singer's id
+     * @param idSinger Integer corresponding to the singer's id
+     */
     public void setIdSinger(int idSinger) {
         this.idSinger = idSinger;
     }
 
+    /**
+     * Sets the album's id
+     * @param idAlbum Integer corresponding to the album's id
+     */
     public void setIdAlbum(int idAlbum) {
         this.idAlbum = idAlbum;
     }
 
+    /**
+     * Method to get the duration of the song (minutes)
+     * @return Integer corresponding to the duration (minutes)
+     */
     public int getMinutes() {
         return minutes;
     }
-
+    /**
+     * Method to get the duration of the song (seconds)
+     * @return Integer corresponding to the duration (seconds)
+     */
     public int getSeconds() {
         return seconds;
     }
 
+    /**
+     * Method to get the lyrics of a song
+     * @return Method to get the lyrics of the song
+     */
     public String getLyrics() {
         return lyrics;
     }
 
+    /**
+     * Method the set the owner of the song
+     * @param owne String corresponding to the owner
+     */
     public void setOwne(String owne) {
         this.owne = owne;
     }

@@ -15,22 +15,40 @@ public class Genre implements Comparable<Genre>{
         this.amount = amount;
     }
 
+    /**
+     * Method to get the Id of a genre
+     * @return Integer corresponding of the genre's id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Method to get the name of the genre
+     * @return String corresponding the name of the genre
+     */
     public String getGenre() {
         return genre;
     }
 
+    /**
+     * Method to get a number corresponding to the number of songs classified inside that genre
+     * @return Integer corresponding to the number of songs classified inside that genre
+     */
     public int getAmount() {
         return amount;
     }
 
+    /**
+     * Method to add 1 to the total amount of songs classified in the corresponding genre
+     */
     public void incrementAmount() {
         amount++;
     }
 
+    /**
+     * Method to subtract 1 to the total amount of songs classified in the corresponding genre. Never will be under 0.
+     */
     public void decrementAmount() {
         if (amount > 0) {
             amount--;
