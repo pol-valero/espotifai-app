@@ -719,15 +719,12 @@ public class MusicListView {
     }
 
     public void clearCheckBoxes () {
-        System.out.println("prova");
-
         for (int i = 0; i < data.length; i++) {
             //data[i][6] = false;
             //table.setModel();
             table.setValueAt(false, i, 6);
         }
         table.revalidate();
-
     }
 
 }
