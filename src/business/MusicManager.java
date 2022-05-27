@@ -86,12 +86,10 @@ public class MusicManager {
         this.createSong = song;
         boolean existGenre = false;
         List<Genre> stadistic = musicDAO.loadStadistic();
-       // System.out.println("la lista de generos tiene = " + stadistic.size());
+
         insertIdSingerAlbum(song);
         song.setIdSinger(createSong.getIdSinger());
         song.setIdAlbum(createSong.getIdAlbum());
-        //System.out.println("id album song = "+ song.getIdAlbum() +"album = "+ createSong.getIdAlbum());
-       // System.out.println("id artista song = "+ song.getIdSinger());
 
         if (stadistic.size() != 0) {
             for(Genre genre: stadistic) {
@@ -117,22 +115,9 @@ public class MusicManager {
             song.setIdGenre(stadistic.get(stadistic.size() - 1).getId());
             musicDAO.createSong(song);
         }
-
         createSong = null;
     }
 
-    private void checkCreateSong (Song newSong){
-        List<Song> song = musicListDAO.loadAllMusic();
-        boolean check = false;
-        for (Song songs: song){
-            if (newSong.getIdSong() == songs.getIdSong()){
-                check = true;
-            }
-        }
-        if (!check){
-            createSong(newSong);
-        }
-    }
 
     public void deleteUserAddedSong(Song song){
         List<Genre> stadistic = musicDAO.loadStadistic();

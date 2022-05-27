@@ -7,7 +7,7 @@ import persistence.MusicListDAO;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Spliterator;
+
 
 public class MusicListManager {
     private MusicListDAO  musicListDAO = new MusicListDatabaseDAO();
@@ -35,7 +35,7 @@ public class MusicListManager {
         return musicListDAO.loadAllMusic();
     }
 
-    public void addSongPlaylist(String playlistName, List<String> songNameList, int idUser){ //todo falta mirar lo de la posicion
+    public void addSongPlaylist(String playlistName, List<String> songNameList, int idUser){
         Playlist playlist = findUserPlaylist(playlistName, idUser);
         for (int i = 0; i < songNameList.size(); i++) {
             String songName = songNameList.get(i);
@@ -57,7 +57,7 @@ public class MusicListManager {
         Playlist playlist = findUserPlaylist(playlistName, idUser);
         List<Song> songs = findSong(songName);
 
-        if (playlist != null && songs.size() != 0){
+        if (songs.size() > 0){
             for (Song song: songs){
                 musicListDAO.deleteSongPlaylist(playlist, song);
             }
