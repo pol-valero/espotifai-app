@@ -3,6 +3,9 @@ package business;
 import business.entities.Genre;
 import business.entities.MusicPlayer;
 import business.entities.Song;
+import javazoom.jl.decoder.Bitstream;
+import javazoom.jl.decoder.BitstreamException;
+import javazoom.jl.decoder.Header;
 import javazoom.jl.decoder.JavaLayerException;
 import persistence.DAO.MusicDatabaseDAO;
 import persistence.DAO.MusicListDatabaseDAO;
@@ -191,6 +194,42 @@ public class MusicManager {
         }
     }
 
+
+    public int[] songTime(String filePath){
+        String filename = "SongsunVeranoSinTi.mp3";
+        Header h = null;
+        FileInputStream file = null;
+        int[] time = new int[2];
+        time[0] = 0;
+        time[1] = 0;
+        try {
+            file = new FileInputStream(filename);
+        } catch (FileNotFoundException ex) {
+
+            return time;
+        }
+        Bitstream bitstream = new Bitstream(file);
+        try {
+            h = bitstream.readFrame();
+        } catch (BitstreamException ex) {
+            return time;
+        }
+        long fileChannelSize = 0;
+        try {
+            fileChannelSize = file.getChannel().size();
+        }  catch (IOException e) {
+            return time;
+        }
+
+        int total = (int) (h.total_ms((int) fileChannelSize)/1000);
+        int minutes = total/60;
+        int seconds = total - minutes*60;
+        time[0] = minutes;
+        time[1] = seconds;
+        return time;
+    }
+
+
     //podria ser un boolean y retorna false si falla en el path
     public void previusNextSong(int next){ //para la parte de la barra de reproduccion las fleechas
         musicPlayer.stop();
@@ -260,6 +299,7 @@ public class MusicManager {
         return seconds;
 
     }*/
+
 
 
 }

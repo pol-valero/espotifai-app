@@ -19,11 +19,6 @@ public class LoginManager {
     private final static boolean ERROR = false;
 
     //El que hi ha dins d'aquest constructor s'ha de borrar. Nomes es per fer proves.
-    public LoginManager () {
-        User userProva = new User("x", "x", "x");
-        userProva.setId(11);
-        setCurrentUser(userProva);
-    }
 
     /**
      * Metodo para obtener la informacio del usuario actual

@@ -174,9 +174,8 @@ public interface BusinessFacade {
     /**
      * Method to create a song and saved it in the data-base
      *
-     * @param song song the be saved
      */
-    void createSong(Song song);
+    void createSong(String name, String artist, String album, String genre, String filePath);
 
     /**
      * Method that returns all genres objects in memory

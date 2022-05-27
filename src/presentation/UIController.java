@@ -56,23 +56,6 @@ public class UIController {
         //showHomescreenCard();
         //showMusicListCard();
         //showAddSongCard();
-        //businessFacade.createSong(new Song("Cancion26", "Artista26", "Album26", "genero", "path", "letra" , 1, 1 ));
-        //businessFacade.addSongPlaylist("provaPlaylist3" ,"Cancion6");
-       List<Song> songs = businessFacade.loadMusicOnePlaylist("provaPlaylist3");
-
-       for(Song song: songs){
-           System.out.println(song.getName() + song.getFilePath()  + song.getOrden());
-       }
-        //businessFacade.moveSongsInPlaylist("provaPlaylist3", 1, -1);
-        List<String> strings = new LinkedList<>();
-       strings.add("Cancion6");
-        //businessFacade.deleteSongPlaylist("provaPlaylist3", strings);
-        businessFacade.deleteSongAllPlaylist("Cancion6");
-         songs = businessFacade.loadMusicOnePlaylist("provaPlaylist3");
-
-        for(Song song: songs){
-            System.out.println(song.getName() + song.getFilePath()  + song.getOrden());
-        }
     }
 
     private void showMainViewCard() {
@@ -194,8 +177,8 @@ public class UIController {
         return businessFacade.loadSearchMusic(filterName);
     }
 
-    public void createSong(Song song){
-        businessFacade.createSong(song);
+    public void createSong(String name, String artist, String album, String genre, String filePath){
+        businessFacade.createSong(name, artist, album, genre, filePath);
     }
 
     public List<Genre> loadStadistic(){
