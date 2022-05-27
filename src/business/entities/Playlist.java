@@ -7,20 +7,20 @@ import java.util.List;
  * Class in charged of managing information related to Playlist objects
  */
 public class Playlist {
-    private long id;
+    private int id;
     private String name;
-    private long id_user;
+    private int id_user;
     private String owner;
     //private List<Song> songList;
 
-    public Playlist(long id, String name, long id_user, String owner){
+    public Playlist(int id, String name, int id_user, String owner){
         this.id = id;
         this.name = name;
         this.id_user = id_user;
         this.owner = owner;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -32,7 +32,7 @@ public class Playlist {
         return owner;
     }
 
-    public long getUserId() {
+    public int getUserId() {
         return id_user;
     }
 

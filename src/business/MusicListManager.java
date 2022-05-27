@@ -7,6 +7,7 @@ import persistence.MusicListDAO;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Spliterator;
 
 public class MusicListManager {
     private MusicListDAO  musicListDAO = new MusicListDatabaseDAO();
@@ -34,11 +35,16 @@ public class MusicListManager {
         return musicListDAO.loadAllMusic();
     }
 
-    public void addSongPlaylist(String playlistName, Song song, int position, int idUser){ //todo falta mirar lo de la posicion
+    public void addSongPlaylist(String playlistName, String songName, int idUser){ //todo falta mirar lo de la posicion
         Playlist playlist = findUserPlaylist(playlistName, idUser);
-
-        if (playlist != null){
-            musicListDAO.addSongPlaylist(playlist, song);
+        int positon = musicListDAO.idSongInPlaylist(playlist.getId());
+        positon++;
+        System.out.println("en el manager la posicion es = " + positon);
+        List<Song> songs = loadAllMusic();
+        for(Song newSong: songs){
+            if (songName.equals(newSong.getName())){
+                musicListDAO.addSongPlaylist(playlist.getId(), newSong.getIdSong(), positon);
+            }
         }
     }
 
@@ -46,7 +52,7 @@ public class MusicListManager {
         Playlist playlist = findUserPlaylist(playlistName, idUser);
         List<Song> songs = findSong(songName);
 
-        if (playlist != null && songs != null){
+        if (playlist != null && songs.size() != 0){
             for (Song song: songs){
                 musicListDAO.deleteSongPlaylist(playlist, song);
             }
@@ -67,11 +73,8 @@ public class MusicListManager {
         return null;
     }
 
-    public void deletePlaylist(String playlistName, int idUser){
-        Playlist playlist = findUserPlaylist(playlistName, idUser);
-        if(playlist != null){
-            musicListDAO.deletePlaylist(playlist);
-        }
+    public void deletePlaylist(String playlistName){
+            musicListDAO.deletePlaylist(playlistName);
     }
 
     public void createPlaylist(String playlistName, int idUser){
@@ -111,15 +114,19 @@ public class MusicListManager {
 
 
     private Playlist findUserPlaylist(String playlistName, int idUser){
-        List<Playlist> playlists =  musicListDAO.loadUserPlaylist(idUser);
+        System.out.println(("id user = " + idUser));
+        List<Playlist> playlists = new LinkedList<>();
+         playlists =  musicListDAO.loadUserPlaylist(idUser);
+         for (Playlist p: playlists){
+             System.out.println( " nombe = " + p.getName());
+         }
 
-        if (playlists.size() != 0) {
             for (Playlist playlist: playlists) {
                 if (playlistName.equals(playlist.getName())) {
                     return playlist;
                 }
             }
-        }
+
         return null;
     }
 
@@ -195,5 +202,34 @@ public class MusicListManager {
     public void setCurrentPlaylist (String playlistName, int idUser) {
         //currentPlaylist = findPlaylist(playlistName, idUser);
         currentPlaylistName = playlistName;
+    }
+
+    public List<Song> loadMusicOnePlaylist(String playlistName, int ideUser){
+
+        Playlist playlist = findUserPlaylist(playlistName, ideUser);
+        System.out.println(playlist.getId());
+
+        return musicListDAO.loadMusicOnePlaylist(playlist.getId());
+    }
+
+    public void moveSongInPlaylist(String playlistName, int position, int upDown, int ideUser){
+        Playlist playlist = findUserPlaylist(playlistName, ideUser);
+        List<Song> songs = musicListDAO.loadMusicOnePlaylist(playlist.getId());
+        int idSong1 = songs.get(position).getIdSong();
+        int moveSong1 = songs.get(position).getOrden();
+        int moveSong2 = songs.get(position - upDown).getOrden();
+        int idSong2 = songs.get(position - upDown).getIdSong();
+
+        musicListDAO.moveSongsInPlaylist(playlist.getId(), idSong1, idSong2, moveSong1,moveSong2);
+
+    }
+
+    public void deleteSongAllPlaylist(String songName){
+        List<Song> songs = loadAllMusic();
+        for (Song song: songs){
+            if (songName.equals(song.getName())){
+                musicListDAO.deleteSongAllPlaylist(song.getIdSong());
+            }
+        }
     }
 }

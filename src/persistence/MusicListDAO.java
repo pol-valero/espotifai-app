@@ -17,7 +17,7 @@ public interface MusicListDAO  {
     List<Song> loadMusicPlaylist(Playlist playlist);
 
     // añade una canción a la playlist
-    void addSongPlaylist(Playlist playlist, Song song);
+    void addSongPlaylist(int idPlaylist, int idSong, int position);
 
     public boolean deleteSongPlaylist(Playlist playlist, Song song);
 
@@ -40,13 +40,22 @@ public interface MusicListDAO  {
 
     /**
      * Metodo para eliminar una playlist de la base de datos
-     * @param playlist Objeto Playlist con la informcion de la playlist
+     * @param playlistName Objeto Playlist con la informcion de la playlist
      */
-     void deletePlaylist(Playlist playlist);
+     void deletePlaylist(String playlistName);
 
     // void canciones_Playlist (int playlist);
 
     List<Playlist> loadUserPlaylist (int user_id);
 
      void changePlaylistName(String currentName, String newName);
+
+    int idSongInPlaylist(int idPlaylist);
+
+    List<Song>  loadMusicOnePlaylist(int idPlaylist);
+
+    void moveSongsInPlaylist(int idPlaylist, int idSong1, int idSong2, int idOrder1, int idOrder2);
+
+    void deleteSongAllPlaylist(int idSong);
+
 }
