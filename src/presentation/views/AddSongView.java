@@ -58,7 +58,7 @@ public class AddSongView {
 
     /**
      * configureView is the main method of this class , creating the view and
-     * adding the view to the JPPanel mainviewCenter in order to be displayed.
+     * adding the view to the JPanel main view Center in order to be displayed.
      *
      */
     private void configureView() {

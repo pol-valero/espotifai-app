@@ -9,7 +9,13 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
-
+/**
+ * Class representing the HomeScreenView. This class contains all the methods and attributes
+ * needed to use and show the HomeScreen View
+ *
+ * @author Pol Valero, Oriol Centeno , Adrià Estevam, Joaquim Balletbo and Manel Martos
+ * @version 1.0
+ */
 public class HomeScreenView {
     private final JPanel mainViewCenter;
     private final CardLayout cardManager;
@@ -30,6 +36,14 @@ public class HomeScreenView {
     private ActionListener actionListener;
 
 
+    /**
+     * Constructor to create the HomeScreenView
+     * Creates the HomeScreenView linking it to the UIController. This function
+     * initializes the HomeScreenView.
+     *
+     * @param mainViewCenter this is the JPanel displayed in the Center of the mainView
+     * @param cardManager the cardManager is the component that manages when to show each view
+     */
     public HomeScreenView (JPanel mainViewCenter, CardLayout cardManager){
         this.mainViewCenter = mainViewCenter;
         this.cardManager = cardManager;
@@ -37,6 +51,11 @@ public class HomeScreenView {
         //topContainer.pack();
     }
 
+    /**
+     * configureView is the main method of this class , creating the view and
+     * adding the view to the JPanel main view Center in order to be displayed.
+     *
+     */
     private void configureView() {
 
         //Creation of main panels
@@ -53,6 +72,18 @@ public class HomeScreenView {
         mainViewCenter.add(panel, "homescreenCard");
     }
 
+    /**
+     * centralPanelConfiguration configures the panel located at the center of the main panel
+     * of this view.
+     *
+     * @param usersPlaylists In order to configure this dynamic view this function receives some of
+     *                       the information to show each time is called. These are the playlist from the users.
+     *
+     * @param publicPlaylists In order to configure this dynamic view this function receives some of
+     *                        the information to show each time is called. These are the playlist that are public
+     *
+     * @return JPanel with the elements that will be in the center of this view added
+     */
     private JPanel centralPanelConfiguration(LinkedList<String> usersPlaylists, LinkedList<String> publicPlaylists) {
 
         Font titols = new Font("Trebuchet MS", Font.PLAIN, 36);
@@ -114,6 +145,12 @@ public class HomeScreenView {
         return centralPanel;
     }
 
+    /**
+     * northernPanelConfiguration configures the panel located at the north of the main panel
+     * of this view.
+     *
+     * @return JPanel with the elements that will be in the north of this view added
+     */
     private JPanel northernPanelConfiguration() {
         //Fonts, colours and sizes
         Font titols = new Font("Trebuchet MS", Font.PLAIN, 65);
@@ -132,6 +169,12 @@ public class HomeScreenView {
         return northernPanel;
     }
 
+    /**
+     * westernPanelConfiguration configures the panel located at the west of the main panel
+     * of this view.
+     *
+     * @return JPanel with the elements that will be in the west of this view added
+     */
     private JPanel westernPanelConfiguration() {
         //Fonts, colours and sizes
         Font titols = new Font("Trebuchet MS", Font.PLAIN, 36);
@@ -143,33 +186,6 @@ public class HomeScreenView {
         westernPanel.setBorder(new EmptyBorder(new Insets(50, 30, 40, 30)));
         westernPanel.setMinimumSize(new Dimension(200,900));
         westernPanel.setBackground(negre);
-
-        //Search Panel
-        /*JPanel searchPanel = new JPanel();
-        BoxLayout searchLayout = new BoxLayout(searchPanel,BoxLayout.X_AXIS);
-        searchPanel.setLayout(searchLayout);
-        searchPanel.setBackground(negre);
-        searchPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        JTextField searchBar = new JTextField();
-        searchBar.setMaximumSize(new Dimension(300,30));
-
-        ImageIcon magLens = new ImageIcon("images/LUPA AI.png");
-        Image magLensIcon = magLens.getImage();
-        Image magLensIconScaled = getScaledImage(magLensIcon, 20, 20);
-        ImageIcon magnifyingLens = new ImageIcon(magLensIconScaled);
-
-        JButton searchBtn = new JButton();
-        searchBtn.setIcon(magnifyingLens);
-        searchBtn.setBackground(vermell);
-        searchBtn.setFocusable(false);
-        searchBtn.setOpaque(true);
-        searchBtn.setBorderPainted(false);
-        searchBtn.setMaximumSize(new Dimension(30,30));
-
-        searchPanel.add(searchBar);
-        searchPanel.add(Box.createRigidArea(new Dimension(20,0))); //Create space between both buttons
-        searchPanel.add(searchBtn);*/
 
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridBagLayout());
@@ -205,6 +221,13 @@ public class HomeScreenView {
 
     }
 
+    /**
+     * createButton is a method that generic creates a JButton
+     *
+     * @param name the name of the button to create
+     * @return A generic JButton with the correct name
+     */
+
     private JButton createButton(String name) {
 
         Dimension button_shape = new Dimension(200,40);
@@ -223,6 +246,14 @@ public class HomeScreenView {
         return btn;
     }
 
+    /**
+     * getScaledImage is a method that receives an image with a certain length and height
+     * and resizes the image to mach the length and height.
+     * @param img Image to be resized
+     * @param wt Width of the image to resize
+     * @param ht Height of the image to resize
+     * @return The image introduced in this method but resized to mach the Width and Height
+     */
     private Image getScaledImage(Image img, int wt, int ht) {
         BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImg.createGraphics();
@@ -234,6 +265,14 @@ public class HomeScreenView {
         return resizedImg;
     }
 
+    /**
+     * createScrollPane receives a LinkedList with the name of the playlist and creates a specific scroll panel
+     * with the correct size to fit all playlist.
+     *
+     * @param playListNames Linked list with the name of all playlist to be shown on this view.
+     *
+     * @return the specific ScrollPanel in which each playlist fits
+     */
     private Component createScrollPane(LinkedList<String> playListNames){
 
         JPanel panel = new JPanel();
@@ -288,6 +327,14 @@ public class HomeScreenView {
 
     }
 
+    /**
+     * getIdealHeight receives an integer with the size of the linked list of playlist
+     * to show and returns the height the JPanel should have in order to fit all of them.
+     *
+     * @param size size of the linked list of playlist to show
+     *
+     * @return the specific size that the JPanel should have.
+     */
     private int getIdealHeight(int size) {
         double residu = size%5;
 
@@ -309,6 +356,12 @@ public class HomeScreenView {
         return size*38;
     }
 
+    /**
+     * registerController as it's name implies registers the three controllers
+     * of the AddSongView in order to be accessed from the homescreenViewController class
+     * @param homescreenViewController Is the parameter that will receive this class in order to
+     *                              link the listeners of this view with the Controller
+     */
     public void registerController(HomescreenViewController homescreenViewController) {
         stadisticsBtn.addActionListener(homescreenViewController);
         accManBtn.addActionListener(homescreenViewController);
@@ -316,7 +369,15 @@ public class HomeScreenView {
         actionListener = homescreenViewController;
     }
 
-
+    /**
+     * showCard  callas a method to set the error visibility no false
+     * and introduces the current state of the mainViewCenter Frame in the cardManager
+     * and shows to the user the screen.
+     *
+     * @param usersPlaylists These are the playlist from the users.
+     * @param publicPlaylists These are the playlist that are public.
+     *
+     */
     public void showCard(LinkedList<String> usersPlaylists, LinkedList<String> publicPlaylists) {
         panel.remove(centralPanel);
         centralPanel = centralPanelConfiguration(usersPlaylists, publicPlaylists);
