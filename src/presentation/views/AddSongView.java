@@ -33,7 +33,6 @@ public class AddSongView {
     private JTextField genreField = new JTextField(25);
     private JTextField filepathField = new JTextField(25);
     private JLabel jlExistingSong = new JLabel();
-    private JLabel jlUnusableSong = new JLabel();
     private JLabel jlUnfoundArtistError = new JLabel();
     private JLabel jlWrongFilepathError = new JLabel();
     private JLabel jlAlbumNotFoundError = new JLabel();
@@ -199,10 +198,7 @@ public class AddSongView {
         jlExistingSong.setFont(text);
         info_panel.add(jlExistingSong);
 
-        jlUnusableSong.setText("Not a valid song name");
-        jlUnusableSong.setForeground(vermell);
-        jlUnusableSong.setFont(text);
-        info_panel.add(jlUnusableSong);
+
 
         //   info_panel.setOpaque(false);
 
@@ -352,16 +348,7 @@ public class AddSongView {
         goBackImage.addMouseListener(addSongViewController);
     }
 
-    /**
-     *  The function getGenre calls the method getText() of  the parameter genreField
-     *  from this class
-     *
-     * @return The text introduced in the JTextField genreField
-     *
-     */
-    public String getGenre() {
-        return genreField.getText();
-    }
+
 
     /**
      * showCard  callas a method to set the error visibility no false
@@ -393,28 +380,8 @@ public class AddSongView {
         mainViewCenter.revalidate();
     }
 
-    public void unusableSongErrorVisibility(boolean error){
-        jlUnusableSong.setVisible(error);
-        mainViewCenter.revalidate();
-    }
-
-    public void unfoundArtistErrorVisibility(boolean error){
-        jlUnfoundArtistError.setVisible(error);
-        mainViewCenter.revalidate();
-    }
-
-    public void WrongFilepathErrorErrorVisibility (boolean error) {
+    public void wrongFilepathErrorErrorVisibility (boolean error) {
         jlWrongFilepathError.setVisible(error);
-        mainViewCenter.revalidate();
-    }
-
-    public void AlbumNotFoundErrorVisibility(boolean error){
-        jlAlbumNotFoundError.setVisible(error);
-        mainViewCenter.revalidate();
-    }
-
-    public void wrongGenreErrorVisibility(boolean error){
-        jlWrongGenreError.setVisible(error);
         mainViewCenter.revalidate();
     }
 
@@ -422,13 +389,30 @@ public class AddSongView {
         return songNameField.getText();
     }
 
-    public String getArtist() {
+    public String getArtistName() {
         return artistField.getText();
     }
 
-    public String getAlbum() {
+    public String getAlbum () {
         return albumField.getText();
     }
+
+    /**
+     *  The function getGenre calls the method getText() of  the parameter genreField
+     *  from this class
+     *
+     * @return The text introduced in the JTextField genreField
+     *
+     */
+    public String getGenre() {
+        return genreField.getText();
+    }
+
+    public String getFilePath() {
+        return filepathField.getText();
+    }
+
+
 
 
 }

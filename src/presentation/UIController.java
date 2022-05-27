@@ -214,6 +214,14 @@ public class UIController {
         return businessFacade.findPlaylistName(playlistName);
     }
 
+    public boolean findSongName(String songName) {
+        return businessFacade.findSongName(songName);
+    }
+
+    public boolean findPath(String path) {
+        return businessFacade.findPath(path);
+    }
+
     public void changePlaylistName(String currentName, String newName){
         businessFacade.changePlaylistName(currentName, newName);
     }
@@ -229,4 +237,6 @@ public class UIController {
     public void setCurrentPlaylist (String playlistName) {
         businessFacade.setCurrentPlaylist(playlistName);
     }
+
+
 }

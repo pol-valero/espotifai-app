@@ -51,14 +51,45 @@ public class AddSongViewController implements ActionListener, MouseListener {
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()){
             case AddSongView.BTN_ADD:
-                String currentPlaylist = controller.getCurrentPlaylist();
-                controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
+                checkAllFields();
                 break;
 
             case AddSongView.BTN_MANAGEMENT:
                 controller.showLogoutCard();
                 break;
         }
+    }
+
+    private boolean checkAllFields() {
+        boolean errorFlag = false;
+
+        if(controller.findSongName(addSongView.getSongName())){
+            addSongView.existingSongErrorVisibility(true);
+            errorFlag=true;
+        } else {
+            addSongView.existingSongErrorVisibility(false);
+        }
+
+        if(!controller.findPath(addSongView.getFilePath())) {
+            addSongView.wrongFilepathErrorErrorVisibility(true);
+            errorFlag=true;
+        } else {
+            addSongView.wrongFilepathErrorErrorVisibility(false);
+        }
+
+        if(!errorFlag) {
+            String songName = addSongView.getSongName();
+            String artist = addSongView.getArtistName();
+            String albumName = addSongView.getAlbum();
+            String genreName = addSongView.getGenre();
+            String path = addSongView.getFilePath();
+
+            controller.createSong(songName, artist, albumName, genreName, path);
+            String currentPlaylist = controller.getCurrentPlaylist();
+            controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
+        }
+
+        return false;
     }
 
     /**

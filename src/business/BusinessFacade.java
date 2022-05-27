@@ -231,6 +231,10 @@ public interface BusinessFacade {
      */
     boolean findPlaylistName(String playlistName);
 
+    boolean findSongName(String songName);
+
+    boolean findPath(String path);
+
     /**
      * Method that changes a playlist name
      *

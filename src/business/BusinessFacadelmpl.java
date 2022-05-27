@@ -315,6 +315,14 @@ public class BusinessFacadelmpl implements BusinessFacade{
         return musicListManager.findPlaylistName(playlistName, loginManager.getCurrentUSer().getId());
     }
 
+    public boolean findSongName(String songName) {
+        return musicManager.findSongName(songName);
+    }
+
+    public boolean findPath(String path) {
+        return musicManager.findPath(path);
+    }
+
     /**
      * Method that changes a playlist name
      * @param currentName String of the name of the playlist name that has to be found

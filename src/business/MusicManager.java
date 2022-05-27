@@ -183,6 +183,22 @@ public class MusicManager {
         }
     }
 
+    public boolean findSongName(String songName) {
+        if (loadSongInformation(songName) != null) {
+            return true;
+        }
+        return false;
+    }
+
+    boolean findPath(String path) {
+        File file = new File(path);
+
+        if (file.exists()) {
+            return true;
+        }
+        return false;
+    }
+
     //todo para la reproduccion de musica
 
     public void pausedSong(){ //para cuando se le da al boton de pausar  reproducir
