@@ -29,16 +29,27 @@ public class SongDetailsViewController implements ActionListener, MouseListener 
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        switch (e.getActionCommand()) {
+            case SongDetailsView.BTN_ADDPLAYLIST:
+                System.out.println("addplaylist");
+                break;
+
+            case SongDetailsView.BTN_ACCOUNT_MANAGEMENT:
+                System.out.println("management");
+                break;
+
+            case SongDetailsView.BTN_GO_BACK:
+                System.out.println("goback");
+                break;
+
+        }
 
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        String clickedLabelName = ((JLabel) e.getSource()).getText();
-
-        switch (clickedLabelName) {
-
-        }
+        //reproduir canço
+        System.out.println("reproduceSong");
     }
 
     @Override
