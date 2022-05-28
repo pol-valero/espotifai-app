@@ -152,7 +152,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
     @Override
     public void createSong(String name, String artist, String album, String genre, String filePath){ //todo añadir los lyrics
 
-        int time[] = musicManager.songTime(filePath);
+        int[] time = musicManager.songTime(filePath);
         String lyrics = getLyrics();
         Song song = new Song(name, artist, album, genre, filePath, lyrics, time[0], time[1]);
         song.setIdOwne(loginManager.getCurrentUSer().getId());
@@ -311,7 +311,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
         } finally {
             conn.disconnect();
         }
-        return "Don't have lyrics";
+        return "This song does not have lyrics";
     }
 
     public String getSelectedSongName() {

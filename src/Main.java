@@ -31,12 +31,12 @@ public class Main {
                 "Songs/cancion", "hola", 1, 1));
 
  */
-        /*
+
         // en la clase business, antes de insertar canción, hay que llamar a la api para
         // recuperar la letra
         // con la letra, pasamos a clase todos los campos + letra recuperada de la api
 
-        BufferedReader reader;
+        /*BufferedReader reader;
         String line;
         StringBuilder responseContent = new StringBuilder();
         HttpURLConnection conn = null;
@@ -48,8 +48,8 @@ public class Main {
             conn = (HttpURLConnection) url.openConnection();
 
             conn.setRequestMethod("GET");
-            conn.setConnectTimeout(5000);// 5000 milliseconds = 5 seconds
-            conn.setReadTimeout(5000);
+            conn.setConnectTimeout(2000);// 5000 milliseconds = 5 seconds
+            conn.setReadTimeout(2000);
 
             //miramos is se ha podido ejecutar
             int status = conn.getResponseCode();
@@ -94,13 +94,13 @@ public class Main {
         catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } catch (ParseException e) {
             e.printStackTrace();
         } finally {
             conn.disconnect();
-        }
+        }*/
 
-         */
+
     }
 }
