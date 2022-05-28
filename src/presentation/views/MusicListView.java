@@ -859,4 +859,8 @@ public class MusicListView {
         table.revalidate();
     }
 
+    public String getSearchBarText () {
+        return searchBar.getText();
+    }
+
 }

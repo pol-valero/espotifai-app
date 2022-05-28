@@ -57,6 +57,11 @@ public class MusicListController implements ActionListener, MouseListener {
         switch (e.getActionCommand()){
 
             case MusicListView.BTN_SEARCH:
+                String searhField = musicListView.getSearchBarText();
+                if (!searhField.isBlank()) {
+                    LinkedList<Song> filteredSongs = (LinkedList<Song>) controller.loadSearchMusic(searhField);
+                    musicListView.showCard(filteredSongs, "AllSongs");
+                }
                 break;
 
             case MusicListView.BTN_STADISTICS:
