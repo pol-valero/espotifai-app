@@ -254,4 +254,8 @@ public class UIController {
         businessFacade.deletePersonalSong(songNameList);
     }
 
+    public List<Song> loadMusicOnePlaylist(String playlistName){
+        businessFacade.loadMusicOnePlaylist(playlistName);
+    }
+
 }

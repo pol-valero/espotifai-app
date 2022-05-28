@@ -265,7 +265,7 @@ public interface BusinessFacade {
      */
     void setCurrentPlaylist(String playlistName);
 
-    public List<Song> loadMusicOnePlaylist(String playlistName);
+     List<Song> loadMusicOnePlaylist(String playlistName);
 
     public void moveSongsInPlaylist(String playlistName, int position, int upDown);
 
