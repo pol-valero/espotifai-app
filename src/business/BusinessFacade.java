@@ -276,4 +276,8 @@ public interface BusinessFacade {
     void loop();
 
     List<Song> loadAllNotAlreadyAddedSong(String playlistName);
+
+    public String getSelectedSongName();
+
+    public void setSelectedSongName(String selectedSongName);
 }

@@ -307,4 +307,12 @@ public class BusinessFacadelmpl implements BusinessFacade{
         }
         return "Don't have lyrics";
     }
+
+    public String getSelectedSongName() {
+        return musicManager.getSelectedSongName();
+    }
+
+    public void setSelectedSongName(String selectedSongName) {
+        musicManager.setSelectedSongName(selectedSongName);
+    }
 }
