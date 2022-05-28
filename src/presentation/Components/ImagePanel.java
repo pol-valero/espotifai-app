@@ -7,7 +7,14 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class ImagePanel extends JPanel { //todo
+/**
+ * This is the class ImagePanel, this class enables access to an Image Panel in multiple views.
+ * Extends the functions of a JPanel.
+ *
+ * @author Pol Valero, Oriol Centeno , Adrià Estevam, Joaquim Balletbo and Manel Martos
+ * @version 1.0
+ */
+public class ImagePanel extends JPanel {
     //hauriem de crear una classe generica que ens permeti crear imatges escalades en comptes de posar funcions independents a cada classe (com es el cas de loginView i signUpView).
     public ImageIcon getImageIcon (String filePath, int wt, int ht){
 

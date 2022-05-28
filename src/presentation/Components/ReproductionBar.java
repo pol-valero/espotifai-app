@@ -5,6 +5,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * This is the class ReproductionBar, this class enables access to a Reproduction Bar in multiple views.
+ * Extends the functions of a JPanel.
+ *
+ * @author Pol Valero, Oriol Centeno , Adrià Estevam, Joaquim Balletbo and Manel Martos
+ * @version 1.0
+ */
 public class ReproductionBar extends JPanel {
 
     private final Color negre = new Color(48,48,48);
@@ -16,11 +23,21 @@ public class ReproductionBar extends JPanel {
     JLabel currentTimeLabel;
     JLabel endTimeLabel;
 
+    /**
+     * Constructor to create ReproductionBar
+     * Creates the ReproductionBar calling the method configureBar
+     *
+     */
     public ReproductionBar(){
         configureBar();
 
     }
 
+    /**
+     * configureBar is the main method of this class , creating the Bar and
+     * calling specific methods to add the components.
+     *
+     */
     private void configureBar() {
 
         setLayout(new FlowLayout());
@@ -62,6 +79,11 @@ public class ReproductionBar extends JPanel {
 
     }
 
+    /**
+     * songNamePanelConfig configures the panel that contains all the elements of the title.
+     *
+     * @return JPanel with the elements that will be in the title
+     */
     private JPanel songNamePanelConfig() {
         JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new BoxLayout(titlePanel,BoxLayout.Y_AXIS));
@@ -79,7 +101,11 @@ public class ReproductionBar extends JPanel {
         return titlePanel;
 
     }
-
+    /**
+     * barPanelConfig configures the panel that contains all the elements of the bar.
+     *
+     * @return JPanel with the elements that will be in the bar
+     */
     private JPanel barPanelConfig() {
 
         JPanel barPanel = new JPanel();
@@ -103,6 +129,12 @@ public class ReproductionBar extends JPanel {
 
         return barPanel;
     }
+
+    /**
+     * buttonsPanelConfig configures the panel that contains all the elements of the buttons.
+     *
+     * @return JPanel with the elements that will be in the buttons
+     */
     private JPanel buttonsPanelConfig() {
         JPanel mainBtns = new JPanel();
         mainBtns.setLayout(new BoxLayout(mainBtns,BoxLayout.X_AXIS));
@@ -136,6 +168,14 @@ public class ReproductionBar extends JPanel {
         return mainBtns;
     }
 
+    /**
+     * createRoundButton is a generic method that  creates a RoundButton
+     *
+     * @param filepath the location of the image to use as a button
+     * @param weidth width of the image that will be the RoundButton
+     * @param height of the image that will be the RoundButton
+     * @return A generic RoundButton with the correct attributes
+     */
     private RoundButton createRoundButton(String filepath, int weidth, int height) {
         JButton button = new RoundButton("");
         button.setIcon(getScaledImage(filepath,weidth,height));
@@ -144,6 +184,14 @@ public class ReproductionBar extends JPanel {
     }
 
 
+    /**
+     * getScaledImage is a method that receives an image with a certain length and height
+     * and resizes the image to mach the length and height.
+     * @param  filepath the location of the image to use as a button
+     * @param wt Width of the image to resize
+     * @param ht Height of the image to resize
+     * @return The image introduced in this method but resized to mach the Width and Height
+     */
     private ImageIcon getScaledImage(String filepath, int wt, int ht) {
         ImageIcon imageIcon = new ImageIcon(filepath);
         Image image = imageIcon.getImage();
@@ -188,6 +236,12 @@ public class ReproductionBar extends JPanel {
         revalidate();
     }
 
+    /**
+     * reproduceNewSong prepares the ReproductionBar to change the parameters of a new song
+     * @param songName name of the new song to play
+     * @param totalMinutes length of the minute's duration of the song
+     * @param totalSeconds length of the second's duration of the song
+     */
     public void reproduceNewSong(String songName, int totalMinutes, int totalSeconds){
         bar.setValue(0);
         bar.setMaximum(totalMinutes*60+totalSeconds);
@@ -200,6 +254,11 @@ public class ReproductionBar extends JPanel {
         revalidate();
     }
 
+    /**
+     * update the ReproductionBar to show the current time of the song
+     * @param minutes length of the minute's duration in the current moment
+     * @param seconds length of the second's duration in the current moment
+     */
     public void update (int minutes, int seconds){
         bar.setValue(minutes*60+seconds);
         currentTimeLabel.setText(timeFormater(minutes,seconds));
@@ -208,6 +267,12 @@ public class ReproductionBar extends JPanel {
 
     }
 
+    /**
+     * timeFormater arranges the values of seconds and minutes to display them correctly
+     * @param minutes length of the minute's duration of the song
+     * @param seconds length of the second's duration of the song
+     * @return
+     */
     private String timeFormater(int minutes, int seconds){
         int secondsL = seconds/10;
         int secondsR = seconds - secondsL*10;
