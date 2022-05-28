@@ -351,7 +351,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
         //playMusic(NOTPLAYLIST, 0);
         playMusic();
         musicManager.startingThread();
-        musicManager.pausedSong();
+        //musicManager.pausedSong();
     }
 
     public void setCurrentSong (Song song) {

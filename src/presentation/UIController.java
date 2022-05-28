@@ -61,11 +61,11 @@ public class UIController {
         addToPlaylistViewController = new AddToPlaylistViewController(this, mainViewCenter, cardManager);
         stadisticViewController = new StadisticViewController(this, mainViewCenter, cardManager);
 
-        initialSongSetup();
+        //initialSongSetup();
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
         //showSignUpCard();
-        showHomescreenCard();
+        //showHomescreenCard();
         //showLoginCard();
         //showSignUpCard();
         //showMusicListCard();
@@ -174,9 +174,12 @@ public class UIController {
         return !businessFacade.sameString(password, rewritedPassword);
     }
 
-    public boolean loginRequest(String login, String password) { //todo
-
-        return businessFacade.loginRequest(login, password);
+    public boolean loginRequest(String login, String password) {
+        if (businessFacade.loginRequest(login, password)) {
+            playBarController.initialSongConfiguration();
+            return true;
+        }
+        return false;
     }
 
     public void signUpRequest (User user) {

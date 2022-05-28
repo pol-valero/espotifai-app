@@ -16,7 +16,6 @@ public class PlayBarController implements ActionListener {
         this.playBar = playBar;
         this.controller = controller;
         playBar.registerController(this);
-        initialSongConfiguration();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -51,8 +50,9 @@ public class PlayBarController implements ActionListener {
 
     }
 
-    private void initialSongConfiguration () {
+    public void initialSongConfiguration () {
         Song firstSong =  controller.loadAllMusic().get(0);
-        reproduceNewSong(firstSong.getName(), firstSong.getMinutes(), firstSong.getSeconds());
+        playBar.reproduceNewSong(firstSong.getName(),firstSong.getMinutes(),firstSong.getSeconds());
+        //playBar.setPlayBtn();
     }
 }
