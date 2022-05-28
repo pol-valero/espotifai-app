@@ -183,18 +183,26 @@ public class BusinessFacadelmpl implements BusinessFacade{
     }
 
     public void playMusic(){
-        //List<Song> songs = new LinkedList<>();
         String playlistName = musicListManager.getCurrentPlaylist();
-        //recuerda que la cancion que se quiere reproducir la tienes en el manager de music ya.
+        String currentSongName = musicManager.getCurrentSong().getName();
+        List<Song> songs = musicListManager.loadMusicPlaylist(playlistName, loginManager.getCurrentUSer().getId());
+        int i = 0;
+        int j = 0;
+
+        for(Song song: songs){
+            if(currentSongName.equals(song.getName())){
+                j = i;
+            }
+            i++;
+        }
 
         if (playlistName.equals("AllSongs") || playlistName.equals("MySongs")){
-            //List<Song> oneSong= musicListManager.loadAllMusic();
-            //songs.add(oneSong.get(position));
-            //musicManager.playSong(false, songs, 0);
+            System.out.println("la posicion vale =" + j);
+            musicManager.playSong(false, songs, j);
 
         } else {
-            //songs = musicListManager.loadMusicPlaylist(playlistName, loginManager.getCurrentUSer().getId());
-            //musicManager.playSong(true, songs, position);
+            System.out.println("la posicion vale =" + j);
+            musicManager.playSong(true, songs, j);
         }
     }
 

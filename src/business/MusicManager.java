@@ -365,7 +365,7 @@ public class MusicManager implements Runnable{
         this.playlist = playlist;
         this.songs = songs;
         this.position = position;
-        changeCurrentSong(position);
+        //changeCurrentSong(position);
         playNewSong();
     }
 
