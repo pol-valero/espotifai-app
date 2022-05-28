@@ -108,22 +108,6 @@ public class MusicManager implements Runnable{
     }
 
     /**
-     * Getter for current song
-     * @return Object song
-     */
-    public Song getCurrentSong() {
-        return currentSong;
-    }
-
-    /**
-     * Method to change the current song to a given one
-     * @param song Object song which will be the new current one
-     */
-    public void changeCurrentSong(Song song){
-        this.currentSong = song;
-    }
-
-    /**
      * Method to load stadistics from persistence
      * @return List of objects genres used for generating stadistics
      */
@@ -140,7 +124,6 @@ public class MusicManager implements Runnable{
 
         return topGenres;
     }
-    //ahora
 
     /**
      * Method to load the information related to a song
@@ -244,17 +227,13 @@ public class MusicManager implements Runnable{
      * Method to insert an ID to an album
      */
     private void insertIdAlbum(){
-        System.out.println("el nombre del album es = " + createSong.getAlbum());
         int idAlbum = musicDAO.loadIdAlbum(createSong.getAlbum());
-        System.out.println("managerMusic id albu = " + idAlbum);
         if (idAlbum != 0) {
             createSong.setIdAlbum(idAlbum);
 
         } else  {
             musicDAO.createAlbum(createSong.getAlbum(), createSong.getIdSinger());
             createSong.setIdAlbum(musicDAO.loadIdAlbum(createSong.getAlbum()));
-            System.out.println("managerMusic id albu al crearse = " + musicDAO.loadIdSinger(createSong.getSinger()) +
-                    "current song = " + createSong.getIdSinger());
         }
     }
 
@@ -284,15 +263,12 @@ public class MusicManager implements Runnable{
         return false;
     }
 
-    //todo para la reproduccion de musica
-
     /**
      * Method used when the user wants to pause the song
      */
-    public void pausedSong(){ //para cuando se le da al boton de pausar  reproducir
-        System.out.println("pausa vale = " + paused);
+    public void pausedSong(){
         paused = !paused;
-        System.out.println("pausa vale = " + paused);
+
         if (paused) {
             musicPlayer.resume();
         } else {
@@ -346,7 +322,7 @@ public class MusicManager implements Runnable{
      */
     public void previusNextSong(int next){
 
-        if(!musicPlayer.getfinisehedSong()){
+        if (!musicPlayer.getfinisehedSong()) {
             musicPlayer.stop();
         }
 
@@ -357,12 +333,11 @@ public class MusicManager implements Runnable{
             changeCurrentSong(position);
             this.position = position;
         } else {
-            if (position >= songs.size() && playlist){
+            if (position >= songs.size() && playlist) {
                 position = this.position;
             }
             changeCurrentSong(position);
             this.position = position;
-
         }
         playNewSong();
     }
@@ -379,7 +354,6 @@ public class MusicManager implements Runnable{
         this.position = position;
 
         currentSong = loadSongInformation(selectedSongName);
-        System.out.println(currentSong.getName());
         playNewSong();
     }
 
@@ -395,7 +369,7 @@ public class MusicManager implements Runnable{
      * Method to play the song
      * @return boolean true in case there were no problems, false for opposite case
      */
-    private boolean playNewSong() { //podria ser void si no queremos mirar si el path falla
+    private boolean playNewSong() {
         try {
             if (musicPlayer != null){
                 if(!musicPlayer.getfinisehedSong()){
@@ -421,7 +395,7 @@ public class MusicManager implements Runnable{
     /**
      * Method to start playing next song when the current one has finished
      */
-    public void automaticSongChange(){ //depende donde este el Thread sera publico o priv
+    private void automaticSongChange(){
         if(!musicPlayer.getfinisehedSong()){
             musicPlayer.stop();
         }
@@ -451,17 +425,19 @@ public class MusicManager implements Runnable{
      * Method to set the current song in a loop
      */
     public void loop(){
-        System.out.println("activo loop");
         this.loop = !loop;
     }
 
+    /**
+     * Method to set the current playlist in a loop
+     */
     public void playlistLoop(){
         this.playlistLop = !playlistLop;
     }
 
     /**
      * Getter for selected song names
-     * @return
+     * @return String of current song name
      */
     public String getSelectedSongName() {
         return selectedSongName;
@@ -481,7 +457,6 @@ public class MusicManager implements Runnable{
     public void startingThread(){
         thread = new Thread(this);
         thread.start();
-
     }
 
     /**

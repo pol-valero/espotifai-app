@@ -18,10 +18,6 @@ public class MusicListManager {
      */
     private MusicListDAO  musicListDAO = new MusicListDatabaseDAO();
 
-    /**
-     *Object that is used to save the current playlist the user is using
-     */
-    private Playlist currentPlaylist;
 
     /**
      * Name of the current playlist
@@ -75,11 +71,10 @@ public class MusicListManager {
             String songName = songNameList.get(i);
             int positon = musicListDAO.idSongInPlaylist(playlist.getId());
             positon++;
-            System.out.println("cancion añadida = " + songName);
-            System.out.println("en el manager la posicion es = " + positon);
+
             List<Song> songs = loadAllMusic();
             for(Song newSong: songs){
-                if (songName.equals(newSong.getName())){
+                if (songName.equals(newSong.getName())) {
                     musicListDAO.addSongPlaylist(playlist.getId(), newSong.getIdSong(), positon);
                 }
             }
@@ -193,19 +188,14 @@ public class MusicListManager {
      * @return Playlist which its name and the given string matches
      */
     private Playlist findUserPlaylist(String playlistName, int idUser){
-        System.out.println(("id user = " + idUser));
         List<Playlist> playlists = new LinkedList<>();
          playlists =  musicListDAO.loadUserPlaylist(idUser);
-         for (Playlist p: playlists){
-             System.out.println( " nombe = " + p.getName());
-         }
 
             for (Playlist playlist: playlists) {
                 if (playlistName.equals(playlist.getName())) {
                     return playlist;
                 }
             }
-
         return null;
     }
 
@@ -217,8 +207,6 @@ public class MusicListManager {
     private List<Song> findSong(List<String> songName){
         List<Song> songs = musicListDAO.loadAllMusic();
         List<Song> newSong = new LinkedList<>();
-
-        System.out.println(songName.size());
 
         if (songs.size() != 0 && songName.size() != 0) {
             for (String name: songName) {
@@ -314,17 +302,14 @@ public class MusicListManager {
      * @return String name of the current playlist
      */
     public String getCurrentPlaylist () {
-        //return currentPlaylist.getName();
         return currentPlaylistName;
     }
 
     /**
      * Method to set the current playlist the user is using to a certain name
      * @param playlistName String name of the new current playlist
-     * @param idUser Integer id of the user
      */
-    public void setCurrentPlaylist (String playlistName, int idUser) {
-        //currentPlaylist = findPlaylist(playlistName, idUser);
+    public void setCurrentPlaylist (String playlistName) {
         currentPlaylistName = playlistName;
     }
 
@@ -386,15 +371,15 @@ public class MusicListManager {
         if (songPlaylist.size() != 0){
             List<Song> songList = new LinkedList<>();
 
-            for (Song allSong: loadAllMusic()){
+            for (Song allSong: loadAllMusic()) {
                 boolean found = false;
 
-                for (Song songP: songPlaylist){
+                for (Song songP: songPlaylist) {
                     if (allSong.getIdSong() == songP.getIdSong()) {
                         found = true;
                     }
                 }
-                if (!found){
+                if (!found) {
                     songList.add(allSong);
                 }
             }

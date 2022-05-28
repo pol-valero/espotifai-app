@@ -40,12 +40,6 @@ public class LoginManager {
      * @return boolean true in case the log in was successfully done
      */
     public boolean loginRequest(String login, String password){
-       /*
-        String passwordSHA = pwdHash(password);
-
-        if (loginDAO.checkLogin(login, passwordSHA) > 0 ) return OK;
-        else return ERROR;
-        */
 
         List<User> users = loginDAO.getAllUsers();
         String passwordSHA = pwdHash(password);
@@ -75,7 +69,6 @@ public class LoginManager {
         return ERROR;
 
     }
-
 
 
     /**

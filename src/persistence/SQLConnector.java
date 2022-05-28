@@ -1,7 +1,6 @@
 package persistence;
 
 import persistence.DAO.JsonDAO;
-
 import java.sql.*;
 
 public class SQLConnector {
@@ -14,7 +13,7 @@ public class SQLConnector {
     private Connection connection;
     private ConfigDAO configDAO =  new JsonDAO();
 
-    public static SQLConnector getInstance(){ //si la base no esta instanciada la instanciamos
+    public static SQLConnector getInstance(){
         if (instance == null ){
             instance = new SQLConnector();
             instance.connect();
@@ -95,16 +94,5 @@ public class SQLConnector {
         }
         return resultSet;
     }
-
-/*
-    public void disconnect(){
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            System.err.println("Problem when closing the connection --> " + e.getSQLState() + " (" + e.getMessage() + ")");
-        }
-    }
-
- */
 
 }

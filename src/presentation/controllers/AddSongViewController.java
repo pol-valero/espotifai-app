@@ -1,9 +1,7 @@
 package presentation.controllers;
-import business.entities.User;
 import presentation.UIController;
 
 import presentation.views.AddSongView;
-import presentation.views.SignupView;
 
 import javax.swing.*;
 import java.awt.*;

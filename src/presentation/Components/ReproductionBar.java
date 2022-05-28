@@ -86,8 +86,6 @@ public class ReproductionBar extends JPanel {
 
         add(reproductionPanel);
 
-
-
     }
 
     /**

@@ -15,7 +15,6 @@ import java.io.IOException;
  * @version 1.0
  */
 public class ImagePanel extends JPanel {
-    //hauriem de crear una classe generica que ens permeti crear imatges escalades en comptes de posar funcions independents a cada classe (com es el cas de loginView i signUpView).
     public ImageIcon getImageIcon (String filePath, int wt, int ht){
 
         Image image = (new ImageIcon(filePath)).getImage();

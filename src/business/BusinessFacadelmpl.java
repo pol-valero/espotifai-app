@@ -27,7 +27,6 @@ public class BusinessFacadelmpl implements BusinessFacade{
     private LoginManager loginManager = new LoginManager();
     private MusicListManager musicListManager = new MusicListManager();
     private MusicManager musicManager = new MusicManager();
-    private final String NOTPLAYLIST = "AllSongs";
 
     @Override
     public boolean checkEmail(String email){
@@ -187,7 +186,6 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     public void playMusic(){
         String playlistName = musicListManager.getCurrentPlaylist();
-        System.out.println(playlistName);
         String currentSongName = musicManager.getSelectedSongName();
         List<Song> songs = musicListManager.loadMusicPlaylist(playlistName, loginManager.getCurrentUSer().getId());
         int i = 0;
@@ -201,11 +199,9 @@ public class BusinessFacadelmpl implements BusinessFacade{
         }
 
         if (playlistName.equals("AllSongs") || playlistName.equals("MySongs")){
-            System.out.println("la posicion vale =" + j);
             musicManager.playSong(false, songs, j);
 
         } else {
-            System.out.println("la posicion vale =" + j);
             musicManager.playSong(true, songs, j);
         }
     }
@@ -245,7 +241,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
     }
 
     public void setCurrentPlaylist (String playlistName) {
-        musicListManager.setCurrentPlaylist(playlistName, loginManager.getCurrentUSer().getId());
+        musicListManager.setCurrentPlaylist(playlistName);
     }
 
     public List<Song> loadMusicOnePlaylist(String playlistName){
@@ -345,10 +341,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
         Song initialSong = loadAllMusic().get(0);
         setCurrentPlaylist("AllSongs");
         setSelectedSongName(initialSong.getName());
-        //businessFacade.setCurrentSong(initialSong);
-        //businessFacade.playMusic();
 
-        //playMusic(NOTPLAYLIST, 0);
         playMusic();
         musicManager.startingThread();
         //musicManager.pausedSong();

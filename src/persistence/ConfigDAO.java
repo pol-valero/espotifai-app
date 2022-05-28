@@ -2,12 +2,12 @@ package persistence;
 
 public interface ConfigDAO {
 
-    public void readJson();
+     void readJson();
 
-    public String getUrl() ;
+     String getUrl() ;
 
     String getPassword();
 
-    public String getUsuariobbdd();
+     String getUsuariobbdd();
 
 }

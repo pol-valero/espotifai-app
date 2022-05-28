@@ -13,7 +13,7 @@ public class Song {
     private String album;
     private int idSinger;
     private String singer;
-    private int idOwne; //user
+    private int idOwne;
     private String owne;
     private String filePath;
     private int orden;

@@ -53,13 +53,6 @@ public interface MusicListDAO  {
      void createPlaylist(String playlistName, int id_user);
 
     /**
-     * Metodo para eliminar una cancion de una playlist ya existente
-     * @param playlist Objeto Playlist con la informcion de la playlist
-     */
-     //void updatePlaylist(Playlist playlist);
-
-
-    /**
      * Metodo para eliminar una playlist de la base de datos
      * @param playlistName Objeto Playlist con la informcion de la playlist
      */

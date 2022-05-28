@@ -111,7 +111,6 @@ public class MusicListController implements ActionListener, MouseListener {
                 break;
 
             case MusicListView.BTN_REMOVE_SELECTED_PLAYLIST_SONGS:
-                //fer crida a business per eliminar
                 controller.deleteSongPlaylist(currentPlaylist, selectedSongs);
                 System.out.println("Linkedlist size: " + selectedSongs.size());
                 emptySelectedSongsList();
@@ -119,7 +118,6 @@ public class MusicListController implements ActionListener, MouseListener {
                 break;
 
             case MusicListView.BTN_REMOVE_SELECTED_PERSONAL_SONGS:
-                //fer crida a business per eliminar
                 controller.deletePersonalSong(selectedSongs);
                 System.out.println("Linkedlist size: " + selectedSongs.size());
                 emptySelectedSongsList();

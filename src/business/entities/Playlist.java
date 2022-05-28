@@ -63,7 +63,4 @@ public class Playlist {
         return id_user;
     }
 
-    //public List<Song> getSongList() {
-    //    return songList;
-    //}
 }

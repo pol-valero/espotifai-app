@@ -41,7 +41,7 @@ public class MusicDatabaseDAO implements MusicDAO {
      * @param song we receive the song to insert
      */
     @Override
-    public void createSong(Song song) { //cambiar al campo pathFile en char en la base
+    public void createSong(Song song) {
         String query = "INSERT INTO canciones (titulo, id_genero, id_album, id_usuario," +
                 "filePath,timeMinutes, timeSec,lyrics) VALUES ('"
                 + song.getName() + "', '"
@@ -137,8 +137,6 @@ public class MusicDatabaseDAO implements MusicDAO {
             }
             return 0;
         } catch (SQLException e) {
-            //e.printStackTrace();
-            System.out.println("ERROR album");
             return 0;
         }
 
@@ -168,13 +166,10 @@ public class MusicDatabaseDAO implements MusicDAO {
         try {
             if (resultSet != null) {
                 resultSet.next();
-                //System.out.println("la id vale = "+ resultSet.getInt("id"));
                 return resultSet.getInt("id");
             }
            return 0;
         } catch (SQLException e) {
-           //e.printStackTrace();
-            System.out.println("error singer");
             return 0;
         }
     }

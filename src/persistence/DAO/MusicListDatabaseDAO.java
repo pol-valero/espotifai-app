@@ -127,11 +127,9 @@ public class MusicListDatabaseDAO implements MusicListDAO {
                 int seconds = resultSet.getInt("timeSec");
                 String lyrics = resultSet.getString("lyrics");
 
-
-                //aquí el campo orden no es significativo pero se lo pasamos
                 song.add(new Song(idSong, name, idGenere, genere, idAlbum, album, idSinger, singer, idOwner, owner, filePath, orden, minutes, seconds, lyrics));
             }
-        } catch (SQLException exception){
+        } catch (SQLException exception) {
             exception.getErrorCode();
         }
         return song;
@@ -142,7 +140,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
      * @param playlist we receive the playlist
      */
     @Override
-    public List<Song> loadMusicPlaylist(Playlist playlist) {
+    public List<Song> loadMusicPlaylist(Playlist playlist){
         List<Song> song = new LinkedList<>();
         String query = "select lista_cancion.id as idSongPlaylist, name, listas_reproduccion.id_usuario as idOwnerLista, orden, v_songs.* from lista_cancion" +
                 "            inner join v_songs on lista_cancion.id_cancion = v_songs.idSong" +
@@ -182,7 +180,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
      * method that will allow to load all the songs by selecting them from the songs view.
      */
     @Override
-    public List<Song> loadAllMusic() {
+    public List<Song> loadAllMusic(){
         List<Song> song = new LinkedList<>();
         String query = "SELECT * FROM v_songs;";
 
@@ -204,7 +202,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
                 int seconds = resultSet.getInt("timeSec");
                 String lyrics = resultSet.getString("lyrics");
                 String filePath = resultSet.getString("filepath");
-                int orden = 0; //ponemos 0 porque el orden nos da igual, las canciones se ordenan por nombre y no se requiere
+                int orden = 0;
 
                 song.add(new Song(idSong, name, idGenere, genere, idAlbum, album, idSinger, singer, idOwner, owner, filePath,orden, minutes, seconds, lyrics));
             }
@@ -240,9 +238,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         String query = "DELETE FROM lista_cancion WHERE id_lista = '" + playlist.getId() + "' AND id_cancion = '" + song.getIdSong() + "';";
 
         SQLConnector.getInstance().deleteQuery(query);
-
         return true;
-
     }
 
     /***
@@ -269,7 +265,6 @@ public class MusicListDatabaseDAO implements MusicListDAO {
             int sizeId = 0;
             while (resultSet.next()){
                 int id = resultSet.getInt("id_cancion");
-                System.out.println("id de la lista es = " + id);
                 sizeId++;
             }
             return sizeId;
@@ -340,5 +335,4 @@ public class MusicListDatabaseDAO implements MusicListDAO {
         String query = "Delete From lista_cancion Where id_cancion = '" + idSong+"';";
         SQLConnector.getInstance().deleteQuery(query);
     }
-
 }

@@ -8,7 +8,6 @@ import persistence.ConfigDAO;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Connection;
 
 public class JsonDAO implements ConfigDAO {
     private String usuariobbdd ;
@@ -20,12 +19,10 @@ public class JsonDAO implements ConfigDAO {
     }
 
     public String getPassword() {
-
         return password;
     }
 
     public String getUrl() {
-
         return url;
     }
 
