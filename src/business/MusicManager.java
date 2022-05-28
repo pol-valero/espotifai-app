@@ -42,6 +42,8 @@ public class MusicManager implements Runnable{
     private int position;
     private Song createSong;
     private boolean loop;
+    private Thread thread;
+    private boolean threadStatus;
 
     private String selectedSongName;
 
@@ -49,9 +51,10 @@ public class MusicManager implements Runnable{
         //System.out.println(getSongLenght());
         this.loop = false;
         this.playlist = false;
-        this.paused = false;
+        this.paused = true;
         songs = null;
         currentSong = null;
+        threadStatus = true;
 
     }
 
@@ -196,7 +199,9 @@ public class MusicManager implements Runnable{
     //todo para la reproduccion de musica
 
     public void pausedSong(){ //para cuando se le da al boton de pausar  reproducir
+        System.out.println("pausa vale = " + paused);
         paused = !paused;
+        System.out.println("pausa vale = " + paused);
         if (paused) {
             musicPlayer.resume();
         } else {
@@ -206,7 +211,7 @@ public class MusicManager implements Runnable{
 
 
     public int[] songTime(String filePath){
-        String filename = "SongsunVeranoSinTi.mp3";
+        String filename = filePath;
         Header h = null;
         FileInputStream file = null;
         int[] time = new int[2];
@@ -215,7 +220,6 @@ public class MusicManager implements Runnable{
         try {
             file = new FileInputStream(filename);
         } catch (FileNotFoundException ex) {
-
             return time;
         }
         Bitstream bitstream = new Bitstream(file);
@@ -242,7 +246,7 @@ public class MusicManager implements Runnable{
 
     //podria ser un boolean y retorna false si falla en el path
     public void previusNextSong(int next){ //para la parte de la barra de reproduccion las fleechas
-        musicPlayer.stop();
+
         int position = this.position + next; //next debe ser uno o menos uno
 
         if ( position >= songs.size() || position < 0) {
@@ -269,9 +273,8 @@ public class MusicManager implements Runnable{
 
     private boolean playNewSong() { //podria ser void si no queremos mirar si el path falla
         try {
-            musicPlayer.stop();
+
             FileInputStream inputStream = new FileInputStream(currentSong.getFilePath());
-            paused = false;
             musicPlayer = new MusicPlayer(inputStream);
             musicPlayer.play();
             return true;
@@ -286,6 +289,8 @@ public class MusicManager implements Runnable{
 
 
     public void automaticSongChange(){ //depende donde este el Thread sera publico o priv
+        musicPlayer.stop();
+        paused = false;
         if (!playlist || loop){
             previusNextSong(0);
         } else {
@@ -295,7 +300,7 @@ public class MusicManager implements Runnable{
 
     @Override
     public void run() {
-        while(true){
+        while(threadStatus){
             if(musicPlayer.getfinisehedSong()){
                 automaticSongChange();
             }
@@ -315,22 +320,21 @@ public class MusicManager implements Runnable{
         this.selectedSongName = selectedSongName;
     }
 
-    /*
-    public int getSongLenght () {
-        AudioFileFormat fileFormat = null;
-        try {
-            fileFormat = AudioSystem.getAudioFileFormat(new File("songs/Clash Royal.mp3"));
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Long microseconds = (long) fileFormat.properties().get("duration");
-        int seconds = (int) (microseconds / 10^6);
-        return seconds;
+    public void startingThread(){
+        System.out.println("iniciamos thread");
+        System.out.println("path de la cancion = " +currentSong.getFilePath());
 
-    }*/
+        thread = new Thread(this);
+        thread.start();
 
+    }
 
+    public void stopThread(){
+        System.out.println("hola?");
+        musicPlayer.close();
+
+        this.threadStatus = false;
+
+    }
 
 }

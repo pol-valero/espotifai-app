@@ -35,7 +35,6 @@ public class MusicPlayer {
 
         synchronized (synchronizedThread) {
             switch (musicStatus) {
-
                 case NOTSTARTED: //todo preguntar si asi es correcto
                     final Runnable r = new Runnable() {
                         public void run() {
@@ -109,7 +108,7 @@ public class MusicPlayer {
                 if (!player.play(1)) {
                     break;
                 }
-                thread.sleep(100);
+                thread.sleep(10);
             } catch (final JavaLayerException e) {
                 break;
             } catch (InterruptedException e) {
@@ -134,7 +133,7 @@ public class MusicPlayer {
     /**
      * Method that sets song status to finished and stop the thread
      */
-    private void close() {
+    public void close() {
         synchronized (synchronizedThread) {
             musicStatus = FINISHED;
         }
@@ -142,7 +141,6 @@ public class MusicPlayer {
             player.close();
 
         } catch (final Exception e) {
-
         }
     }
 

@@ -46,7 +46,9 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     @Override
     public boolean loginRequest(String login, String password){
+        startingThread();
         return loginManager.loginRequest(login, password);
+
     }
 
 
@@ -65,12 +67,15 @@ public class BusinessFacadelmpl implements BusinessFacade{
     @Override
     public void singUpRequest(User user){
         loginManager.singUpRequest(user);
+        startingThread();
     }
 
 
     @Override
     public void logoutRequest(){
+        musicManager.stopThread();
         loginManager.logoutRequest();
+
     }
 
     @Override
@@ -82,6 +87,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
             }
         }
         loginManager.deleteAccountRequest();
+        musicManager.stopThread();
     }
 
     @Override
@@ -319,4 +325,12 @@ public class BusinessFacadelmpl implements BusinessFacade{
     public boolean songExistsInPlaylist (String playlistName, String songName) {
         return musicListManager.songExistsInPlaylist(playlistName, songName, loginManager.getCurrentUSer().getId());
     }
+
+    public void startingThread(){
+
+        playMusic(NOTPLAYLIST, 0);
+        musicManager.startingThread();
+        musicManager.pausedSong();
+    }
+
 }
