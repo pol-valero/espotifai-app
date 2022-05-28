@@ -21,6 +21,8 @@ public class AddToPlaylistView {
     private final Color negre = new Color(48,48,48);
     private final Color vermell = new Color (232,74,77);
 
+    private JLabel goBackImage;
+
     /**
      * Constructor to create AddToPlaylistView
      * Creates the AddToPlaylistView linking it to the UIController. This function
@@ -46,11 +48,29 @@ public class AddToPlaylistView {
         panel.setLayout(new BorderLayout());
         JPanel westernPanel = westernPanelConfiguration();
         JPanel centralPanel = centralPanelConfiguration(new LinkedList<>());
+        JPanel northernPanel = northernPanelConfig();
 
         panel.add(westernPanel,BorderLayout.WEST);
         panel.add(centralPanel,BorderLayout.CENTER);
 
         mainViewCenter.add(panel,"addToPlaylistCard");
+
+    }
+
+    private JPanel northernPanelConfig() {
+        JPanel northernPanel = new JPanel();
+        northernPanel.setLayout(new FlowLayout());
+
+        goBackImage = new JLabel();
+
+        Image backIcon = (new ImageIcon("images/boto.png")).getImage();
+        Image backIconScaled = getScaledImage(backIcon, 50, 50);
+        ImageIcon finalBackIcon = new ImageIcon(backIconScaled);
+        goBackImage.setIcon(finalBackIcon);
+
+        northernPanel.add(goBackImage);
+
+        return  northernPanel;
 
     }
 
@@ -61,9 +81,6 @@ public class AddToPlaylistView {
      * @return JPanel with the elements that will be in the west of this view added
      */
     private JPanel westernPanelConfiguration() {
-        //Fonts, colours and sizes
-        Font titols = new Font("Trebuchet MS", Font.PLAIN, 36);
-        Font text = new Font("Gulim", Font.PLAIN, 24);
 
         JPanel westernPanel = new JPanel();
         BoxLayout westernLayout = new BoxLayout(westernPanel,BoxLayout.Y_AXIS);
@@ -73,6 +90,7 @@ public class AddToPlaylistView {
         westernPanel.setBackground(negre);
 
         JButton accMBtn = createButton("Account Manager");
+        accMBtn.setFont( new Font("Gulim", Font.PLAIN, 24));
 
         westernPanel.add(accMBtn);
 
@@ -90,8 +108,8 @@ public class AddToPlaylistView {
      */
     private JPanel centralPanelConfiguration(LinkedList<String> playlists){
         playlists = generateLinkedlist(playlists);
-        Font titols = new Font("Trebuchet MS", Font.PLAIN, 54);
-        Font text = new Font("Trebuchet MS", Font.PLAIN, 24);
+        Font titols = new Font("Tahoma", Font.PLAIN, 54);
+        Font text = new Font("Gulim", Font.PLAIN, 24);
 
         JPanel centralPanel = new JPanel();
         BoxLayout centralLayout = new BoxLayout(centralPanel,BoxLayout.Y_AXIS);

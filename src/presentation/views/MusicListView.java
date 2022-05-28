@@ -280,7 +280,7 @@ public class MusicListView {
      */
     private JPanel northernPanelConfiguration(String playlistName) {
         //Fonts, colours and sizes
-        Font titols = new Font("Trebuchet MS", Font.PLAIN, 65);
+        Font titols = new Font("Tahoma", Font.PLAIN, 65);
 
         JPanel northernPanel = new JPanel();
         BoxLayout northernLayout = new BoxLayout(northernPanel,BoxLayout.X_AXIS);

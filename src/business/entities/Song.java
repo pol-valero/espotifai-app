@@ -158,7 +158,10 @@ public class Song {
         return idOwne;
     }
 
-
+    /**
+     * Method the get the position of the song regards the playlist where it belongs
+     * @return Integer corresponding to the position of the song regarding its playlist
+     */
     public int getOrden() {
         return orden;
     }
@@ -226,6 +229,10 @@ public class Song {
         this.owne = owne;
     }
 
+    /**
+     * Method to set the position of the song in its playlist
+     * @param orden Integer corresponding to the position of the song to be set.
+     */
     public void setOrden(int orden) {
         this.orden = orden;
     }
