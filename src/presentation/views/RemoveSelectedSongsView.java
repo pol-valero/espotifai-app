@@ -61,7 +61,6 @@ public class RemoveSelectedSongsView {
         JButton confirmButton = createButton("Yes, remove songs");
         JButton cancelButton = createButton("Cancel");
 
-
         buttonPanel.add(confirmButton);
         buttonPanel.add(Box.createRigidArea(new Dimension(30,0)));
         buttonPanel.add(cancelButton);
