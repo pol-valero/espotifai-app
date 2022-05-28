@@ -29,21 +29,28 @@ import java.util.Map;
 /**
  * Clase encargada de gestionar la informacion de Song y Playlist
  */
-public class MusicManager {
+public class MusicManager implements Runnable{
 
     private MusicDAO musicDAO = new MusicDatabaseDAO();
     private MusicListDAO musicListDAO = new MusicListDatabaseDAO();
 
     private Song currentSong;
     private MusicPlayer musicPlayer;
-    private boolean playlist = false;
+    private boolean playlist;
     private List<Song> songs;
-    private boolean paused = false;
+    private boolean paused;
     private int position;
     private Song createSong;
+    private boolean loop;
 
     public MusicManager () {
         //System.out.println(getSongLenght());
+        this.loop = false;
+        this.playlist = false;
+        this.paused = false;
+        songs = null;
+        currentSong = null;
+
     }
 
     public Song getCurrentSong() {
@@ -277,11 +284,24 @@ public class MusicManager {
 
 
     public void automaticSongChange(){ //depende donde este el Thread sera publico o priv
-        if (!playlist){
+        if (!playlist || loop){
             previusNextSong(0);
         } else {
             previusNextSong(1);
         }
+    }
+
+    @Override
+    public void run() {
+        while(true){
+            if(musicPlayer.getfinisehedSong()){
+                automaticSongChange();
+            }
+        }
+    }
+
+    public void loop(){
+        this.loop = !loop;
     }
 
 
