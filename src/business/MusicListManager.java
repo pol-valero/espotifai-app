@@ -107,9 +107,9 @@ public class MusicListManager {
 
         if (songs.size() != 0 ){
             for(Song song: songs){
-                if(filterName.equals(song.getName()) || filterName.equals(song.getGenre())
-                        || filterName.equals(song.getAlbum()) || filterName.equals(song.getSinger())
-                        || filterName.equals(song.getOwne())) {
+                if(filterName.equalsIgnoreCase(song.getName()) || filterName.equalsIgnoreCase(song.getGenre())
+                        || filterName.equalsIgnoreCase(song.getAlbum()) || filterName.equalsIgnoreCase(song.getSinger())
+                        || filterName.equalsIgnoreCase(song.getOwne())) {
                     searchSong.add(song);
                 }
             }
