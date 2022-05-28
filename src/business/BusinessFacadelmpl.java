@@ -5,8 +5,19 @@ import business.entities.Playlist;
 import business.entities.Song;
 import business.entities.User;
 
+import java.io.BufferedReader;
+import java.net.HttpURLConnection;
+import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Scanner;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 
 /**
  * Class capable of managing information between controller and business classes
@@ -136,7 +147,8 @@ public class BusinessFacadelmpl implements BusinessFacade{
     public void createSong(String name, String artist, String album, String genre, String filePath){ //todo añadir los lyrics
 
         int time[] = musicManager.songTime(filePath);
-        Song song = new Song(name, artist, album, genre, filePath, ".", time[0], time[1]);
+        String lyrics = getLyrics();
+        Song song = new Song(name, artist, album, genre, filePath, lyrics, time[0], time[1]);
         song.setIdOwne(loginManager.getCurrentUSer().getId());
         song.setOwne(loginManager.getCurrentUSer().getName());
         musicManager.createSong(song);
@@ -149,7 +161,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
     }
 
     @Override
-    public void deleteUserAddedSong(String songName){ //TODO llamar a las funciones de eliminar cancion de playlist quizas n hace falta
+    public void deleteUserAddedSong(String songName){
         List<Song> songs = musicListManager.loadAllMusic();
         for (Song song: songs){
             if (songName.equals(song.getName())) {
@@ -240,5 +252,59 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     public List<Song> loadAllNotAlreadyAddedSong(String playlistName){
         return musicListManager.loadAllNotAlreadyAddedSong(playlistName, loginManager.getCurrentUSer().getId());
+    }
+
+    private String getLyrics(){
+        BufferedReader reader;
+        String line;
+        StringBuilder responseContent = new StringBuilder();
+        HttpURLConnection conn = null;
+
+        try{
+            String lyric = "";
+
+            URL url = new URL("https://api.lyrics.ovh/v1/melendi/saraluna");
+            conn = (HttpURLConnection) url.openConnection();
+
+            conn.setRequestMethod("GET");
+            conn.setConnectTimeout(5000);
+            conn.setReadTimeout(5000);
+
+            int status = conn.getResponseCode();
+
+            if (status >= 300) {
+                reader = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+                while ((line = reader.readLine()) != null) {
+                    responseContent.append(line);
+                }
+                reader.close();
+            }
+            else {
+                reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                while ((line = reader.readLine()) != null) {
+                    responseContent.append(line);
+                }
+                reader.close();
+
+                String myjson = responseContent.toString();
+                JSONParser parser = new JSONParser();
+                Object obj = parser.parse(myjson);
+                JSONObject configjson = (JSONObject) obj;
+
+                lyric = (String) configjson.get("lyrics");
+                return lyric;
+            }
+
+        }
+        catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (org.json.simple.parser.ParseException e) {
+            e.printStackTrace();
+        } finally {
+            conn.disconnect();
+        }
+        return "Don't have lyrics";
     }
 }
