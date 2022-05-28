@@ -358,4 +358,8 @@ public class BusinessFacadelmpl implements BusinessFacade{
         musicManager.setCurrentSong(song);
     }
 
+    public void playlistLoop(){
+        musicManager.playlistLoop();
+    }
+
 }

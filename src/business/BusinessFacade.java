@@ -285,5 +285,7 @@ public interface BusinessFacade {
 
     void setCurrentSong (Song song);
 
-    public void startingThread();
+     void startingThread();
+
+     void playlistLoop();
 }

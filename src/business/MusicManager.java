@@ -90,6 +90,8 @@ public class MusicManager implements Runnable{
      */
     private String selectedSongName;
 
+    private boolean playlistLop;
+
     /**
      * Constructor
      */
@@ -101,6 +103,7 @@ public class MusicManager implements Runnable{
         songs = null;
         currentSong = null;
         threadStatus = true;
+        playlistLop = false;
 
     }
 
@@ -341,19 +344,25 @@ public class MusicManager implements Runnable{
      * @param next Integer corresponding to the difference from final to original position of the song to be played. Should be 1 or -1,
      *  respectively to next and previous position
      */
-    public void previusNextSong(int next){ //para la parte de la barra de reproduccion las fleechas
-        //podria ser un boolean y retorna false si falla en el path
+    public void previusNextSong(int next){
+
         if(!musicPlayer.getfinisehedSong()){
             musicPlayer.stop();
         }
-        int position = this.position + next; //next debe ser uno o menos uno
 
-        if ( position >= songs.size() || position < 0) {
+        int position  = this.position + next;
+
+        if ( (position >= songs.size() && playlistLop) || position < 0) {
             position = 0;
             changeCurrentSong(position);
             this.position = position;
         } else {
+            if (position >= songs.size() && playlist){
+                position = this.position;
+            }
             changeCurrentSong(position);
+            this.position = position;
+
         }
         playNewSong();
     }
@@ -368,11 +377,7 @@ public class MusicManager implements Runnable{
         this.playlist = playlist;
         this.songs = songs;
         this.position = position;
-        //changeCurrentSong(position);
 
-        //la "selectedSongName" es la cancion que se estava mostrando en la vista de "musicDetails" antes de darle a reproducir
-        System.out.println("prova");
-        System.out.println(selectedSongName);
         currentSong = loadSongInformation(selectedSongName);
         System.out.println(currentSong.getName());
         playNewSong();
@@ -420,7 +425,6 @@ public class MusicManager implements Runnable{
         if(!musicPlayer.getfinisehedSong()){
             musicPlayer.stop();
         }
-
         paused = true;
         if (!playlist || loop){
             previusNextSong(0);
@@ -449,6 +453,10 @@ public class MusicManager implements Runnable{
     public void loop(){
         System.out.println("activo loop");
         this.loop = !loop;
+    }
+
+    public void playlistLoop(){
+        this.playlistLop = !playlistLop;
     }
 
     /**
