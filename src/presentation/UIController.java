@@ -32,6 +32,7 @@ public class UIController {
     private RenamePlaylistViewController renamePlaylistViewController;
     private SongDetailsViewController songDetailsViewController;
     private AddToPlaylistViewController addToPlaylistViewController;
+    private RemoveSelectedSongsController removeSelectedSongsController;
 
     public void run () {
         JFrame topContainer = new JFrame();
@@ -53,6 +54,7 @@ public class UIController {
         renamePlaylistViewController = new RenamePlaylistViewController(this, mainViewCenter, cardManager);
         songDetailsViewController = new SongDetailsViewController(this, mainViewCenter, cardManager);
         addToPlaylistViewController = new AddToPlaylistViewController(this, mainViewCenter, cardManager);
+        removeSelectedSongsController = new RemoveSelectedSongsController(this, mainViewCenter,cardManager);
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
         //showSignUpCard();
@@ -63,12 +65,17 @@ public class UIController {
         //showMusicListCard();
         //showAddSongCard();
         //showSongDetailsCard(findSong("CançoV2"));
-        showAddToPlaylistCard();
+        //showAddToPlaylistCard();
+        showRemoveSelectedSongCard();
         /*LinkedList<String> prueva = new LinkedList<>();
         prueva.add("prettySong");
         addSongPlaylist("provanova", prueva);*/
 
 
+    }
+
+    private void showRemoveSelectedSongCard() {
+        removeSelectedSongsController.showRemoveSelectedSongsCard();
     }
 
     private void showMainViewCard() {

@@ -83,8 +83,7 @@ public class RemovePlaylistView {
      */
     private JPanel centralPanelConfiguration(String playlistName, int songNumber) {
 
-        Color negre = new Color(48, 48, 48);
-        Color vermell = new Color (232,74,77);
+
         Font subtitle = new Font("Trebuchet MS", Font.PLAIN, 30);
         Font titol = new Font("Trebuchet MS", Font.PLAIN, 38);
         Font button = new Font("Trebuchet MS", Font.PLAIN, 20);
