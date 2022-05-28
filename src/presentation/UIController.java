@@ -281,4 +281,8 @@ public class UIController {
         businessFacade.setSelectedSongName(selectedSongName);
     }
 
+    public boolean songExistsInPlaylist (String playlistName, String songName) {
+        return businessFacade.songExistsInPlaylist(playlistName, songName);
+    }
+
 }

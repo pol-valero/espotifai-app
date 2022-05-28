@@ -52,8 +52,12 @@ public class AddToPlaylistViewController implements ActionListener, MouseListene
                 LinkedList<String> songToAdd = new LinkedList<>();
                 songToAdd.add(selectedSongName);
 
-                controller.addSongPlaylist(playlistName, songToAdd);
-                controller.showMusicListCard(controller.loadPlaylistMusic(playlistName), playlistName);
+                if (!controller.songExistsInPlaylist(playlistName, selectedSongName)) {
+                    controller.addSongPlaylist(playlistName, songToAdd);
+                    controller.showMusicListCard(controller.loadPlaylistMusic(playlistName), playlistName);
+                } else {
+                    addToPlaylistView.songExistsErrorVisibility(true);
+                }
                 break;
         }
     }
@@ -68,14 +72,14 @@ public class AddToPlaylistViewController implements ActionListener, MouseListene
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        String selectedSongName = controller.getSelectedSongName();
-        Song selectedSong = controller.findSong(selectedSongName);
-        controller.showSongDetailsCard(selectedSong);
+
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        String selectedSongName = controller.getSelectedSongName();
+        Song selectedSong = controller.findSong(selectedSongName);
+        controller.showSongDetailsCard(selectedSong);
     }
 
     @Override

@@ -29,6 +29,8 @@ public class AddToPlaylistView {
 
     private JLabel goBackImage;
 
+    private JLabel songExistsError = new JLabel();
+
     private JPanel panel;
     private JPanel centralPanel;
 
@@ -165,15 +167,19 @@ public class AddToPlaylistView {
         playlistScrollPanel.add(scrollPane); //todo
         playlistScrollPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        /*JPanel donePanel = new JPanel();
+        JPanel donePanel = new JPanel();
         donePanel.setBorder(new EmptyBorder(new Insets(0,850,0,0)));
         donePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         donePanel.setBackground(negre);
-        donePanel.add(createButton("Done"));*/
+        //donePanel.add(createButton("Done"));
+        songExistsError.setText("This song already exists in this playlist");
+        songExistsError.setForeground(vermell);
+        songExistsError.setFont(new Font("Gulim", Font.PLAIN, 14));
+        donePanel.add(songExistsError);
 
         centralPanel.add(titlePanel);
         centralPanel.add(playlistScrollPanel);
-        //centralPanel.add(donePanel);
+        centralPanel.add(donePanel);
 
         return centralPanel;
     }
@@ -317,6 +323,10 @@ public class AddToPlaylistView {
         actionListener = addToPlaylistViewController;
     }
 
+    public void songExistsErrorVisibility (boolean visible) {
+        songExistsError.setVisible(visible);
+        mainViewCenter.revalidate();
+    }
 
     /**
      * showCard introduces the current state of the mainViewCenter Frame in the cardManager
@@ -327,7 +337,9 @@ public class AddToPlaylistView {
         panel.remove(centralPanel);
         centralPanel = centralPanelConfiguration(userPlaylist);
         panel.add(centralPanel, BorderLayout.CENTER);
+        songExistsErrorVisibility(false);
         mainViewCenter.revalidate();
         cardManager.show(mainViewCenter,"addToPlaylistCard");
     }
+
 }

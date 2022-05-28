@@ -280,4 +280,6 @@ public interface BusinessFacade {
     public String getSelectedSongName();
 
     public void setSelectedSongName(String selectedSongName);
+
+    public boolean songExistsInPlaylist (String playlistName, String songName);
 }
