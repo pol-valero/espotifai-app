@@ -72,6 +72,7 @@ public class MusicListController implements ActionListener, MouseListener {
                 break;
 
             case MusicListView.BTN_ADDSONG:
+                //Aqui en vez de mostrar todas las caciones del sistema directamente, mostraremos canciones del sistema - canciones de la playlist
                 musicListView.showCard((LinkedList<Song>) controller.loadAllMusic(), "AllSongs");
                 musicListView.addSongsVariation();
                 break;
@@ -106,6 +107,7 @@ public class MusicListController implements ActionListener, MouseListener {
             case MusicListView.BTN_REMOVE_SELECTED_PLAYLIST_SONGS:
                 //fer crida a business per eliminar
                 controller.deleteSongPlaylist(currentPlaylist, selectedSongs);
+                System.out.println("Linkedlist size: " + selectedSongs.size());
                 emptySelectedSongsList();
                 controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
                 break;
@@ -113,9 +115,9 @@ public class MusicListController implements ActionListener, MouseListener {
             case MusicListView.BTN_REMOVE_SELECTED_PERSONAL_SONGS:
                 //fer crida a business per eliminar
                 controller.deletePersonalSong(selectedSongs);
+                System.out.println("Linkedlist size: " + selectedSongs.size());
                 emptySelectedSongsList();
-                String currentPlaylist2 = controller.getCurrentPlaylist();
-                controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist2), currentPlaylist2);
+                controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
                 break;
 
             case MusicListView.BTN_CANCEL:
@@ -189,11 +191,12 @@ public class MusicListController implements ActionListener, MouseListener {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-        int row = musicListView.getRowAtPoint(e.getPoint());
+        /*int row = musicListView.getRowAtPoint(e.getPoint());
         int column = musicListView.getColumnAtPoint(e.getPoint());
 
         String songName = musicListView.getSongName(row);
 
+        System.out.println(songName);
         if (column != 6) {
             //mostrar vista detalls canço
         } else {
@@ -205,7 +208,7 @@ public class MusicListController implements ActionListener, MouseListener {
                 //System.out.println("Song afegida: " + songName);
             }
 
-        }
+        }*/
     }
 
     /**
@@ -219,7 +222,24 @@ public class MusicListController implements ActionListener, MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
+        int row = musicListView.getRowAtPoint(e.getPoint());
+        int column = musicListView.getColumnAtPoint(e.getPoint());
 
+        String songName = musicListView.getSongName(row);
+
+        System.out.println(songName);
+        if (column != 6) {
+            //mostrar vista detalls canço
+        } else {
+            if (selectedSongs.contains(songName)) {
+                selectedSongs.remove(songName);
+                //System.out.println("Song borrada: " + songName);
+            } else {
+                selectedSongs.add(musicListView.getSongName(musicListView.getRow()));
+                //System.out.println("Song afegida: " + songName);
+            }
+
+        }
     }
 
     @Override
