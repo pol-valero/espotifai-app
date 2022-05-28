@@ -13,7 +13,7 @@ public class SongDetailsView {
 
     public static final String BTN_ACCOUNT_MANAGEMENT= "BTN_ACCOUNT_MANAGEMENT";
     public static final String BTN_ADDPLAYLIST = "BTN_ADDPLAYLIST";
-
+    public static final String BTN_GO_BACK = "BTN_GO_BACK";
 
 
     private final JPanel mainViewCenter;
@@ -21,7 +21,8 @@ public class SongDetailsView {
     private JButton jbManagement = new JButton();
     private JButton jbAddPlaylist = new JButton();
 
-    private JLabel goBackImage = new JLabel();
+    private JButton jbGoBackImage = new JButton();
+
     private JLabel playImage = new JLabel();
     private JLabel albumImage = new JLabel();
 
@@ -345,8 +346,11 @@ public class SongDetailsView {
         Image Image_2 = getScaledImage(imageIcon_2, 50, 50);
         ImageIcon new_Boto = new ImageIcon(Image_2);
 
-        goBackImage.setIcon(new_Boto);
-        goBackImage.addMouseListener(new MouseAdapter() {});
+        jbGoBackImage.setIcon(new_Boto);
+        jbGoBackImage.setPreferredSize(new Dimension(50,50));
+        jbGoBackImage.setActionCommand(BTN_GO_BACK);
+        //goBackImage.setIcon(new_Boto);
+        //goBackImage.addMouseListener(new MouseAdapter() {});
 
         JPanel BorderAdjustment = new JPanel(new BorderLayout());
 
@@ -358,7 +362,8 @@ public class SongDetailsView {
         FillWEST.setBackground(negre);
         FillWEST.setSize(10, 20);
 
-        BorderAdjustment.add(goBackImage, BorderLayout.CENTER);
+        //BorderAdjustment.add(goBackImage, BorderLayout.CENTER);
+        BorderAdjustment.add(jbGoBackImage, BorderLayout.CENTER);
         BorderAdjustment.add(FillNORTH, BorderLayout.NORTH);
         BorderAdjustment.add(FillWEST, BorderLayout.WEST);
 
@@ -432,7 +437,7 @@ public class SongDetailsView {
     public void registerController (SongDetailsViewController songDetailsViewController) {
         jbAddPlaylist.addActionListener(songDetailsViewController);
         jbManagement.addActionListener(songDetailsViewController);
-        goBackImage.addMouseListener(songDetailsViewController);
+        jbGoBackImage.addActionListener(songDetailsViewController);
         playImage.addMouseListener(songDetailsViewController);
     }
 

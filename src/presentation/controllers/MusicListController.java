@@ -229,7 +229,11 @@ public class MusicListController implements ActionListener, MouseListener {
 
         System.out.println(songName);
         if (column != 6) {
-            //mostrar vista detalls canço
+            if (column == 0 || column == 1) {
+                //mostrar vista detalls canço
+                Song song = controller.findSong(songName);
+                controller.showSongDetailsCard(song);
+            }
         } else {
             if (selectedSongs.contains(songName)) {
                 selectedSongs.remove(songName);
