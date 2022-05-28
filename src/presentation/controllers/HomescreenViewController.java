@@ -46,6 +46,7 @@ public class HomescreenViewController implements ActionListener {
 
         switch (e.getActionCommand()) {
             case HomeScreenView.BTN_STATISTICS:
+                controller.showStadisticsCard();
                 break;
             case HomeScreenView.BTN_ACCOUNTMANAGER:
                 controller.showLogoutCard();

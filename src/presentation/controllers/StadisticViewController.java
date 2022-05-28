@@ -40,7 +40,14 @@ public class StadisticViewController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        switch(e.getActionCommand()) {
+            case StadisticsView.BTN_HOME:
+                controller.showHomescreenCard();
+                break;
+            case StadisticsView.BTN_ACCOUNTMANAGER:
+                controller.showLogoutCard();
+                break;
+        }
     }
 
     public void showStadisticsView(LinkedList<Genre> genres){

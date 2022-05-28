@@ -32,6 +32,7 @@ public class UIController {
     private RenamePlaylistViewController renamePlaylistViewController;
     private SongDetailsViewController songDetailsViewController;
     private AddToPlaylistViewController addToPlaylistViewController;
+    private StadisticViewController stadisticViewController;
 
     public void run () {
         JFrame topContainer = new JFrame();
@@ -53,6 +54,7 @@ public class UIController {
         renamePlaylistViewController = new RenamePlaylistViewController(this, mainViewCenter, cardManager);
         songDetailsViewController = new SongDetailsViewController(this, mainViewCenter, cardManager);
         addToPlaylistViewController = new AddToPlaylistViewController(this, mainViewCenter, cardManager);
+        stadisticViewController = new StadisticViewController(this, mainViewCenter, cardManager);
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
         //showSignUpCard();
@@ -66,7 +68,7 @@ public class UIController {
         /*LinkedList<String> prueva = new LinkedList<>();
         prueva.add("prettySong");
         addSongPlaylist("provanova", prueva);*/
-
+        //showStadisticsCard();
     }
 
     private void showMainViewCard() {
@@ -129,6 +131,10 @@ public class UIController {
     public void showAddToPlaylistCard() {
         LinkedList<String> userPlaylist = businessFacade.loadUserPlaylist();
         addToPlaylistViewController.showAddToPlaylistView(userPlaylist);
+    }
+
+    public void showStadisticsCard() {
+        stadisticViewController.showStadisticsView((LinkedList<Genre>) businessFacade.loadStadistic());
     }
 
     public boolean findUserNameMatch(String username){//todo

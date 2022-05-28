@@ -65,7 +65,7 @@ public class MusicListController implements ActionListener, MouseListener {
                 break;
 
             case MusicListView.BTN_STADISTICS:
-
+                controller.showStadisticsCard();
                 break;
 
             case MusicListView.BTN_ACCOUNTMANAGER:

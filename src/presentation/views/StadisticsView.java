@@ -105,9 +105,15 @@ public class StadisticsView {
      */
     private JPanel centralPanelConfiguration(LinkedList<Genre> genres) {
 
-        int maxValue = genres.get(0).getAmount();
+        int maxValue;
         int maxWidth = 1000;
         int rowHeight = 50;
+
+        if (genres.size() > 0) {
+            maxValue = genres.get(0).getAmount();
+        } else {
+            maxValue = 1;
+        }
 
         //Central panel config
         JPanel centralPanel = new JPanel();
@@ -193,11 +199,11 @@ public class StadisticsView {
 
         JPanel scalePanel = new JPanel();
         scalePanel.setLayout(new FlowLayout());
-        scalePanel.setBorder(new EmptyBorder(new Insets(0,30,0,80)));
+        scalePanel.setBorder(new EmptyBorder(new Insets(0,30,0,70)));
 
-        for(int i=1; i < amount+1;i++ ){
+        for(int i=0; i < amount+1;i++ ){
             JPanel panel = new JPanel();
-            JLabel label = new JLabel(i+"");
+            JLabel label = new JLabel(String.valueOf(i));
             label.setAlignmentX(Component.RIGHT_ALIGNMENT);
             panel.add(label);
             panel.setPreferredSize(new Dimension(idealWidth,40));
