@@ -155,8 +155,8 @@ public class ReproductionBar extends JPanel {
         previousSongBtn = createRoundButton("images/iconGoBack.png",24,24);
         previousSongBtn.setActionCommand(BTN_PREVIOUS_SONG);
 
-        playPauseBtn = createRoundButton("images/pauseButton.png",24,24);
-        playPauseBtn.setActionCommand(BTN_PAUSE);
+        playPauseBtn = createRoundButton("images/playButton.png",24,24);
+        playPauseBtn.setActionCommand(BTN_PLAY);
 
         nextSongBtn =createRoundButton("images/iconGoNext.png",24,24);
         nextSongBtn.setActionCommand(BTN_NEXT_SONG);

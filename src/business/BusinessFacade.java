@@ -284,4 +284,6 @@ public interface BusinessFacade {
     boolean songExistsInPlaylist (String playlistName, String songName);
 
     void setCurrentSong (Song song);
+
+    public void startingThread();
 }

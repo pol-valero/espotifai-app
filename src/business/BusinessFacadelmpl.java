@@ -46,8 +46,11 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     @Override
     public boolean loginRequest(String login, String password){
-        startingThread();
-        return loginManager.loginRequest(login, password);
+        if (loginManager.loginRequest(login, password)) {
+            startingThread();
+            return true;
+        }
+        return false;
 
     }
 
@@ -338,6 +341,12 @@ public class BusinessFacadelmpl implements BusinessFacade{
     }
 
     public void startingThread(){
+
+        Song initialSong = loadAllMusic().get(0);
+        setCurrentPlaylist("AllSongs");
+        setSelectedSongName(initialSong.getName());
+        //businessFacade.setCurrentSong(initialSong);
+        //businessFacade.playMusic();
 
         //playMusic(NOTPLAYLIST, 0);
         playMusic();
