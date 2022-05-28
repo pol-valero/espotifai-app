@@ -1,6 +1,7 @@
 package presentation.views;
 
 import business.entities.Song;
+import presentation.controllers.SongDetailsViewController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +11,7 @@ import java.awt.image.BufferedImage;
 
 public class SongDetailsView {
 
-    public static final String BTN_GO_BACK = "BTN_GO_BACK";
+    public static final String BTN_ACCOUNT_MANAGEMENT= "BTN_ACCOUNT_MANAGEMENT";
     public static final String BTN_ADDPLAYLIST = "BTN_ADDPLAYLIST";
 
 
@@ -45,7 +46,8 @@ public class SongDetailsView {
         panel.setLayout(new BorderLayout());
         JPanel southernPanel = southernPanelConfiguration();
 
-        centralPanel = centralPanelConfiguration(" ", innitializeSong,0,0);
+        centralPanel = new JPanel();
+        //centralPanel = centralPanelConfiguration(" ", innitializeSong,0,0);
         JPanel northernPanel = northernPanelConfiguration();
 
         panel.add(northernPanel,BorderLayout.NORTH);
@@ -55,7 +57,7 @@ public class SongDetailsView {
         mainViewCenter.add(panel, "songDetailsCard");
 
     }
-    private JPanel centralPanelConfiguration(String songLyrics , Song song, int minutesSongLength, int secondsSongLength) {
+    private JPanel centralPanelConfiguration(Song song) {
 
 
 
@@ -213,7 +215,7 @@ public class SongDetailsView {
 
         JLabel durationSong = new JLabel();
 
-        durationSong.setText(String.valueOf(minutesSongLength) + ":" + String.valueOf(secondsSongLength) );
+        durationSong.setText(song.getMinutes() + ":" + song.getSeconds());
         durationSong.setForeground(Color.white);
         durationSong.setFont(text);
 
@@ -265,7 +267,7 @@ public class SongDetailsView {
 
         jbAddPlaylist.setBackground(vermell);
         jbAddPlaylist.setForeground(Color.white);
-        jbAddPlaylist.setText("Remove Playlist");
+        jbAddPlaylist.setText("Add to playlist");
         jbAddPlaylist.setFont(subtitle);
         jbAddPlaylist.setPreferredSize(button_shape);
         jbAddPlaylist.setFocusable(false);
@@ -292,7 +294,7 @@ public class SongDetailsView {
         subpanel_3.add(songLyricsLabel,c);
         subpanel_3.add(Box.createRigidArea(new Dimension(10, 10)));
 
-        String data = songLyrics;
+        String data = song.getLyrics();
         JTextArea textArea = new JTextArea(data,18,30);
         textArea.setFont(word);
         textArea.setForeground(Color.white);
@@ -387,7 +389,7 @@ public class SongDetailsView {
         jbManagement.setFocusable(false);
         jbManagement.setOpaque(true);
         jbManagement.setBorderPainted(false);
-        jbManagement.setActionCommand(BTN_GO_BACK);
+        jbManagement.setActionCommand(BTN_ACCOUNT_MANAGEMENT);
 
         JPanel BorderAdjustment_2 = new JPanel(new BorderLayout());
 
@@ -426,11 +428,21 @@ public class SongDetailsView {
 
         return resizedImg;
     }
-    public void showCard(String songLyrics , Song song, int minutesSongLength, int secondsSongLength) {
+
+    public void registerController (SongDetailsViewController songDetailsViewController) {
+        jbAddPlaylist.addActionListener(songDetailsViewController);
+        jbManagement.addActionListener(songDetailsViewController);
+        goBackImage.addMouseListener(songDetailsViewController);
+        playImage.addMouseListener(songDetailsViewController);
+    }
+
+
+    public void showCard(Song song) {
+
         panel.remove(centralPanel);
-        centralPanel = centralPanelConfiguration(songLyrics, song, minutesSongLength,secondsSongLength );
+        centralPanel = centralPanelConfiguration(song);
         panel.add(centralPanel,BorderLayout.CENTER);
-        mainViewCenter.add(panel);
+        //mainViewCenter.add(panel, "songDetailsCard");
         mainViewCenter.revalidate();
         cardManager.show(mainViewCenter, "songDetailsCard");
         //mainView.setVisible(true);

@@ -30,6 +30,8 @@ public class UIController {
     private CreatePlaylistViewController createPlaylistViewController;
     private RemovePlaylistController removePlaylistController;
     private RenamePlaylistViewController renamePlaylistViewController;
+    private SongDetailsViewController songDetailsViewController;
+    private AddToPlaylistViewController addToPlaylistViewController;
 
     public void run () {
         JFrame topContainer = new JFrame();
@@ -49,7 +51,8 @@ public class UIController {
         createPlaylistViewController = new CreatePlaylistViewController(this, mainViewCenter, cardManager);
         removePlaylistController = new RemovePlaylistController(this, mainViewCenter, cardManager);
         renamePlaylistViewController = new RenamePlaylistViewController(this, mainViewCenter, cardManager);
-
+        songDetailsViewController = new SongDetailsViewController(this, mainViewCenter, cardManager);
+        addToPlaylistViewController = new AddToPlaylistViewController(this, mainViewCenter, cardManager);
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
         //showSignUpCard();
@@ -60,6 +63,8 @@ public class UIController {
         //showMusicListCard();
         //showAddSongCard();
 
+        //showSongDetailsCard(findSong("CançoV2"));
+        showAddToPlaylistCard();
         /*LinkedList<String> prueva = new LinkedList<>();
         prueva.add("prettySong");
         addSongPlaylist("provanova", prueva);*/
@@ -118,6 +123,14 @@ public class UIController {
 
     public void showRenamePlaylistCard () {
         renamePlaylistViewController.showRenamePlaylistCard();
+    }
+
+    public void showSongDetailsCard (Song song) {
+        songDetailsViewController.showSongDetailsCard(song);
+    }
+
+    public void showAddToPlaylistCard() {
+        addToPlaylistViewController.showAddToPlaylistView();
     }
 
     public boolean findUserNameMatch(String username){//todo
