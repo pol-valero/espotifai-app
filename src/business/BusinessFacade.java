@@ -267,9 +267,9 @@ public interface BusinessFacade {
 
      List<Song> loadMusicOnePlaylist(String playlistName);
 
-    public void moveSongsInPlaylist(String playlistName, int position, int upDown);
+     void moveSongsInPlaylist(String playlistName, int position, int upDown);
 
-    public void deleteSongAllPlaylist(String songName);
+    void deleteSongAllPlaylist(String songName);
 
     void deletePersonalSong(List<String> songNameList);
 
@@ -277,9 +277,11 @@ public interface BusinessFacade {
 
     List<Song> loadAllNotAlreadyAddedSong(String playlistName);
 
-    public String getSelectedSongName();
+    String getSelectedSongName();
 
-    public void setSelectedSongName(String selectedSongName);
+    void setSelectedSongName(String selectedSongName);
 
-    public boolean songExistsInPlaylist (String playlistName, String songName);
+    boolean songExistsInPlaylist (String playlistName, String songName);
+
+    void setCurrentSong (Song song);
 }

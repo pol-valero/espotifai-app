@@ -60,6 +60,8 @@ public class UIController {
         songDetailsViewController = new SongDetailsViewController(this, mainViewCenter, cardManager);
         addToPlaylistViewController = new AddToPlaylistViewController(this, mainViewCenter, cardManager);
         stadisticViewController = new StadisticViewController(this, mainViewCenter, cardManager);
+
+        initialSongSetup();
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
         //showSignUpCard();
@@ -74,6 +76,12 @@ public class UIController {
         prueva.add("prettySong");
         addSongPlaylist("provanova", prueva);*/
         //showStadisticsCard();
+    }
+
+    private void initialSongSetup () {
+        Song initialSong = businessFacade.loadAllMusic().get(0);
+        businessFacade.setCurrentPlaylist("AllSongs");
+        businessFacade.setCurrentSong(initialSong);
     }
 
     private void showMainViewCard() {
@@ -302,5 +310,7 @@ public class UIController {
     public void moveSongInPlaylist (String playlistName, int songPosition, int upDown) {
         businessFacade.moveSongsInPlaylist(playlistName, songPosition, upDown);
     }
+
+
 
 }

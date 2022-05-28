@@ -14,6 +14,7 @@ public class PlayBarController implements ActionListener {
     public PlayBarController(UIController controller, ReproductionBar playBar) {
         this.playBar = playBar;
         this.controller = controller;
+        playBar.registerController(this);
     }
 
     public void actionPerformed(ActionEvent e) {

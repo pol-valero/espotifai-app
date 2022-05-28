@@ -183,7 +183,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
     }
 
     public void playMusic(){
-        List<Song> songs = new LinkedList<>();
+        //List<Song> songs = new LinkedList<>();
         String playlistName = musicListManager.getCurrentPlaylist();
         //recuerda que la cancion que se quiere reproducir la tienes en el manager de music ya.
 
@@ -334,6 +334,10 @@ public class BusinessFacadelmpl implements BusinessFacade{
         playMusic();
         musicManager.startingThread();
         musicManager.pausedSong();
+    }
+
+    public void setCurrentSong (Song song) {
+        musicManager.setCurrentSong(song);
     }
 
 }

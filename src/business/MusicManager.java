@@ -465,4 +465,8 @@ public class MusicManager implements Runnable{
 
     }
 
+    public void setCurrentSong (Song currentSong) {
+        this.currentSong = currentSong;
+    }
+
 }
