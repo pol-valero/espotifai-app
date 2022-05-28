@@ -29,22 +29,42 @@ public class User {
         this.password = password;
     }
 
+    /**
+     * Method to get the user's id
+     * @return Integer corresponding to the user's id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Method to set the user's id
+     * @param id Integer corresponding to the new id of the user
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Method to get the name of the user
+     * @return String corresponding to the user's name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Method to get the user's email
+     * @return String corresponding to the user's email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * Method to get the user's password
+     * @return String corresponding to the user's passwords
+     */
     public String getPassword() {
         return password;
     }

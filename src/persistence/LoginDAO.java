@@ -11,20 +11,20 @@ public interface LoginDAO {
    // public boolean checkUser(String username);
 
     /***
-     * Metodo para obtener todos los usuarios almacenados en la base de datos
-     * @return List de user con la informacion de los usuarios
+     * Method to get all users stored in the database
+     * @return List of user with user information
      */
     public List<User> getAllUsers();
 
     /***
-     * Metodo para registrar a un usuario
-     * @param user objeto de la clase User con los datos del usuario
+     * Method to register a user
+     * @param user object of the User class with the user data
      */
     public void singUpRequest(User user);
 
     /**
-     * Metodo para eliminar a un usuario de la base de datos
-     * @param userName String con el nombre del usuario a elimianar
+     * Method to remove a user from the database
+     * @param userName String with the name of the user to be deleted
      */
     public void deleteAccountRequest(String userName);
 

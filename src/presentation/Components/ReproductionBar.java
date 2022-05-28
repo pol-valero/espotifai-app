@@ -27,6 +27,7 @@ public class ReproductionBar extends JPanel {
         setBorder(new EmptyBorder(new Insets(20,20,20,20)));
         setBackground(negre);
 
+
         JPanel reproductionPanel = new JPanel(){
             @Override
             public void paintComponent(Graphics g) {
@@ -45,8 +46,8 @@ public class ReproductionBar extends JPanel {
 
         reproductionPanel.setBackground(this.getBackground());
 
-        JPanel songNamePanel = songNamePanelConfig(new String(), new String());
-        JPanel barPanel = barPanelConfig(2,34,3,25);
+        JPanel songNamePanel = songNamePanelConfig();
+        JPanel barPanel = barPanelConfig();
         JPanel buttonsPanel = buttonsPanelConfig();
 
         reproductionPanel.add(songNamePanel);
@@ -61,15 +62,15 @@ public class ReproductionBar extends JPanel {
 
     }
 
-    private JPanel songNamePanelConfig(String songName, String artistName) {
+    private JPanel songNamePanelConfig() {
         JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new BoxLayout(titlePanel,BoxLayout.Y_AXIS));
         titlePanel.setBackground(Color.gray);
 
-        songNameLab = new JLabel(songName);
+        songNameLab = new JLabel();
         songNameLab.setForeground(Color.white);
 
-        artistNameLab = new JLabel(artistName);
+        artistNameLab = new JLabel();
         artistNameLab.setForeground(Color.white);
 
         titlePanel.add(songNameLab);
@@ -79,23 +80,20 @@ public class ReproductionBar extends JPanel {
 
     }
 
-    private JPanel barPanelConfig(int currentMin, int currentSec, int maxMin, int maxSec) {
+    private JPanel barPanelConfig() {
 
         JPanel barPanel = new JPanel();
         barPanel.setLayout(new BoxLayout(barPanel,BoxLayout.X_AXIS));
         barPanel.setBackground(Color.gray);
 
-        String actualTime = currentMin+":"+currentSec;
-        String endTime = maxMin +":"+ maxSec;
 
-        currentTimeLabel = new JLabel(actualTime);
+        currentTimeLabel = new JLabel();
         currentTimeLabel.setForeground(Color.white);
-        endTimeLabel = new JLabel(endTime);
+        endTimeLabel = new JLabel();
         endTimeLabel.setForeground(Color.white);
 
         bar = new JProgressBar(SwingConstants.HORIZONTAL);
         bar.setBackground(Color.lightGray);
-        bar.setMaximum(maxMin*60+maxSec);
 
         barPanel.add(currentTimeLabel);
         barPanel.add(Box.createRigidArea(new Dimension(5,0)));
@@ -124,7 +122,7 @@ public class ReproductionBar extends JPanel {
         JButton indRepBtn = new JButton("IRB");
         indRepBtn.setBackground(Color.gray);
         indRepBtn.setPreferredSize(new Dimension(25,25));
-        indRepBtn.setIcon(getScaledImage("images/individualRepeticionIcon.png",25,25));
+        indRepBtn.setIcon(getScaledImage("images/individualRepeticion.png",25,25));
         mainBtns.add(indRepBtn);
 
         mainBtns.add(Box.createRigidArea(new Dimension(10,0)));
@@ -189,6 +187,35 @@ public class ReproductionBar extends JPanel {
         playPauseBtn.setIcon(getScaledImage("images/whenPause.png",25,25));
         revalidate();
     }
+
+    public void reproduceNewSong(String songName, int totalMinutes, int totalSeconds){
+        bar.setValue(0);
+        bar.setMaximum(totalMinutes*60+totalSeconds);
+
+        songNameLab.setText(songName);
+
+        currentTimeLabel.setText("0:00");
+        endTimeLabel.setText(timeFormater(totalMinutes,totalSeconds));
+
+        revalidate();
+    }
+
+    public void update (int minutes, int seconds){
+        bar.setValue(minutes*60+seconds);
+        currentTimeLabel.setText(timeFormater(minutes,seconds));
+
+        revalidate();
+
+    }
+
+    private String timeFormater(int minutes, int seconds){
+        int secondsL = seconds/10;
+        int secondsR = seconds - secondsL*10;
+
+        return minutes+":"+secondsL+secondsR;
+
+    }
+
 
 
 }

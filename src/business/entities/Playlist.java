@@ -11,7 +11,6 @@ public class Playlist {
     private String name;
     private int id_user;
     private String owner;
-    //private List<Song> songList;
 
     public Playlist(int id, String name, int id_user, String owner){
         this.id = id;
@@ -20,18 +19,34 @@ public class Playlist {
         this.owner = owner;
     }
 
+    /**
+     * Method to get the Playlist ID
+     * @return Interger Id of the playlist
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Method to get playlist name
+     * @return String name of playlist
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Method to get owner of a laylist
+     * @return String correspondig of the owner
+     */
     public String getOwner() {
         return owner;
     }
 
+    /**
+     * Method to get the id of the owner
+     * @return Integer corresponding to the id of the user
+     */
     public int getUserId() {
         return id_user;
     }

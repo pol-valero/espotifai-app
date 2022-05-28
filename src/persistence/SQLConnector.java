@@ -30,7 +30,7 @@ public class SQLConnector {
     }
 
     /**
-     * Metodo para conectar a la base de datos
+     * Method for connecting to the database
      */
     public void connect() {
         try {
@@ -41,8 +41,8 @@ public class SQLConnector {
     }
 
     /**
-     * Metodo para insertar nueva informacion a la base de datos
-     * @param query String con el comando para el SQL
+     * Method for inserting new information to the database
+     * @param query String with the SQL command
      */
     public void insertQuery(String query){
         try {
@@ -54,8 +54,8 @@ public class SQLConnector {
     }
 
     /**
-     *  Metodo para actiualizar informacion ya existente de la  base de datos
-     * @param query String con el comando para el SQL
+     * Method to update already existing database information
+     * @param query String with the SQL command
      */
     public void updateQuery(String query){
         try {
@@ -67,8 +67,8 @@ public class SQLConnector {
     }
 
     /**
-     * Metodo para eliminar informacion de la base de datos
-     * @param query String con el comando para el SQL
+     * Method to delete information from the database
+     * @param query String with the SQL command
      */
     public void deleteQuery(String query){
         try {
@@ -82,8 +82,8 @@ public class SQLConnector {
 
     /**
      *
-     * @param query String con el comando para el SQL
-     * @return resulSet objeto de tipo ResultSet con ls informcion de la base de datos //todo preguntar por el puntero ya que en java no existen
+     * @param query String with the SQL command
+     * @return resultSet object of type ResultSet with database information
      */
     public ResultSet selectQuery(String query){
         ResultSet resultSet = null;

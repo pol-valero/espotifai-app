@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Controller for the MusicListView, the connection between the MusicListView and the UIController.
@@ -69,8 +70,7 @@ public class MusicListController implements ActionListener, MouseListener {
                 break;
 
             case MusicListView.BTN_ADDSONG:
-                //fer crida a business per afegir
-                emptySelectedSongsList();
+                musicListView.showCard((LinkedList<Song>) controller.loadAllMusic(), "AllSongs");
                 musicListView.addSongsVariation();
                 break;
 
@@ -95,6 +95,15 @@ public class MusicListController implements ActionListener, MouseListener {
                 musicListView.removePersonalSongsVariation();
                 break;
 
+            case MusicListView.BTN_ADD_SELECTED:
+                String currentPlaylist = controller.getCurrentPlaylist();
+                controller.addSongPlaylist(currentPlaylist, selectedSongs);
+                emptySelectedSongsList();
+                //Realment, aqui li estem dient que ens torni a mostrar "allSongs", no? Ja que la currentplaylist es all songs. Aixo esta malament
+                controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
+                //musicListView.returnToPreviousVariation();
+                break;
+
             case MusicListView.BTN_REMOVE_SELECTED_PLAYLIST_SONGS:
                 //fer crida a business per eliminar
                 emptySelectedSongsList();
@@ -102,7 +111,10 @@ public class MusicListController implements ActionListener, MouseListener {
 
             case MusicListView.BTN_REMOVE_SELECTED_PERSONAL_SONGS:
                 //fer crida a business per eliminar
+                controller.deletePersonalSong(selectedSongs);
                 emptySelectedSongsList();
+                String currentPlaylist2 = controller.getCurrentPlaylist();
+                controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist2), currentPlaylist2);
                 break;
 
             case MusicListView.BTN_CANCEL:
@@ -135,7 +147,11 @@ public class MusicListController implements ActionListener, MouseListener {
     }
 
     public void showMusicListCard(LinkedList<Song> songList, String songListName){
+
+        //Potser seria interessant fer un "if" aqui per si es dona el cas que el nom es "AllSongs" doncs no es canvii el nom de la
+        //currentPlaylist?  (en canvi, si que es interessant que per a MySongs es canvii).
         controller.setCurrentPlaylist(songListName);
+
         musicListView.showCard(songList,songListName);
         chooseVariation(songListName);
     }
