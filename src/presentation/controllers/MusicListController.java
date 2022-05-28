@@ -128,13 +128,18 @@ public class MusicListController implements ActionListener, MouseListener {
                 break;
 
             case MusicListView.BTN_UP:
-               if(musicListView.getColumn() != 0 && musicListView.getRow() > 0){
+                int selectedRow1 = musicListView.getRow();
+                //String selectedSong = musicListView.getSongName(selectedRow);
+                if(musicListView.getColumn() != 0 && musicListView.getRow() > 0){
+                   controller.moveSongInPlaylist(currentPlaylist, selectedRow1, 1);
                    musicListView.moveUp();
-               }
+                }
                 break;
 
             case MusicListView.BTN_DOWN:
+                int selectedRow2 = musicListView.getRow();
                 if(musicListView.getColumn() != 0 && musicListView.getRow() < getSongListSize()){
+                    controller.moveSongInPlaylist(currentPlaylist, selectedRow2, -1);
                     musicListView.moveDown();
                 }
                 break;

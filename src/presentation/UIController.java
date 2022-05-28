@@ -285,4 +285,8 @@ public class UIController {
         return businessFacade.songExistsInPlaylist(playlistName, songName);
     }
 
+    public void moveSongInPlaylist (String playlistName, int songPosition, int upDown) {
+        businessFacade.moveSongsInPlaylist(playlistName, songPosition, upDown);
+    }
+
 }
