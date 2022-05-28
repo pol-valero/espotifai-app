@@ -67,7 +67,6 @@ public class UIController {
         prueva.add("prettySong");
         addSongPlaylist("provanova", prueva);*/
 
-
     }
 
     private void showMainViewCard() {
@@ -128,7 +127,8 @@ public class UIController {
     }
 
     public void showAddToPlaylistCard() {
-        addToPlaylistViewController.showAddToPlaylistView();
+        LinkedList<String> userPlaylist = businessFacade.loadUserPlaylist();
+        addToPlaylistViewController.showAddToPlaylistView(userPlaylist);
     }
 
     public boolean findUserNameMatch(String username){//todo
@@ -271,6 +271,22 @@ public class UIController {
 
     public LinkedList<Song> loadAllNotAlreadyAddedSongs (String playlistName) {
         return (LinkedList<Song>) businessFacade.loadAllNotAlreadyAddedSong(playlistName);
+    }
+
+    public String getSelectedSongName() {
+        return businessFacade.getSelectedSongName();
+    }
+
+    public void setSelectedSongName(String selectedSongName) {
+        businessFacade.setSelectedSongName(selectedSongName);
+    }
+
+    public boolean songExistsInPlaylist (String playlistName, String songName) {
+        return businessFacade.songExistsInPlaylist(playlistName, songName);
+    }
+
+    public void moveSongInPlaylist (String playlistName, int songPosition, int upDown) {
+        businessFacade.moveSongsInPlaylist(playlistName, songPosition, upDown);
     }
 
 }

@@ -43,6 +43,8 @@ public class MusicManager implements Runnable{
     private Song createSong;
     private boolean loop;
 
+    private String selectedSongName;
+
     public MusicManager () {
         //System.out.println(getSongLenght());
         this.loop = false;
@@ -304,6 +306,14 @@ public class MusicManager implements Runnable{
         this.loop = !loop;
     }
 
+
+    public String getSelectedSongName() {
+        return selectedSongName;
+    }
+
+    public void setSelectedSongName(String selectedSongName) {
+        this.selectedSongName = selectedSongName;
+    }
 
     /*
     public int getSongLenght () {

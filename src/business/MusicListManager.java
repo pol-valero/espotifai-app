@@ -262,4 +262,14 @@ public class MusicListManager {
         }
         return loadAllMusic();
     }
+
+    public boolean songExistsInPlaylist(String playlistName, String songName, int userId) {
+        LinkedList<Song> playlistSongs = (LinkedList<Song>) loadMusicPlaylist(playlistName, userId);
+        for (Song song: playlistSongs) {
+            if(song.getName().equals(songName)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

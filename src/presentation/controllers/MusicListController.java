@@ -57,6 +57,11 @@ public class MusicListController implements ActionListener, MouseListener {
         switch (e.getActionCommand()){
 
             case MusicListView.BTN_SEARCH:
+                String searhField = musicListView.getSearchBarText();
+                if (!searhField.isBlank()) {
+                    LinkedList<Song> filteredSongs = (LinkedList<Song>) controller.loadSearchMusic(searhField);
+                    musicListView.showCard(filteredSongs, "AllSongs");
+                }
                 break;
 
             case MusicListView.BTN_STADISTICS:
@@ -128,13 +133,18 @@ public class MusicListController implements ActionListener, MouseListener {
                 break;
 
             case MusicListView.BTN_UP:
-               if(musicListView.getColumn() != 0 && musicListView.getRow() > 0){
+                int selectedRow1 = musicListView.getRow();
+                //String selectedSong = musicListView.getSongName(selectedRow);
+                if(musicListView.getColumn() != 0 && musicListView.getRow() > 0){
+                   controller.moveSongInPlaylist(currentPlaylist, selectedRow1, 1);
                    musicListView.moveUp();
-               }
+                }
                 break;
 
             case MusicListView.BTN_DOWN:
+                int selectedRow2 = musicListView.getRow();
                 if(musicListView.getColumn() != 0 && musicListView.getRow() < getSongListSize()){
+                    controller.moveSongInPlaylist(currentPlaylist, selectedRow2, -1);
                     musicListView.moveDown();
                 }
                 break;
@@ -233,6 +243,7 @@ public class MusicListController implements ActionListener, MouseListener {
             if (column == 0 || column == 1) {
                 //mostrar vista detalls canço
                 Song song = controller.findSong(songName);
+                controller.setSelectedSongName(songName);
                 controller.showSongDetailsCard(song);
             }
         } else {
