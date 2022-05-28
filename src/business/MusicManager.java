@@ -343,9 +343,12 @@ public class MusicManager implements Runnable{
      */
     public void previusNextSong(int next){ //para la parte de la barra de reproduccion las fleechas
         //podria ser un boolean y retorna false si falla en el path
+        if(!musicPlayer.getfinisehedSong()){
+            musicPlayer.stop();
+        }
         int position = this.position + next; //next debe ser uno o menos uno
 
-        if ( position >= songs.size() || position < 0) {
+        if ( position > songs.size() || position < 0) {
             position = 0;
             changeCurrentSong(position);
             this.position = position;
@@ -387,7 +390,11 @@ public class MusicManager implements Runnable{
      */
     private boolean playNewSong() { //podria ser void si no queremos mirar si el path falla
         try {
-
+            if (musicPlayer != null){
+                if(!musicPlayer.getfinisehedSong()){
+                    musicPlayer.stop();
+                }
+            }
             FileInputStream inputStream = new FileInputStream(currentSong.getFilePath());
             musicPlayer = new MusicPlayer(inputStream);
             musicPlayer.play();
@@ -405,8 +412,11 @@ public class MusicManager implements Runnable{
      * Method to start playing next song when the current one has finished
      */
     public void automaticSongChange(){ //depende donde este el Thread sera publico o priv
-        musicPlayer.stop();
-        paused = false;
+        if(!musicPlayer.getfinisehedSong()){
+            musicPlayer.stop();
+        }
+
+        paused = true;
         if (!playlist || loop){
             previusNextSong(0);
         } else {
@@ -427,6 +437,7 @@ public class MusicManager implements Runnable{
      * Method to set the current song in a loop
      */
     public void loop(){
+        System.out.println("activo loop");
         this.loop = !loop;
     }
 
