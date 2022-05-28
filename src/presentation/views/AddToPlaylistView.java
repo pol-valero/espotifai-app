@@ -52,14 +52,21 @@ public class AddToPlaylistView {
 
         panel.add(westernPanel,BorderLayout.WEST);
         panel.add(centralPanel,BorderLayout.CENTER);
+        panel.add(northernPanel,BorderLayout.NORTH);
 
         mainViewCenter.add(panel,"addToPlaylistCard");
 
     }
 
+    /**
+     * Northern Panel configuration configures the panel located in the north of the main panel of this view
+     * @return JPanel with the elements that will be in the north of this view
+     */
     private JPanel northernPanelConfig() {
         JPanel northernPanel = new JPanel();
-        northernPanel.setLayout(new FlowLayout());
+        northernPanel.setBackground(negre);
+        northernPanel.setLayout(new BoxLayout(northernPanel,BoxLayout.X_AXIS));
+        northernPanel.setBorder( new EmptyBorder( new Insets(20,20,20,20)));
 
         goBackImage = new JLabel();
 
@@ -85,12 +92,12 @@ public class AddToPlaylistView {
         JPanel westernPanel = new JPanel();
         BoxLayout westernLayout = new BoxLayout(westernPanel,BoxLayout.Y_AXIS);
         westernPanel.setLayout(westernLayout);
-        westernPanel.setBorder(new EmptyBorder(new Insets(750, 30, 40, 30)));
-        westernPanel.setMinimumSize(new Dimension(200,900));
+        westernPanel.setBorder(new EmptyBorder(new Insets(650, 30, 40, 30)));
+        //westernPanel.setMinimumSize(new Dimension(200,900));
         westernPanel.setBackground(negre);
 
         JButton accMBtn = createButton("Account Manager");
-        accMBtn.setFont( new Font("Gulim", Font.PLAIN, 24));
+        accMBtn.setFont( new Font("Gulim", Font.PLAIN, 18));
 
         westernPanel.add(accMBtn);
 

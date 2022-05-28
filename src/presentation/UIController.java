@@ -56,15 +56,14 @@ public class UIController {
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
         //showSignUpCard();
-        //showHomescreenCard();
+        showHomescreenCard();
         //showLoginCard();
         //showSignUpCard();
         //showHomescreenCard();
         //showMusicListCard();
         //showAddSongCard();
-
         //showSongDetailsCard(findSong("CançoV2"));
-        //showAddToPlaylistCard();
+        showAddToPlaylistCard();
         /*LinkedList<String> prueva = new LinkedList<>();
         prueva.add("prettySong");
         addSongPlaylist("provanova", prueva);*/
