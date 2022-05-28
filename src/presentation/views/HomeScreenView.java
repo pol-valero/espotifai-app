@@ -23,8 +23,8 @@ public class HomeScreenView {
     private final Color negre = new Color(48,48,48);
     private final Color vermell = new Color (232,74,77);
 
-    JPanel panel;
-    JPanel centralPanel;
+    private JPanel panel;
+    private JPanel centralPanel;
 
     public static final String BTN_STATISTICS = "BTN_STATISTICS";
     public static final String BTN_ACCOUNTMANAGER = "BTN_ACCOUNTMANAGER";
@@ -315,7 +315,6 @@ public class HomeScreenView {
             miniPanel.setBackground(negre);
 
             panel.add(miniPanel);
-            //buttons.get(i).setActionCommand(); todo
         }
 
         JScrollPane scrollPane = new JScrollPane(panel,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

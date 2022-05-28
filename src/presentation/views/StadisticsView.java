@@ -7,6 +7,7 @@ import presentation.controllers.StadisticViewController;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,8 +22,20 @@ import java.util.List;
 public class StadisticsView {
     private final JPanel mainViewCenter;
     private final CardLayout cardManager;
+
     private final Color negre = new Color(48,48,48);
     private final Color vermell = new Color (232,74,77);
+
+    private JPanel centralPanel;
+    private JPanel panel;
+
+    public static final String BTN_HOME = "BTN_HOME";
+    public static final String BTN_ACCOUNTMANAGER = "BTN_ACCOUNTMANAGER";
+
+    private JButton homeBtn;
+    private JButton accManBtn;
+
+    private ActionListener actionListener; //todo ?¿
 
     /**
      * Constructor to create StadisticsView
@@ -46,10 +59,10 @@ public class StadisticsView {
      */
     private void configureView() {
         //Creation of main panels
-        JPanel panel = new JPanel();
+        panel = new JPanel();
         panel.setLayout(new BorderLayout());
         JPanel westernPanel = westernPanelConfiguration();
-        JPanel centralPanel = centralPanelConfiguration(new LinkedList<>());
+        centralPanel = centralPanelConfiguration(new LinkedList<>());
         JPanel northernPanel = northernPanelConfiguration();
 
         panel.add(northernPanel,BorderLayout.NORTH);
@@ -67,8 +80,6 @@ public class StadisticsView {
      * @return JPanel with the elements that will be in the north of this view added
      */
     private JPanel northernPanelConfiguration() {
-        //Fonts, colours and sizes
-        Font titols = new Font("Trebuchet MS", Font.PLAIN, 65);
 
         JPanel northernPanel = new JPanel();
         BoxLayout northernLayout = new BoxLayout(northernPanel,BoxLayout.X_AXIS);
@@ -77,7 +88,7 @@ public class StadisticsView {
         northernPanel.setBorder(new EmptyBorder(new Insets(50, 250, 0, 50)));
 
         JLabel homeLabel = new JLabel("Stadistics");
-        homeLabel.setFont(titols);
+        homeLabel.setFont( new Font("Tahoma", Font.PLAIN, 65));
         homeLabel.setForeground(Color.white);
 
         northernPanel.add(homeLabel);
@@ -94,8 +105,9 @@ public class StadisticsView {
      */
     private JPanel centralPanelConfiguration(LinkedList<Genre> genres) {
 
-        int maxValue =36;
-        //int maxValue = genres.get(0).getAmount();
+        int maxValue = genres.get(0).getAmount();
+        int maxWidth = 1000;
+        int rowHeight = 50;
 
         //Central panel config
         JPanel centralPanel = new JPanel();
@@ -107,7 +119,7 @@ public class StadisticsView {
         //rowPanel config
         JPanel rowPanel = new JPanel();
 
-        GridLayout rowLayout = new GridLayout(0,1,0,20);//change 10
+        GridLayout rowLayout = new GridLayout(0,1,0,20);
         Border outsideBorder= new MatteBorder(1, 1, 1, 1, vermell);
         Border insideBorder = new EmptyBorder(10, 10, 0, 10);
         Border compund = new CompoundBorder(outsideBorder,insideBorder);
@@ -124,7 +136,7 @@ public class StadisticsView {
         genrePanel.setBackground(negre);
 
         //Scale panel x-axis numbers
-        JPanel scalePanel =createScalePanel(maxValue);//todo passa el nombre màxim
+        JPanel scalePanel = createScalePanel(maxValue,maxWidth);
 
         GridLayout scaleLayout = new GridLayout(1,0,0,0);
         scalePanel.setLayout(scaleLayout);
@@ -134,15 +146,10 @@ public class StadisticsView {
         scalePanel.setBorder(new EmptyBorder(0,65,0,130));
 
 
-        //todo treure valor de la linkedlist
-        int maxWidth = 1000;
-        int rowHeight = 50;
+        for(int i=0; i < genres.size(); i++){//Adding rows and their respective genre name
 
-        for(int i=1; i < 10+1; i++){//Adding rows and their respective genre name
-
-            String genreName = "Genre"+i;
-            int value = (maxValue/10)*i;
-
+            String genreName = genres.get(i).getGenre();
+            int value = genres.get(i).getAmount();
 
             JLabel valueLabel = new JLabel(String.valueOf(value));
             valueLabel.setHorizontalTextPosition(JLabel.RIGHT);
@@ -181,20 +188,21 @@ public class StadisticsView {
      *
      * @return the specific JPanel in which each playlist fits
      */
-    private JPanel createScalePanel(int amount) {
+    private JPanel createScalePanel(int amount, int maxWidth) {
+        int idealWidth = maxWidth/amount;
+
         JPanel scalePanel = new JPanel();
         scalePanel.setLayout(new FlowLayout());
         scalePanel.setBorder(new EmptyBorder(new Insets(0,30,0,80)));
 
         for(int i=1; i < amount+1;i++ ){
-            JPanel panel1 = new JPanel();
+            JPanel panel = new JPanel();
             JLabel label = new JLabel(i+"");
             label.setAlignmentX(Component.RIGHT_ALIGNMENT);
-            panel1.add(label);
-            panel1.setPreferredSize(new Dimension(100,40));
-            panel1.setBackground(Color.white);
-            panel1.setBorder(new LineBorder(Color.black));
-            scalePanel.add(panel1);
+            panel.add(label);
+            panel.setPreferredSize(new Dimension(idealWidth,40));
+            panel.setBackground(negre);
+            scalePanel.add(panel);
         }
 
         return scalePanel;
@@ -208,9 +216,6 @@ public class StadisticsView {
      * @return JPanel with the elements that will be in the west of this view added
      */
     private JPanel westernPanelConfiguration() {
-        //Fonts, colours and sizes
-        Font titols = new Font("Trebuchet MS", Font.PLAIN, 36);
-        Font text = new Font("Gulim", Font.PLAIN, 24);
 
         JPanel westernPanel = new JPanel();
         BoxLayout westernLayout = new BoxLayout(westernPanel,BoxLayout.Y_AXIS);
@@ -226,12 +231,14 @@ public class StadisticsView {
 
         GridBagConstraints constraints = new GridBagConstraints();
 
-        JButton stadisticsBtn = createButton("Home");
-        JButton accManBtn = createButton("Account Manager");
+        homeBtn = createButton("Home");
+        homeBtn.setActionCommand(BTN_HOME);
+        accManBtn = createButton("Account Manager");
+        accManBtn.setActionCommand(BTN_ACCOUNTMANAGER);
 
         constraints.gridx=0;
         constraints.gridy=0;
-        buttonsPanel.add(stadisticsBtn,constraints);
+        buttonsPanel.add(homeBtn,constraints);
 
         constraints.gridx=0;
         constraints.gridy=1;
@@ -279,7 +286,9 @@ public class StadisticsView {
      *                              link the listeners of this view with the Controller
      */
     public void registerController(StadisticViewController stadisticViewController) {
-
+        homeBtn.addActionListener(stadisticViewController);
+        accManBtn.addActionListener(stadisticViewController);
+        actionListener= stadisticViewController; //todo ?¿
     }
 
     /**
@@ -291,7 +300,10 @@ public class StadisticsView {
      *
      */
     public void showCard(LinkedList<Genre> genres) {
-
+        panel.remove(centralPanel);
+        centralPanel = centralPanelConfiguration(genres);
+        panel.add(centralPanel,BorderLayout.CENTER);
+        mainViewCenter.revalidate();
         cardManager.show(mainViewCenter,"stadisticsCard");
     }
 }
