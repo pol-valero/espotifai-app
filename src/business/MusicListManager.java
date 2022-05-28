@@ -8,13 +8,31 @@ import persistence.MusicListDAO;
 import java.util.LinkedList;
 import java.util.List;
 
-
+/**
+ * Class capable of managing everything related to the functionalities of a playlist. Main class when it comes to communication
+ * between upper layers and persistence layer
+ */
 public class MusicListManager {
+    /**
+     * Object will be bringing method to apply functionalities to the persistence layer
+     */
     private MusicListDAO  musicListDAO = new MusicListDatabaseDAO();
 
+    /**
+     *Object that is used to save the current playlist the user is using
+     */
     private Playlist currentPlaylist;
+
+    /**
+     * Name of the current playlist
+     */
     private String currentPlaylistName;
 
+    /**
+     *Method used for getting all playlist which the current user is not the owner.
+     * @param idUser Id of the current user
+     * @return Linkedlist of String corresponding to the name of all public playlist
+     */
     public LinkedList<String> loadPublicPlaylist(int idUser){
         LinkedList<String> publicPlaylistNames = new LinkedList<>();
         for (Playlist playlist: musicListDAO.loadPublicPlaylist(idUser)) {
@@ -23,6 +41,11 @@ public class MusicListManager {
         return  publicPlaylistNames;
     }
 
+    /**
+     *Method used for getting all playlist which the current user is the owner.
+     * @param idUser Id of the current user
+     * @return Linkedlist of String corresponding to the name of all playlist of the user
+     */
     public LinkedList<String> loadUserPlaylist(int idUser){
         LinkedList<String> userPlaylistNames = new LinkedList<>();
         for (Playlist playlist: musicListDAO.loadUserPlaylist(idUser)) {
@@ -31,10 +54,21 @@ public class MusicListManager {
         return userPlaylistNames;
     }
 
+    /**
+     * Method to load all songs of the data base
+     * @return List of songs corresponding to all the songs of the system
+     */
     public List<Song> loadAllMusic(){
         return musicListDAO.loadAllMusic();
     }
 
+    /**
+     * Method to add a list of songs into a playlist and save it in persistence layer
+     * @param playlistName Name of the playlist where the songs will be saved
+     * @param songNameList List of objects songs which will be saved
+     * @param idUser id of the current user. This parameter is relevant as only the current user is able to add songs to
+     *               their own playlists.
+     */
     public void addSongPlaylist(String playlistName, List<String> songNameList, int idUser){
         Playlist playlist = findUserPlaylist(playlistName, idUser);
         for (int i = 0; i < songNameList.size(); i++) {
@@ -53,6 +87,13 @@ public class MusicListManager {
 
     }
 
+    /**
+     * Method to delete a list of songs into a playlist and delete it in persistence layer
+     * @param playlistName Name of the playlist where the songs will be deleted
+     * @param songName List of objects songs which will be deleted
+     * @param idUser id of the current user. This parameter is relevant as only the current user is able to delete songs of
+     *               their own playlists.
+     */
     public void deleteSongPlaylist(String playlistName, List<String> songName, int idUser){
         Playlist playlist = findUserPlaylist(playlistName, idUser);
         List<Song> songs = findSong(songName);
@@ -64,6 +105,13 @@ public class MusicListManager {
         }
     }
 
+    /**
+     * Method that finds the object playlist by giving a name to search and the user id (owner). It
+     * will search first in the users playlist and then in the public ones.
+     * @param playlistName String name of the playlist to find
+     * @param idUser Integer Id of the user
+     * @return Playlist that has been found. Null in case it has not.
+     */
     public Playlist findPlaylist(String playlistName, int idUser){
         Playlist playlist = findUserPlaylist(playlistName, idUser);
 
@@ -78,14 +126,29 @@ public class MusicListManager {
         return null;
     }
 
+    /**
+     * Method to delete a playlist in persistence
+     * @param playlistName String name of the playlist to delete
+     */
     public void deletePlaylist(String playlistName){
             musicListDAO.deletePlaylist(playlistName);
     }
 
+    /**
+     * Method to create a playlist in persistence
+     * @param playlistName Playlist name
+     * @param idUser Id of the user who has created the playlist (owner)
+     */
     public void createPlaylist(String playlistName, int idUser){
             musicListDAO.createPlaylist(playlistName, idUser);
     }
 
+    /**
+     * Method to get a list of objects song corresponding to a playlist
+     * @param playlistName Name of the playlist
+     * @param ideUser Integer corresponding the Id of the user
+     * @return List of objects songs
+     */
     public List<Song> loadMusicPlaylist(String playlistName, int ideUser){
         Playlist playlist = findPlaylist(playlistName, ideUser);
         if(playlist != null){
@@ -101,6 +164,11 @@ public class MusicListManager {
         return null;
     }
 
+    /**
+     * Method that loads a list og songs which name matches a given string
+     * @param filterName String name of reference to do the research
+     * @return List of Songs whose name matches
+     */
     public List<Song> loadSearchMusic(String filterName){
         List<Song> songs = musicListDAO.loadAllMusic();
         List<Song> searchSong = new LinkedList<>();
@@ -118,7 +186,12 @@ public class MusicListManager {
         return null;
     }
 
-
+    /**
+     * Method that finds a user's playlist in persistence
+     * @param playlistName Playlist name to find
+     * @param idUser Id of the user
+     * @return Playlist which its name and the given string matches
+     */
     private Playlist findUserPlaylist(String playlistName, int idUser){
         System.out.println(("id user = " + idUser));
         List<Playlist> playlists = new LinkedList<>();
@@ -136,6 +209,11 @@ public class MusicListManager {
         return null;
     }
 
+    /**
+     * Method to find a songs
+     * @param songName List of name of songs to find
+     * @return List of objects songs which name mathces the given list of strings
+     */
     private List<Song> findSong(List<String> songName){
         List<Song> songs = musicListDAO.loadAllMusic();
         List<Song> newSong = new LinkedList<>();
@@ -157,6 +235,12 @@ public class MusicListManager {
         return newSong;
     }
 
+    /**
+     * Method to check is a Playlist object exists with the name given to the method
+     * @param playlistName String name of the playlist to find
+     * @param idUser Integer Id user of the current user
+     * @return boolean true when there has been a match, false in opposite case
+     */
     public boolean findPlaylistName(String playlistName, int idUser){
 
         if(findPlaylist(playlistName, idUser) != null){
@@ -165,6 +249,13 @@ public class MusicListManager {
         return false;
     }
 
+    /**
+     * Method to find one public playlist
+     * @param playlistName String name of the playlist to find
+     * @param idUser Integer id user
+     * @return Object Playlist corresponding to the playlist who's name macthes the given string. In
+     * case there is no match, returns null.
+     */
     private Playlist findOnePublicPlaylist(String playlistName , int idUser){
         List<Playlist> playlistList = musicListDAO.loadPublicPlaylist(idUser);
 
@@ -178,10 +269,21 @@ public class MusicListManager {
         return null;
     }
 
+    /**
+     * Method to change a playlist name
+     * @param currentName String current playlist name to change
+     * @param newName String of the new name of the playlist
+     */
     public void changePlaylistName(String currentName, String newName){
         musicListDAO.changePlaylistName(currentName, newName);
     }
 
+    /**
+     * Method that checks if a plyalist of public (the current user is not the owner) or not
+     * @param playlistName String name of playlist to find and check
+     * @param idUser Id of the current user
+     * @return boolean true in case the playlist with matching names is public, false in the opposite case
+     */
     public boolean isPublicPlaylist(String playlistName, int idUser) {
        Playlist playlist = findPlaylist(playlistName, idUser);
        if (playlist.getUserId() == idUser) {
@@ -191,6 +293,11 @@ public class MusicListManager {
        }
     }
 
+    /**
+     * Method to load all songs of the current user
+     * @param idUser Id of the user
+     * @return List of objects songs which the current user is the owner
+     */
     private List<Song> loadAllUserSongs (int idUser) {
         List<Song> userSongs = new LinkedList<>();
         List<Song> allSongs = loadAllMusic();
@@ -202,16 +309,31 @@ public class MusicListManager {
         return userSongs;
     }
 
+    /**
+     * Method to know the current playlist the user is using
+     * @return String name of the current playlist
+     */
     public String getCurrentPlaylist () {
         //return currentPlaylist.getName();
         return currentPlaylistName;
     }
 
+    /**
+     * Method to set the current playlist the user is using to a certain name
+     * @param playlistName String name of the new current playlist
+     * @param idUser Integer id of the user
+     */
     public void setCurrentPlaylist (String playlistName, int idUser) {
         //currentPlaylist = findPlaylist(playlistName, idUser);
         currentPlaylistName = playlistName;
     }
 
+    /**
+     * Method to load all songs of an specific playlist
+     * @param playlistName String name of the playlist
+     * @param ideUser Integer Id of the current user
+     * @return List of objects songs
+     */
     public List<Song> loadMusicOnePlaylist(String playlistName, int ideUser){
 
         Playlist playlist = findUserPlaylist(playlistName, ideUser);
@@ -220,6 +342,13 @@ public class MusicListManager {
         return musicListDAO.loadMusicOnePlaylist(playlist.getId());
     }
 
+    /**
+     * Method to change the position of a song in a playlist and save it in persistence
+     * @param playlistName Name of the playlist
+     * @param position Integer corresponding to the previous position of the song
+     * @param upDown Integer of who many positions above or under the song must be set
+     * @param ideUser Integer id of the current user
+     */
     public void moveSongInPlaylist(String playlistName, int position, int upDown, int ideUser){
         Playlist playlist = findUserPlaylist(playlistName, ideUser);
         List<Song> songs = musicListDAO.loadMusicOnePlaylist(playlist.getId());
@@ -232,6 +361,10 @@ public class MusicListManager {
 
     }
 
+    /**
+     * Method to delete a song from all existing playlist where it belonged to
+     * @param songName String name of the song
+     */
     public void deleteSongAllPlaylist(String songName){
         List<Song> songs = loadAllMusic();
         for (Song song: songs){
@@ -241,6 +374,12 @@ public class MusicListManager {
         }
     }
 
+    /**
+     * Method to load all songs which have not been added yet to a certain playlist
+     * @param playlistName Name of the playlist
+     * @param idUser Integer Id of the user
+     * @return List of songs corresponding to the songs that have not been added yet
+     */
     public List<Song> loadAllNotAlreadyAddedSong(String playlistName, int idUser){
         List<Song> songPlaylist = loadMusicPlaylist(playlistName, idUser);
 

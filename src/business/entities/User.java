@@ -11,8 +11,19 @@ import java.security.NoSuchAlgorithmException;
 public class User {
 
     private int id;
+    /**
+     * String name of the user
+     */
     private String name;
+
+    /**
+     * String email of the user
+     */
     private String email;
+
+    /**
+     * String password of the user
+     */
     private String password;
 
     public User(String name, String email, String password) {

@@ -27,26 +27,72 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Clase encargada de gestionar la informacion de Song y Playlist
+ * Class responsable for the management of information of songs and playlist
  */
 public class MusicManager implements Runnable{
-
+    /**
+     * Object musicDAO, used for managing information related to songs and capable of communicate between
+     * persistence layer with upper layers
+     */
     private MusicDAO musicDAO = new MusicDatabaseDAO();
+
+    /**
+     * Object MusiclistDAO, used for managing information related to playlist and capable of
+     * communicate persistence with upper layers.
+     */
     private MusicListDAO musicListDAO = new MusicListDatabaseDAO();
 
+    /**
+     * Object Song which corresponds to the current song playing
+     */
     private Song currentSong;
+    /**
+     * Object Music player which will be facilitating functionalities of reproduction of files
+     */
     private MusicPlayer musicPlayer;
+    /**
+     * Boolean true when the user is currently using a playlist
+     */
     private boolean playlist;
+    /**
+     * List of songs which the user will be listening to if clicking previous or next song
+     */
     private List<Song> songs;
+    /**
+     * Boolean true means that the user asked for the song to pause
+     */
     private boolean paused;
-    private int position;
-    private Song createSong;
-    private boolean loop;
-    private Thread thread;
-    private boolean threadStatus;
 
+    /**
+     * Integer position meaning what current position of the song is being played
+     */
+    private int position;
+
+    /**
+     * Object song for the creation of new songs
+     */
+    private Song createSong;
+
+    /**
+     * Boolean true meaning the song, went ending; must continue playing
+     */
+    private boolean loop;
+    /**
+     * Thread of the reproduction of the song
+     */
+    private Thread thread;
+    /**
+     * boolean indicating the state of the thread
+     */
+    private boolean threadStatus;
+    /**
+     * String of song names used for various purposes.
+     */
     private String selectedSongName;
 
+    /**
+     * Constructor
+     */
     public MusicManager () {
         //System.out.println(getSongLenght());
         this.loop = false;
@@ -58,14 +104,26 @@ public class MusicManager implements Runnable{
 
     }
 
+    /**
+     * Getter for current song
+     * @return Object song
+     */
     public Song getCurrentSong() {
         return currentSong;
     }
 
+    /**
+     * Method to change the current song to a given one
+     * @param song Object song which will be the new current one
+     */
     public void changeCurrentSong(Song song){
         this.currentSong = song;
     }
 
+    /**
+     * Method to load stadistics from persistence
+     * @return List of objects genres used for generating stadistics
+     */
     public List<Genre> loadStadistc() {
         LinkedList<Genre> stadistic = (LinkedList<Genre>) musicDAO.loadStadistic();
         stadistic.sort(Comparator.reverseOrder());
@@ -81,7 +139,11 @@ public class MusicManager implements Runnable{
     }
     //ahora
 
-
+    /**
+     * Method to load the information related to a song
+     * @param songName String name of the song which the method will look for
+     * @return Song with matching names. In case it was not found, returns null
+     */
     public Song loadSongInformation(String songName){
         List<Song> songs = musicListDAO.loadAllMusic();
 
@@ -93,7 +155,10 @@ public class MusicManager implements Runnable{
         return null;
     }
 
-
+    /**
+     * Method to create a song and save it into persistence
+     * @param song Object song
+     */
     public void createSong(Song song) {
         this.createSong = song;
         boolean existGenre = false;
@@ -130,7 +195,10 @@ public class MusicManager implements Runnable{
         createSong = null;
     }
 
-
+    /**
+     * Method to delete a song a user had added
+     * @param song Song to delete from persistence
+     */
     public void deleteUserAddedSong(Song song){
         List<Genre> stadistic = musicDAO.loadStadistic();
 
@@ -152,6 +220,10 @@ public class MusicManager implements Runnable{
         }
     }
 
+    /**
+     * Method to insert an ID to a singer
+     * @param song Song object
+     */
     private void insertIdSingerAlbum(Song song){
         int idSinger = musicDAO.loadIdSinger(song.getSinger());
 
@@ -165,6 +237,9 @@ public class MusicManager implements Runnable{
         insertIdAlbum();
     }
 
+    /**
+     * Method to insert an ID to an album
+     */
     private void insertIdAlbum(){
         System.out.println("el nombre del album es = " + createSong.getAlbum());
         int idAlbum = musicDAO.loadIdAlbum(createSong.getAlbum());
@@ -180,6 +255,11 @@ public class MusicManager implements Runnable{
         }
     }
 
+    /**
+     * Method to find in persistence the existence of a song
+     * @param songName String name of the song used for finding it in persistence
+     * @return boolean true in case there's a match, false for opposite case
+     */
     public boolean findSongName(String songName) {
         if (loadSongInformation(songName) != null) {
             return true;
@@ -187,6 +267,11 @@ public class MusicManager implements Runnable{
         return false;
     }
 
+    /**
+     * Method to check if a file path exists or not
+     * @param path String corresponding to the file path
+     * @return boolean true in case the file path exsists. False for the opposite case
+     */
     boolean findPath(String path) {
         File file = new File(path);
 
@@ -198,6 +283,9 @@ public class MusicManager implements Runnable{
 
     //todo para la reproduccion de musica
 
+    /**
+     * Method used when the user wants to pause the song
+     */
     public void pausedSong(){ //para cuando se le da al boton de pausar  reproducir
         System.out.println("pausa vale = " + paused);
         paused = !paused;
@@ -209,7 +297,11 @@ public class MusicManager implements Runnable{
         }
     }
 
-
+    /**
+     * Method to know the duration of a song
+     * @param filePath String corresponding to the file path of the song file
+     * @return array of interger where [0] corresponds to the minutes and [1] to the seconds of duration
+     */
     public int[] songTime(String filePath){
         String filename = filePath;
         Header h = null;
@@ -244,9 +336,13 @@ public class MusicManager implements Runnable{
     }
 
 
-    //podria ser un boolean y retorna false si falla en el path
+    /**
+     * Method to start playing the previous or next song in the music list
+     * @param next Integer corresponding to the difference from final to original position of the song to be played. Should be 1 or -1,
+     *  respectively to next and previous position
+     */
     public void previusNextSong(int next){ //para la parte de la barra de reproduccion las fleechas
-
+        //podria ser un boolean y retorna false si falla en el path
         int position = this.position + next; //next debe ser uno o menos uno
 
         if ( position >= songs.size() || position < 0) {
@@ -259,6 +355,12 @@ public class MusicManager implements Runnable{
         playNewSong();
     }
 
+    /**
+     * Method to start playing a song.
+     * @param playlist boolean that for true means that the user is currently using a playlist
+     * @param songs List of song objects which the user will be able to play
+     * @param position Integer corresponding to the position of the song in the music list which the user want to play
+     */
     public void playSong(boolean playlist, List<Song> songs, int position){
         this.playlist = playlist;
         this.songs = songs;
@@ -267,10 +369,18 @@ public class MusicManager implements Runnable{
         playNewSong();
     }
 
+    /**
+     * Method to change the current song
+     * @param position Integer position of the new current song
+     */
     private void changeCurrentSong(int position){
         currentSong = songs.get(position);
     }
 
+    /**
+     * Method to play the song
+     * @return boolean true in case there were no problems, false for opposite case
+     */
     private boolean playNewSong() { //podria ser void si no queremos mirar si el path falla
         try {
 
@@ -287,7 +397,9 @@ public class MusicManager implements Runnable{
         }
     }
 
-
+    /**
+     * Method to start playing next song when the current one has finished
+     */
     public void automaticSongChange(){ //depende donde este el Thread sera publico o priv
         musicPlayer.stop();
         paused = false;
@@ -307,19 +419,32 @@ public class MusicManager implements Runnable{
         }
     }
 
+    /**
+     * Method to set the current song in a loop
+     */
     public void loop(){
         this.loop = !loop;
     }
 
-
+    /**
+     * Getter for selected song names
+     * @return
+     */
     public String getSelectedSongName() {
         return selectedSongName;
     }
 
+    /**
+     * Setter for selected song names
+     * @param selectedSongName String of song names that have been selected
+     */
     public void setSelectedSongName(String selectedSongName) {
         this.selectedSongName = selectedSongName;
     }
 
+    /**
+     * Method to start the thread
+     */
     public void startingThread(){
         System.out.println("iniciamos thread");
         System.out.println("path de la cancion = " +currentSong.getFilePath());
@@ -329,6 +454,9 @@ public class MusicManager implements Runnable{
 
     }
 
+    /**
+     * Method to stop the thread
+     */
     public void stopThread(){
         System.out.println("hola?");
         musicPlayer.close();

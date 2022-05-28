@@ -7,9 +7,21 @@ import java.util.List;
  * Class in charged of managing information related to Playlist objects
  */
 public class Playlist {
+    /**
+     * Integer id of the playlist
+     */
     private int id;
+    /**
+     * String name of the playlist
+     */
     private String name;
+    /**
+     * Integer id of the user and owner of the song
+     */
     private int id_user;
+    /**
+     * String name of the owner
+     */
     private String owner;
 
     public Playlist(int id, String name, int id_user, String owner){
