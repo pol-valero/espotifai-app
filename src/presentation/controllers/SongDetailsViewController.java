@@ -29,17 +29,19 @@ public class SongDetailsViewController implements ActionListener, MouseListener 
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String currentPlaylist = controller.getCurrentPlaylist();
+
         switch (e.getActionCommand()) {
             case SongDetailsView.BTN_ADDPLAYLIST:
-                System.out.println("addplaylist");
+                controller.showAddToPlaylistCard();
                 break;
 
             case SongDetailsView.BTN_ACCOUNT_MANAGEMENT:
-                System.out.println("management");
+                controller.showLogoutCard();
                 break;
 
             case SongDetailsView.BTN_GO_BACK:
-                System.out.println("goback");
+                controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
                 break;
 
         }

@@ -63,7 +63,7 @@ public class UIController {
         //showMusicListCard();
         //showAddSongCard();
 
-        showSongDetailsCard(findSong("CançoV2"));
+        //showSongDetailsCard(findSong("CançoV2"));
         //showAddToPlaylistCard();
         /*LinkedList<String> prueva = new LinkedList<>();
         prueva.add("prettySong");
