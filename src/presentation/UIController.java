@@ -33,6 +33,7 @@ public class UIController {
     private SongDetailsViewController songDetailsViewController;
     private AddToPlaylistViewController addToPlaylistViewController;
     private StadisticViewController stadisticViewController;
+    private PlayBarController playBarController;
 
     public void run () {
         JFrame topContainer = new JFrame();
@@ -40,10 +41,14 @@ public class UIController {
         CardLayout jFrameCardManager = new CardLayout();
         CardLayout cardManager = new CardLayout();
 
+        ReproductionBar reproductionBar = new ReproductionBar();
+
         loginViewController = new LoginViewController(this, topContainer, jFrameCardManager);
         signupViewController = new SignupViewController(this, topContainer, jFrameCardManager);
 
-        mainViewController = new MainViewController(topContainer, jFrameCardManager, cardManager, mainViewCenter, new ReproductionBar());
+        playBarController = new PlayBarController(this, reproductionBar);
+
+        mainViewController = new MainViewController(topContainer, jFrameCardManager, cardManager, mainViewCenter, reproductionBar);
 
         homescreenViewController = new HomescreenViewController(this,mainViewCenter,cardManager);
         logoutViewController = new LogoutViewController(this, mainViewCenter, cardManager);
@@ -227,8 +232,11 @@ public class UIController {
         businessFacade.addSongPlaylist(playlistName, songNameList);
     }
 
-    public void playMusic(String playlistName, int position){
+    /*public void playMusic(String playlistName, int position){
         businessFacade.playMusic(playlistName, position);
+    }*/
+    public void playMusic() {
+        businessFacade.playMusic();
     }
 
     public void previusNextSong(int next){ //todo para la barra de reproduccion alante o atras

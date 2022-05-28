@@ -1,5 +1,7 @@
 package presentation.Components;
 
+import presentation.controllers.PlayBarController;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -14,14 +16,23 @@ import java.awt.image.BufferedImage;
  */
 public class ReproductionBar extends JPanel {
 
+    public static final String BTN_PLAY = "BTN_PLAY";
+    public static final String BTN_PAUSE = "BTN_PAUSE";
+    public static final String BTN_PREVIOUS_SONG = "BTN_PREVIOUS_SONG";
+    public static final String BTN_NEXT_SONG = "BTN_NEXT_SONG";
+
     private final Color negre = new Color(48,48,48);
 
-    JProgressBar bar;
-    JButton playPauseBtn;
-    JLabel songNameLab;
-    JLabel artistNameLab;
-    JLabel currentTimeLabel;
-    JLabel endTimeLabel;
+    private JProgressBar bar;
+
+    private JButton playPauseBtn;
+    private JButton previousSongBtn;
+    private JButton nextSongBtn;
+
+    private JLabel songNameLab;
+    private JLabel artistNameLab;
+    private JLabel currentTimeLabel;
+    private JLabel endTimeLabel;
 
     /**
      * Constructor to create ReproductionBar
@@ -141,9 +152,14 @@ public class ReproductionBar extends JPanel {
         mainBtns.setBackground(Color.gray);
 
 
-        JButton previousSongBtn = createRoundButton("images/iconGoBack.png",24,24);
-        playPauseBtn = createRoundButton("images/whenPlaying.png",24,24);
-        JButton nextSongBtn =createRoundButton("images/iconGoNext.png",24,24);
+        previousSongBtn = createRoundButton("images/iconGoBack.png",24,24);
+        previousSongBtn.setActionCommand(BTN_PREVIOUS_SONG);
+
+        playPauseBtn = createRoundButton("images/playButton.png",24,24);
+        playPauseBtn.setActionCommand(BTN_PLAY);
+
+        nextSongBtn =createRoundButton("images/iconGoNext.png",24,24);
+        nextSongBtn.setActionCommand(BTN_NEXT_SONG);
 
         mainBtns.add(previousSongBtn);
         mainBtns.add(playPauseBtn);
@@ -226,13 +242,15 @@ public class ReproductionBar extends JPanel {
 
 
     public void setPlayBtn(){
-        playPauseBtn.setIcon(getScaledImage("images/whenPlaying.png",25,25));
+        playPauseBtn.setIcon(getScaledImage("images/playButton.png",25,25));
+        playPauseBtn.setActionCommand(BTN_PLAY);
         revalidate();
 
     }
 
     public void setPauseBtn(){
-        playPauseBtn.setIcon(getScaledImage("images/whenPause.png",25,25));
+        playPauseBtn.setIcon(getScaledImage("images/pauseButton.png",25,25));
+        playPauseBtn.setActionCommand(BTN_PAUSE);
         revalidate();
     }
 
@@ -279,6 +297,12 @@ public class ReproductionBar extends JPanel {
 
         return minutes+":"+secondsL+secondsR;
 
+    }
+
+    public void registerController(PlayBarController playBarController) {
+        playPauseBtn.addActionListener(playBarController);
+        nextSongBtn.addActionListener(playBarController);
+        previousSongBtn.addActionListener(playBarController);
     }
 
 

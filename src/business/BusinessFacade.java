@@ -202,11 +202,11 @@ public interface BusinessFacade {
     /**
      * Method that reproduces a song given a playlist name and the position.
      *
-     * @param playlistName String name of the playlist were the song to be reproduced belongs.
-     * @param position     Integer corresponding to the position inside the List of songs of the corresponding
+     * @ playlistName String name of the playlist were the song to be reproduced belongs.
+     * @ position     Integer corresponding to the position inside the List of songs of the corresponding
      *                     playlist.
      */
-    void playMusic(String playlistName, int position);
+    void playMusic();
 
     /**
      * Method that reproduces the previous or next song of the current song been reproduced.
