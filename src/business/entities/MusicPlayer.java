@@ -145,4 +145,9 @@ public class MusicPlayer {
 
         }
     }
+
+    public boolean getfinisehedSong() {
+        return finishedSong;
+    }
 }
+

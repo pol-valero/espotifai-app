@@ -233,4 +233,8 @@ public class BusinessFacadelmpl implements BusinessFacade{
             deleteUserAddedSong(song);
         }
     }
+
+    public void loop(){
+        musicManager.loop();
+    }
 }

@@ -272,4 +272,6 @@ public interface BusinessFacade {
     public void deleteSongAllPlaylist(String songName);
 
     void deletePersonalSong(List<String> songNameList);
+
+    void loop();
 }
