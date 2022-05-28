@@ -52,9 +52,11 @@ public class MusicListController implements ActionListener, MouseListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        switch (e.getActionCommand()){
-            case MusicListView.BTN_SEARCH:
+        String currentPlaylist = controller.getCurrentPlaylist();
 
+        switch (e.getActionCommand()){
+
+            case MusicListView.BTN_SEARCH:
                 break;
 
             case MusicListView.BTN_STADISTICS:
@@ -75,8 +77,7 @@ public class MusicListController implements ActionListener, MouseListener {
                 break;
 
             case MusicListView.BTN_DELETE:
-                String playlistName = controller.getCurrentPlaylist();
-                controller.showRemovePlaylistCard(playlistName, controller.loadPlaylistMusic(playlistName).size());
+                controller.showRemovePlaylistCard(currentPlaylist, controller.loadPlaylistMusic(currentPlaylist).size());
                 break;
 
             case MusicListView.BTN_RENAMEPLAYLIST:
@@ -96,10 +97,8 @@ public class MusicListController implements ActionListener, MouseListener {
                 break;
 
             case MusicListView.BTN_ADD_SELECTED:
-                String currentPlaylist = controller.getCurrentPlaylist();
                 controller.addSongPlaylist(currentPlaylist, selectedSongs);
                 emptySelectedSongsList();
-                //Realment, aqui li estem dient que ens torni a mostrar "allSongs", no? Ja que la currentplaylist es all songs. Aixo esta malament
                 controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
                 //musicListView.returnToPreviousVariation();
                 break;
@@ -119,7 +118,8 @@ public class MusicListController implements ActionListener, MouseListener {
 
             case MusicListView.BTN_CANCEL:
                 emptySelectedSongsList();
-                musicListView.returnToPreviousVariation();
+                controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
+                //musicListView.returnToPreviousVariation();
                 break;
 
             case MusicListView.BTN_UP:
@@ -150,7 +150,9 @@ public class MusicListController implements ActionListener, MouseListener {
 
         //Potser seria interessant fer un "if" aqui per si es dona el cas que el nom es "AllSongs" doncs no es canvii el nom de la
         //currentPlaylist?  (en canvi, si que es interessant que per a MySongs es canvii).
-        controller.setCurrentPlaylist(songListName);
+        if(!songListName.equals("AllSongs")) {
+            controller.setCurrentPlaylist(songListName);
+        }
 
         musicListView.showCard(songList,songListName);
         chooseVariation(songListName);

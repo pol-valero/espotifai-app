@@ -4,8 +4,6 @@ import business.entities.Song;
 
 import javax.swing.*;
 import java.awt.*;
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 
@@ -17,7 +15,7 @@ public class SongDetailsView {
 
 
 
-    private final JFrame topContainer;
+    private final JPanel mainViewCenter;
     private final CardLayout cardManager;
     private JButton jbManagement = new JButton();
     private JButton jbAddPlaylist = new JButton();
@@ -34,11 +32,11 @@ public class SongDetailsView {
     Song innitializeSong = new Song(0, "", 0, "", 0,
             "", 0, "", 0, "", "", 0, 0, 0,"" );
 
-    public SongDetailsView (JFrame topContainer, CardLayout cardManager) {
-        this.topContainer = topContainer;
+    public SongDetailsView (JPanel mainViewCenter, CardLayout cardManager) {
+        this.mainViewCenter = mainViewCenter;
         this.cardManager = cardManager;
         configureView();
-        topContainer.pack();
+        //this.mainView.pack();
     }
 
     private void configureView() {
@@ -54,7 +52,7 @@ public class SongDetailsView {
         panel.add(southernPanel,BorderLayout.SOUTH);
         panel.add(centralPanel,BorderLayout.CENTER);
 
-        topContainer.getContentPane().add(panel, "songDetailsCard");
+        mainViewCenter.add(panel, "songDetailsCard");
 
     }
     private JPanel centralPanelConfiguration(String songLyrics , Song song, int minutesSongLength, int secondsSongLength) {
@@ -432,8 +430,9 @@ public class SongDetailsView {
         panel.remove(centralPanel);
         centralPanel = centralPanelConfiguration(songLyrics, song, minutesSongLength,secondsSongLength );
         panel.add(centralPanel,BorderLayout.CENTER);
-        topContainer.revalidate();
-        topContainer.getContentPane().add(panel);
-        topContainer.setVisible(true);
+        mainViewCenter.add(panel);
+        mainViewCenter.revalidate();
+        cardManager.show(mainViewCenter, "songDetailsCard");
+        //mainView.setVisible(true);
     }
 }

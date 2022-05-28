@@ -55,7 +55,8 @@ public class HomescreenViewController implements ActionListener {
                 break;
             default:
                 String playlistName = e.getActionCommand();
-                if (playlistName.equals("AllSongs") || playlistName.equals("MySongs")) {
+                controller.showMusicListCard(controller.loadPlaylistMusic(playlistName), playlistName);
+                /*if (playlistName.equals("AllSongs") || playlistName.equals("MySongs")) {
                     controller.showMusicListCard(controller.loadPlaylistMusic(playlistName), playlistName);
                 } else {
                     if (controller.isPublicPlaylist(playlistName)) {
@@ -63,7 +64,7 @@ public class HomescreenViewController implements ActionListener {
                     } else {
                         controller.showMusicListCard((LinkedList<Song>) controller.loadMusicOnePlaylist(playlistName), playlistName);
                     }
-                }
+                }*/
                 break;
         }
     }
