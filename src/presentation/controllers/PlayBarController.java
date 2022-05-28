@@ -37,6 +37,14 @@ public class PlayBarController implements ActionListener {
             case ReproductionBar.BTN_NEXT_SONG:
                 controller.previusNextSong(1);
                 break;
+
+            case ReproductionBar.BTN_SONG_REPETITION:
+                controller.loopSong();
+                break;
+
+            case ReproductionBar.BTN_PLAYLIST_REPETITION:
+                controller.loopPlaylist();
+                break;
         }
     }
 

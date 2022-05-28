@@ -20,6 +20,8 @@ public class ReproductionBar extends JPanel {
     public static final String BTN_PAUSE = "BTN_PAUSE";
     public static final String BTN_PREVIOUS_SONG = "BTN_PREVIOUS_SONG";
     public static final String BTN_NEXT_SONG = "BTN_NEXT_SONG";
+    public static final String BTN_SONG_REPETITION = "BTN_SONG_REPETITION";
+    public static final String BTN_PLAYLIST_REPETITION = "BTN_PLAYLIST_REPETITION";
 
     private final Color negre = new Color(48,48,48);
 
@@ -28,6 +30,9 @@ public class ReproductionBar extends JPanel {
     private JButton playPauseBtn;
     private JButton previousSongBtn;
     private JButton nextSongBtn;
+
+    private JButton songRepetition;
+    private JButton playlistRepetition;
 
     private JLabel songNameLab;
     private JLabel artistNameLab;
@@ -165,19 +170,21 @@ public class ReproductionBar extends JPanel {
 
         mainBtns.add(Box.createRigidArea(new Dimension(20,0)));
 
-        JButton indRepBtn = new JButton("IRB");
-        indRepBtn.setBackground(Color.gray);
-        indRepBtn.setPreferredSize(new Dimension(25,25));
-        indRepBtn.setIcon(getScaledImage("images/individualRepeticion.png",25,25));
-        mainBtns.add(indRepBtn);
+        songRepetition = new JButton();
+        songRepetition.setBackground(Color.gray);
+        songRepetition.setPreferredSize(new Dimension(25,25));
+        songRepetition.setIcon(getScaledImage("images/individualRepeticion.png",25,25));
+        songRepetition.setActionCommand(BTN_SONG_REPETITION);
+        mainBtns.add(songRepetition);
 
         mainBtns.add(Box.createRigidArea(new Dimension(10,0)));
 
-        JButton globalRepBtn = new JButton("Next");
-        globalRepBtn.setBackground(Color.gray);
-        globalRepBtn.setPreferredSize(new Dimension(25,25));
-        globalRepBtn.setIcon(getScaledImage("images/globalRepeticionIcon.png",25,25));
-        mainBtns.add(globalRepBtn);
+        playlistRepetition = new JButton();
+        playlistRepetition.setBackground(Color.gray);
+        playlistRepetition.setPreferredSize(new Dimension(25,25));
+        playlistRepetition.setIcon(getScaledImage("images/globalRepeticionIcon.png",25,25));
+        playlistRepetition.setActionCommand(BTN_PLAYLIST_REPETITION);
+        mainBtns.add(playlistRepetition);
 
         return mainBtns;
     }
@@ -301,6 +308,8 @@ public class ReproductionBar extends JPanel {
         playPauseBtn.addActionListener(playBarController);
         nextSongBtn.addActionListener(playBarController);
         previousSongBtn.addActionListener(playBarController);
+        playlistRepetition.addActionListener(playBarController);
+        songRepetition.addActionListener(playBarController);
     }
 
 

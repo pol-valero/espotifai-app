@@ -61,11 +61,11 @@ public class UIController {
         addToPlaylistViewController = new AddToPlaylistViewController(this, mainViewCenter, cardManager);
         stadisticViewController = new StadisticViewController(this, mainViewCenter, cardManager);
 
-        //initialSongSetup();
+        initialSongSetup();
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
         //showSignUpCard();
-        //showHomescreenCard();
+        showHomescreenCard();
         //showLoginCard();
         //showSignUpCard();
         //showMusicListCard();
@@ -80,6 +80,7 @@ public class UIController {
 
     //Esta funcion es "temporal". Solo sirve para que cuando iniciemos sesion directamente sin hacer login no salten errores para reproducir musica. Se tiene que quitar al final.
     private void initialSongSetup () {
+        playBarController.initialSongConfiguration();
         businessFacade.startingThread();
     }
 
@@ -311,6 +312,14 @@ public class UIController {
 
     public void moveSongInPlaylist (String playlistName, int songPosition, int upDown) {
         businessFacade.moveSongsInPlaylist(playlistName, songPosition, upDown);
+    }
+
+    public void loopSong () {
+        businessFacade.loop();
+    }
+
+    public void loopPlaylist () {
+        businessFacade.playlistLoop();
     }
 
 
