@@ -315,7 +315,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
         catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+
         } catch (org.json.simple.parser.ParseException e) {
             e.printStackTrace();
         } finally {
