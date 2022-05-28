@@ -1,5 +1,6 @@
 package presentation.controllers;
 
+import business.entities.Song;
 import presentation.Components.ReproductionBar;
 import presentation.UIController;
 
@@ -15,6 +16,7 @@ public class PlayBarController implements ActionListener {
         this.playBar = playBar;
         this.controller = controller;
         playBar.registerController(this);
+        initialSongConfiguration();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -24,7 +26,7 @@ public class PlayBarController implements ActionListener {
                 break;
 
             case ReproductionBar.BTN_PLAY:
-                controller.playMusic();
+                controller.pausedSong();
                 playBar.setPauseBtn();
                 break;
 
@@ -47,5 +49,10 @@ public class PlayBarController implements ActionListener {
     public void update(int currentMinutes, int currentSeconds){
         playBar.update(currentMinutes,currentSeconds);
 
+    }
+
+    private void initialSongConfiguration () {
+        Song firstSong =  controller.loadAllMusic().get(0);
+        reproduceNewSong(firstSong.getName(), firstSong.getMinutes(), firstSong.getSeconds());
     }
 }

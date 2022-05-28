@@ -52,7 +52,7 @@ public class SongDetailsViewController implements ActionListener, MouseListener 
     public void mouseClicked(MouseEvent e) {
         //canviar currentSong a la "selectedSong"
         //cridar a la funcio reproduir
-        System.out.println("reproduceSong");
+        controller.playMusic();
     }
 
     @Override

@@ -366,6 +366,10 @@ public class MusicManager implements Runnable{
         this.songs = songs;
         this.position = position;
         //changeCurrentSong(position);
+
+        //la "selectedSongName" es la cancion que se estava mostrando en la vista de "musicDetails" antes de darle a reproducir
+        currentSong = loadSongInformation(selectedSongName);
+
         playNewSong();
     }
 
