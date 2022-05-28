@@ -155,7 +155,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
     public void createSong(String name, String artist, String album, String genre, String filePath){ //todo añadir los lyrics
 
         int[] time = musicManager.songTime(filePath);
-        String lyrics = getLyrics();
+        String lyrics = getLyrics().replaceAll("'", "");
         Song song = new Song(name, artist, album, genre, filePath, lyrics, time[0], time[1]);
         song.setIdOwne(loginManager.getCurrentUSer().getId());
         song.setOwne(loginManager.getCurrentUSer().getName());
