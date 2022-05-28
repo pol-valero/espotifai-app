@@ -184,7 +184,8 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     public void playMusic(){
         String playlistName = musicListManager.getCurrentPlaylist();
-        String currentSongName = musicManager.getCurrentSong().getName();
+        System.out.println(playlistName);
+        String currentSongName = musicManager.getSelectedSongName();
         List<Song> songs = musicListManager.loadMusicPlaylist(playlistName, loginManager.getCurrentUSer().getId());
         int i = 0;
         int j = 0;

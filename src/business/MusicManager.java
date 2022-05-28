@@ -371,8 +371,10 @@ public class MusicManager implements Runnable{
         //changeCurrentSong(position);
 
         //la "selectedSongName" es la cancion que se estava mostrando en la vista de "musicDetails" antes de darle a reproducir
+        System.out.println("prova");
+        System.out.println(selectedSongName);
         currentSong = loadSongInformation(selectedSongName);
-
+        System.out.println(currentSong.getName());
         playNewSong();
     }
 

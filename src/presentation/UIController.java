@@ -81,7 +81,9 @@ public class UIController {
     private void initialSongSetup () {
         Song initialSong = businessFacade.loadAllMusic().get(0);
         businessFacade.setCurrentPlaylist("AllSongs");
-        businessFacade.setCurrentSong(initialSong);
+        businessFacade.setSelectedSongName(initialSong.getName());
+        //businessFacade.setCurrentSong(initialSong);
+        businessFacade.playMusic();
     }
 
     private void showMainViewCard() {
