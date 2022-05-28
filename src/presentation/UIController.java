@@ -255,7 +255,7 @@ public class UIController {
     }
 
     public List<Song> loadMusicOnePlaylist(String playlistName){
-        businessFacade.loadMusicOnePlaylist(playlistName);
+        return businessFacade.loadMusicOnePlaylist(playlistName);
     }
 
 }
