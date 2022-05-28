@@ -108,7 +108,8 @@ public class MusicListManager {
         if (songs.size() != 0 ){
             for(Song song: songs){
                 if(filterName.equals(song.getName()) || filterName.equals(song.getGenre())
-                        || filterName.equals(song.getAlbum()) || filterName.equals(song.getSinger())) {
+                        || filterName.equals(song.getAlbum()) || filterName.equals(song.getSinger())
+                        || filterName.equals(song.getOwne())) {
                     searchSong.add(song);
                 }
             }
