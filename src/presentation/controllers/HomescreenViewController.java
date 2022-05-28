@@ -1,5 +1,6 @@
 package presentation.controllers;
 
+import business.entities.Song;
 import presentation.UIController;
 import presentation.views.HomeScreenView;
 
@@ -54,7 +55,15 @@ public class HomescreenViewController implements ActionListener {
                 break;
             default:
                 String playlistName = e.getActionCommand();
-                controller.showMusicListCard(controller.loadPlaylistMusic(playlistName), playlistName);
+                if (playlistName.equals("AllSongs") || playlistName.equals("MySongs")) {
+                    controller.showMusicListCard(controller.loadPlaylistMusic(playlistName), playlistName);
+                } else {
+                    if (controller.isPublicPlaylist(playlistName)) {
+                        controller.showMusicListCard(controller.loadPlaylistMusic(playlistName), playlistName);
+                    } else {
+                        controller.showMusicListCard((LinkedList<Song>) controller.loadMusicOnePlaylist(playlistName), playlistName);
+                    }
+                }
                 break;
         }
     }

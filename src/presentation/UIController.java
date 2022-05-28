@@ -60,9 +60,9 @@ public class UIController {
         //showMusicListCard();
         //showAddSongCard();
 
-        LinkedList<String> prueva = new LinkedList<>();
+        /*LinkedList<String> prueva = new LinkedList<>();
         prueva.add("prettySong");
-        addSongPlaylist("provanova", prueva);
+        addSongPlaylist("provanova", prueva);*/
 
 
     }
