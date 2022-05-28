@@ -45,6 +45,7 @@ public class LogoutViewController implements ActionListener, MouseListener{
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()){
             case LogoutView.BTN_LOGOUT:
+                controller.logoutRequest();
                 controller.showLoginCard();
                 break;
             case LogoutView.BTN_DELETEACCOUNT:
