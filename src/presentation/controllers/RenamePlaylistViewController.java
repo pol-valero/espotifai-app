@@ -11,6 +11,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ * Controller for the RenamePlaylistView, the connection between the RenamePlaylistView and the UIController.
+ * Implementing an ActionListener and MouseListener.
+ *
+ * @author Pol Valero, Oriol Centeno , Adrià Estevam, Joaquim Balletbo and Manel Martos
+ * @version 1.0
+ */
 public class RenamePlaylistViewController implements ActionListener, MouseListener {
 
     private final RenamePlaylistView renamePlaylistView;

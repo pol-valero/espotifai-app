@@ -6,6 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Class representing the RemovePlaylistView. This class contains all the methods and attributes
+ * needed to use and show the  RemovePlaylist View
+ *
+ * @author Pol Valero, Oriol Centeno , Adrià Estevam, Joaquim Balletbo and Manel Martos
+ * @version 1.0
+ */
 public class RemovePlaylistView {
 
     public static final String BTN_MANAGEMENT = "BTN_MANAGEMENT";
@@ -27,6 +34,14 @@ public class RemovePlaylistView {
     JPanel panel;
     JPanel centralPanel;
 
+    /**
+     * Constructor to create the RemovePlaylistView
+     * Creates the RemovePlaylistView linking it to the UIController. This function
+     * initializes the RemovePlaylistView.
+     *
+     * @param mainViewCenter this is the JPanel displayed in the Center of the mainView
+     * @param cardManager the cardManager is the component that manages when to show each view
+     */
     public RemovePlaylistView (JPanel mainViewCenter, CardLayout cardManager){
         this.mainViewCenter = mainViewCenter;
         this.cardManager = cardManager;
@@ -34,6 +49,11 @@ public class RemovePlaylistView {
         //this.mainViewCenter.pack();
     }
 
+    /**
+     * configureView is the main method of this class , creating the view and
+     * adding the view to the JPanel main view Center in order to be displayed.
+     *
+     */
     private void configureView() {
 
         //Colors, fonts and sizes
@@ -51,6 +71,16 @@ public class RemovePlaylistView {
         mainViewCenter.add(panel, "removePlaylistCard");
     }
 
+    /**
+     * centralPanelConfiguration configures the panel located at the center of the main panel
+     * of this view.
+     *
+     * @param playlistName the name of the playlist that can be deleted
+     *
+     * @param songNumber The number of songs of the playlist
+     *
+     * @return JPanel with the elements that will be in the center of this view added
+     */
     private JPanel centralPanelConfiguration(String playlistName, int songNumber) {
 
         Color negre = new Color(48, 48, 48);
@@ -186,6 +216,12 @@ public class RemovePlaylistView {
         return centralPanel;
 }
 
+    /**
+     * northernPanelConfiguration configures the panel located at the north of the main panel
+     * of this view.
+     *
+     * @return JPanel with the elements that will be in the north of this view added
+     */
     private JPanel northernPanelConfiguration() {
         //Fonts, colours and sizes
 
@@ -212,6 +248,12 @@ public class RemovePlaylistView {
         return northernPanel;
     }
 
+    /**
+     *  southernPanelConfiguration configures the panel located at the south of the main panel
+     * of this view.
+     *
+     * @return JPanel with the elements that will be in the south of this view added
+     */
     private JPanel southernPanelConfiguration() {
 
         //Fonts, colours and sizes
@@ -259,18 +301,12 @@ public class RemovePlaylistView {
 
     }
 
-
-    private Image getScaledImage(Image img, int wt, int ht) {
-        BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2 = resizedImg.createGraphics();
-
-        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2.drawImage(img, 0, 0, wt, ht, null);
-        g2.dispose();
-
-        return resizedImg;
-    }
-
+    /**
+     * registerController as it's name implies registers the three controllers
+     * of the AddSongView in order to be accessed from the removePlaylistController class
+     * @param removePlaylistController Is the parameter that will receive this class in order to
+     *                              link the listeners of this view with the Controller
+     */
     public void registerController (RemovePlaylistController removePlaylistController) {
         jbCancel.addActionListener(removePlaylistController);
         jbRemovePlaylist.addActionListener(removePlaylistController);
@@ -278,6 +314,15 @@ public class RemovePlaylistView {
     }
 
 
+    /**
+     * showCard  callas a method to
+     * introduces the current state of the mainViewCenter Frame in the cardManager
+     * and shows to the user the screen.
+     *
+     * @param playlistName Name of the playlist.
+     * @param songNumber Number of songs of the playlist.
+     *
+     */
     public void showCard(String playlistName, int songNumber) {
         panel.remove(centralPanel);
         centralPanel = centralPanelConfiguration(playlistName, songNumber);

@@ -6,7 +6,13 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 
-
+/**
+ * Class representing the SignupView. This class contains all the methods and attributes
+ * needed to use and show the  SignupView View
+ *
+ * @author Pol Valero, Oriol Centeno , Adrià Estevam, Joaquim Balletbo and Manel Martos
+ * @version 1.0
+ */
 public class SignupView {
 
     private final JFrame topContainer;
@@ -27,7 +33,14 @@ public class SignupView {
     private JLabel jlPasswordFormatError = new JLabel();
 
 
-
+    /**
+     * Constructor to create the SignupView
+     * Creates the SignupView linking it to the UIController. This function
+     * initializes the SignupView.
+     *
+     * @param topContainer this is the JPanel displayed in the Center of the mainView
+     * @param jFrameCardManager the cardManager is the component that manages when to show each view
+     */
     public SignupView (JFrame topContainer, CardLayout jFrameCardManager) {
         this.topContainer = topContainer;
         this.jFrameCardManager = jFrameCardManager;
@@ -35,6 +48,11 @@ public class SignupView {
         topContainer.pack();
     }
 
+    /**
+     * configureView is the main method of this class , creating the view and
+     * adding the view to the JPanel main view Center in order to be displayed.
+     *
+     */
     private void configureView() {
         //Colors, fonts and sizes
         Color negre = new Color(48, 48, 48);
@@ -229,6 +247,14 @@ public class SignupView {
     }
 
 
+    /**
+     * getScaledImage is a method that receives an image with a certain length and height
+     * and resizes the image to mach the length and height.
+     * @param Img Image to be resized
+     * @param wt Width of the image to resize
+     * @param ht Height of the image to resize
+     * @return The image introduced in this method but resized to mach the Width and Height
+     */
     private Image getScaledImage(Image Img, int wt, int ht) {
         BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImg.createGraphics();
@@ -240,35 +266,56 @@ public class SignupView {
         return resizedImg;
     }
 
-    public void registerController (SignupViewController signupViewController){ //Todo crida aquesta funció on toqui
+    /**
+     * registerController as it's name implies registers the two controllers
+     * of the signupViewController in order to be accessed from the signupViewController class
+     * @param signupViewController Is the parameter that will receive this class in order to
+     *                              link the listeners of this view with the Controller
+     */
+    public void registerController (SignupViewController signupViewController){
         jbSignup.addActionListener(signupViewController);
         goBackImage.addMouseListener(signupViewController);
     }
 
    /**
-    * Aquesta funcio permet canviar si es visible o no , per tant s'ha de utilitzar
-    * tant per si s'ha de fer visible com invisible.
+    * existingUsernameErrorVisibility sets the visibility of jlExistingUsername
+    * either true or false
     */
     public void existingUsernameErrorVisibility(boolean error){
         jlExistingUsername.setVisible(error);
         topContainer.revalidate();
     }
 
+    /**
+     * existingUsernameErrorVisibility sets the visibility of  jlExistingMailError
+     * either true or false
+     */
     public void existingMailErrorVisibility(boolean error){
         jlExistingMailError.setVisible(error);
         topContainer.revalidate();
     }
 
+    /**
+     * existingUsernameErrorVisibility sets the visibility of jlMailFormatError
+     * either true or false
+     */
     public void mailFormatErrorVisibility (boolean error) {
         jlMailFormatError.setVisible(error);
         topContainer.revalidate();
     }
 
+    /**
+     * existingUsernameErrorVisibility sets the visibility of jlNotEqualPasswordsError
+     * either true or false
+     */
     public void notEqualPasswordsErrorVisibility(boolean error){
         jlNotEqualPasswordsError.setVisible(error);
         topContainer.revalidate();
     }
-
+    /**
+     * existingUsernameErrorVisibility sets the visibility of jlPasswordFormatError
+     * either true or false
+     */
     public void passwordFormatErrorVisibility(boolean error){
         jlPasswordFormatError.setVisible(error);
         topContainer.revalidate();
@@ -290,11 +337,20 @@ public class SignupView {
         return repeatedPasswordField.getText();
     }
 
+    /**
+     * showCard  callas a method to
+     * introduces the current state of the mainViewCenter Frame in the cardManager
+     * and shows to the user the screen.
+     *
+     */
     public void showCard () {
         setErrorsInvisible();
         jFrameCardManager.show(topContainer.getContentPane(),"signupCard");
     }
 
+    /**
+     * setErrorsInvisibley sets the visibility of all errors invisible
+     */
     private void setErrorsInvisible() {
         jlExistingUsername.setVisible(false);
         jlExistingMailError.setVisible(false);

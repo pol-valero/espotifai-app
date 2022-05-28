@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 
+
 public class SongDetailsView {
 
     public static final String BTN_GO_BACK = "BTN_GO_BACK";

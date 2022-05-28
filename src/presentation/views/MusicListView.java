@@ -12,7 +12,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
-
+/**
+ * Class representing the MusicListView. This class contains all the methods and attributes
+ * needed to use and show the MusicList View
+ *
+ * @author Pol Valero, Oriol Centeno , Adrià Estevam, Joaquim Balletbo and Manel Martos
+ * @version 1.0
+ */
 public class MusicListView {
     private final JPanel mainViewCenter;
     private final CardLayout cardManager;
@@ -73,6 +79,14 @@ public class MusicListView {
     private boolean publicPlaylistVariationActive;
     private boolean allSongsVariationActive;
 
+    /**
+     * Constructor to create the MusicListView
+     * Creates the MusicListView linking it to the UIController. This function
+     * initializes the MusicListView.
+     *
+     * @param mainViewCenter this is the JPanel displayed in the Center of the mainView
+     * @param cardManager the cardManager is the component that manages when to show each view
+     */
     public MusicListView (JPanel mainViewCenter, CardLayout cardManager){
         this.mainViewCenter =mainViewCenter;
         this.cardManager=cardManager;
@@ -81,6 +95,10 @@ public class MusicListView {
         //topContainer.pack();
     }
 
+
+    /**
+     * configureTable is a method that configures the table setting the right number of columns and rows
+     */
     private void configureTable () {
         table = new JTable(model){
             public Class getColumnClass(int column) {//Specifing class for column 0 and 6
@@ -97,6 +115,11 @@ public class MusicListView {
         };
     }
 
+    /**
+     * configureView is the main method of this class , creating the view and
+     * adding the view to the JPanel main view Center in order to be displayed.
+     *
+     */
     private void configureView() {
         //Creation of main panels
         panel = new JPanel();
@@ -120,6 +143,12 @@ public class MusicListView {
 
     }
 
+    /**
+     * easternPanelConfiguration configures the panel located at the east of the main panel
+     * of this view.
+     *
+     * @return JPanel with the elements that will be in the east of this view added
+     */
     private JPanel easternPanelConfiguration() {
         Color negre = new Color(48,48,48);
 
@@ -243,6 +272,12 @@ public class MusicListView {
 
     }
 
+    /**
+     * northernPanelConfiguration configures the panel located at the north of the main panel
+     * of this view.
+     *
+     * @return JPanel with the elements that will be in the north of this view added
+     */
     private JPanel northernPanelConfiguration(String playlistName) {
         //Fonts, colours and sizes
         Font titols = new Font("Trebuchet MS", Font.PLAIN, 65);
@@ -264,6 +299,14 @@ public class MusicListView {
         return northernPanel;
     }
 
+    /**
+     * centralPanelConfiguration configures the panel located at the center of the main panel
+     * of this view.
+     *
+     * @param songList is a linked list of songs with all the songs that will be loaded on this view
+     *
+     * @return JPanel with the elements that will be in the center of this view added
+     */
     private JPanel centralPanelConfiguration(LinkedList<Song> songList) {
         Font titols = new Font("Trebuchet MS", Font.PLAIN, 20);
 
@@ -322,6 +365,12 @@ public class MusicListView {
         return centralPanel;
     }
 
+    /**
+     * westernPanelConfiguration configures the panel located at the west of the main panel
+     * of this view.
+     *
+     * @return JPanel with the elements that will be in the west of this view added
+     */
     private JPanel westernPanelConfiguration() {
 
         JPanel westernPanel = new JPanel();
@@ -402,7 +451,12 @@ public class MusicListView {
         return westernPanel;
     }
 
-    private Object[][] songConversor(LinkedList<Song> songList) { //todo descomentar quan calgui
+    /**
+     * songConversor returns the object data extracting the information from songList
+     * @param songList a linked list with all the songs that will be added in this class
+     * @return data an object that stores the information from each song
+     */
+    private Object[][] songConversor(LinkedList<Song> songList) {
         //Object[][] data = new Object[songList.size()][6];
         Object[][] data = new Object[songList.size()][7];
 
@@ -433,6 +487,15 @@ public class MusicListView {
 
         return data;
     }
+
+    /**
+     * getScaledImage is a method that receives an image with a certain length and height
+     * and resizes the image to mach the length and height.
+     * @param Img Image to be resized
+     * @param wt Width of the image to resize
+     * @param ht Height of the image to resize
+     * @return The image introduced in this method but resized to mach the Width and Height
+     */
     private Image getScaledImage(Image Img, int wt, int ht) {
         BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImg.createGraphics();
@@ -444,6 +507,12 @@ public class MusicListView {
         return resizedImg;
     }
 
+    /**
+     * createButton is a method that generic creates a JButton
+     *
+     * @param name the name of the button to create
+     * @return A generic JButton with the correct name
+     */
     private JButton createButton(String name) {
         Dimension button_shape = new Dimension(170,40);
         Font text = new Font("Gulim", Font.PLAIN, 17);
@@ -461,6 +530,12 @@ public class MusicListView {
         return btn;
     }
 
+    /**
+     * registerController as it's name implies registers the many controllers
+     * of the musicLisView in order to be accessed from the musicListController class
+     * @param musicListController Is the parameter that will receive this class in order to
+     *                              link the listeners of this view with the Controller
+     */
     public void registerController(MusicListController musicListController) {
         table.addMouseListener(musicListController);
         addSong.addActionListener(musicListController);
@@ -480,6 +555,7 @@ public class MusicListView {
         jbHome.addActionListener(musicListController);
         accManBtn.addActionListener(musicListController);
     }
+
 
     public int getRow() {
         return table.getSelectedRow();
@@ -501,6 +577,9 @@ public class MusicListView {
         return (String) table.getValueAt(row, 1);
     }
 
+    /**
+     * hideCheckBox calls the getColumnModel to change the size of each column and hide it from the view
+     */
     private void hideCheckBox(){
         table.getColumnModel().getColumn(6).setMinWidth(0);
         table.getColumnModel().getColumn(6).setMaxWidth(0);
@@ -508,6 +587,10 @@ public class MusicListView {
         table.getColumnModel().getColumn(6).setMaxWidth(0);
     }
 
+    /**
+     * hideCheckBox calls the getColumnModel to change the size of each column and show
+     * it in the view
+     */
     public void showCheckbox(){
         table.getColumnModel().getColumn(6).setMinWidth(100);
         table.getColumnModel().getColumn(6).setMaxWidth(100);
@@ -515,18 +598,31 @@ public class MusicListView {
         table.getColumnModel().getColumn(6).setMaxWidth(100);
     }
 
+    /**
+     * moveDown allows the user to select a song that is located below the current selected song
+     */
     public void moveDown() {
         int index = table.getSelectedRow();
         model.moveRow(index, index,index+1);
         table.setRowSelectionInterval(index+1,index+1);
     }
-
+    /**
+     * moveUp allows the user to select a song that is located above the current selected song
+     */
     public void moveUp() {
         int index = table.getSelectedRow();
         model.moveRow(index, index,index-1);
         table.setRowSelectionInterval(index-1,index-1);
     }
 
+    /**
+     * showCard  callas a method to revalidate the central and northern panels
+     * and introduces the current state of the mainViewCenter Frame in the cardManager
+     * and shows to the user the screen
+     *
+     * @param musicList linked list with  all the songs
+     * @param playlistName name of the playlist
+     */
     public void showCard(LinkedList<Song> musicList, String playlistName) {
 
         panel.remove(centralPanel);
@@ -546,6 +642,10 @@ public class MusicListView {
         return table.getRowCount()-1; //todo revisar
     }
 
+    /**
+     * removePlaylistSongsVariation sets false the visibility related to  song Variation
+     * and sets true the visibility of cancel
+     */
     public void removePlaylistSongsVariation() {
         showCheckbox();
         addSong.setVisible(false);
@@ -565,6 +665,10 @@ public class MusicListView {
         mainViewCenter.revalidate();
     }
 
+    /**
+     * removePlaylistSongsVariation sets false the visibility related to personal songs
+     * and sets true the visibility of  removeSelectedPersonalSongs among other things
+     */
     public void removePersonalSongsVariation() {
         showCheckbox();
         addSong.setVisible(false);
@@ -583,7 +687,10 @@ public class MusicListView {
         searchBar.setVisible(false);
         mainViewCenter.revalidate();
     }
-
+    /**
+     * addSongsVariation sets false the visibility related to  song Variation
+     * and sets true the visibility of addSelectedSongs among other things
+     */
     public void addSongsVariation() {
         showCheckbox();
         addSong.setVisible(false);
@@ -603,6 +710,10 @@ public class MusicListView {
         mainViewCenter.revalidate();
     }
 
+    /**
+     * userPersonalSongsVariation sets false the visibility related to personal songs
+     * and sets true the visibility of addSelectedSongs among other things
+     */
     public void userPersonalSongsVariation() {
         hideCheckBox();
         addSong.setVisible(false);
@@ -624,6 +735,10 @@ public class MusicListView {
         userPersonalSongsVariationActive = true;
     }
 
+    /**
+     * userPlaylistVariation sets false the visibility related to personal songs
+     * and activates the userPersonalSongsVariationActive
+     */
     public void userPlaylistVariation() {
         hideCheckBox();
         addSong.setVisible(true);
@@ -645,6 +760,10 @@ public class MusicListView {
         userPlaylistVariationActive = true;
     }
 
+    /**
+     * publicPlaylistVariation sets false the visibility related to personal songs
+     * and sets true the visibility of addSelectedSongs among other things
+     */
     public void publicPlaylistVariation() {
         hideCheckBox();
         addSong.setVisible(false);
@@ -666,6 +785,10 @@ public class MusicListView {
         publicPlaylistVariationActive = true;
     }
 
+    /**
+     * publicSongsVariation sets false the visibility related to personal songs
+     * and sets true the visibility of addSelectedSongs among other things
+     */
     public void publicSongsVariation(){
         hideCheckBox();
         addSong.setVisible(false);
@@ -687,6 +810,9 @@ public class MusicListView {
         allSongsVariationActive = true;
     }
 
+    /**
+     * allows the user to go back to the previous variation selected
+     */
     public void returnToPreviousVariation() {
 
         if (userPersonalSongsVariationActive) {
@@ -706,6 +832,9 @@ public class MusicListView {
         }
     }
 
+    /**
+     * setVariationsToInactive makes all variations false and will be called from each variation method
+     */
     public void setVariationsToInactive() {
         //aquesta funcio posara totes les variacions a false. Cridarem aquesta funcio dins del procediment de cada variacio (just abans d'activar el boolean de la variacio)
         userPersonalSongsVariationActive = false;
@@ -718,6 +847,9 @@ public class MusicListView {
         return playlistTitle.getText();
     }
 
+    /**
+     * clearCheckBoxes clears all check boxes and revalidates the table
+     */
     public void clearCheckBoxes () {
         for (int i = 0; i < data.length; i++) {
             //data[i][6] = false;

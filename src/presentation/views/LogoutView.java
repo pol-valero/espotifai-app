@@ -6,6 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * Class representing the LogoutView. This class contains all the methods and attributes
+ * needed to use and show the LogoutView View.
+ *
+ * @author Pol Valero, Oriol Centeno , Adrià Estevam, Joaquim Balletbo and Manel Martos
+ * @version 1.0
+ */
 public class LogoutView {
     private final JPanel mainViewCenter;
     private final CardLayout cardManager;
@@ -16,7 +23,15 @@ public class LogoutView {
     private JButton btnLogout = new JButton("Log out");
     private JButton btnDeleteAccount = new JButton("Delete Account");
     private JLabel goBackImage = new JLabel();
-    
+
+    /**
+     * Constructor to create LogoutView
+     * Creates the LogoutView linking it to the UIController. This function
+     * initializes the LogoutView.
+     *
+     * @param mainViewCenter this is the JPanel displayed in the Center of the mainView
+     * @param cardManager the cardManager is the component that manages when to show each view
+     */
     public LogoutView (JPanel mainViewCenter, CardLayout cardManager) {
         this.mainViewCenter = mainViewCenter;
         this.cardManager = cardManager;
@@ -25,7 +40,11 @@ public class LogoutView {
 
     }
 
-
+    /**
+     * configureView is the main method of this class , creating the view and
+     * adding the view to the JPanel main view Center in order to be displayed.
+     *
+     */
     private void configureView() {
         //Colors, fonts and sizes
         Color negre = new Color(48, 48, 48);
@@ -121,6 +140,15 @@ public class LogoutView {
 
         mainViewCenter.add(panel, "logoutCard");
     }
+
+    /**
+     * getScaledImage is a method that receives an image with a certain length and height
+     * and resizes the image to mach the length and height.
+     * @param Img Image to be resized
+     * @param wt Width of the image to resize
+     * @param ht Height of the image to resize
+     * @return The image introduced in this method but resized to mach the Width and Height
+     */
     private Image getScaledImage(Image Img, int wt, int ht) {
         BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImg.createGraphics();
@@ -131,12 +159,24 @@ public class LogoutView {
 
         return resizedImg;
     }
-    public void registerController (LogoutViewController logoutViewController){ //Todo crida aquesta funció on toqui
+
+    /**
+     * registerController as it's name implies registers the three controllers
+     * of the logoutView in order to be accessed from the logoutViewController class
+     * @param logoutViewController Is the parameter that will receive this class in order to
+     *                              link the listeners of this view with the Controller
+     */
+    public void registerController (LogoutViewController logoutViewController){
         btnLogout.addActionListener(logoutViewController);
         btnDeleteAccount.addActionListener(logoutViewController);
         goBackImage.addMouseListener(logoutViewController);
     }
 
+    /**
+     * showCard introduces the current state of the mainViewCenter Frame in the cardManager
+     * and shows to the user the screen
+     *
+     */
     public void showCard () {
         cardManager.show(mainViewCenter,"logoutCard");
     }

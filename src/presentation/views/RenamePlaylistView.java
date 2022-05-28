@@ -9,6 +9,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
+/**
+ * Class representing the RenamePlaylistView. This class contains all the methods and attributes
+ * needed to use and show the RenamePlaylist View.
+ *
+ * @author Pol Valero, Oriol Centeno , Adrià Estevam, Joaquim Balletbo and Manel Martos
+ * @version 1.0
+ */
 public class RenamePlaylistView {
 
     private final JPanel mainViewCenter;

@@ -11,12 +11,27 @@ import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Class representing the StadisticsView. This class contains all the methods and attributes
+ * needed to use and show the Stadistics View.
+ *
+ * @author Pol Valero, Oriol Centeno , Adrià Estevam, Joaquim Balletbo and Manel Martos
+ * @version 1.0
+ */
 public class StadisticsView {
     private final JPanel mainViewCenter;
     private final CardLayout cardManager;
     private final Color negre = new Color(48,48,48);
     private final Color vermell = new Color (232,74,77);
 
+    /**
+     * Constructor to create StadisticsView
+     * Creates the LogoutView linking it to the UIController. This function
+     * initializes the LogoutView.
+     *
+     * @param mainViewCenter this is the JPanel displayed in the Center of the mainView
+     * @param cardManager the cardManager is the component that manages when to show each view
+     */
     public StadisticsView (JPanel mainViewCenter, CardLayout cardManager){
         this.mainViewCenter=mainViewCenter;
         this.cardManager=cardManager;
@@ -24,6 +39,11 @@ public class StadisticsView {
 
     }
 
+    /**
+     * configureView is the main method of this class , creating the view and
+     * adding the view to the JPanel main view Center in order to be displayed.
+     *
+     */
     private void configureView() {
         //Creation of main panels
         JPanel panel = new JPanel();
@@ -40,7 +60,12 @@ public class StadisticsView {
 
     }
 
-
+    /**
+     * northernPanelConfiguration configures the panel located at the north of the main panel
+     * of this view.
+     *
+     * @return JPanel with the elements that will be in the north of this view added
+     */
     private JPanel northernPanelConfiguration() {
         //Fonts, colours and sizes
         Font titols = new Font("Trebuchet MS", Font.PLAIN, 65);
@@ -59,6 +84,14 @@ public class StadisticsView {
         return northernPanel;
     }
 
+    /**
+     * centralPanelConfiguration configures the panel located at the center of the main panel
+     * of this view.
+     *
+     * @param genres a linked list with  different song genres
+     *
+     * @return JPanel with the elements that will be in the center of this view added
+     */
     private JPanel centralPanelConfiguration(LinkedList<Genre> genres) {
 
         int maxValue =36;
@@ -140,6 +173,14 @@ public class StadisticsView {
         return centralPanel;
     }
 
+    /**
+     * createScalePanel receives a LinkedList with the name of the playlist and creates a specific scroll panel
+     * with the correct size to fit all playlist.
+     *
+     * @param amount amount of elements introduced in the panel
+     *
+     * @return the specific JPanel in which each playlist fits
+     */
     private JPanel createScalePanel(int amount) {
         JPanel scalePanel = new JPanel();
         scalePanel.setLayout(new FlowLayout());
@@ -160,6 +201,12 @@ public class StadisticsView {
     }
 
 
+    /**
+     * westernPanelConfiguration the panel located at the west of the main panel
+     * of this view.
+     *
+     * @return JPanel with the elements that will be in the west of this view added
+     */
     private JPanel westernPanelConfiguration() {
         //Fonts, colours and sizes
         Font titols = new Font("Trebuchet MS", Font.PLAIN, 36);
@@ -202,17 +249,12 @@ public class StadisticsView {
         return westernPanel;
     }
 
-    private Image getScaledImage(Image img, int wt, int ht) {
-        BufferedImage resizedImg = new BufferedImage(wt, ht, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2 = resizedImg.createGraphics();
-
-        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2.drawImage(img, 0, 0, wt, ht, null);
-        g2.dispose();
-
-        return resizedImg;
-    }
-
+    /**
+     * createButton is a method that generic creates a JButton
+     *
+     * @param name the name of the button to create
+     * @return A generic JButton with the correct name
+     */
     private JButton createButton(String name) {
         Dimension button_shape = new Dimension(200,40);
         Font text = new Font("Gulim", Font.PLAIN, 19);
@@ -230,10 +272,24 @@ public class StadisticsView {
         return btn;
     }
 
+    /**
+     * registerController as it's name implies registers the three controllers
+     * of the stadisticView order to be accessed from the stadisticViewController class
+     * @param stadisticViewController Is the parameter that will receive this class in order to
+     *                              link the listeners of this view with the Controller
+     */
     public void registerController(StadisticViewController stadisticViewController) {
 
     }
 
+    /**
+     * showCard  calls a method to set the error visibility no false
+     * and introduces the current state of the mainViewCenter Frame in the cardManager
+     * and shows to the user the screen.
+     *
+     * @param genres These are the different music genres.
+     *
+     */
     public void showCard(LinkedList<Genre> genres) {
 
         cardManager.show(mainViewCenter,"stadisticsCard");

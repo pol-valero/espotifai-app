@@ -14,12 +14,28 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
 
+/**
+ * Controller for the MusicListView, the connection between the MusicListView and the UIController.
+ * Implementing an ActionListener and MouseListener.
+ *
+ * @author Pol Valero, Oriol Centeno , Adrià Estevam, Joaquim Balletbo and Manel Martos
+ * @version 1.0
+ */
 public class MusicListController implements ActionListener, MouseListener {
     private final MusicListView musicListView;
     private final UIController controller;
 
     LinkedList<String> selectedSongs = new LinkedList<>();
 
+    /**
+     * Constructor to create MusicListController
+     * Creates the MusicListController linking it to the UIController. This function
+     * links the elements of the class with the UIController.
+     *
+     * @param controller this is the UI controller parameter, shared among all Controllers
+     * @param mainViewCenter this is the JPanel displayed in the Center of the mainView
+     * @param cardManager the cardManager is the component that manages when to show each view
+     */
     public MusicListController (UIController controller, JPanel mainViewCenter, CardLayout cardManager){
         this.controller = controller;
         musicListView = new MusicListView(mainViewCenter, cardManager);
@@ -28,7 +44,11 @@ public class MusicListController implements ActionListener, MouseListener {
         //jugar amb el fet que sabem el nom de les playlist "MySongs" i "AllSongs"?
         musicListView.userPlaylistVariation();
     }
-
+    /**
+     * Overrides the function actionPerformed to use the Card of different views
+     * this function manages the main logic of this class
+     * @param e Is the event that activates this method
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()){
@@ -105,9 +125,11 @@ public class MusicListController implements ActionListener, MouseListener {
     }
 
 
-
-
-
+    /**
+     * getSongListSize is a function that calls the method getSongListSize
+     * in musicListView to now the number of songs of a given list.
+     * @return the number of songs in a given list
+     */
     private int getSongListSize() {
         return musicListView.getSongListSize();
     }
@@ -118,7 +140,10 @@ public class MusicListController implements ActionListener, MouseListener {
         chooseVariation(songListName);
     }
 
-
+    /**
+     * The method chooseVariation determines witch kind of playlist the selected playlist is
+     * @param playlistName is the name of the playlist and will be used to identify the playlist
+     */
     private void chooseVariation(String playlistName) {
         switch (playlistName) {
             case "MySongs":
@@ -137,6 +162,11 @@ public class MusicListController implements ActionListener, MouseListener {
         }
     }
 
+    /**
+     * Overrides the function mouseClicked to call the class musicListView
+     *  every time the mouse clicks in the corresponding area
+     *
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         int row = musicListView.getRowAtPoint(e.getPoint());
@@ -158,6 +188,10 @@ public class MusicListController implements ActionListener, MouseListener {
         }
     }
 
+    /**
+     * emptySelectedSongsList calls the method clearCheckBoxes of musicListView
+     * and the attribute selectedSongs from this class
+     */
     private void emptySelectedSongsList() {
         musicListView.clearCheckBoxes();
         selectedSongs.clear();
