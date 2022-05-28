@@ -73,7 +73,8 @@ public class MusicListController implements ActionListener, MouseListener {
 
             case MusicListView.BTN_ADDSONG:
                 //Aqui en vez de mostrar todas las caciones del sistema directamente, mostraremos canciones del sistema - canciones de la playlist
-                musicListView.showCard((LinkedList<Song>) controller.loadAllMusic(), "AllSongs");
+                //musicListView.showCard((LinkedList<Song>) controller.loadAllMusic(), "AllSongs");
+                musicListView.showCard(controller.loadAllNotAlreadyAddedSongs(currentPlaylist), "AllSongs");
                 musicListView.addSongsVariation();
                 break;
 
@@ -232,6 +233,7 @@ public class MusicListController implements ActionListener, MouseListener {
             if (column == 0 || column == 1) {
                 //mostrar vista detalls canço
                 Song song = controller.findSong(songName);
+                controller.setSelectedSongName(songName);
                 controller.showSongDetailsCard(song);
             }
         } else {

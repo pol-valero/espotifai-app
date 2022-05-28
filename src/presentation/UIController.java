@@ -32,7 +32,6 @@ public class UIController {
     private RenamePlaylistViewController renamePlaylistViewController;
     private SongDetailsViewController songDetailsViewController;
     private AddToPlaylistViewController addToPlaylistViewController;
-    private RemoveSelectedSongsController removeSelectedSongsController;
 
     public void run () {
         JFrame topContainer = new JFrame();
@@ -54,28 +53,20 @@ public class UIController {
         renamePlaylistViewController = new RenamePlaylistViewController(this, mainViewCenter, cardManager);
         songDetailsViewController = new SongDetailsViewController(this, mainViewCenter, cardManager);
         addToPlaylistViewController = new AddToPlaylistViewController(this, mainViewCenter, cardManager);
-        removeSelectedSongsController = new RemoveSelectedSongsController(this, mainViewCenter,cardManager);
         //fer el mateix amb tots els altres controllers
         //showMusicListCard();
         //showSignUpCard();
         showHomescreenCard();
         //showLoginCard();
         //showSignUpCard();
-        //showHomescreenCard();
         //showMusicListCard();
         //showAddSongCard();
         //showSongDetailsCard(findSong("CançoV2"));
         //showAddToPlaylistCard();
-        showRemoveSelectedSongCard();
         /*LinkedList<String> prueva = new LinkedList<>();
         prueva.add("prettySong");
         addSongPlaylist("provanova", prueva);*/
 
-
-    }
-
-    private void showRemoveSelectedSongCard() {
-        removeSelectedSongsController.showRemoveSelectedSongsCard();
     }
 
     private void showMainViewCard() {
@@ -136,7 +127,8 @@ public class UIController {
     }
 
     public void showAddToPlaylistCard() {
-        addToPlaylistViewController.showAddToPlaylistView();
+        LinkedList<String> userPlaylist = businessFacade.loadUserPlaylist();
+        addToPlaylistViewController.showAddToPlaylistView(userPlaylist);
     }
 
     public boolean findUserNameMatch(String username){//todo
@@ -275,6 +267,18 @@ public class UIController {
 
     public List<Song> loadMusicOnePlaylist(String playlistName){
         return businessFacade.loadMusicOnePlaylist(playlistName);
+    }
+
+    public LinkedList<Song> loadAllNotAlreadyAddedSongs (String playlistName) {
+        return (LinkedList<Song>) businessFacade.loadAllNotAlreadyAddedSong(playlistName);
+    }
+
+    public String getSelectedSongName() {
+        return businessFacade.getSelectedSongName();
+    }
+
+    public void setSelectedSongName(String selectedSongName) {
+        businessFacade.setSelectedSongName(selectedSongName);
     }
 
 }

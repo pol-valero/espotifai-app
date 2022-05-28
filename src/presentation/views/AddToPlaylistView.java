@@ -1,10 +1,11 @@
 package presentation.views;
 
-import business.entities.Playlist;
+import presentation.controllers.AddToPlaylistViewController;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
@@ -16,12 +17,22 @@ import java.util.LinkedList;
  * @version 1.0
  */
 public class AddToPlaylistView {
+
+    public static final String BTN_ACCOUNT_MANAGEMENT = "BTN_ACCOUNT_MANAGEMENT";
+
     private final JPanel mainViewCenter;
     private final CardLayout cardManager;
     private final Color negre = new Color(48,48,48);
     private final Color vermell = new Color (232,74,77);
 
+    private JButton jbAccountManagement;
+
     private JLabel goBackImage;
+
+    private JPanel panel;
+    private JPanel centralPanel;
+
+    private ActionListener actionListener;
 
     /**
      * Constructor to create AddToPlaylistView
@@ -44,10 +55,10 @@ public class AddToPlaylistView {
      *
      */
     private void configureView() {
-        JPanel panel = new JPanel();
+        panel = new JPanel();
         panel.setLayout(new BorderLayout());
         JPanel westernPanel = westernPanelConfiguration();
-        JPanel centralPanel = centralPanelConfiguration(new LinkedList<>());
+        centralPanel = centralPanelConfiguration(new LinkedList<>());
         JPanel northernPanel = northernPanelConfig();
 
         panel.add(westernPanel,BorderLayout.WEST);
@@ -96,10 +107,11 @@ public class AddToPlaylistView {
         //westernPanel.setMinimumSize(new Dimension(200,900));
         westernPanel.setBackground(negre);
 
-        JButton accMBtn = createButton("Account Manager");
-        accMBtn.setFont( new Font("Gulim", Font.PLAIN, 18));
+        jbAccountManagement = createButton("Account Manager");
+        jbAccountManagement.setFont( new Font("Gulim", Font.PLAIN, 18));
+        jbAccountManagement.setActionCommand(BTN_ACCOUNT_MANAGEMENT);
 
-        westernPanel.add(accMBtn);
+        westernPanel.add(jbAccountManagement);
 
 
         return westernPanel;
@@ -114,7 +126,6 @@ public class AddToPlaylistView {
      * @return JPanel with the elements that will be in the center of this view added
      */
     private JPanel centralPanelConfiguration(LinkedList<String> playlists){
-        playlists = generateLinkedlist(playlists);
         Font titols = new Font("Tahoma", Font.PLAIN, 54);
         Font text = new Font("Gulim", Font.PLAIN, 24);
 
@@ -145,9 +156,7 @@ public class AddToPlaylistView {
         titlePanel.add(subtitle);
         titlePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        //Panel ScrollPane Playlist
-        playlists.addFirst("AllSongs");
-        playlists.addLast("Final");
+
 
         JPanel playlistScrollPanel = new JPanel();
         playlistScrollPanel.setBackground(negre);
@@ -156,15 +165,15 @@ public class AddToPlaylistView {
         playlistScrollPanel.add(scrollPane); //todo
         playlistScrollPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        JPanel donePanel = new JPanel();
+        /*JPanel donePanel = new JPanel();
         donePanel.setBorder(new EmptyBorder(new Insets(0,850,0,0)));
         donePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         donePanel.setBackground(negre);
-        donePanel.add(createButton("Done"));
+        donePanel.add(createButton("Done"));*/
 
         centralPanel.add(titlePanel);
         centralPanel.add(playlistScrollPanel);
-        centralPanel.add(donePanel);
+        //centralPanel.add(donePanel);
 
         return centralPanel;
     }
@@ -207,6 +216,8 @@ public class AddToPlaylistView {
             jbPlaylist.setPreferredSize(new Dimension(160,160));
             jbPlaylist.setAlignmentX(Component.CENTER_ALIGNMENT);
             jbPlaylist.setIcon(albumCoverDefault);
+            jbPlaylist.addActionListener(actionListener);
+            jbPlaylist.setActionCommand(playListName);
 
             //Adding components to panel
             miniPanel.add(jbPlaylist);
@@ -215,7 +226,7 @@ public class AddToPlaylistView {
             miniPanel.setBackground(negre);
 
             panel.add(miniPanel);
-            //buttons.get(i).setActionCommand(); todo
+
         }
 
         JScrollPane scrollPane = new JScrollPane(panel,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -251,25 +262,11 @@ public class AddToPlaylistView {
         else if (residu == 4) {
             size += 1;
         }
-        return size*38;
+        return size*40;
 
 
     }
-    /**
-     * generateLinkedlist receives a LinkedList with the name of the playlist and returns the linked list
-     * with the playlist names added.
-     *
-     * @param playlists Linked list with the name of all playlist to be shown on this view.
-     *
-     * @return the linked list with the playlist names added.
-     */
-    private LinkedList<String> generateLinkedlist(LinkedList<String> playlists) {
-        for(int i=0; i < 20; i++){
-            playlists.add("Playlist"+i);
-        }
 
-        return playlists;
-    }
 
     /**
      * createButton is a method that generic creates a JButton
@@ -313,12 +310,24 @@ public class AddToPlaylistView {
 
         return resizedImg;
     }
+
+    public void registerController(AddToPlaylistViewController addToPlaylistViewController) {
+        jbAccountManagement.addActionListener(addToPlaylistViewController);
+        goBackImage.addMouseListener(addToPlaylistViewController);
+        actionListener = addToPlaylistViewController;
+    }
+
+
     /**
      * showCard introduces the current state of the mainViewCenter Frame in the cardManager
      * and shows to the user the screen
      *
      */
-    public void showCard(){
+    public void showCard(LinkedList<String> userPlaylist){
+        panel.remove(centralPanel);
+        centralPanel = centralPanelConfiguration(userPlaylist);
+        panel.add(centralPanel, BorderLayout.CENTER);
+        mainViewCenter.revalidate();
         cardManager.show(mainViewCenter,"addToPlaylistCard");
     }
 }
