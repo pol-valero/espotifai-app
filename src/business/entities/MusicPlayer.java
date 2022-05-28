@@ -29,13 +29,12 @@ public class MusicPlayer {
      * Method to begin the thread for playing a song or restart in case of pause
      */
     public void play() {
-        System.out.println("se acaba vale = "+ finishedSong);
         finishedSong = false;
         musicStatus = NOTSTARTED;
 
         synchronized (synchronizedThread) {
             switch (musicStatus) {
-                case NOTSTARTED: //todo preguntar si asi es correcto
+                case NOTSTARTED:
                     final Runnable r = new Runnable() {
                         public void run() {
                             playInternal();

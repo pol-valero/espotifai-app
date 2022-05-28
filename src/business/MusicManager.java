@@ -12,19 +12,13 @@ import persistence.DAO.MusicListDatabaseDAO;
 import persistence.MusicDAO;
 import persistence.MusicListDAO;
 
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import java.beans.Encoder;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.temporal.TemporalAdjuster;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Class responsable for the management of information of songs and playlist
@@ -96,7 +90,6 @@ public class MusicManager implements Runnable{
      * Constructor
      */
     public MusicManager () {
-        //System.out.println(getSongLenght());
         this.loop = false;
         this.playlist = false;
         this.paused = true;
@@ -334,7 +327,7 @@ public class MusicManager implements Runnable{
             this.position = position;
         } else {
             if (position >= songs.size() && playlist) {
-                position = this.position;
+                position = position - 1;
             }
             changeCurrentSong(position);
             this.position = position;
@@ -425,6 +418,7 @@ public class MusicManager implements Runnable{
      * Method to set the current song in a loop
      */
     public void loop(){
+        System.out.println("loop vale =" + loop);
         this.loop = !loop;
     }
 
@@ -471,5 +465,4 @@ public class MusicManager implements Runnable{
     public void setCurrentSong (Song currentSong) {
         this.currentSong = currentSong;
     }
-
 }
