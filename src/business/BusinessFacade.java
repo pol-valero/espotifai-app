@@ -274,4 +274,6 @@ public interface BusinessFacade {
     void deletePersonalSong(List<String> songNameList);
 
     void loop();
+
+    List<Song> loadAllNotAlreadyAddedSong(String playlistName);
 }

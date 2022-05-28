@@ -237,4 +237,8 @@ public class BusinessFacadelmpl implements BusinessFacade{
     public void loop(){
         musicManager.loop();
     }
+
+    public List<Song> loadAllNotAlreadyAddedSong(String playlistName){
+        return musicListManager.loadAllNotAlreadyAddedSong(playlistName, loginManager.getCurrentUSer().getId());
+    }
 }

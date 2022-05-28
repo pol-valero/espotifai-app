@@ -239,4 +239,27 @@ public class MusicListManager {
             }
         }
     }
+
+    public List<Song> loadAllNotAlreadyAddedSong(String playlistName, int idUser){
+        List<Song> songPlaylist = loadMusicPlaylist(playlistName, idUser);
+
+        if (songPlaylist.size() != 0){
+            List<Song> songList = new LinkedList<>();
+
+            for (Song allSong: loadAllMusic()){
+                boolean found = false;
+
+                for (Song songP: songPlaylist){
+                    if (allSong.getIdSong() == songP.getIdSong()) {
+                        found = true;
+                    }
+                }
+                if (!found){
+                    songList.add(allSong);
+                }
+            }
+            return songList;
+        }
+        return loadAllMusic();
+    }
 }
