@@ -59,11 +59,10 @@ public class UIController {
         showHomescreenCard();
         //showLoginCard();
         //showSignUpCard();
-        //showHomescreenCard();
         //showMusicListCard();
         //showAddSongCard();
         //showSongDetailsCard(findSong("CançoV2"));
-        showAddToPlaylistCard();
+        //showAddToPlaylistCard();
         /*LinkedList<String> prueva = new LinkedList<>();
         prueva.add("prettySong");
         addSongPlaylist("provanova", prueva);*/
@@ -268,6 +267,10 @@ public class UIController {
 
     public List<Song> loadMusicOnePlaylist(String playlistName){
         return businessFacade.loadMusicOnePlaylist(playlistName);
+    }
+
+    public LinkedList<Song> loadAllNotAlreadyAddedSongs (String playlistName) {
+        return (LinkedList<Song>) businessFacade.loadAllNotAlreadyAddedSong(playlistName);
     }
 
 }
