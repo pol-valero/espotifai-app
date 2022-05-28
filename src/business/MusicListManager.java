@@ -139,6 +139,8 @@ public class MusicListManager {
         List<Song> songs = musicListDAO.loadAllMusic();
         List<Song> newSong = new LinkedList<>();
 
+        System.out.println(songName.size());
+
         if (songs.size() != 0 && songName.size() != 0) {
             for (String name: songName) {
                 for (Song song : songs) {

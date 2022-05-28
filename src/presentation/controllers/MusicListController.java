@@ -105,7 +105,9 @@ public class MusicListController implements ActionListener, MouseListener {
 
             case MusicListView.BTN_REMOVE_SELECTED_PLAYLIST_SONGS:
                 //fer crida a business per eliminar
+                controller.deleteSongPlaylist(currentPlaylist, selectedSongs);
                 emptySelectedSongsList();
+                controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
                 break;
 
             case MusicListView.BTN_REMOVE_SELECTED_PERSONAL_SONGS:
