@@ -348,7 +348,7 @@ public class MusicManager implements Runnable{
         }
         int position = this.position + next; //next debe ser uno o menos uno
 
-        if ( position > songs.size() || position < 0) {
+        if ( position >= songs.size() || position < 0) {
             position = 0;
             changeCurrentSong(position);
             this.position = position;
@@ -400,6 +400,9 @@ public class MusicManager implements Runnable{
             FileInputStream inputStream = new FileInputStream(currentSong.getFilePath());
             musicPlayer = new MusicPlayer(inputStream);
             musicPlayer.play();
+            if (thread == null){
+                startingThread();
+            }
             return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -432,6 +435,11 @@ public class MusicManager implements Runnable{
             if(musicPlayer.getfinisehedSong()){
                 automaticSongChange();
             }
+            try {
+                thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -463,9 +471,6 @@ public class MusicManager implements Runnable{
      * Method to start the thread
      */
     public void startingThread(){
-        System.out.println("iniciamos thread");
-        System.out.println("path de la cancion = " +currentSong.getFilePath());
-
         thread = new Thread(this);
         thread.start();
 
@@ -475,9 +480,7 @@ public class MusicManager implements Runnable{
      * Method to stop the thread
      */
     public void stopThread(){
-        System.out.println("hola?");
         musicPlayer.close();
-
         this.threadStatus = false;
 
     }

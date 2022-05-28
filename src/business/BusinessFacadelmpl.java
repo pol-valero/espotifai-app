@@ -67,7 +67,6 @@ public class BusinessFacadelmpl implements BusinessFacade{
     @Override
     public void singUpRequest(User user){
         loginManager.singUpRequest(user);
-        startingThread();
     }
 
 
@@ -86,8 +85,9 @@ public class BusinessFacadelmpl implements BusinessFacade{
                 deleteUserAddedSong(song.getName());
             }
         }
-        loginManager.deleteAccountRequest();
         musicManager.stopThread();
+        loginManager.deleteAccountRequest();
+
     }
 
     @Override

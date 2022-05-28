@@ -126,6 +126,7 @@ public class MusicPlayer {
                 }
             }
         }
+        finishedSong = true;
         close();
         return finishedSong = true;
     }
