@@ -4,10 +4,7 @@ import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
-/*
-Author: Nam Ha Minh
-Source: https://www.codejava.net/java-se/swing/jtable-column-header-custom-renderer-examples
- */
+
 /**
  * This is the class SimpleHeaderRenderer, this class enables access to a SimpleHeader Renderer in multiple views.
  * Implements the functions of an Icon.

@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Controller for the StadisticView, the connection between Stadistic View and the UIController.

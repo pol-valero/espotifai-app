@@ -5,15 +5,12 @@ import presentation.UIController;
 import presentation.views.MusicListView;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Controller for the MusicListView, the connection between the MusicListView and the UIController.
@@ -41,8 +38,6 @@ public class MusicListController implements ActionListener, MouseListener {
         this.controller = controller;
         musicListView = new MusicListView(mainViewCenter, cardManager);
         musicListView.registerController(this);
-        //la variacio que es carrega realment es fara desde la funcio "show", a on a partir del propietari de la playlist (el usuari logejat, un altre usuari, o null) carregarem la variacio que toqui. Tambe podem
-        //jugar amb el fet que sabem el nom de les playlist "MySongs" i "AllSongs"?
         musicListView.userPlaylistVariation();
     }
     /**
@@ -77,8 +72,6 @@ public class MusicListController implements ActionListener, MouseListener {
                 break;
 
             case MusicListView.BTN_ADDSONG:
-                //Aqui en vez de mostrar todas las caciones del sistema directamente, mostraremos canciones del sistema - canciones de la playlist
-                //musicListView.showCard((LinkedList<Song>) controller.loadAllMusic(), "AllSongs");
                 musicListView.showCard(controller.loadAllNotAlreadyAddedSongs(currentPlaylist), "AllSongs");
                 musicListView.addSongsVariation();
                 break;
@@ -107,7 +100,6 @@ public class MusicListController implements ActionListener, MouseListener {
                 controller.addSongPlaylist(currentPlaylist, selectedSongs);
                 emptySelectedSongsList();
                 controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
-                //musicListView.returnToPreviousVariation();
                 break;
 
             case MusicListView.BTN_REMOVE_SELECTED_PLAYLIST_SONGS:
@@ -117,28 +109,13 @@ public class MusicListController implements ActionListener, MouseListener {
                 emptySelectedSongsList();
                 break;
 
-
-            /*case MusicListView.BTN_REMOVE_SELECTED_PLAYLIST_SONGS:
-                controller.deleteSongPlaylist(currentPlaylist, selectedSongs);
-                emptySelectedSongsList();
-                controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
-                break;
-
-            case MusicListView.BTN_REMOVE_SELECTED_PERSONAL_SONGS:
-                controller.deletePersonalSong(selectedSongs);
-                emptySelectedSongsList();
-                controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
-                break;*/
-
             case MusicListView.BTN_CANCEL:
                 emptySelectedSongsList();
                 controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
-                //musicListView.returnToPreviousVariation();
                 break;
 
             case MusicListView.BTN_UP:
                 int selectedRow1 = musicListView.getRow();
-                //String selectedSong = musicListView.getSongName(selectedRow);
                 if(musicListView.getColumn() != 0 && musicListView.getRow() > 0){
                    controller.moveSongInPlaylist(currentPlaylist, selectedRow1, 1);
                    musicListView.moveUp();
@@ -167,8 +144,6 @@ public class MusicListController implements ActionListener, MouseListener {
 
     public void showMusicListCard(LinkedList<Song> songList, String songListName){
 
-        //Potser seria interessant fer un "if" aqui per si es dona el cas que el nom es "AllSongs" doncs no es canvii el nom de la
-        //currentPlaylist?  (en canvi, si que es interessant que per a MySongs es canvii).
         if(!songListName.equals("AllSongs")) {
             controller.setCurrentPlaylist(songListName);
         }
@@ -206,24 +181,7 @@ public class MusicListController implements ActionListener, MouseListener {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-        /*int row = musicListView.getRowAtPoint(e.getPoint());
-        int column = musicListView.getColumnAtPoint(e.getPoint());
 
-        String songName = musicListView.getSongName(row);
-
-        System.out.println(songName);
-        if (column != 6) {
-            //mostrar vista detalls canço
-        } else {
-            if (selectedSongs.contains(songName)) {
-                selectedSongs.remove(songName);
-                //System.out.println("Song borrada: " + songName);
-            } else {
-                selectedSongs.add(musicListView.getSongName(musicListView.getRow()));
-                //System.out.println("Song afegida: " + songName);
-            }
-
-        }*/
     }
 
     /**
@@ -243,10 +201,8 @@ public class MusicListController implements ActionListener, MouseListener {
         if (row != -1 && column != -1) {
             String songName = musicListView.getSongName(row);
 
-            System.out.println(songName);
             if (column != 6) {
                 if (column == 0 || column == 1) {
-                    //mostrar vista detalls canço
                     Song song = controller.findSong(songName);
                     controller.setSelectedSongName(songName);
                     controller.showSongDetailsCard(song);
@@ -254,10 +210,8 @@ public class MusicListController implements ActionListener, MouseListener {
             } else {
                 if (selectedSongs.contains(songName)) {
                     selectedSongs.remove(songName);
-                    //System.out.println("Song borrada: " + songName);
                 } else {
                     selectedSongs.add(musicListView.getSongName(musicListView.getRow()));
-                    //System.out.println("Song afegida: " + songName);
                 }
 
             }

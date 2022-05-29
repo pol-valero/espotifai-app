@@ -230,22 +230,6 @@ public class ReproductionBar extends JPanel {
 
     }
 
-    public void setNameLabels(String songName, String artistName){
-        songNameLab.setText(songName);
-        artistNameLab.setText(artistName);
-        revalidate();
-    }
-
-    public void setCurrentTime(int minutes, int seconds){
-        int secondsL = seconds/10;
-        int secondsR = seconds - secondsL*10;
-
-        currentTimeLabel.setText(minutes+":"+secondsL+""+secondsR);
-        bar.setValue(minutes*60+seconds);
-        revalidate();
-
-    }
-
 
     public void setPlayBtn(){
         playPauseBtn.setIcon(getScaledImage("images/playButton.png",25,25));

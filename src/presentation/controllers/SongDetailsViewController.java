@@ -2,7 +2,6 @@ package presentation.controllers;
 
 import business.entities.Song;
 import presentation.UIController;
-import presentation.views.HomeScreenView;
 import presentation.views.SongDetailsView;
 
 import javax.swing.*;

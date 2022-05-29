@@ -1,7 +1,6 @@
 package presentation.views;
 
 import business.entities.Song;
-import presentation.Components.ImagePanel;
 import presentation.controllers.MusicListController;
 import presentation.Components.SimpleHeaderRenderer;
 
