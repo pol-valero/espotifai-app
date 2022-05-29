@@ -308,7 +308,7 @@ public class MusicListView {
      * @return JPanel with the elements that will be in the center of this view added
      */
     private JPanel centralPanelConfiguration(LinkedList<Song> songList) {
-        Font titols = new Font("Trebuchet MS", Font.PLAIN, 20);
+        Font titols = new Font("Tahoma", Font.PLAIN, 20);
 
         //Central panel configuration
         JPanel centralPanel = new JPanel();

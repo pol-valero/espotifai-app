@@ -84,10 +84,8 @@ public class RemovePlaylistView {
     private JPanel centralPanelConfiguration(String playlistName, int songNumber) {
 
 
-        Font subtitle = new Font("Trebuchet MS", Font.PLAIN, 30);
-        Font titol = new Font("Trebuchet MS", Font.PLAIN, 38);
-        Font button = new Font("Trebuchet MS", Font.PLAIN, 20);
-        Font text = new Font("Gulim", Font.PLAIN, 14);
+        Font subtitle = new Font("Gulim", Font.PLAIN, 30);
+        Font titol = new Font("Tahoma", Font.PLAIN, 38);
         Font information = new Font("Gulim", Font.PLAIN, 14);
 
         Dimension button_shape = new Dimension(245,40);
@@ -258,7 +256,7 @@ public class RemovePlaylistView {
         //Fonts, colours and sizes
         Color negre = new Color(48, 48, 48);
         Color vermell = new Color (232,74,77);
-        Font button = new Font("Trebuchet MS", Font.PLAIN, 20);
+        Font button = new Font("Gulim", Font.PLAIN, 20);
         Dimension button_shape_2 = new Dimension(245,40);
 
 

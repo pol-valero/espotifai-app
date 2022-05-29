@@ -16,7 +16,7 @@ Source: https://www.codejava.net/java-se/swing/jtable-column-header-custom-rende
  * @version 1.0
  */
 public class SimpleHeaderRenderer extends JLabel implements TableCellRenderer {
-    Font titols = new Font("Trebuchet MS", Font.PLAIN, 30);
+    Font titols = new Font("Tahoma", Font.PLAIN, 30);
     private final Color negre = new Color(48,48,48);
 
 

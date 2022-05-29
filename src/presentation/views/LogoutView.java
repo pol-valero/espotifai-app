@@ -49,7 +49,7 @@ public class LogoutView {
         //Colors, fonts and sizes
         Color negre = new Color(48, 48, 48);
         Color vermell = new Color (232,74,77);
-        Font titols = new Font("Trebuchet MS", Font.PLAIN, 36);
+        Font titols = new Font("Tahoma", Font.PLAIN, 36);
         Font text = new Font("Gulim", Font.PLAIN, 24);
         Dimension button_shape = new Dimension(371,56);
 

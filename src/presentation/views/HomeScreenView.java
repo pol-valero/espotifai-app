@@ -86,8 +86,7 @@ public class HomeScreenView {
      */
     private JPanel centralPanelConfiguration(LinkedList<String> usersPlaylists, LinkedList<String> publicPlaylists) {
 
-        Font titols = new Font("Trebuchet MS", Font.PLAIN, 36);
-        Font text = new Font("Gulim", Font.PLAIN, 24);
+        Font titols = new Font("Tahoma", Font.PLAIN, 36);
 
         JPanel centralPanel = new JPanel();
         BoxLayout centralLayout = new BoxLayout(centralPanel,BoxLayout.Y_AXIS);
@@ -153,7 +152,7 @@ public class HomeScreenView {
      */
     private JPanel northernPanelConfiguration() {
         //Fonts, colours and sizes
-        Font titols = new Font("Trebuchet MS", Font.PLAIN, 65);
+        Font titols = new Font("Tahoma", Font.PLAIN, 65);
 
         JPanel northernPanel = new JPanel();
         BoxLayout northernLayout = new BoxLayout(northernPanel,BoxLayout.X_AXIS);
@@ -176,9 +175,6 @@ public class HomeScreenView {
      * @return JPanel with the elements that will be in the west of this view added
      */
     private JPanel westernPanelConfiguration() {
-        //Fonts, colours and sizes
-        Font titols = new Font("Trebuchet MS", Font.PLAIN, 36);
-        Font text = new Font("Gulim", Font.PLAIN, 24);
 
         JPanel westernPanel = new JPanel();
         BoxLayout westernLayout = new BoxLayout(westernPanel,BoxLayout.Y_AXIS);
