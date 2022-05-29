@@ -18,12 +18,7 @@ public interface MusicListDAO  {
      */
     List<Playlist> loadPublicPlaylist(int id_user);
 
-    /***
-     * Method that shows the list of all the different songs that the user
-     * has in the playlist in the Home view.
-     * @param id_user we receive the user id
-     */
-     List<Song> loadUserAddedSongs(int id_user);
+
 
     /***
      * Method to list the songs in a playlist and this will be displayed in the Home view in the EXPLORE section.
@@ -93,10 +88,6 @@ public interface MusicListDAO  {
      */
     void moveSongsInPlaylist(int idPlaylist, int idSong1, int idSong2, int idOrder1, int idOrder2);
 
-    /***
-     * Method to delete from all playlists
-     * @param idSong we receive the id of the song
-     */
-    void deleteSongAllPlaylist(int idSong);
+
 
 }

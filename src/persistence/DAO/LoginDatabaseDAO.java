@@ -4,8 +4,7 @@ import business.entities.User;
 import persistence.LoginDAO;
 import persistence.SQLConnector;
 
-import javax.xml.transform.OutputKeys;
-import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;

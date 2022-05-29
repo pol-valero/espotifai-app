@@ -93,47 +93,7 @@ public class MusicListDatabaseDAO implements MusicListDAO {
     }
 
 
-    /***
-     * Method that shows the list of all the different songs that the user
-     * has in the playlist in the Home view.
-     * @param id_user we receive the user id
-     */
-    @Override
-    public List<Song> loadUserAddedSongs(int id_user) {
-        List<Song> song = new LinkedList<>();
-        String query = "select distinct name, listas_reproduccion.id_usuario as idOwnerLista, v_songs.* from lista_cancion " +
-                "            inner join v_songs on lista_cancion.id_cancion = v_songs.idSong " +
-                "            inner join listas_reproduccion on lista_cancion.id_lista = listas_reproduccion.id " +
-                " where listas_reproduccion.id_usuario = \""+ id_user +
-                "\" order by name asc";
 
-        try {
-            ResultSet resultSet = SQLConnector.getInstance().selectQuery(query);
-
-            while (resultSet.next()) {
-                int idSong = resultSet.getInt("idSong");
-                String name = resultSet.getString("name");
-                int idGenere = resultSet.getInt("id_genere");
-                String genere = resultSet.getString("genere");
-                int idAlbum = resultSet.getInt("id_album");
-                String album = resultSet.getString("album");
-                int idSinger = resultSet.getInt("idSinger");
-                String singer = resultSet.getString("singer");
-                int idOwner = resultSet.getInt("idOwner");
-                String owner = resultSet.getString("Owner");
-                String filePath = resultSet.getString("filepath");
-                int orden = resultSet.getInt("orden");
-                int minutes = resultSet.getInt("timeMinutes");
-                int seconds = resultSet.getInt("timeSec");
-                String lyrics = resultSet.getString("lyrics");
-
-                song.add(new Song(idSong, name, idGenere, genere, idAlbum, album, idSinger, singer, idOwner, owner, filePath, orden, minutes, seconds, lyrics));
-            }
-        } catch (SQLException exception) {
-            exception.getErrorCode();
-        }
-        return song;
-    }
 
     /***
      * Method to list the songs in a playlist and this will be displayed in the Home view in the EXPLORE section.
@@ -326,13 +286,5 @@ public class MusicListDatabaseDAO implements MusicListDAO {
 
     }
 
-    /***
-     * Method to delete from all playlists
-     * @param idSong we receive the id of the song
-     */
-    @Override
-    public void deleteSongAllPlaylist(int idSong){
-        String query = "Delete From lista_cancion Where id_cancion = '" + idSong+"';";
-        SQLConnector.getInstance().deleteQuery(query);
-    }
+
 }
