@@ -290,8 +290,16 @@ public class HomeScreenView {
             playlistTitle.setForeground(Color.white);
             playlistTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+            ImageIcon defaultCover;
 
-            ImageIcon defaultCover = new ImageIcon("images/albumCoverDefault.png");
+            if(playlistTitle.getText().equals("MySongs")) {
+                defaultCover = new ImageIcon("images/mysongsCover.png");
+            } else if (playlistTitle.getText().equals("AllSongs")) {
+                defaultCover = new ImageIcon("images/allsongsCover.png");
+            } else {
+                defaultCover = new ImageIcon("images/albumCoverDefault.png");
+            }
+
             Image defaultCoverIcon = defaultCover.getImage();
             Image defaultCoverIconScaled = getScaledImage(defaultCoverIcon, 160, 160);
             ImageIcon albumCoverDefault = new ImageIcon(defaultCoverIconScaled);
