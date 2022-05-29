@@ -354,6 +354,7 @@ public class MusicManager {
      * @return boolean true in case there were no problems, false for opposite case
      */
     private boolean playNewSong() {
+        //Reiniciar comptador.
         try {
             if (musicPlayer != null){
                 if(!musicPlayer.getfinisehedSong()){

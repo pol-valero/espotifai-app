@@ -1,4 +1,5 @@
 package business.entities;
+import com.sun.tools.javac.Main;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import java.io.InputStream;
@@ -102,16 +103,25 @@ public class MusicPlayer {
      * @return
      */
     private boolean playInternal() {
+        int temps = 0;
+        int segons = 0;
         while (musicStatus != FINISHED) {
             try {
                 if (!player.play(1)) {
                     break;
                 }
-                thread.sleep(10);
+
+                temps++;
+                temps++;
+
+                if (temps == 100) {
+                    temps = 0;
+                    segons++;
+                    System.out.println(segons);
+                }
+
             } catch (final JavaLayerException e) {
                 break;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
 
             synchronized (synchronizedThread) {
