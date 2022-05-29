@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * Class responsable for the management of information of songs and playlist
  */
-public class MusicManager implements Runnable{
+public class MusicManager {
     /**
      * Object musicDAO, used for managing information related to songs and capable of communicate between
      * persistence layer with upper layers
@@ -72,13 +72,7 @@ public class MusicManager implements Runnable{
      */
     private boolean loop;
     /**
-     * Thread of the reproduction of the song
-     */
-    private Thread thread;
-    /**
-     * boolean indicating the state of the thread
-     */
-    private boolean threadStatus;
+
     /**
      * String of song names used for various purposes.
      */
@@ -95,7 +89,6 @@ public class MusicManager implements Runnable{
         this.paused = true;
         songs = null;
         currentSong = null;
-        threadStatus = true;
         playlistLop = false;
 
     }
@@ -321,14 +314,11 @@ public class MusicManager implements Runnable{
 
         int position  = this.position + next;
 
-        if ( (position >= songs.size() && playlistLop) || position < 0) {
+        if (position >= songs.size() || position < 0) {
             position = 0;
             changeCurrentSong(position);
             this.position = position;
         } else {
-            if (position >= songs.size() && playlist) {
-                position = position - 1;
-            }
             changeCurrentSong(position);
             this.position = position;
         }
@@ -373,9 +363,7 @@ public class MusicManager implements Runnable{
             FileInputStream inputStream = new FileInputStream(currentSong.getFilePath());
             musicPlayer = new MusicPlayer(inputStream);
             musicPlayer.play();
-            if (thread == null){
-                startingThread();
-            }
+
             return true;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -386,34 +374,6 @@ public class MusicManager implements Runnable{
         }
     }
 
-    /**
-     * Method to start playing next song when the current one has finished
-     */
-    private void automaticSongChange(){
-        if(!musicPlayer.getfinisehedSong()){
-            musicPlayer.stop();
-        }
-        paused = true;
-        if (!playlist || loop){
-            previusNextSong(0);
-        } else {
-            previusNextSong(1);
-        }
-    }
-
-    @Override
-    public void run() {
-        while(threadStatus){
-            if(musicPlayer.getfinisehedSong()){
-                automaticSongChange();
-            }
-            try {
-                thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     /**
      * Method to set the current song in a loop
@@ -446,24 +406,15 @@ public class MusicManager implements Runnable{
         this.selectedSongName = selectedSongName;
     }
 
-    /**
-     * Method to start the thread
-     */
-    public void startingThread(){
-        thread = new Thread(this);
-        thread.start();
-    }
-
-    /**
-     * Method to stop the thread
-     */
-    public void stopThread(){
-        musicPlayer.close();
-        this.threadStatus = false;
-
-    }
-
     public void setCurrentSong (Song currentSong) {
         this.currentSong = currentSong;
+    }
+
+    public boolean getFinishedSong(){
+        return musicPlayer.getfinisehedSong();
+    }
+
+    public void stopSong(){
+        musicPlayer.stop();
     }
 }

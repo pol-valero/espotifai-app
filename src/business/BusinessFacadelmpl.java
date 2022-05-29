@@ -74,9 +74,10 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     @Override
     public void logoutRequest(){
-        musicManager.stopThread();
         loginManager.logoutRequest();
-
+        if (!musicManager.getFinishedSong()) {
+            musicManager.stopSong();
+        }
     }
 
     @Override
@@ -87,7 +88,9 @@ public class BusinessFacadelmpl implements BusinessFacade{
                 deleteUserAddedSong(song.getName());
             }
         }
-        musicManager.stopThread();
+        if (!musicManager.getFinishedSong()) {
+            musicManager.stopSong();
+        }
         loginManager.deleteAccountRequest();
 
     }
@@ -343,8 +346,6 @@ public class BusinessFacadelmpl implements BusinessFacade{
         setSelectedSongName(initialSong.getName());
 
         playMusic();
-        musicManager.startingThread();
-        //musicManager.pausedSong();
     }
 
     public void setCurrentSong (Song song) {
