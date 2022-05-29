@@ -56,6 +56,7 @@ public class HomescreenViewController implements ActionListener {
                 break;
             default:
                 String playlistName = e.getActionCommand();
+                controller.setCurrentPlaylist(playlistName);
                 controller.showMusicListCard(controller.loadPlaylistMusic(playlistName), playlistName);
 
                 break;
