@@ -57,7 +57,7 @@ public class RenamePlaylistView {
         Color vermell = new Color (232,74,77);
         Font subtitle = new Font("Gulim", Font.PLAIN, 30);
         Font titol = new Font("Tahoma", Font.PLAIN, 38);
-        Font button = new Font("Gulim-mainViewCente", Font.PLAIN, 20);
+        Font button = new Font("Gulim", Font.PLAIN, 20);
         Font text = new Font("Gulim", Font.PLAIN, 14);
         Font information = new Font("Gulim", Font.PLAIN, 14);
 

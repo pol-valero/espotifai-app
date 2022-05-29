@@ -34,7 +34,7 @@ public class LoginDatabaseDAO implements LoginDAO {
 
             }
         } catch (SQLException exception){
-
+            System.err.println("Problem when " + exception.getErrorCode());
         }
 
         return users;
