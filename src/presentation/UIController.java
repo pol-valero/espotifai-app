@@ -255,8 +255,18 @@ public class UIController {
         businessFacade.playMusic();
     }
 
-    public void previusNextSong(int next){ //todo para la barra de reproduccion alante o atras
+    public void previusNextSong(int next){
+
+        int totalMinutes;
+        int totalSeconds;
+        Song songToBeReproduced;
+
         businessFacade.previusNextSong(next);
+
+        songToBeReproduced = getCurrentSong();
+        totalSeconds = songToBeReproduced.getSeconds();
+        totalMinutes = songToBeReproduced.getMinutes();
+        playBarController.reproduceNewSong(songToBeReproduced.getName(), totalMinutes, totalSeconds);
     }
 
     public void pausedSong(){
@@ -325,6 +335,10 @@ public class UIController {
 
     public void loopPlaylist () {
         businessFacade.playlistLoop();
+    }
+
+    public Song getCurrentSong() {
+        return businessFacade.getCurrentSong();
     }
 
 

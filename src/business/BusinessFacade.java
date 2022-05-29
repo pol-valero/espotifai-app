@@ -288,4 +288,6 @@ public interface BusinessFacade {
      void startingThread();
 
      void playlistLoop();
+
+     Song getCurrentSong();
 }

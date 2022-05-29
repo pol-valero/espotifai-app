@@ -417,4 +417,8 @@ public class MusicManager {
     public void stopSong(){
         musicPlayer.stop();
     }
+
+    public Song getCurrentSong() {
+        return currentSong;
+    }
 }
