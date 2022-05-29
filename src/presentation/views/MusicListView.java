@@ -175,7 +175,7 @@ public class MusicListView {
         removeSong = createButton("Remove song");
         removeSong.setActionCommand(BTN_REMOVESONG);
 
-        renamePlaylist = createButton("Rename Playlist");
+        renamePlaylist = createButton("Rename list");
         renamePlaylist.setActionCommand(BTN_RENAMEPLAYLIST);
 
         deletePlaylist = createButton("Delete Playlist");
@@ -190,10 +190,10 @@ public class MusicListView {
         cancel = createButton("Cancel");
         cancel.setActionCommand(BTN_CANCEL);
 
-        removeSelectedPlaylistSongs = createButton("Remove selected");
+        removeSelectedPlaylistSongs = createButton("Remove sel.");
         removeSelectedPlaylistSongs.setActionCommand(BTN_REMOVE_SELECTED_PLAYLIST_SONGS);
 
-        removeSelectedPersonalSongs = createButton("Remove selected");
+        removeSelectedPersonalSongs = createButton("Remove sel.");
         removeSelectedPersonalSongs.setActionCommand(BTN_REMOVE_SELECTED_PERSONAL_SONGS);
 
 

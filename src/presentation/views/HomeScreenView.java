@@ -192,7 +192,7 @@ public class HomeScreenView {
         stadisticsBtn = createButton("Stadistics");
         stadisticsBtn.setActionCommand(BTN_STATISTICS);
 
-        accManBtn = createButton("Account Manager");
+        accManBtn = createButton("My account");
         accManBtn.setActionCommand(BTN_ACCOUNTMANAGER);
 
         constraints.gridx=0;
