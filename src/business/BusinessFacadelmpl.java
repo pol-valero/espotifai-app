@@ -74,6 +74,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
     @Override
     public void singUpRequest(User user){
         loginManager.singUpRequest(user);
+        startingThread();
     }
 
 
