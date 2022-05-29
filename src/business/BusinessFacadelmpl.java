@@ -102,10 +102,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
 
     }
 
-    @Override
-    public User getCurrentUser(){
-        return loginManager.getCurrentUSer();
-    }
+
 
 
     @Override
@@ -146,10 +143,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
         musicListManager.createPlaylist(playlistName, loginManager.getCurrentUSer().getId());
     }
 
-    @Override
-    public Playlist findPlaylist(String playlistName){
-        return musicListManager.findPlaylist(playlistName, loginManager.getCurrentUSer().getId());
-    }
+
 
     @Override
     public List<Song> loadMusicPlaylist(String playlistName){
@@ -162,7 +156,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
     }
 
     @Override
-    public void createSong(String name, String artist, String album, String genre, String filePath){ //todo añadir los lyrics
+    public void createSong(String name, String artist, String album, String genre, String filePath){
 
         int[] time = musicManager.songTime(filePath);
         String lyrics = getLyrics(name, artist).replaceAll("'", "");
@@ -254,17 +248,12 @@ public class BusinessFacadelmpl implements BusinessFacade{
         musicListManager.setCurrentPlaylist(playlistName);
     }
 
-    public List<Song> loadMusicOnePlaylist(String playlistName){
-        return musicListManager.loadMusicOnePlaylist(playlistName, loginManager.getCurrentUSer().getId());
-    }
+
 
     public void moveSongsInPlaylist(String playlistName, int position, int upDown){
         musicListManager.moveSongInPlaylist(playlistName, position ,upDown, loginManager.getCurrentUSer().getId());
     }
 
-    public void deleteSongAllPlaylist(String songName){
-        musicListManager.deleteSongAllPlaylist(songName);
-    }
 
     public void deletePersonalSong(List<String> songNameList){
         for (String song: songNameList){
@@ -289,9 +278,9 @@ public class BusinessFacadelmpl implements BusinessFacade{
         try{
             String lyric;
 
-            //URL url = new URL("https://api.lyrics.ovh/v1/melendi/saraluna");
+
             URL url = new URL("https://api.lyrics.ovh/v1/" + artist + "/" + songName);
-            //URL url = new URL("https://api.lyrics.ovh/v1/morad/pelele");
+
             conn = (HttpURLConnection) url.openConnection();
 
             conn.setRequestMethod("GET");
@@ -357,9 +346,6 @@ public class BusinessFacadelmpl implements BusinessFacade{
         playMusic();
     }
 
-    public void setCurrentSong (Song song) {
-        musicManager.setCurrentSong(song);
-    }
 
     public void playlistLoop(){
         musicManager.playlistLoop();

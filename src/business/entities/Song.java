@@ -20,9 +20,7 @@ public class Song {
     private int minutes;
     private int seconds;
     private String lyrics;
-    private String Lyrics;
-    private int minutos;
-    private int segundos;
+
 
 
     public Song(String name, String artist, String album, String genre, String filePath, String lyrics, int minutos, int segundos){

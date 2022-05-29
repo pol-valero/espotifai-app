@@ -47,13 +47,7 @@ public class Playlist {
         return name;
     }
 
-    /**
-     * Method to get owner of a laylist
-     * @return String correspondig of the owner
-     */
-    public String getOwner() {
-        return owner;
-    }
+
 
     /**
      * Method to get the id of the owner

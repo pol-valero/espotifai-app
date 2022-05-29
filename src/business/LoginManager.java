@@ -105,18 +105,8 @@ public class LoginManager {
      * @param user User object with the information of the user who has sign up
      */
     public void singUpRequest(User user){
-
-        // miro si existe primero el usuario
-      //  if (loginDAO.checkUser(user.getName())) {
-            // si existe o existe un error al verificar si existe el usuario obtendremos True
-            // NO podemos dar de alta. Falta cambiar la función a boolean
-
-       // } else {
-            //si NO EXISTE EL USUARIO, lo damos de alta
             loginDAO.singUpRequest(user);
             setCurrentUser(user);
-        //}
-
     }
 
     /**
@@ -156,9 +146,8 @@ public class LoginManager {
      * @param email String of the email to check
      * @return boolean true in case the email meets the requirements, false in opposite case.
      */
-    public boolean checkEmail(String email){ //todo falta comprobar que solo hayan numeros, letras y puntos
-                                            // (contando que ya se comprueba que solo haya un@), poner metodo
-                                            //que lo compruebe ya que sera para cada parte del String
+    public boolean checkEmail(String email){
+
         if ( !itsEmail(email) || checkNonEmptyString(email)){
             try {
                 if (email.length() <= 254 && checkNonEmptyString(email) && email.charAt(email.length() - 1) == '.') {
@@ -213,7 +202,7 @@ public class LoginManager {
         for (int i = 0; i < password.length ; i++) {
             char aux = Character.toUpperCase(password[i]);
 
-            if (Character.compare(aux, password[i]) == 0 && !Character.isDigit(password[i])) {
+            if (aux == password[i] && !Character.isDigit(password[i])) {
                 return OK;
             }
         }
@@ -230,7 +219,7 @@ public class LoginManager {
         for (int i = 0; i < password.length ; i++) {
             char aux = Character.toLowerCase(password[i]);
 
-            if (Character.compare(aux, password[i]) == 0 && !Character.isDigit(password[i])) {
+            if (aux == password[i] && !Character.isDigit(password[i])) {
                 return OK;
             }
         }

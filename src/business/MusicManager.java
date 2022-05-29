@@ -28,8 +28,17 @@ public class MusicManager {
 
     private PlayBarListener playBarListener;
 
+    /**
+     * Constructor
+     */
     public MusicManager (PlayBarListener playBarListener) {
         this.playBarListener = playBarListener;
+        this.loop = false;
+        this.playlist = false;
+        this.paused = true;
+        songs = null;
+        currentSong = null;
+        playlistLop = false;
     }
     /**
      * Object musicDAO, used for managing information related to songs and capable of communicate between
@@ -87,18 +96,6 @@ public class MusicManager {
 
     private boolean playlistLop;
 
-    /**
-     * Constructor
-     */
-    public MusicManager () {
-        this.loop = false;
-        this.playlist = false;
-        this.paused = true;
-        songs = null;
-        currentSong = null;
-        playlistLop = false;
-
-    }
 
     /**
      * Method to load stadistics from persistence
@@ -344,7 +341,6 @@ public class MusicManager {
         this.position = position;
 
         currentSong = loadSongInformation(selectedSongName);
-        //Aqui s'ha de fer el la crida a canviar de canço a la vista
         playNewSong();
     }
 
@@ -361,7 +357,6 @@ public class MusicManager {
      * @return boolean true in case there were no problems, false for opposite case
      */
     private boolean playNewSong() {
-        //Reiniciar comptador.
         try {
             if (musicPlayer != null){
                 if(!musicPlayer.getfinisehedSong()){
@@ -412,10 +407,6 @@ public class MusicManager {
      */
     public void setSelectedSongName(String selectedSongName) {
         this.selectedSongName = selectedSongName;
-    }
-
-    public void setCurrentSong (Song currentSong) {
-        this.currentSong = currentSong;
     }
 
     public boolean getFinishedSong(){

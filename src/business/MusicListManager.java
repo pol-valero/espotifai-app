@@ -313,19 +313,7 @@ public class MusicListManager {
         currentPlaylistName = playlistName;
     }
 
-    /**
-     * Method to load all songs of an specific playlist
-     * @param playlistName String name of the playlist
-     * @param ideUser Integer Id of the current user
-     * @return List of objects songs
-     */
-    public List<Song> loadMusicOnePlaylist(String playlistName, int ideUser){
 
-        Playlist playlist = findUserPlaylist(playlistName, ideUser);
-        System.out.println(playlist.getId());
-
-        return musicListDAO.loadMusicOnePlaylist(playlist.getId());
-    }
 
     /**
      * Method to change the position of a song in a playlist and save it in persistence
@@ -346,18 +334,7 @@ public class MusicListManager {
 
     }
 
-    /**
-     * Method to delete a song from all existing playlist where it belonged to
-     * @param songName String name of the song
-     */
-    public void deleteSongAllPlaylist(String songName){
-        List<Song> songs = loadAllMusic();
-        for (Song song: songs){
-            if (songName.equals(song.getName())){
-                musicListDAO.deleteSongAllPlaylist(song.getIdSong());
-            }
-        }
-    }
+
 
     /**
      * Method to load all songs which have not been added yet to a certain playlist
