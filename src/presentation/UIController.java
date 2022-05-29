@@ -35,6 +35,7 @@ public class UIController implements PlayBarListener {
     private AddToPlaylistViewController addToPlaylistViewController;
     private StadisticViewController stadisticViewController;
     private PlayBarController playBarController;
+    private RemoveSelectedSongsController removeSelectedSongsController;
 
     public void run () {
         JFrame topContainer = new JFrame();
@@ -63,6 +64,7 @@ public class UIController implements PlayBarListener {
         songDetailsViewController = new SongDetailsViewController(this, mainViewCenter, cardManager);
         addToPlaylistViewController = new AddToPlaylistViewController(this, mainViewCenter, cardManager);
         stadisticViewController = new StadisticViewController(this, mainViewCenter, cardManager);
+        removeSelectedSongsController = new RemoveSelectedSongsController(this, mainViewCenter, cardManager);
 
         initialSongSetup();
         //fer el mateix amb tots els altres controllers
@@ -151,6 +153,10 @@ public class UIController implements PlayBarListener {
 
     public void showStadisticsCard() {
         stadisticViewController.showStadisticsView((LinkedList<Genre>) businessFacade.loadStadistic());
+    }
+
+    public void showRemoveSelectedSongsCard(LinkedList<String> songsToRemove) {
+        removeSelectedSongsController.showRemoveSelectedSongsCard(songsToRemove);
     }
 
     public boolean findUserNameMatch(String username){//todo

@@ -8,10 +8,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
 public class RemoveSelectedSongsController implements ActionListener {
     private UIController controller;
     private RemoveSelectedSongsView removeSelectedSongsView;
+    private LinkedList<String> songsToRemove;
 
     public RemoveSelectedSongsController(UIController controller, JPanel mainViewCenter, CardLayout cardManager){
         this.controller=controller;
@@ -21,10 +23,26 @@ public class RemoveSelectedSongsController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String currentPlaylist = controller.getCurrentPlaylist();
+        switch (e.getActionCommand()) {
+            case RemoveSelectedSongsView.BTN_CONFIRM_REMOVE:
+                if (!currentPlaylist.equals("MySongs")) {
+                    controller.deleteSongPlaylist(currentPlaylist, songsToRemove);
+                    controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
+                } else {
+                    controller.deletePersonalSong(songsToRemove);
+                    controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
+                }
+                break;
 
+            case RemoveSelectedSongsView.BTN_CANCEL:
+                controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
+                break;
+        }
     }
 
-    public void showRemoveSelectedSongsCard(){
+    public void showRemoveSelectedSongsCard(LinkedList<String> songsToRemove){
+        this.songsToRemove = new LinkedList<>(songsToRemove);
         removeSelectedSongsView.showCard();
     }
 }

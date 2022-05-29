@@ -9,11 +9,17 @@ import java.awt.*;
 
 public class RemoveSelectedSongsView {
 
+    public static final String BTN_CONFIRM_REMOVE = "BTN_CONFIRM_REMOVE";
+    public static final String BTN_CANCEL = "BTN_CANCEL";
+
     private final JPanel mainViewCenter;
     private final CardLayout cardManager;
 
     private JPanel panel;
     private JLabel cannotDeleteSongLabel;
+
+    private JButton confirmButton;
+    private JButton cancelButton;
 
     private final Color negre = new Color(48,48,48);
     private final Color vermell = new Color (232,74,77);
@@ -58,8 +64,11 @@ public class RemoveSelectedSongsView {
         buttonPanel.setBackground(negre);
         buttonPanel.setBorder(new EmptyBorder(new Insets(100,60,0,0)));
 
-        JButton confirmButton = createButton("Yes, remove songs");
-        JButton cancelButton = createButton("Cancel");
+        confirmButton = createButton("Yes, remove songs");
+        confirmButton.setActionCommand(BTN_CONFIRM_REMOVE);
+
+        cancelButton = createButton("Cancel");
+        cancelButton.setActionCommand(BTN_CANCEL);
 
         buttonPanel.add(confirmButton);
         buttonPanel.add(Box.createRigidArea(new Dimension(30,0)));
@@ -108,5 +117,7 @@ public class RemoveSelectedSongsView {
     }
 
     public void registerController(RemoveSelectedSongsController removeSelectedSongsController) {
+        confirmButton.addActionListener(removeSelectedSongsController);
+        cancelButton.addActionListener(removeSelectedSongsController);
     }
 }

@@ -111,18 +111,24 @@ public class MusicListController implements ActionListener, MouseListener {
                 break;
 
             case MusicListView.BTN_REMOVE_SELECTED_PLAYLIST_SONGS:
+            case MusicListView.BTN_REMOVE_SELECTED_PERSONAL_SONGS:
+
+                controller.showRemoveSelectedSongsCard(selectedSongs);
+                emptySelectedSongsList();
+                break;
+
+
+            /*case MusicListView.BTN_REMOVE_SELECTED_PLAYLIST_SONGS:
                 controller.deleteSongPlaylist(currentPlaylist, selectedSongs);
-                System.out.println("Linkedlist size: " + selectedSongs.size());
                 emptySelectedSongsList();
                 controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
                 break;
 
             case MusicListView.BTN_REMOVE_SELECTED_PERSONAL_SONGS:
                 controller.deletePersonalSong(selectedSongs);
-                System.out.println("Linkedlist size: " + selectedSongs.size());
                 emptySelectedSongsList();
                 controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
-                break;
+                break;*/
 
             case MusicListView.BTN_CANCEL:
                 emptySelectedSongsList();
