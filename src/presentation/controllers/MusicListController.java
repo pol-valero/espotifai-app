@@ -240,25 +240,27 @@ public class MusicListController implements ActionListener, MouseListener {
         int row = musicListView.getRowAtPoint(e.getPoint());
         int column = musicListView.getColumnAtPoint(e.getPoint());
 
-        String songName = musicListView.getSongName(row);
+        if (row != -1 && column != -1) {
+            String songName = musicListView.getSongName(row);
 
-        System.out.println(songName);
-        if (column != 6) {
-            if (column == 0 || column == 1) {
-                //mostrar vista detalls canço
-                Song song = controller.findSong(songName);
-                controller.setSelectedSongName(songName);
-                controller.showSongDetailsCard(song);
-            }
-        } else {
-            if (selectedSongs.contains(songName)) {
-                selectedSongs.remove(songName);
-                //System.out.println("Song borrada: " + songName);
+            System.out.println(songName);
+            if (column != 6) {
+                if (column == 0 || column == 1) {
+                    //mostrar vista detalls canço
+                    Song song = controller.findSong(songName);
+                    controller.setSelectedSongName(songName);
+                    controller.showSongDetailsCard(song);
+                }
             } else {
-                selectedSongs.add(musicListView.getSongName(musicListView.getRow()));
-                //System.out.println("Song afegida: " + songName);
-            }
+                if (selectedSongs.contains(songName)) {
+                    selectedSongs.remove(songName);
+                    //System.out.println("Song borrada: " + songName);
+                } else {
+                    selectedSongs.add(musicListView.getSongName(musicListView.getRow()));
+                    //System.out.println("Song afegida: " + songName);
+                }
 
+            }
         }
     }
 

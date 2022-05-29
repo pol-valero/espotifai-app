@@ -82,6 +82,9 @@ public class RemoveSelectedSongsView {
         button.setBackground(vermell);
         button.setForeground(Color.white);
         button.setFont(new Font("Gulim", Font.PLAIN, 15));
+        button.setFocusable(false);
+        button.setOpaque(true);
+        button.setBorderPainted(false);
         button.setPreferredSize(new Dimension(200,50));
 
         return button;

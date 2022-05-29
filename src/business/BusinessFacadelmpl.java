@@ -165,7 +165,8 @@ public class BusinessFacadelmpl implements BusinessFacade{
     public void createSong(String name, String artist, String album, String genre, String filePath){ //todo añadir los lyrics
 
         int[] time = musicManager.songTime(filePath);
-        String lyrics = getLyrics().replaceAll("'", "");
+        //String lyrics = getLyrics(name, artist).replaceAll("'", "");
+        String lyrics = "";
         Song song = new Song(name, artist, album, genre, filePath, lyrics, time[0], time[1]);
         song.setIdOwne(loginManager.getCurrentUSer().getId());
         song.setOwne(loginManager.getCurrentUSer().getName());
@@ -280,21 +281,23 @@ public class BusinessFacadelmpl implements BusinessFacade{
         return musicListManager.loadAllNotAlreadyAddedSong(playlistName, loginManager.getCurrentUSer().getId());
     }
 
-    private String getLyrics(){
+    private String getLyrics(String songName, String artist){
         BufferedReader reader;
         String line;
         StringBuilder responseContent = new StringBuilder();
         HttpURLConnection conn = null;
 
         try{
-            String lyric = "";
+            String lyric;
 
-            URL url = new URL("https://api.lyrics.ovh/v1/melendi/saraluna");
+            //URL url = new URL("https://api.lyrics.ovh/v1/melendi/saraluna");
+            //URL url = new URL("https://api.lyrics.ovh/v1/" + artist + "/" + songName);
+            URL url = new URL("https://api.lyrics.ovh/v1/morad/pelele");
             conn = (HttpURLConnection) url.openConnection();
 
             conn.setRequestMethod("GET");
-            conn.setConnectTimeout(5000);
-            conn.setReadTimeout(5000);
+            conn.setConnectTimeout(10000);
+            conn.setReadTimeout(10000);
 
             int status = conn.getResponseCode();
 
