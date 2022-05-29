@@ -35,7 +35,7 @@ public class SQLConnector {
         try {
             connection = DriverManager.getConnection(url, username, password);
         } catch(SQLException exception) {
-            System.err.println("Couldn't connect to  " + url);
+
         }
     }
 
@@ -48,7 +48,7 @@ public class SQLConnector {
             Statement s = connection.createStatement();
             s.executeUpdate(query);
         } catch (SQLException exception) {
-            System.err.println("ERROR in = " + query + " (" + exception.getMessage() + ")");
+
         }
     }
 
@@ -61,7 +61,7 @@ public class SQLConnector {
             Statement statement = connection.createStatement();
             statement.executeUpdate(query);
         } catch (SQLException exception) {
-            System.err.println("ERROR in = " + query);
+
         }
     }
 
@@ -74,7 +74,7 @@ public class SQLConnector {
             Statement statement = connection.createStatement();
             statement.executeUpdate(query);
         } catch (SQLException exception) {
-            System.err.println("ERROR in = " + query);
+
         }
 
     }
@@ -90,7 +90,7 @@ public class SQLConnector {
             Statement statement = connection.createStatement();
             resultSet = statement.executeQuery(query);
         } catch (SQLException exception) {
-            System.err.println("ERROR in = " + query);
+
         }
         return resultSet;
     }

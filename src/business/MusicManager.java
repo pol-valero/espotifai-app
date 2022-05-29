@@ -382,7 +382,7 @@ public class MusicManager {
      * Method to set the current song in a loop
      */
     public void loop(){
-        System.out.println("loop vale =" + loop);
+
         this.loop = !loop;
     }
 

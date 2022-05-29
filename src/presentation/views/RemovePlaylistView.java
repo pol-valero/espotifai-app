@@ -85,7 +85,6 @@ public class RemovePlaylistView {
         Font subtitle = new Font("Gulim", Font.PLAIN, 30);
         Font titol = new Font("Tahoma", Font.PLAIN, 38);
         Font information = new Font("Gulim", Font.PLAIN, 14);
-
         Dimension button_shape = new Dimension(245,40);
         Dimension CentralPanel = new Dimension(500,500);
 

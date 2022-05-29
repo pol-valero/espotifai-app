@@ -185,11 +185,11 @@ public class LoginManager {
             char[] letter = password.toCharArray();
 
             if (checkCapitalLetter(letter) && checkLowercaseLetter(letter) && containsNumber(letter)) {
-                System.out.println("CONTRASEMNYA OK");
+
                 return OK;
             }
         }
-        System.out.println("CONTRASEMNYA Error");
+
         return ERROR;
     }
     /**

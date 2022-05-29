@@ -46,7 +46,6 @@ public class ReproductionBar extends JPanel {
      */
     public ReproductionBar(){
         configureBar();
-
     }
 
     /**
