@@ -51,6 +51,7 @@ public class RenamePlaylistViewController implements ActionListener, MouseListen
                     renamePlaylistView.wrongNameErrorVisibility(false);
                     controller.changePlaylistName(controller.getCurrentPlaylist(), renamePlaylistView.getPlaylistName());
                     controller.showMusicListCard(controller.loadPlaylistMusic(renamePlaylistView.getPlaylistName()), renamePlaylistView.getPlaylistName());
+                    renamePlaylistView.clearFields();
                 } else {
                     renamePlaylistView.wrongNameErrorVisibility(true);
                 }
@@ -58,6 +59,7 @@ public class RenamePlaylistViewController implements ActionListener, MouseListen
 
             case CreatePlaylistView.BTN_MANAGEMENT:
                 controller.showLogoutCard();
+                renamePlaylistView.clearFields();
                 break;
         }
 
@@ -79,6 +81,7 @@ public class RenamePlaylistViewController implements ActionListener, MouseListen
     @Override
     public void mouseClicked(MouseEvent e) {
         controller.showHomescreenCard();
+        renamePlaylistView.clearFields();
     }
 
     @Override

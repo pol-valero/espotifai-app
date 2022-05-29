@@ -116,7 +116,7 @@ public class MusicPlayer {
                     break;
                 }
 
-                temps = temps + 2.65;
+                temps = temps + 2.42;
 
                 if (temps > 100 && temps < 103) {
                     temps = 0;

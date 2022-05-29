@@ -287,5 +287,9 @@ public class CreatePlaylistView {
             goBackImage.addMouseListener(createPlaylistViewController);
     }
 
+    public void clearFields () {
+        nameField.setText("");
     }
+
+}
 

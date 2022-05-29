@@ -266,6 +266,11 @@ public class LoginView {
         jFrameCardManager.show(topContainer.getContentPane(),"loginCard");
     }
 
+    public void clearFields() {
+        loginField.setText("");
+        passwordField.setText("");
+    }
+
 
 
 }

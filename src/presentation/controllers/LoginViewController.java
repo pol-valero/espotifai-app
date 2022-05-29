@@ -47,13 +47,15 @@ public class LoginViewController implements ActionListener, MouseListener {
             case LoginView.BTN_LOGIN:
                 if(controller.loginRequest(loginView.getLoginField(), loginView.getPasswordField())){
                     controller.showHomescreenCard();
+                    loginView.clearFields();
                 }
                 else{
                     loginView.loginErrorVisibility(true);
                 }
                 break;
-            case LoginView.BTN_SIGNUP: //todo
+            case LoginView.BTN_SIGNUP:
                 controller.showSignUpCard();
+                loginView.clearFields();
                 break;
         }
 

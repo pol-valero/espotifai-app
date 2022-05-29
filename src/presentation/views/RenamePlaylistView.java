@@ -286,4 +286,8 @@ public class RenamePlaylistView {
         jbManagement.addActionListener(renamePlaylistViewController);
         goBackImage.addMouseListener(renamePlaylistViewController);
     }
+
+    public void clearFields () {
+        nameField.setText("");
+    }
 }

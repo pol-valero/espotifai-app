@@ -216,7 +216,7 @@ public class SongDetailsView {
 
         JLabel durationSong = new JLabel();
 
-        durationSong.setText(song.getMinutes() + ":" + song.getSeconds());
+        durationSong.setText(song.getMinutes() + "m  " + song.getSeconds() + "s");
         durationSong.setForeground(Color.white);
         durationSong.setFont(text);
 

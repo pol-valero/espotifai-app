@@ -85,6 +85,7 @@ public class AddSongViewController implements ActionListener, MouseListener {
             controller.createSong(songName, artist, albumName, genreName, path);
             String currentPlaylist = controller.getCurrentPlaylist();
             controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
+            addSongView.clearFields();
         }
 
         return false;
@@ -109,6 +110,7 @@ public class AddSongViewController implements ActionListener, MouseListener {
     public void mouseClicked(MouseEvent e) {
         String currentPlaylist = controller.getCurrentPlaylist();
         controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
+        addSongView.clearFields();
     }
 
     @Override

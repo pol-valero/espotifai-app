@@ -51,6 +51,7 @@ public class CreatePlaylistViewController implements ActionListener, MouseListen
                     createPlaylistView.wrongNameErrorVisibility(false);
                     controller.createPlaylist(createPlaylistView.getPlaylistName());
                     controller.showHomescreenCard();
+                    createPlaylistView.clearFields();
                 } else {
                     createPlaylistView.wrongNameErrorVisibility(true);
                 }
@@ -58,6 +59,7 @@ public class CreatePlaylistViewController implements ActionListener, MouseListen
 
             case CreatePlaylistView.BTN_MANAGEMENT:
                 controller.showLogoutCard();
+                createPlaylistView.clearFields();
                 break;
         }
 
@@ -79,6 +81,7 @@ public class CreatePlaylistViewController implements ActionListener, MouseListen
     @Override
     public void mouseClicked(MouseEvent e) {
         controller.showHomescreenCard();
+        createPlaylistView.clearFields();
     }
 
     @Override

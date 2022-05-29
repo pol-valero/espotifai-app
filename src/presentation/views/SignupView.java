@@ -359,4 +359,11 @@ public class SignupView {
         jlMailFormatError.setVisible(false);
         topContainer.revalidate();
     }
+
+    public void clearFields () {
+        emailField.setText("");
+        passwordField.setText("");
+        repeatedPasswordField.setText("");
+        usernameField.setText("");
+    }
 }

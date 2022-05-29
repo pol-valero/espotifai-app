@@ -99,6 +99,7 @@ public class SignupViewController implements ActionListener, MouseListener {
             User user = new User(signupView.getUsername(), signupView.getEmail(), signupView.getPassword());
             controller.signUpRequest(user);
             controller.showHomescreenCard();
+            signupView.clearFields();
         }
 
     }
@@ -118,6 +119,7 @@ public class SignupViewController implements ActionListener, MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         controller.showLoginCard();
+        signupView.clearFields();
     }
 
     @Override

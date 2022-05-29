@@ -412,6 +412,14 @@ public class AddSongView {
         return filepathField.getText();
     }
 
+    public void clearFields () {
+        albumField.setText("");
+        filepathField.setText("");
+        artistField.setText("");
+        genreField.setText("");
+        songNameField.setText("");
+    }
+
 
 
 
