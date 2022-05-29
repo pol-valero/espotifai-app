@@ -24,14 +24,19 @@ public class RemoveSelectedSongsController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String currentPlaylist = controller.getCurrentPlaylist();
+        String currentSong = controller.getCurrentSong().getName();
         switch (e.getActionCommand()) {
             case RemoveSelectedSongsView.BTN_CONFIRM_REMOVE:
                 if (!currentPlaylist.equals("MySongs")) {
                     controller.deleteSongPlaylist(currentPlaylist, songsToRemove);
                     controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
                 } else {
-                    controller.deletePersonalSong(songsToRemove);
-                    controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
+                    if (songsToRemove.contains(currentSong)) {
+                        removeSelectedSongsView.cannotDeleteSongVisibility(true);
+                    } else {
+                        controller.deletePersonalSong(songsToRemove);
+                        controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
+                    }
                 }
                 break;
 
@@ -43,6 +48,7 @@ public class RemoveSelectedSongsController implements ActionListener {
 
     public void showRemoveSelectedSongsCard(LinkedList<String> songsToRemove){
         this.songsToRemove = new LinkedList<>(songsToRemove);
+        removeSelectedSongsView.cannotDeleteSongVisibility(false);
         removeSelectedSongsView.showCard();
     }
 }
