@@ -4,6 +4,7 @@ import business.entities.Genre;
 import business.entities.Playlist;
 import business.entities.Song;
 import business.entities.User;
+import presentation.UIController;
 
 import java.util.LinkedList;
 import java.util.List;

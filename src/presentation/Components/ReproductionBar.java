@@ -158,8 +158,8 @@ public class ReproductionBar extends JPanel {
         previousSongBtn = createRoundButton("images/iconGoBack.png",24,24);
         previousSongBtn.setActionCommand(BTN_PREVIOUS_SONG);
 
-        playPauseBtn = createRoundButton("images/pauseButton.png",24,24);
-        playPauseBtn.setActionCommand(BTN_PAUSE);
+        playPauseBtn = createRoundButton("images/playButton.png",24,24);
+        playPauseBtn.setActionCommand(BTN_PLAY);
 
         nextSongBtn =createRoundButton("images/iconGoNext.png",24,24);
         nextSongBtn.setActionCommand(BTN_NEXT_SONG);
@@ -266,12 +266,12 @@ public class ReproductionBar extends JPanel {
      * @param totalSeconds length of the second's duration of the song
      */
     public void reproduceNewSong(String songName, int totalMinutes, int totalSeconds){
-        bar.setValue(0);
+        bar.setValue(1);
         bar.setMaximum(totalMinutes*60+totalSeconds);
 
         songNameLab.setText(songName);
 
-        currentTimeLabel.setText("0:00");
+        currentTimeLabel.setText("0:01");
         endTimeLabel.setText(timeFormater(totalMinutes,totalSeconds));
 
         revalidate();

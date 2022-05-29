@@ -2,6 +2,8 @@ package business.entities;
 import com.sun.tools.javac.Main;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
+import presentation.listeners.PlayBarListener;
+
 import java.io.InputStream;
 
 /**
@@ -20,10 +22,12 @@ public class MusicPlayer {
     private int musicStatus;
 
     private final Player player;
+    private PlayBarListener playBarListener;
 
 
-    public MusicPlayer(final InputStream inputStream) throws JavaLayerException {
+    public MusicPlayer(final InputStream inputStream, PlayBarListener playBarListener) throws JavaLayerException {
             this.player = new Player(inputStream);
+            this.playBarListener = playBarListener;
     }
 
     /**
@@ -103,21 +107,25 @@ public class MusicPlayer {
      * @return
      */
     private boolean playInternal() {
-        int temps = 0;
+        double temps = 0;
         int segons = 0;
+        int minutes = 0;
         while (musicStatus != FINISHED) {
             try {
                 if (!player.play(1)) {
                     break;
                 }
 
-                temps++;
-                temps++;
+                temps = temps + 2.65;
 
-                if (temps == 100) {
+                if (temps > 100 && temps < 103) {
                     temps = 0;
                     segons++;
-                    System.out.println(segons);
+                    if (segons == 60) {
+                        segons = 0;
+                        minutes++;
+                    }
+                    playBarListener.updateBar(minutes, segons);
                 }
 
             } catch (final JavaLayerException e) {

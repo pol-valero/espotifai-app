@@ -8,6 +8,7 @@ import business.entities.Song;
 import business.entities.User;
 import presentation.Components.ReproductionBar;
 import presentation.controllers.*;
+import presentation.listeners.PlayBarListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,14 +18,14 @@ import java.util.List;
 /**
  * Clase que gestiona el funcionamiento del programa
  */
-public class UIController {
+public class UIController implements PlayBarListener {
 
     private MainViewController mainViewController;
     private LoginViewController loginViewController;
     private LogoutViewController logoutViewController;
     private SignupViewController signupViewController;
     private HomescreenViewController homescreenViewController;
-    private BusinessFacade businessFacade = new BusinessFacadelmpl();
+    private BusinessFacade businessFacade;
     private MusicListController musicListController;
     private AddSongViewController addSongViewController;
     private CreatePlaylistViewController createPlaylistViewController;
@@ -42,6 +43,8 @@ public class UIController {
         CardLayout cardManager = new CardLayout();
 
         ReproductionBar reproductionBar = new ReproductionBar();
+
+        businessFacade = new BusinessFacadelmpl(this);
 
         loginViewController = new LoginViewController(this, topContainer, jFrameCardManager);
         signupViewController = new SignupViewController(this, topContainer, jFrameCardManager);
@@ -341,6 +344,9 @@ public class UIController {
         return businessFacade.getCurrentSong();
     }
 
-
+    @Override
+    public void updateBar(int currentMinutes, int currentSeconds) {
+        playBarController.update(currentMinutes, currentSeconds);
+    }
 
 }

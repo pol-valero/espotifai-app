@@ -17,6 +17,7 @@ import java.net.URL;
 import java.util.Scanner;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import presentation.listeners.PlayBarListener;
 
 
 /**
@@ -24,9 +25,15 @@ import org.json.simple.parser.JSONParser;
  */
 public class BusinessFacadelmpl implements BusinessFacade{
 
-    private LoginManager loginManager = new LoginManager();
-    private MusicListManager musicListManager = new MusicListManager();
-    private MusicManager musicManager = new MusicManager();
+    private LoginManager loginManager;
+    private MusicListManager musicListManager;
+    private MusicManager musicManager;
+
+    public BusinessFacadelmpl (PlayBarListener playBarListener) {
+        loginManager = new LoginManager();
+        musicListManager = new MusicListManager();
+        musicManager = new MusicManager(playBarListener);
+    }
 
     @Override
     public boolean checkEmail(String email){

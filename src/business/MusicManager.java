@@ -11,6 +11,7 @@ import persistence.DAO.MusicDatabaseDAO;
 import persistence.DAO.MusicListDatabaseDAO;
 import persistence.MusicDAO;
 import persistence.MusicListDAO;
+import presentation.listeners.PlayBarListener;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,6 +25,12 @@ import java.util.List;
  * Class responsable for the management of information of songs and playlist
  */
 public class MusicManager {
+
+    private PlayBarListener playBarListener;
+
+    public MusicManager (PlayBarListener playBarListener) {
+        this.playBarListener = playBarListener;
+    }
     /**
      * Object musicDAO, used for managing information related to songs and capable of communicate between
      * persistence layer with upper layers
@@ -362,7 +369,7 @@ public class MusicManager {
                 }
             }
             FileInputStream inputStream = new FileInputStream(currentSong.getFilePath());
-            musicPlayer = new MusicPlayer(inputStream);
+            musicPlayer = new MusicPlayer(inputStream, playBarListener);
             musicPlayer.play();
 
             return true;
