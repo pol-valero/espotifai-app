@@ -57,7 +57,7 @@ public class SignupView {
         //Colors, fonts and sizes
         Color negre = new Color(48, 48, 48);
         Color vermell = new Color (232,74,77);
-        Font titols = new Font("Trebuchet MS", Font.PLAIN, 28);
+        Font titols = new Font("Tahoma", Font.PLAIN, 28);
         Font text = new Font("Gulim", Font.PLAIN, 14);
         Font information = new Font("Gulim", Font.PLAIN, 14);
         // Dimension button_shape = new Dimension(371,56);

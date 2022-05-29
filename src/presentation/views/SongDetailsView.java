@@ -64,8 +64,8 @@ public class SongDetailsView {
 
         Color negre = new Color(48, 48, 48);
         Color vermell = new Color (232,74,77);
-        Font subtitle = new Font("Trebuchet MS", Font.PLAIN, 30);
-        Font titol = new Font("Trebuchet MS", Font.PLAIN, 38);
+        Font subtitle = new Font("Gulim", Font.PLAIN, 30);
+        Font titol = new Font("Tahoma", Font.PLAIN, 38);
         Font text = new Font("Gulim", Font.PLAIN, 20);
         Font word = new Font("Gulim", Font.PLAIN, 14);
         Font information = new Font("Gulim", Font.PLAIN, 14);
@@ -382,7 +382,7 @@ public class SongDetailsView {
         //Fonts, colours and sizes
         Color negre = new Color(48, 48, 48);
         Color vermell = new Color (232,74,77);
-        Font button = new Font("Trebuchet MS", Font.PLAIN, 20);
+        Font button = new Font("Gulim", Font.PLAIN, 20);
         Dimension button_shape_2 = new Dimension(245,40);
 
 
