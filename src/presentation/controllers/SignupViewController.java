@@ -60,7 +60,7 @@ public class SignupViewController implements ActionListener, MouseListener {
     private void checkAllSignupFields() {
         boolean errorFlag = false;
 
-        if(controller.findUserNameMatch(signupView.getUsername())){
+        if(controller.findUserNameMatch(signupView.getUsername()) || signupView.getUsername().isBlank()){
             signupView.existingUsernameErrorVisibility(true);
             errorFlag=true;
         } else {
@@ -87,7 +87,7 @@ public class SignupViewController implements ActionListener, MouseListener {
             errorFlag=true;
         } else {
             signupView.notEqualPasswordsErrorVisibility(false);
-            if(controller.checkPasswordFormat(signupView.getPassword())){
+            if(controller.checkPasswordFormat(signupView.getPassword()) || signupView.getPassword().isBlank()){
                 signupView.passwordFormatErrorVisibility(true);
                 errorFlag=true;
             } else {

@@ -38,6 +38,7 @@ public class AddSongView {
     private JLabel jlAlbumNotFoundError = new JLabel();
     private JLabel goBackImage = new JLabel();
     private JLabel jlWrongGenreError = new JLabel();
+    private JLabel jlEmptyFieldsError = new JLabel();
 
     /**
      * Constructor to create AddSongView
@@ -277,6 +278,14 @@ public class AddSongView {
         jlWrongFilepathError.setForeground(vermell);
         jlWrongFilepathError.setFont(text);
         info_panel.add(jlWrongFilepathError);
+
+
+        jlEmptyFieldsError.setText("Some fields are empty");
+        jlEmptyFieldsError.setForeground(vermell);
+        jlEmptyFieldsError.setFont(text);
+        info_panel.add(jlEmptyFieldsError);
+
+
         //Sign up button
 
         jbAdd.setBackground(vermell);
@@ -373,6 +382,7 @@ public class AddSongView {
         jlAlbumNotFoundError.setVisible(false);
         jlWrongGenreError.setVisible(false);
         jlWrongFilepathError.setVisible(false);
+        jlEmptyFieldsError.setVisible(false);
         mainViewCenter.revalidate();
     }
     public void existingSongErrorVisibility(boolean error){
@@ -382,6 +392,11 @@ public class AddSongView {
 
     public void wrongFilepathErrorErrorVisibility (boolean error) {
         jlWrongFilepathError.setVisible(error);
+        mainViewCenter.revalidate();
+    }
+
+    public void someFieldsEmptyErrorVisibility(boolean error) {
+        jlEmptyFieldsError.setVisible(error);
         mainViewCenter.revalidate();
     }
 

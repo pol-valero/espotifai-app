@@ -61,28 +61,35 @@ public class AddSongViewController implements ActionListener, MouseListener {
     private boolean checkAllFields() {
         boolean errorFlag = false;
 
-        if(controller.findSongName(addSongView.getSongName())){
+        String songName = addSongView.getSongName();
+        String artistName = addSongView.getArtistName();
+        String albumName = addSongView.getAlbum();
+        String genreName = addSongView.getGenre();
+        String pathName = addSongView.getFilePath();
+
+        if(controller.findSongName(songName)){
             addSongView.existingSongErrorVisibility(true);
             errorFlag=true;
         } else {
             addSongView.existingSongErrorVisibility(false);
         }
 
-        if(!controller.findPath(addSongView.getFilePath())) {
+        if(!controller.findPath(pathName)) {
             addSongView.wrongFilepathErrorErrorVisibility(true);
             errorFlag=true;
         } else {
             addSongView.wrongFilepathErrorErrorVisibility(false);
         }
 
-        if(!errorFlag) {
-            String songName = addSongView.getSongName();
-            String artist = addSongView.getArtistName();
-            String albumName = addSongView.getAlbum();
-            String genreName = addSongView.getGenre();
-            String path = addSongView.getFilePath();
+        if (artistName.isBlank() || albumName.isBlank() || genreName.isBlank()) {
+            errorFlag = true;
+            addSongView.someFieldsEmptyErrorVisibility(true);
+        } else {
+            addSongView.someFieldsEmptyErrorVisibility(false);
+        }
 
-            controller.createSong(songName, artist, albumName, genreName, path);
+        if(!errorFlag) {
+            controller.createSong(songName, artistName, albumName, genreName, pathName);
             String currentPlaylist = controller.getCurrentPlaylist();
             controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
             addSongView.clearFields();
