@@ -347,6 +347,7 @@ public class MusicManager implements Runnable{
         this.position = position;
 
         currentSong = loadSongInformation(selectedSongName);
+        //Aqui s'ha de fer el la crida a canviar de canço a la vista
         playNewSong();
     }
 

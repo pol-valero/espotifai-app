@@ -247,6 +247,11 @@ public class UIController {
         businessFacade.playMusic(playlistName, position);
     }*/
     public void playMusic() {
+        String selectedSongName = getSelectedSongName();
+        Song songToBeReproduced = findSong(selectedSongName);
+        int totalMinutes = songToBeReproduced.getMinutes();
+        int totalSeconds = songToBeReproduced.getSeconds();
+        playBarController.reproduceNewSong(selectedSongName, totalMinutes, totalSeconds);
         businessFacade.playMusic();
     }
 
