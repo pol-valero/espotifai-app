@@ -165,8 +165,7 @@ public class BusinessFacadelmpl implements BusinessFacade{
     public void createSong(String name, String artist, String album, String genre, String filePath){ //todo añadir los lyrics
 
         int[] time = musicManager.songTime(filePath);
-        //String lyrics = getLyrics(name, artist).replaceAll("'", "");
-        String lyrics = "";
+        String lyrics = getLyrics(name, artist).replaceAll("'", "");
         Song song = new Song(name, artist, album, genre, filePath, lyrics, time[0], time[1]);
         song.setIdOwne(loginManager.getCurrentUSer().getId());
         song.setOwne(loginManager.getCurrentUSer().getName());
@@ -291,8 +290,8 @@ public class BusinessFacadelmpl implements BusinessFacade{
             String lyric;
 
             //URL url = new URL("https://api.lyrics.ovh/v1/melendi/saraluna");
-            //URL url = new URL("https://api.lyrics.ovh/v1/" + artist + "/" + songName);
-            URL url = new URL("https://api.lyrics.ovh/v1/morad/pelele");
+            URL url = new URL("https://api.lyrics.ovh/v1/" + artist + "/" + songName);
+            //URL url = new URL("https://api.lyrics.ovh/v1/morad/pelele");
             conn = (HttpURLConnection) url.openConnection();
 
             conn.setRequestMethod("GET");
