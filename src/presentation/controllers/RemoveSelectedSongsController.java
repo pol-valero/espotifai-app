@@ -28,15 +28,17 @@ public class RemoveSelectedSongsController implements ActionListener {
         switch (e.getActionCommand()) {
             case RemoveSelectedSongsView.BTN_CONFIRM_REMOVE:
                 if (!currentPlaylist.equals("MySongs")) {
-                    controller.deleteSongPlaylist(currentPlaylist, songsToRemove);
+                    if (!songsToRemove.isEmpty()){
+                        controller.deleteSongPlaylist(currentPlaylist, songsToRemove);
+                    }
                     controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
                 } else {
                     if (songsToRemove.contains(currentSong)) {
                         removeSelectedSongsView.cannotDeleteSongVisibility(true);
-                    } else {
+                    } else if (!songsToRemove.isEmpty()){
                         controller.deletePersonalSong(songsToRemove);
-                        controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
                     }
+                    controller.showMusicListCard(controller.loadPlaylistMusic(currentPlaylist), currentPlaylist);
                 }
                 break;
 
