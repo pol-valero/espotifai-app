@@ -38,6 +38,7 @@ public class UIController implements PlayBarListener {
     private RemoveSelectedSongsController removeSelectedSongsController;
 
     public void run () {
+
         JFrame topContainer = new JFrame();
         JPanel mainViewCenter = new JPanel();
         CardLayout jFrameCardManager = new CardLayout();
@@ -66,28 +67,9 @@ public class UIController implements PlayBarListener {
         stadisticViewController = new StadisticViewController(this, mainViewCenter, cardManager);
         removeSelectedSongsController = new RemoveSelectedSongsController(this, mainViewCenter, cardManager);
 
-        initialSongSetup();
-        //fer el mateix amb tots els altres controllers
-        //showMusicListCard();
-        //showSignUpCard();
-        showHomescreenCard();
-        //showLoginCard();
-        //showSignUpCard();
-        //showMusicListCard();
-        //showAddSongCard();
-        //showSongDetailsCard(findSong("CançoV2"));
-        //showAddToPlaylistCard();
-        /*LinkedList<String> prueva = new LinkedList<>();
-        prueva.add("prettySong");
-        addSongPlaylist("provanova", prueva);*/
-        //showStadisticsCard();
     }
 
-    //Esta funcion es "temporal". Solo sirve para que cuando iniciemos sesion directamente sin hacer login no salten errores para reproducir musica. Se tiene que quitar al final.
-    private void initialSongSetup () {
-        playBarController.initialSongConfiguration();
-        businessFacade.startingThread();
-    }
+
 
     private void showMainViewCard() {
         mainViewController.showMainViewCard();
