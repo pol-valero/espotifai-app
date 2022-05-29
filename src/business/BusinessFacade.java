@@ -4,6 +4,7 @@ import business.entities.Genre;
 import business.entities.Playlist;
 import business.entities.Song;
 import business.entities.User;
+import presentation.UIController;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -86,6 +87,12 @@ public interface BusinessFacade {
      */
     void deleteAccountRequest();
 
+    /**
+     * Method that gives the user that has log in or sign up
+     *
+     * @return returns an User object corresponding to the one that has recently log in o sign up
+     */
+    User getCurrentUser();
 
     /**
      * Method that loads the name of the playlist of all users excepts the one that has log in or sign up
@@ -138,7 +145,14 @@ public interface BusinessFacade {
      */
     void createPlaylist(String playlistName);
 
-
+    /**
+     * Method that given a string, returns the playlist object which the string corresponds to the name of it
+     *
+     * @param playlistName String corresponding to the name of the playlist to find
+     * @return return the object Playlist corresponding of the name of the String. If the playlist was not found,
+     * returns null.
+     */
+    Playlist findPlaylist(String playlistName); //todo mirar
 
     /**
      * Method that by given de string corresponding to the name of an existing playlist, returns the list of
@@ -252,9 +266,11 @@ public interface BusinessFacade {
      */
     void setCurrentPlaylist(String playlistName);
 
+     List<Song> loadMusicOnePlaylist(String playlistName);
 
-    void moveSongsInPlaylist(String playlistName, int position, int upDown);
+     void moveSongsInPlaylist(String playlistName, int position, int upDown);
 
+    void deleteSongAllPlaylist(String songName);
 
     void deletePersonalSong(List<String> songNameList);
 
@@ -268,10 +284,11 @@ public interface BusinessFacade {
 
     boolean songExistsInPlaylist (String playlistName, String songName);
 
+    void setCurrentSong (Song song);
 
-    void startingThread();
+     void startingThread();
 
-    void playlistLoop();
+     void playlistLoop();
 
-    Song getCurrentSong();
+     Song getCurrentSong();
 }

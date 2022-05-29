@@ -7,17 +7,15 @@ import business.entities.User;
 
 import java.io.BufferedReader;
 import java.net.HttpURLConnection;
-import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Scanner;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import presentation.listeners.PlayBarListener;
+import presentation.UIController;
 
 
 /**
@@ -269,6 +267,12 @@ public class BusinessFacadelmpl implements BusinessFacade{
         return musicListManager.loadAllNotAlreadyAddedSong(playlistName, loginManager.getCurrentUSer().getId());
     }
 
+    /**
+     *  method to get the lyrics of a song through the API
+     * @param songName String with the name of the song
+     * @param artist Sting with the name of the artist
+     * @return String with the lyrics of the song
+     */
     private String getLyrics(String songName, String artist){
         BufferedReader reader;
         String line;

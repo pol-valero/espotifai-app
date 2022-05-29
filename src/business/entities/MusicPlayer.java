@@ -1,5 +1,4 @@
 package business.entities;
-import com.sun.tools.javac.Main;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import presentation.listeners.PlayBarListener;
@@ -11,20 +10,61 @@ import java.io.InputStream;
  */
 public class MusicPlayer {
 
+    /**
+     * reference object to synchronize the thread of the class
+     */
     private final Object synchronizedThread = new Object();
-    private Thread thread;
 
-    private final static int NOTSTARTED = 0;
-    private final static int PLAYING = 1;
+    /**
+     * Thread object that is used in the class MusicPlayer
+     */
+    private Thread thread;
+    /**
+     * Int indicates that the song is not playing
+     */
+    private final static int NOTSTARTEDSONG = 0;
+
+    /**
+     * Int indicates that the song is playing
+     */
+    private final static int PLAYINGMUSIC = 1;
+
+    /**
+     * Int indicates that the song is paused
+     */
     private final static int PAUSED = 2;
+
+    /**
+     * Int  indicates that the song is finished
+     */
     private final static int FINISHED = 3;
+
+    /**
+     * Boolean that indicates if the song has finished (true)
+     */
     private boolean finishedSong;
+
+    /**
+     * Int indicates the current status of the song
+     */
     private int musicStatus;
 
+    /**
+     * Object of the player class, from the Jlayer library
+     */
     private final Player player;
+    /**
+     * Object bar listener
+     */
     private PlayBarListener playBarListener;
 
 
+    /**
+     * Constructor MusicPlayer
+     * @param inputStream Object InputSteam , with the information of FileInputStream
+     * @param playBarListener Object playBarListener
+     * @throws JavaLayerException Jlayer class exception
+     */
     public MusicPlayer(final InputStream inputStream, PlayBarListener playBarListener) throws JavaLayerException {
             this.player = new Player(inputStream);
             this.playBarListener = playBarListener;
@@ -35,21 +75,21 @@ public class MusicPlayer {
      */
     public void play() {
         finishedSong = false;
-        musicStatus = NOTSTARTED;
+        musicStatus = NOTSTARTEDSONG;
 
         synchronized (synchronizedThread) {
             switch (musicStatus) {
-                case NOTSTARTED:
+                case NOTSTARTEDSONG:
                     final Runnable r = new Runnable() {
                         public void run() {
-                            playInternal();
+                            playMusic();
                         }
                     };
 
                     thread = new Thread(r);
                     thread.setDaemon(true);
                     thread.setPriority(Thread.MAX_PRIORITY);
-                    musicStatus = PLAYING;
+                    musicStatus = PLAYINGMUSIC;
                     thread.start();
                     break;
 
@@ -70,7 +110,7 @@ public class MusicPlayer {
      */
     public boolean pause() {
         synchronized (synchronizedThread) {
-            if (musicStatus == PLAYING) {
+            if (musicStatus == PLAYINGMUSIC) {
                 musicStatus = PAUSED;
             }
             return musicStatus == PAUSED;
@@ -85,10 +125,10 @@ public class MusicPlayer {
     public boolean resume() {
         synchronized (synchronizedThread) {
             if (musicStatus == PAUSED) {
-                musicStatus = PLAYING;
+                musicStatus = PLAYINGMUSIC;
                 synchronizedThread.notifyAll();
             }
-            return musicStatus == PLAYING;
+            return musicStatus == PLAYINGMUSIC;
         }
     }
 
@@ -104,9 +144,9 @@ public class MusicPlayer {
 
     /**
      * Method that manages the reproduction of the
-     * @return
+     * @return boolean that indicates if the song has finished
      */
-    private boolean playInternal() {
+    private boolean playMusic() {
         double temps = 0;
         int segons = 0;
         int minutes = 0;
@@ -145,7 +185,7 @@ public class MusicPlayer {
         }
         finishedSong = true;
         close();
-        return finishedSong = true;
+        return finishedSong;
     }
 
     /**
@@ -162,6 +202,10 @@ public class MusicPlayer {
         }
     }
 
+    /**
+     * method to check if the song has finished
+     * @return boolean that indicates if the song has finished (true)
+     */
     public boolean getfinisehedSong() {
         return finishedSong;
     }

@@ -29,7 +29,7 @@ public class MusicManager {
     private PlayBarListener playBarListener;
 
     /**
-     * Constructor
+     * Constructor Music Manager
      */
     public MusicManager (PlayBarListener playBarListener) {
         this.playBarListener = playBarListener;
@@ -382,7 +382,6 @@ public class MusicManager {
      * Method to set the current song in a loop
      */
     public void loop(){
-
         this.loop = !loop;
     }
 
@@ -413,10 +412,17 @@ public class MusicManager {
         return musicPlayer.getfinisehedSong();
     }
 
+    /**
+     * Method to end the song
+     */
     public void stopSong(){
         musicPlayer.stop();
     }
 
+    /**
+     * Method to see the information of the song that is playing
+     * @return Song  with information
+     */
     public Song getCurrentSong() {
         return currentSong;
     }
