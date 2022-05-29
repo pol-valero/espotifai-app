@@ -50,14 +50,12 @@ public class SongDetailsViewController implements ActionListener, MouseListener 
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        //canviar currentSong a la "selectedSong"
-        //cridar a la funcio reproduir
-        controller.playMusic();
+
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        controller.playMusic();
     }
 
     @Override
