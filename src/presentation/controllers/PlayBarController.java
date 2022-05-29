@@ -49,8 +49,15 @@ public class PlayBarController implements ActionListener {
     }
 
     public void reproduceNewSong(String songName, int totalMinutes, int totalSeconds){
-        playBar.reproduceNewSong(songName,totalMinutes,totalSeconds);
+        String currentPlaylist = controller.getCurrentPlaylist();
 
+        if(currentPlaylist.equals("AllSongs") || currentPlaylist.equals("MySongs")) {
+            playBar.showGlobalRepetitionBtn(false);
+        } else {
+            playBar.showGlobalRepetitionBtn(true);
+        }
+
+        playBar.reproduceNewSong(songName,totalMinutes,totalSeconds);
     }
 
     public void update(int currentMinutes, int currentSeconds){

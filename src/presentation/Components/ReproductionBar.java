@@ -184,6 +184,7 @@ public class ReproductionBar extends JPanel {
         playlistRepetition.setPreferredSize(new Dimension(25,25));
         playlistRepetition.setIcon(getScaledImage("images/globalRepeticionIcon.png",25,25));
         playlistRepetition.setActionCommand(BTN_PLAYLIST_REPETITION);
+        playlistRepetition.setVisible(false);
         mainBtns.add(playlistRepetition);
 
         return mainBtns;
@@ -288,6 +289,12 @@ public class ReproductionBar extends JPanel {
 
         revalidate();
 
+    }
+
+
+    public void showGlobalRepetitionBtn (boolean visible) {
+        playlistRepetition.setVisible(visible);
+        revalidate();
     }
 
     /**
