@@ -27,18 +27,15 @@ public class SongDetailsView {
     private JLabel albumImage = new JLabel();
 
     private final Color negre = new Color(48,48,48);
-    private final Color vermell = new Color (232,74,77);
 
-    JPanel panel;
-    JPanel centralPanel;
-    Song innitializeSong = new Song(0, "", 0, "", 0,
-            "", 0, "", 0, "", "", 0, 0, 0,"" );
+    private JPanel panel;
+    private JPanel centralPanel;
+
 
     public SongDetailsView (JPanel mainViewCenter, CardLayout cardManager) {
         this.mainViewCenter = mainViewCenter;
         this.cardManager = cardManager;
         configureView();
-        //this.mainView.pack();
     }
 
     private void configureView() {
@@ -48,7 +45,6 @@ public class SongDetailsView {
         JPanel southernPanel = southernPanelConfiguration();
 
         centralPanel = new JPanel();
-        //centralPanel = centralPanelConfiguration(" ", innitializeSong,0,0);
         JPanel northernPanel = northernPanelConfiguration();
 
         panel.add(northernPanel,BorderLayout.NORTH);
@@ -68,11 +64,9 @@ public class SongDetailsView {
         Font titol = new Font("Tahoma", Font.PLAIN, 38);
         Font text = new Font("Gulim", Font.PLAIN, 20);
         Font word = new Font("Gulim", Font.PLAIN, 14);
-        Font information = new Font("Gulim", Font.PLAIN, 14);
 
         Dimension button_shape = new Dimension(325,40);
         Dimension CentralPanel = new Dimension(1000,500);
-        Dimension PanelShape = new Dimension(500,250);
 
 
         GridBagConstraints c = new GridBagConstraints();
@@ -136,6 +130,7 @@ public class SongDetailsView {
         JPanel details_panel = new JPanel();
         details_panel.setLayout(new BoxLayout(details_panel, BoxLayout.LINE_AXIS));
         details_panel.setBackground(negre);
+
         //album
 
         JPanel  album_panel = new JPanel();
@@ -181,6 +176,7 @@ public class SongDetailsView {
 
         details_panel.add(owner_panel);
         details_panel.add(Box.createRigidArea(new Dimension(20, 20)));
+
         //  Genre
 
         JPanel  genre_panel = new JPanel();
@@ -307,8 +303,7 @@ public class SongDetailsView {
                 JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
 
-        // scrollPane.setBackground(negre);
-        //scrollPane.add(BorderAdjustment);
+
         c.gridx = 0;
         c.gridy = 1;
         subpanel_3.add(js,c);
@@ -349,8 +344,7 @@ public class SongDetailsView {
         jbGoBackImage.setIcon(new_Boto);
         jbGoBackImage.setPreferredSize(new Dimension(50,50));
         jbGoBackImage.setActionCommand(BTN_GO_BACK);
-        //goBackImage.setIcon(new_Boto);
-        //goBackImage.addMouseListener(new MouseAdapter() {});
+
 
         JPanel BorderAdjustment = new JPanel(new BorderLayout());
 
@@ -362,7 +356,6 @@ public class SongDetailsView {
         FillWEST.setBackground(negre);
         FillWEST.setSize(10, 20);
 
-        //BorderAdjustment.add(goBackImage, BorderLayout.CENTER);
         BorderAdjustment.add(jbGoBackImage, BorderLayout.CENTER);
         BorderAdjustment.add(FillNORTH, BorderLayout.NORTH);
         BorderAdjustment.add(FillWEST, BorderLayout.WEST);
@@ -447,9 +440,7 @@ public class SongDetailsView {
         panel.remove(centralPanel);
         centralPanel = centralPanelConfiguration(song);
         panel.add(centralPanel,BorderLayout.CENTER);
-        //mainViewCenter.add(panel, "songDetailsCard");
         mainViewCenter.revalidate();
         cardManager.show(mainViewCenter, "songDetailsCard");
-        //mainView.setVisible(true);
     }
 }

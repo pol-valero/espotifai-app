@@ -3,7 +3,6 @@ package presentation;
 import business.BusinessFacade;
 import business.BusinessFacadelmpl;
 import business.entities.Genre;
-import business.entities.Playlist;
 import business.entities.Song;
 import business.entities.User;
 import presentation.Components.ReproductionBar;
@@ -83,18 +82,6 @@ public class UIController implements PlayBarListener {
         musicListController.showMusicListCard(songList, songListName);
     }
 
-    public LinkedList<String> loadPublicPlaylists() {
-        LinkedList<String> publicPlaylists = new LinkedList<String>();
-
-        return publicPlaylists;
-    }
-
-    public LinkedList<String> loadUsersPlaylists() {
-        LinkedList<String> usersPlaylists = new LinkedList<String>();
-
-        return usersPlaylists;
-    }
-
     public void showHomescreenCard() {
         showMainViewCard();
         homescreenViewController.showHomescreenCard(businessFacade.loadUserPlaylist(),businessFacade.loadPublicPlaylist());
@@ -141,17 +128,17 @@ public class UIController implements PlayBarListener {
         removeSelectedSongsController.showRemoveSelectedSongsCard(songsToRemove);
     }
 
-    public boolean findUserNameMatch(String username){//todo
+    public boolean findUserNameMatch(String username){
 
         return businessFacade.findUsernameMach(username);
     }
 
-    public boolean findEmailMatch(String email){ //todo
+    public boolean findEmailMatch(String email){
 
         return businessFacade.findEmailMach(email);
     }
 
-    public boolean checkPasswordFormat(String password){ //todo
+    public boolean checkPasswordFormat(String password){
 
         return !businessFacade.checkPassword(password);
     }
@@ -206,9 +193,6 @@ public class UIController implements PlayBarListener {
         businessFacade.createPlaylist(playlistName);
     }
 
-    public Playlist findPlaylist(String playlistName){ //Todo examinar
-       return businessFacade.findPlaylist(playlistName);
-    }
 
     public List<Song> loadSearchMusic(String filterName){
         return businessFacade.loadSearchMusic(filterName);
@@ -216,14 +200,6 @@ public class UIController implements PlayBarListener {
 
     public void createSong(String name, String artist, String album, String genre, String filePath){
         businessFacade.createSong(name, artist, album, genre, filePath);
-    }
-
-    public List<Genre> loadStadistic(){
-        return businessFacade.loadStadistic();
-    }
-
-    public void deleteUserAddedSong(String songName){
-        businessFacade.deleteUserAddedSong(songName);
     }
 
     public Song findSong(String songName){
@@ -234,9 +210,6 @@ public class UIController implements PlayBarListener {
         businessFacade.addSongPlaylist(playlistName, songNameList);
     }
 
-    /*public void playMusic(String playlistName, int position){
-        businessFacade.playMusic(playlistName, position);
-    }*/
     public void playMusic() {
         String selectedSongName = getSelectedSongName();
         Song songToBeReproduced = findSong(selectedSongName);
@@ -294,10 +267,6 @@ public class UIController implements PlayBarListener {
 
     public void deletePersonalSong(List<String> songNameList){
         businessFacade.deletePersonalSong(songNameList);
-    }
-
-    public List<Song> loadMusicOnePlaylist(String playlistName){
-        return businessFacade.loadMusicOnePlaylist(playlistName);
     }
 
     public LinkedList<Song> loadAllNotAlreadyAddedSongs (String playlistName) {

@@ -43,7 +43,6 @@ public class RenamePlaylistView {
         this.mainViewCenter = mainViewCenter;
         this.cardManager = cardManager;
         configureView();
-        //this.mainViewCenter.pack();
     }
 
     /**
@@ -107,8 +106,7 @@ public class RenamePlaylistView {
         info_panel.add(explanation);
         info_panel.add(Box.createRigidArea(new Dimension(5, 10)));
 
-        //tittle_panel.add(titleLabel);
-        //  tittle_panel.add(explanation);
+
 
         // Set go back Image and Imatge filler
 

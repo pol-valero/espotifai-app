@@ -4,9 +4,7 @@ import presentation.controllers.CreatePlaylistViewController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 /**
@@ -43,7 +41,6 @@ public class CreatePlaylistView {
             this.mainViewCenter = mainViewCenter;
             this.cardManager = cardManager;
             configureView();
-            //this.mainViewCenter.pack();
         }
 
     /**
@@ -107,8 +104,7 @@ public class CreatePlaylistView {
             info_panel.add(explanation);
             info_panel.add(Box.createRigidArea(new Dimension(5, 10)));
 
-            //tittle_panel.add(titleLabel);
-            //  tittle_panel.add(explanation);
+
 
             // Set go back Image and Imatge filler
 

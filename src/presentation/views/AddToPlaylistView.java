@@ -48,7 +48,6 @@ public class AddToPlaylistView {
         this.mainViewCenter = mainViewCenter;
         this.cardManager=cardManager;
         configureView();
-        //topContainer.pack();
     }
 
     /**
@@ -106,7 +105,6 @@ public class AddToPlaylistView {
         BoxLayout westernLayout = new BoxLayout(westernPanel,BoxLayout.Y_AXIS);
         westernPanel.setLayout(westernLayout);
         westernPanel.setBorder(new EmptyBorder(new Insets(650, 30, 40, 30)));
-        //westernPanel.setMinimumSize(new Dimension(200,900));
         westernPanel.setBackground(negre);
 
         jbAccountManagement = createButton("Account Manager");
@@ -171,7 +169,6 @@ public class AddToPlaylistView {
         donePanel.setBorder(new EmptyBorder(new Insets(0,850,0,0)));
         donePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         donePanel.setBackground(negre);
-        //donePanel.add(createButton("Done"));
         songExistsError.setText("This song already exists in this playlist");
         songExistsError.setForeground(vermell);
         songExistsError.setFont(new Font("Gulim", Font.PLAIN, 14));

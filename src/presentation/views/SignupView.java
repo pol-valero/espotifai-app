@@ -60,7 +60,6 @@ public class SignupView {
         Font titols = new Font("Tahoma", Font.PLAIN, 28);
         Font text = new Font("Gulim", Font.PLAIN, 14);
         Font information = new Font("Gulim", Font.PLAIN, 14);
-        // Dimension button_shape = new Dimension(371,56);
         Dimension button_shape = new Dimension(430,40);
 
 
@@ -221,7 +220,6 @@ public class SignupView {
         jbSignup.setBorderPainted(false);
         jbSignup.setActionCommand(BTN_SIGNUP);
 
-        //   btnSignup.setActionCommand(BTN_LOGOUT);
 
 
         //Position and addition

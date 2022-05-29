@@ -4,7 +4,6 @@ import presentation.controllers.RemovePlaylistController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * Class representing the RemovePlaylistView. This class contains all the methods and attributes
@@ -46,7 +45,6 @@ public class RemovePlaylistView {
         this.mainViewCenter = mainViewCenter;
         this.cardManager = cardManager;
         configureView();
-        //this.mainViewCenter.pack();
     }
 
     /**
@@ -90,7 +88,6 @@ public class RemovePlaylistView {
 
         Dimension button_shape = new Dimension(245,40);
         Dimension CentralPanel = new Dimension(500,500);
-        //   Dimension button_shape_2 = new Dimension(245,40);
 
 
         // Panel
@@ -131,10 +128,8 @@ public class RemovePlaylistView {
         explanation.setFont(information);
 
         title_panel.add(titleLabel);
-        //title_panel.add(Box.createRigidArea(new Dimension(50, 15)));
 
         title_panel.add(explanation);
-        //  subtitle_panel.add(Box.createRigidArea(new Dimension(50, 15)));
 
         info_panel.add(title_panel);
         info_panel.add(Box.createRigidArea(new Dimension(0, 10)));

@@ -53,7 +53,6 @@ public class AddSongView {
         this.mainViewCenter = mainViewCenter;
         this.cardManager = cardManager;
         configureView();
-        //this.mainViewCenter.pack();
     }
 
     /**
@@ -201,7 +200,6 @@ public class AddSongView {
 
 
 
-        //   info_panel.setOpaque(false);
 
         //Artist name and Artist text
 
@@ -298,7 +296,6 @@ public class AddSongView {
         jbAdd.setBorderPainted(false);
         jbAdd.setActionCommand(BTN_ADD);
 
-        //   btnSignup.setActionCommand(BTN_LOGOUT);
 
 
         //Position and addition

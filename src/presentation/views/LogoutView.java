@@ -36,8 +36,6 @@ public class LogoutView {
         this.mainViewCenter = mainViewCenter;
         this.cardManager = cardManager;
         configureView();
-        //topContainer.pack();
-
     }
 
     /**

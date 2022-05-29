@@ -8,9 +8,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Class representing the StadisticsView. This class contains all the methods and attributes
@@ -35,7 +33,6 @@ public class StadisticsView {
     private JButton homeBtn;
     private JButton accManBtn;
 
-    private ActionListener actionListener; //todo ?¿
 
     /**
      * Constructor to create StadisticsView
@@ -294,7 +291,6 @@ public class StadisticsView {
     public void registerController(StadisticViewController stadisticViewController) {
         homeBtn.addActionListener(stadisticViewController);
         accManBtn.addActionListener(stadisticViewController);
-        actionListener= stadisticViewController; //todo ?¿
     }
 
     /**

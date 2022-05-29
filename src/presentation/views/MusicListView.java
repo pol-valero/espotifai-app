@@ -65,7 +65,6 @@ public class MusicListView {
     private JTable table;
     private Object[][] data;
 
-    private ImagePanel imagePanel;
 
     private final Color negre = new Color(48,48,48);
     private final Color vermell = new Color (232,74,77);
@@ -92,7 +91,6 @@ public class MusicListView {
         this.cardManager=cardManager;
         configureTable();
         configureView();
-        //topContainer.pack();
     }
 
 
@@ -126,11 +124,8 @@ public class MusicListView {
         panel.setLayout(new BorderLayout());
         JPanel westernPanel = westernPanelConfiguration();
         centralPanel = centralPanelConfiguration(new LinkedList<>());
-        northernPanel = northernPanelConfiguration(new String());
+        northernPanel = northernPanelConfiguration("");
         JPanel easternPanel = easternPanelConfiguration();
-
-
-
 
         panel.add(westernPanel,BorderLayout.WEST);
         panel.add(easternPanel,BorderLayout.EAST);
@@ -139,7 +134,7 @@ public class MusicListView {
         panel.remove(centralPanel);
         panel.remove(northernPanel);
 
-        mainViewCenter.add(panel, "musicListCard");//todo ??
+        mainViewCenter.add(panel, "musicListCard");
 
     }
 
@@ -327,20 +322,7 @@ public class MusicListView {
         table.setModel(model);
 
         table.setFillsViewportHeight(true);
-        /*table = new JTable(model){
-        table {
-            public Class getColumnClass(int column) {//Specifing class for column 0 and 6
-                switch(column){
-                    case 0 -> {
-                        return Icon.class;
-                    }
-                    case 6 -> {
-                        return Boolean.class;
-                    }
-                    default -> {return String.class;}
-                }
-            }
-        };*/
+
 
         table.setBackground(negre);
         table.setFont(titols);
@@ -352,7 +334,6 @@ public class MusicListView {
         table.setDefaultEditor(Object.class, null);
         table.getColumnModel().getColumn(6).setMinWidth(0);
         table.getColumnModel().getColumn(6).setMaxWidth(0);
-        //table.removeColumn(table.getColumnModel().getColumn(6)); todo mètode per "amagar" una playlist
 
         //Scrollpane creation and config
         JScrollPane scrollPane = new JScrollPane();
@@ -457,7 +438,6 @@ public class MusicListView {
      * @return data an object that stores the information from each song
      */
     private Object[][] songConversor(LinkedList<Song> songList) {
-        //Object[][] data = new Object[songList.size()][6];
         Object[][] data = new Object[songList.size()][7];
 
         ImageIcon songCover = new ImageIcon("images/musicCoverMusicList.png");
@@ -465,15 +445,7 @@ public class MusicListView {
         Image songCoverScaled = getScaledImage(songCoverImage,40,40);
         ImageIcon songCoverDone = new ImageIcon(songCoverScaled);
 
-        /*for(int i=0; i < 200; i++){
-            data[i][0] = songCoverDone;
-            data[i][1] = "songName"+i;
-            data[i][2] = "Singer"+i;
-            data[i][3] = "Album"+i;
-            data[i][4] = "Genre"+i;
-            data[i][5] = "Owner"+i;
-            data[i][6] = false;
-        }*/
+
 
         for(int i=0; i < songList.size(); i++){
             data[i][0] = songCoverDone;
@@ -810,27 +782,6 @@ public class MusicListView {
         allSongsVariationActive = true;
     }
 
-    /**
-     * allows the user to go back to the previous variation selected
-     */
-    public void returnToPreviousVariation() {
-
-        if (userPersonalSongsVariationActive) {
-            userPersonalSongsVariation();
-        }
-
-        if (userPlaylistVariationActive) {
-            userPlaylistVariation();
-        }
-
-        if (publicPlaylistVariationActive) {
-            publicPlaylistVariation();
-        }
-
-        if (allSongsVariationActive) {
-            publicSongsVariation();
-        }
-    }
 
     /**
      * setVariationsToInactive makes all variations false and will be called from each variation method
@@ -843,17 +794,12 @@ public class MusicListView {
         allSongsVariationActive = false;
     }
 
-    public String getDisplayedPlaylistName() {
-        return playlistTitle.getText();
-    }
 
     /**
      * clearCheckBoxes clears all check boxes and revalidates the table
      */
     public void clearCheckBoxes () {
         for (int i = 0; i < data.length; i++) {
-            //data[i][6] = false;
-            //table.setModel();
             table.setValueAt(false, i, 6);
         }
         table.revalidate();

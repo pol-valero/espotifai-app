@@ -48,7 +48,6 @@ public class HomeScreenView {
         this.mainViewCenter = mainViewCenter;
         this.cardManager = cardManager;
         configureView();
-        //topContainer.pack();
     }
 
     /**
