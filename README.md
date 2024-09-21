@@ -1,5 +1,8 @@
-# SPOTIFAI APP
+# ESPOTIFAI APP
 
+App for desktop that imitates Spotify, with some different features. It allows each user to create playlists, add music so that it can be seen by everyone, play music through the speakers and many more functionalities.
+
+**Mockup**
 
 Interactive mockup of app, with all the implemented functionalities and screens: https://www.figma.com/proto/KxSvflubHjoMBWCUNndWlu/MockUp-Spotify?node-id=241-262&node-type=canvas&t=bKOU980X3yYq2YsX-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=241%3A155
 
@@ -23,6 +26,14 @@ Based on what has been mentioned, the program includes a set of songs that can b
 Finally, it should be noted that if the program is not connected to the database, it will not function since all the information is remotely stored on a web server, where all the application data is kept.
 
 **IMPORTANT:** It is necessary to select "JDK-17" to the project when opening it for the first time.
+
+## Class diagram
+The project was developed using a Layered Architecture, with Presentation, Business and Persistence layers. 
+
+![Alt text](readme_images/class_diagram_example.png)
+
+*See full class diagram downloading the class_diagram_UML.pdf file that is in the project folder
+
 
 # Authors
 [Pol Valero] (https://github.com/pol-valero)
